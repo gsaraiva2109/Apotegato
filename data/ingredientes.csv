@@ -1,0 +1,27 @@
+id,nome,regiao,paridade,condicoes
+buriti,Buriti,amazonia,impar,xeroftalmia
+camu_camu,Camu-camu,amazonia,impar,escorbuto|anemia_ferropriva:ou
+resina_copaiba,Resina de copaíba,amazonia,par,queimaduras
+unha_de_gato,Unha-de-gato,amazonia,par,dor_muscular
+castanha_caju,Castanha de caju,caatinga,impar,anemia_ferropriva|ossos_fracos
+alecrim_pimenta,Alecrim-pimenta,caatinga,impar,resfriado
+acerola,Acerola,caatinga,par,escorbuto|anemia_ferropriva:ou
+licuri,Licuri,caatinga,par,xeroftalmia
+pele_tilapia,Pele de tilápia,campos_rios,impar,queimaduras
+banana_da_terra,Banana-da-terra,campos_rios,impar,diarreia
+figado_bovino,Fígado bovino,campos_rios,par,anemia_ferropriva|xeroftalmia
+erva_cidreira,Erva-cidreira,campos_rios,par,insonia|gastrite
+semente_chia,Semente de chia,campos_rios,par,ossos_fracos
+pequi,Pequi,cerrado,impar,xeroftalmia
+flor_assa_peixe,Flor de assa-peixe,cerrado,impar,resfriado
+mulungu,Mulungu,cerrado,par,insonia
+arnica_brasileira,Arnica-brasileira,cerrado,par,dor_muscular
+agua_coco,Água de coco,litoral,impar,diarreia
+sardinha,Sardinha,litoral,impar,ossos_fracos
+mel,Mel,litoral,par,queimaduras|resfriado
+aroeira_praia,Aroeira-da-praia,litoral,par,escorbuto|gastrite
+flor_maracuja,Flor de maracujá,mata_atlantica,impar,insonia
+erva_baleeira,Erva-baleeira,mata_atlantica,impar,dor_muscular
+espinheira_santa,Espinheira-santa,mata_atlantica,impar,gastrite
+folha_goiabeira,Folha de goiabeira,mata_atlantica,par,diarreia
+folha_guaco,Folha de guaco,mata_atlantica,par,resfriado

@@ -1,0 +1,32 @@
+name: Texto do diário
+description: Texto de uma página do diário (condição ou ingrediente)
+labels: ["diário"]
+body:
+  - type: dropdown
+    id: tipo
+    attributes:
+      label: Tipo de página
+      options:
+        - Condição
+        - Ingrediente
+    validations:
+      required: true
+  - type: input
+    id: id
+    attributes:
+      label: Id
+      description: "O id usado no data/ingredientes.csv (ex.: camu_camu, anemia_ferropriva)"
+    validations:
+      required: true
+  - type: textarea
+    id: texto
+    attributes:
+      label: Texto da página
+      description: Linguagem para 10 a 12 anos. Lembre que é um mundo de fantasia, não orientação médica.
+    validations:
+      required: true
+  - type: textarea
+    id: fontes
+    attributes:
+      label: Fontes
+      description: Referências usadas, para a tela Fontes

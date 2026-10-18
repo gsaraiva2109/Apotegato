@@ -1,0 +1,19 @@
+# Hooks de git do projeto. Instalação: veja CONTRIBUTING.md.
+# O gdformat corrige a formatação sozinho e já adiciona a correção ao commit;
+# o gdlint só aponta problemas. Os dois ignoram addons/ (código de terceiros).
+pre-commit:
+  piped: true
+  commands:
+    gdformat:
+      priority: 1
+      glob: "*.gd"
+      exclude:
+        - "addons/**"
+      run: gdformat {staged_files}
+      stage_fixed: true
+    gdlint:
+      priority: 2
+      glob: "*.gd"
+      exclude:
+        - "addons/**"
+      run: gdlint {staged_files}
