@@ -1,0 +1,6 @@
+# Quem é chamado automaticamente para revisar mudanças nestes caminhos.
+# Por enquanto só a infraestrutura (CI, hooks e configuração de exportação).
+# Para incluir mais gente, acrescente o @usuario do GitHub na linha.
+/.github/            @gsaraiva2109
+/lefthook.yml        @gsaraiva2109
+/export_presets.cfg  @gsaraiva2109

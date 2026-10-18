@@ -1,0 +1,77 @@
+name: Setup Godot
+description: >
+  Baixa o Godot (Linux, headless) na versão pedida, confere o SHA-512 e deixa
+  o comando `godot` no PATH. Com templates=true, instala também os export
+  templates do Windows x86_64. Tudo fica em cache por versão.
+
+inputs:
+  version:
+    description: "Versão do Godot, sem o sufixo -stable (ex.: 4.7.2)"
+    required: true
+  templates:
+    description: Instalar os export templates do Windows
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Restaurar Godot do cache
+      id: cache-godot
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/godot-bin
+        key: godot-linux-${{ inputs.version }}
+
+    - name: Baixar Godot
+      if: steps.cache-godot.outputs.cache-hit != 'true'
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+      run: |
+        set -euo pipefail
+        base="https://github.com/godotengine/godot/releases/download/${VERSION}-stable"
+        file="Godot_v${VERSION}-stable_linux.x86_64.zip"
+        mkdir -p ~/godot-bin
+        cd ~/godot-bin
+        curl -fsSLO "$base/$file"
+        curl -fsSL "$base/SHA512-SUMS.txt" | grep " ${file}\$" | sha512sum -c -
+        unzip -q "$file"
+        rm "$file"
+        mv "Godot_v${VERSION}-stable_linux.x86_64" godot
+
+    - name: Colocar godot no PATH
+      shell: bash
+      run: echo "$HOME/godot-bin" >> "$GITHUB_PATH"
+
+    # O pacote de templates tem mais de 1 GB; só os dois executáveis do
+    # Windows x86_64 ficam no cache.
+    - name: Restaurar export templates do cache
+      id: cache-templates
+      if: inputs.templates == 'true'
+      uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+      with:
+        path: ~/.local/share/godot/export_templates/${{ inputs.version }}.stable
+        key: godot-templates-windows-${{ inputs.version }}
+
+    - name: Baixar export templates
+      if: inputs.templates == 'true' && steps.cache-templates.outputs.cache-hit != 'true'
+      shell: bash
+      env:
+        VERSION: ${{ inputs.version }}
+      run: |
+        set -euo pipefail
+        base="https://github.com/godotengine/godot/releases/download/${VERSION}-stable"
+        file="Godot_v${VERSION}-stable_export_templates.tpz"
+        dest="$HOME/.local/share/godot/export_templates/${VERSION}.stable"
+        tmp="$(mktemp -d)"
+        cd "$tmp"
+        curl -fsSLO "$base/$file"
+        curl -fsSL "$base/SHA512-SUMS.txt" | grep " ${file}\$" | sha512sum -c -
+        mkdir -p "$dest"
+        unzip -qj "$file" \
+          templates/version.txt \
+          templates/windows_release_x86_64.exe \
+          templates/windows_debug_x86_64.exe \
+          -d "$dest"
+        rm -rf "$tmp"

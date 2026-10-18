@@ -1,0 +1,31 @@
+name: Tarefa
+description: Algo para fazer numa sprint (código, arte, áudio, interface, testes)
+labels: ["tarefa"]
+body:
+  - type: textarea
+    id: descricao
+    attributes:
+      label: O que precisa ser feito
+    validations:
+      required: true
+  - type: textarea
+    id: pronto
+    attributes:
+      label: Como saber que está pronto
+      placeholder: "- O gato anda com WASD e setas\n- ..."
+  - type: dropdown
+    id: area
+    attributes:
+      label: Área
+      options:
+        - Programação
+        - Arte
+        - Áudio
+        - Interface
+        - Testes
+        - Roteiro
+  - type: input
+    id: sprint
+    attributes:
+      label: Sprint
+      placeholder: "Ex.: 2"

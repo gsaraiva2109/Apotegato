@@ -1,5 +1,7 @@
 # Apotegato
 
+[![CI](https://github.com/gsaraiva2109/Apotegato/actions/workflows/ci.yml/badge.svg)](https://github.com/gsaraiva2109/Apotegato/actions/workflows/ci.yml)
+
 Jogo 2D top-down em pixel art feito em Godot 4 para a disciplina da Unifor. Você joga com o Mingau, um gato que tirava um cochilo na Unifor, foi engolido por um portal e caiu na cabana de uma apotecária. Ela machucou as costelas e não consegue mais sair para buscar ingredientes, então quem vai é ele.
 
 ## Como funciona
@@ -38,20 +40,22 @@ XP, moedas, upgrades e mochila que cresce estão em discussão e **não** fazem 
 
 ## Rodando o projeto
 
-1. Instale o [Godot](https://godotengine.org/download) na versão estável mais recente da série 4.x (a versão padrão, não a .NET).
+1. Instale o [Godot 4.7.2](https://github.com/godotengine/godot/releases/tag/4.7.2-stable) (a versão padrão, não a .NET).
 2. Clone o repositório:
    ```bash
    git clone https://github.com/gsaraiva2109/Apotegato.git
    ```
 3. No Godot, clique em **Importar**, selecione o `project.godot` da pasta e abra.
 
-O alvo é PC com Windows, incluindo máquinas com vídeo integrado.
+O alvo é PC com Windows, incluindo máquinas com vídeo integrado, por isso o projeto usa o renderizador Compatibility.
+
+A versão jogável de cada sprint fica em [Releases](https://github.com/gsaraiva2109/Apotegato/releases).
 
 ## Organização
 
 Trabalhamos em sprints de uma semana, de 19/10 até a primeira semana de dezembro. As tarefas ficam nas issues do GitHub e qualquer pessoa do grupo pode pegar uma. Os textos do diário também entram por issue.
 
-Para mudar alguma coisa, crie uma branch a partir da `main`, abra um pull request e peça para alguém do grupo revisar antes de juntar.
+Para mudar alguma coisa, crie uma branch a partir da `main`, abra um pull request e peça para alguém do grupo revisar antes de juntar. O passo a passo (ferramentas, nomes de branch, testes e como gerar uma versão) está no [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Equipe
 

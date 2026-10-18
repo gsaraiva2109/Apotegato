@@ -1,0 +1,93 @@
+name: Release
+
+# Build do jogo para Windows. Roda só ao criar uma tag de versão (uma por
+# sprint, ex.: v0.1.0) ou manualmente pela aba Actions. Na execução manual o
+# .zip fica só como artifact, sem criar release.
+on:
+  push:
+    tags: ["v*.*.*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  GODOT_VERSION: 4.7.2
+
+jobs:
+  build-windows:
+    name: Build (Windows)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Setup Godot
+        uses: ./.github/actions/setup-godot
+        with:
+          version: ${{ env.GODOT_VERSION }}
+          templates: "true"
+
+      - name: Importar o projeto
+        run: godot --headless --import
+
+      - name: Verificar scripts e cenas
+        run: godot --headless -s res://tools/checar_projeto.gd
+
+      - name: Rodar testes (GUT)
+        run: godot --headless -s addons/gut/gut_cmdln.gd
+
+      - name: Definir nome do pacote
+        id: nome
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+        run: |
+          if [[ $REF_TYPE == tag ]]; then
+            versao="$REF_NAME"
+          else
+            versao="dev-${SHA::7}"
+          fi
+          echo "zip=Apotegato-${versao}-windows.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Exportar para Windows
+        run: |
+          mkdir -p build/Apotegato
+          godot --headless --export-release "Windows Desktop" build/Apotegato/Apotegato.exe
+          test -s build/Apotegato/Apotegato.exe
+
+      - name: Compactar
+        env:
+          ZIP: ${{ steps.nome.outputs.zip }}
+        run: cd build && zip -r "$ZIP" Apotegato
+
+      - name: Enviar artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: ${{ steps.nome.outputs.zip }}
+          path: build/${{ steps.nome.outputs.zip }}
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Criar release
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+          ZIP: ${{ steps.nome.outputs.zip }}
+        run: |
+          gh release create "$TAG" "build/$ZIP" \
+            --repo "$GITHUB_REPOSITORY" \
+            --title "Apotegato $TAG" \
+            --generate-notes \
+            --verify-tag
