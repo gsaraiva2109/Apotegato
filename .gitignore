@@ -1,0 +1,30 @@
+# Godot 4
+.godot/
+/android/
+.import/
+*.tmp
+
+# Traduções importadas (o Godot gera a partir de CSV)
+*.translation
+
+# Exportação
+export_credentials.cfg
+/build/
+/export/
+/exports/
+*.exe
+*.pck
+*.zip
+
+# C#/Mono (caso alguém abra o projeto na versão .NET)
+.mono/
+data_*/
+mono_crash.*.json
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
