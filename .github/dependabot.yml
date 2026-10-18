@@ -1,0 +1,33 @@
+# Atualizações mensais, agrupadas num PR só por ecossistema, para não encher
+# a fila de PRs. O Godot não entra aqui: a versão é fixada em GODOT_VERSION
+# nos workflows e atualizada à mão (junto com a versão instalada por todos).
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directories:
+      - "/"
+      - "/.github/actions/*"
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: ci
+    open-pull-requests-limit: 2
+
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: monthly
+    cooldown:
+      default-days: 7
+    groups:
+      ferramentas:
+        patterns: ["*"]
+    commit-message:
+      prefix: chore
+    open-pull-requests-limit: 2

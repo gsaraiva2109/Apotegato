@@ -1,0 +1,26 @@
+name: Bug
+description: Algo no jogo não funciona como deveria
+labels: ["bug"]
+body:
+  - type: textarea
+    id: oque
+    attributes:
+      label: O que aconteceu
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+      placeholder: "1. Novo Jogo\n2. Entrar na Caatinga\n3. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que deveria acontecer
+  - type: input
+    id: versao
+    attributes:
+      label: Versão ou commit
+      placeholder: "Ex.: v0.2.0, ou rodando pelo editor na main"
