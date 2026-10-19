@@ -15,6 +15,10 @@ config/description="Jogo 2D top-down em pixel art: o gato Mingau coleta ingredie
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
+[autoload]
+
+IngredientData="*res://autoload/ingredient_data.gd"
+
 [display]
 
 window/size/viewport_width=960
