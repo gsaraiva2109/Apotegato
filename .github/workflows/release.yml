@@ -41,7 +41,7 @@ jobs:
         run: godot --headless --import
 
       - name: Verificar scripts e cenas
-        run: godot --headless -s res://tools/checar_projeto.gd
+        run: godot --headless -s res://tools/check_project.gd
 
       - name: Rodar testes (GUT)
         run: godot --headless -s addons/gut/gut_cmdln.gd
