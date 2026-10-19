@@ -18,14 +18,17 @@ Pelo caminho tem criaturas. O combate é sem armas e sem sangue, e é opcional: 
 
 ## Controles
 
-| Ação | Tecla |
-| --- | --- |
-| Mover | Setas ou WASD |
-| Atacar | Espaço |
-| Interagir | E |
-| Menus | Mouse |
+| Ação | Tecla | Nome no Input Map |
+| --- | --- | --- |
+| Mover | Setas ou WASD | `move_up`, `move_down`, `move_left`, `move_right` |
+| Atacar | Espaço | `attack` |
+| Interagir | E | `interact` |
+| Abrir a mochila | I | `backpack` |
+| Abrir o diário | J | `journal` |
+| Pausar | Esc | `pause` |
+| Menus | Mouse | |
 
-Mochila, diário e pausa ainda não têm tecla definida (a sugestão é I, J e Esc).
+As teclas são físicas: WASD fica no mesmo lugar em qualquer layout de teclado. O código usa sempre o nome da ação (`Input.is_action_pressed("attack")`), nunca a tecla. Para mudar uma tecla, edite em Projeto > Configurações do Projeto > Mapa de Entrada e atualize `tests/test_input_map.gd`.
 
 ## Números que já estão fechados
 
