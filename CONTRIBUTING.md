@@ -34,6 +34,67 @@ O hook é opcional, mas o CI roda as mesmas verificações. Sem ele, o erro só 
 3. Abra o PR para a `main` e preencha o template. Peça revisão de pelo menos uma pessoa do grupo.
 4. O PR só entra com o check **CI OK** verde. Junte com **Squash and merge**, para cada PR virar um commit só na `main`.
 
+## Estrutura de pastas
+
+```
+addons/            código de terceiros (GUT). Não edite.
+autoload/          singletons registrados em Projeto > Configurações > Autoload
+assets/
+  art/
+    characters/    Mingau, apotecária e pacientes
+    creatures/
+    regions/       uma subpasta por região, criada quando chegar o primeiro asset
+    cabin/
+    ingredients/   ícones, com o nome igual ao id do CSV (buriti.png)
+    ui/
+  audio/
+    music/
+    sfx/
+  fonts/
+data/              CSVs do jogo (ingredientes, créditos)
+scenes/
+  main.tscn        cena inicial
+  player/          o Mingau
+  cabin/
+  region/          andares, labirinto, porta, ingrediente no chão
+  creatures/
+  ui/              menus, HUD, diário, mochila, estoque, tela Fontes
+scripts/           lógica sem cena (BFS, gerador do labirinto, mochila, luz, save)
+tests/             testes do GUT
+tools/             scripts de linha de comando
+```
+
+- **O script de uma cena fica ao lado dela**, com o mesmo nome: `scenes/player/player.tscn` e `scenes/player/player.gd`. Uma cena que só serve a outra fica na mesma pasta.
+- **`scripts/` é para regra que não depende de tela.** Se dá para testar sem instanciar uma cena, vai para lá. É o que permite cobrir BFS, mochila, luz e save com testes rápidos.
+- **Autoload só para estado global de verdade**: dados carregados do CSV, estado da campanha e save. O arquivo fica em `autoload/` e o nome registrado é em PascalCase (`autoload/game_state.gd` vira `GameState`).
+- **Assets ficam separados por tipo**, não por cena, porque vêm de pacotes de terceiros e cada um precisa ter a licença registrada.
+- Pastas vazias levam um `.gitkeep`. Pode apagar quando a pasta ganhar o primeiro arquivo.
+
+## Convenções de código
+
+O código (pastas, arquivos, nós, classes, funções, variáveis, sinais) é em **inglês**. Comentários, documentação, mensagens de commit, PRs e todo texto que aparece no jogo são em **português**.
+
+A exceção são os dados: as colunas e os ids do `data/ingredientes.csv` continuam como estão (`buriti`, `campos_rios`, `impar`). O código usa esses valores sem traduzir, e os ids de ingrediente, condição e região são sempre os mesmos do CSV.
+
+| O quê | Padrão | Exemplo |
+| --- | --- | --- |
+| Pastas e arquivos | snake_case, sem acento | `scenes/region/floor_door.tscn` |
+| Nós na cena | PascalCase | `Player`, `InteractionArea` |
+| `class_name` e autoloads | PascalCase | `class_name Backpack`, `GameState` |
+| Funções e variáveis | snake_case | `add_item()`, `current_light` |
+| Funções e variáveis privadas | prefixo `_` | `_update_light()` |
+| Constantes e valores de enum | UPPER_SNAKE_CASE | `const MAX_SLOTS := 6` |
+| Sinais | snake_case, no passado | `item_collected`, `floor_cleared` |
+| Testes | `test_` + nome do script testado | `tests/test_backpack.gd` |
+
+Além disso:
+
+- Siga o [guia de estilo do GDScript](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html). O `gdformat` e o `gdlint` já cobram a maior parte.
+- Use tipagem estática: `var hearts: int = 7`, `func heal(amount: int) -> void`.
+- Declare `class_name` só quando outro script precisar referenciar a classe.
+- Um nó fala com os filhos chamando funções e com o pai emitindo sinais. Evite `get_parent()` e caminhos longos como `get_node("../../X")`.
+- Números de balanceamento (luz, corações, espaços da mochila, golpes) ficam em constantes nomeadas ou `@export`, nunca soltos no código.
+
 ## Testes
 
 Os testes ficam em `tests/` e usam o [GUT](https://github.com/bitwes/Gut) (já incluído em `addons/gut`). Arquivos começam com `test_` e estendem `GutTest`.
@@ -42,10 +103,10 @@ Os testes ficam em `tests/` e usam o [GUT](https://github.com/bitwes/Gut) (já i
 - **Na linha de comando:**
   ```bash
   godot --headless --import
-  godot --headless -s res://tools/checar_projeto.gd
+  godot --headless -s res://tools/check_project.gd
   godot --headless -s addons/gut/gut_cmdln.gd
   ```
-  O `checar_projeto.gd` abre todos os scripts e cenas e falha se algum tiver erro. O GUT só avisa quando um script de teste não compila e segue em frente, então essa verificação existe para pegar esse caso.
+  O `check_project.gd` abre todos os scripts e cenas e falha se algum tiver erro. O GUT só avisa quando um script de teste não compila e segue em frente, então essa verificação existe para pegar esse caso.
 
 O que vale testar: tudo que é regra e não depende de tela. BFS, geração do labirinto, sorteio de pacientes e ingredientes, mochila, estoque, fórmula da luz e save.
 
@@ -63,7 +124,7 @@ O que vale testar: tudo que é regra e não depende de tela. BFS, geração do l
 
 O arquivo tem um `.import` com `importer="keep"`. Sem isso o Godot importaria o CSV como tabela de tradução. Não apague esse arquivo.
 
-`tests/test_ingredientes_csv.gd` confere o CSV contra o GDD: total de ingredientes, ids únicos, regiões e paridades válidas e quantidade de ingredientes por condição. Se o time mudar alguma dessas regras, atualize as constantes do teste junto.
+`tests/test_ingredients_csv.gd` confere o CSV contra o GDD: total de ingredientes, ids únicos, regiões e paridades válidas e quantidade de ingredientes por condição. Se o time mudar alguma dessas regras, atualize as constantes do teste junto.
 
 ## Versões e entregas
 
