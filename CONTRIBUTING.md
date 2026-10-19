@@ -122,6 +122,16 @@ O que vale testar: tudo que é regra e não depende de tela. BFS, geração do l
 | `paridade` | `impar` ou `par` |
 | `condicoes` | Ids das condições separados por `\|`. O sufixo `:ou` marca alternativas: entre os ingredientes marcados assim na mesma condição, basta um (é o caso de camu-camu e acerola na anemia ferropriva). |
 
+O jogo lê o CSV pelo autoload `IngredientData` (`autoload/ingredient_data.gd`), carregado uma vez na inicialização. Nenhum outro script deve abrir o arquivo. As consultas principais:
+
+| Função | Devolve |
+| --- | --- |
+| `get_ingredient(id)` | O `Ingredient` com esse id, ou `null` |
+| `get_ingredients_in(regiao, paridade)` | Ingredientes que aparecem nos andares dessa região e paridade |
+| `get_ingredients_for(condicao)` | Todos os ingredientes que servem para a condição, alternativas incluídas |
+| `get_requirements(condicao)` | Os requisitos da condição; cada um é um grupo de ids em que basta um |
+| `is_condition_satisfied(condicao, ids)` | Se os ingredientes entregues cobrem a condição, aplicando a regra `:ou` |
+
 O arquivo tem um `.import` com `importer="keep"`. Sem isso o Godot importaria o CSV como tabela de tradução. Não apague esse arquivo.
 
 `tests/test_ingredients_csv.gd` confere o CSV contra o GDD: total de ingredientes, ids únicos, regiões e paridades válidas e quantidade de ingredientes por condição. Se o time mudar alguma dessas regras, atualize as constantes do teste junto.
