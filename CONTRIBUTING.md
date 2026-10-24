@@ -53,9 +53,8 @@ assets/
   fonts/
 data/              CSVs do jogo (ingredientes, créditos)
 scenes/
-  main.tscn        cena inicial
+  cabin/           a cabana (cena inicial do jogo: cabin.tscn)
   player/          o Mingau
-  cabin/
   region/          andares, labirinto, porta, ingrediente no chão
   creatures/
   ui/              menus, HUD, diário, mochila, estoque, tela Fontes

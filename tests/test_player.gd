@@ -1,8 +1,8 @@
 extends GutTest
-## Confere o movimento do Mingau, a colisão com a sala de teste e a câmera.
+## Confere o movimento do Mingau, a colisão com a cabana e a câmera.
 
 const PlayerScene := preload("res://scenes/player/player.tscn")
-const RoomScene := preload("res://scenes/cabin/test_room.tscn")
+const CabinScene := preload("res://scenes/cabin/cabin.tscn")
 
 
 func test_diagonal_is_not_faster() -> void:
@@ -32,19 +32,19 @@ func test_camera_zooms_and_follows_player() -> void:
 	assert_eq(camera.get_parent(), player, "A câmera segue o gato por ser filha dele")
 
 
-func test_room_limits_the_camera() -> void:
-	var room: Node2D = autofree(RoomScene.instantiate())
+func test_cabin_limits_the_camera() -> void:
+	var room: Node2D = autofree(CabinScene.instantiate())
 	add_child(room)
 	await wait_physics_frames(1)
-	var camera: Camera2D = room.get_node("Player/Camera")
+	var camera: Camera2D = room.get_node("World/Player/Camera")
 	assert_eq(camera.limit_right, 960)
-	assert_eq(camera.limit_bottom, 640)
+	assert_eq(camera.limit_bottom, 544)
 
 
 func test_walls_stop_the_player() -> void:
-	var room: Node2D = autofree(RoomScene.instantiate())
+	var room: Node2D = autofree(CabinScene.instantiate())
 	add_child(room)
-	var player: Player = room.get_node("Player")
+	var player: Player = room.get_node("World/Player")
 	player.position = Vector2(100, 320)
 	await wait_physics_frames(2)
 	# anda para a esquerda até a parede (borda interna em x = 32)
