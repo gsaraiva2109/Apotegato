@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Apotegato"
 config/description="Jogo 2D top-down em pixel art: o gato Mingau coleta ingredientes nas regiões do Brasil para ajudar uma apotecária."
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/cabin/cabin.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [autoload]
