@@ -20,6 +20,8 @@ y_sort_enabled = true
 id = &"exit"
 size = Vector2(40, 40)
 
+[node name="Items" type="Node2D" parent="World"]
+
 [node name="Player" parent="World" instance=ExtResource("3_player")]
 
 [node name="Hud" parent="." instance=ExtResource("5_hud")]
