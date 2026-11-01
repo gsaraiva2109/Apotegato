@@ -6,6 +6,8 @@ extends CharacterBody2D
 ## distância de detecção também é medida andando: uma criatura do outro lado de
 ## uma parede não percebe o gato.
 ##
+## Encostar nela tira um coração do gato (`Player.take_hit`), mesmo parada.
+##
 ## Três arranhões a derrotam, sem sangue: ela pisca, é empurrada para trás e, no
 ## último, some encolhendo.
 
@@ -28,6 +30,8 @@ const FADE_SECONDS := 0.25
 @export var give_up_distance := 288.0
 ## Quantos arranhões a derrotam.
 @export var hits_to_defeat := 3
+## Quantos corações tira do gato a cada contato.
+@export var contact_damage := 1
 
 var brain: CreatureBrain
 var _grid: MazeGrid
@@ -40,6 +44,7 @@ var _knockback_left := 0.0
 var _knockback := Vector2.ZERO
 
 @onready var _sprite: Sprite2D = $Sprite
+@onready var _contact: Area2D = $ContactArea
 
 
 func _ready() -> void:
@@ -54,6 +59,7 @@ func setup(grid: MazeGrid, target: Node2D) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	_hurt_touching_player()
 	if _grid == null or _target == null:
 		return
 	if _knockback_left > 0.0:
@@ -67,6 +73,14 @@ func _physics_process(delta: float) -> void:
 		_think()
 	velocity = _chase_velocity()
 	move_and_slide()
+
+
+## Tira um coração do gato se ele estiver encostado (o gato ignora golpes
+## enquanto está invencível).
+func _hurt_touching_player() -> void:
+	for body in _contact.get_overlapping_bodies():
+		if body is Player:
+			(body as Player).take_hit(contact_damage)
 
 
 ## Se já foi derrotada.
