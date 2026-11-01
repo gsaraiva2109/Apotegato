@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
 [ext_resource type="Texture2D" path="res://assets/art/characters/mingau_placeholder.png" id="2_sprite"]
+[ext_resource type="Script" path="res://scenes/player/scratch_effect.gd" id="3_scratch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
 size = Vector2(20, 14)
@@ -17,6 +18,10 @@ texture = ExtResource("2_sprite")
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_body")
+
+[node name="Scratch" type="Node2D" parent="."]
+z_index = 5
+script = ExtResource("3_scratch")
 
 [node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
