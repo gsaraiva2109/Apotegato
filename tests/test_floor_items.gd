@@ -36,8 +36,18 @@ func _ids(pickups: Array[IngredientPickup]) -> Array:
 	return ids
 
 
+func _expected_ids(region: String, parity: String) -> Array:
+	var ids := []
+	for ingredient in IngredientData.get_ingredients_in(region, parity):
+		ids.append(ingredient.id)
+	ids.sort()
+	return ids
+
+
 func test_floor_one_has_the_odd_ingredients_of_the_region() -> void:
-	assert_eq(_ids(_floor.get_pickups()), ["alecrim_pimenta", "castanha_caju"])
+	var expected := _expected_ids(Regions.CAATINGA, GameState.PARITY_ODD)
+	assert_false(expected.is_empty(), "A Caatinga tem ingredientes ímpares no CSV")
+	assert_eq(_ids(_floor.get_pickups()), expected)
 
 
 func test_only_ingredients_of_the_right_region_and_parity_appear() -> void:
@@ -80,7 +90,11 @@ func test_new_floor_replaces_the_pickups() -> void:
 	var before := _floor.get_pickups()
 	_floor._on_door_choice_made(DoorMenu.UP)
 	var after := _floor.get_pickups()
-	assert_eq(_ids(after), ["acerola", "licuri"], "Andar 2 da Caatinga é par")
+	assert_eq(
+		_ids(after),
+		_expected_ids(Regions.CAATINGA, GameState.PARITY_EVEN),
+		"Andar 2 da Caatinga é par"
+	)
 	for pickup in before:
 		assert_false(pickup in after)
 
