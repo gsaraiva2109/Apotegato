@@ -1,12 +1,17 @@
 class_name Hud
 extends CanvasLayer
-## Interface da exploração: região e andar, o contador da mochila e os avisos
-## rápidos ("Pegou Buriti", "Mochila cheia"). As outras peças (corações)
-## entram aqui conforme ficam prontas.
+## Interface da exploração: os corações (canto superior esquerdo, como em
+## Zelda), região e andar, o contador da mochila e os avisos rápidos ("Pegou
+## Buriti", "Mochila cheia").
+
+const HEART_FULL := preload("res://assets/art/ui/heart_full.png")
+const HEART_EMPTY := preload("res://assets/art/ui/heart_empty.png")
+const HEART_SIZE := Vector2(28, 28)
 
 ## Quanto tempo um aviso fica na tela, em segundos.
 const MESSAGE_SECONDS := 2.5
 
+@onready var _hearts_box: HBoxContainer = $Root/HeartsBox
 @onready var _location_label: Label = $Root/LocationPanel/LocationLabel
 @onready var _backpack_label: Label = $Root/BackpackPanel/BackpackLabel
 @onready var _message_label: Label = $Root/MessageLabel
@@ -17,6 +22,29 @@ func _ready() -> void:
 	_message_timer.wait_time = MESSAGE_SECONDS
 	_message_timer.timeout.connect(_message_label.hide)
 	_message_label.hide()
+
+
+## Mostra os corações: `current` cheios e o resto vazios, até `maximum`.
+func show_hearts(current: int, maximum: int) -> void:
+	while _hearts_box.get_child_count() > maximum:
+		var extra := _hearts_box.get_child(_hearts_box.get_child_count() - 1)
+		_hearts_box.remove_child(extra)
+		extra.queue_free()
+	while _hearts_box.get_child_count() < maximum:
+		_hearts_box.add_child(_new_heart())
+	for i in maximum:
+		(_hearts_box.get_child(i) as TextureRect).texture = (
+			HEART_FULL if i < current else HEART_EMPTY
+		)
+
+
+## Quantos corações cheios estão na tela.
+func full_hearts() -> int:
+	var full := 0
+	for heart: TextureRect in _hearts_box.get_children():
+		if heart.texture == HEART_FULL:
+			full += 1
+	return full
 
 
 ## Mostra a região e o andar, como "Amazônia - Andar 2".
@@ -49,3 +77,12 @@ static func backpack_text(backpack: Backpack) -> String:
 		var item_name := ingredient.display_name if ingredient != null else id
 		lines.append("%s x%d" % [item_name, backpack.count(id)])
 	return "\n".join(lines)
+
+
+func _new_heart() -> TextureRect:
+	var heart := TextureRect.new()
+	heart.custom_minimum_size = HEART_SIZE
+	heart.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	heart.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	heart.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	return heart

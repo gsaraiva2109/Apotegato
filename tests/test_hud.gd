@@ -45,3 +45,15 @@ func test_message_shows_and_then_hides() -> void:
 	assert_eq(label.text, "Pegou Mel")
 	hud.get_node("MessageTimer").timeout.emit()
 	assert_false(label.visible)
+
+
+func test_show_hearts_fills_and_empties() -> void:
+	var hud: Hud = autofree(HudScene.instantiate())
+	add_child(hud)
+	hud.show_hearts(7, 7)
+	assert_eq(hud.full_hearts(), 7)
+	hud.show_hearts(3, 7)
+	assert_eq(hud.full_hearts(), 3)
+	assert_eq(hud.get_node("Root/HeartsBox").get_child_count(), 7)
+	hud.show_hearts(0, 7)
+	assert_eq(hud.full_hearts(), 0)

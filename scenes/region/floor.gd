@@ -7,6 +7,8 @@ extends Node2D
 ## A região e o andar vêm do `GameState`. Mochila e estoque também ficam lá, então
 ## subir, voltar à cabana e trocar de região não os perdem.
 ##
+## O Mingau tem 7 corações; se zerarem, ele desmaia e acorda na cabana.
+##
 ## O andar fica no escuro (`Darkness`): só o círculo de luz do gato ilumina, e
 ## ele volta ao tamanho inicial a cada andar gerado.
 
@@ -18,6 +20,9 @@ const DEFAULT_REGION := Regions.AMAZONIA
 
 const IngredientPickupScene := preload("res://scenes/region/ingredient_pickup.tscn")
 const CreatureScene := preload("res://scenes/creatures/creature.tscn")
+
+## Segundos entre o desmaio do gato e a chegada à cabana.
+@export var faint_seconds := 1.5
 
 @onready var _room: Room = $Room
 @onready var _player: Player = $World/Player
@@ -36,6 +41,9 @@ func _ready() -> void:
 	_exit_door.interacted.connect(_on_exit_door_interacted)
 	_door_menu.choice_made.connect(_on_door_choice_made)
 	_region_menu.region_selected.connect(_on_region_selected)
+	_player.hearts.changed.connect(_hud.show_hearts)
+	_player.fainted.connect(_on_player_fainted)
+	_hud.show_hearts(_player.hearts.current, Hearts.MAX)
 	GameState.backpack.changed.connect(_on_backpack_changed)
 	GameState.backpack.rejected.connect(_on_backpack_rejected)
 	_door_menu.closed.connect(_on_menu_closed)
@@ -98,6 +106,16 @@ func _spawn_creatures(layout: MazeLayout) -> void:
 		creature.setup(layout.grid, _player)
 		creature.defeated.connect(_on_creature_defeated)
 		_creatures.add_child(creature)
+
+
+## Os corações zeraram: o gato desmaia e acorda na cabana. A mochila e o estoque
+## ficam como estavam (estão no `GameState`) e os corações voltam a 7, porque a
+## cabana cria um Mingau novo.
+func _on_player_fainted() -> void:
+	_hud.show_message("Mingau desmaiou... acordando na cabana")
+	await get_tree().create_timer(faint_seconds).timeout
+	GameState.leave_region()
+	get_tree().change_scene_to_file(ScenePaths.CABIN)
 
 
 ## Cada criatura derrotada aumenta a luz do andar.
