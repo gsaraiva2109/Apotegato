@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/region/floor.gd" id="1_floor"]
+[ext_resource type="PackedScene" path="res://scenes/region/room.tscn" id="2_room"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="PackedScene" path="res://scenes/cabin/interaction_area.tscn" id="4_door"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/door_menu.tscn" id="6_door_menu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/region_menu.tscn" id="7_region_menu"]
+
+[node name="Floor" type="Node2D"]
+script = ExtResource("1_floor")
+
+[node name="Room" parent="." instance=ExtResource("2_room")]
+
+[node name="World" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="ExitDoor" parent="World" instance=ExtResource("4_door")]
+id = &"exit"
+size = Vector2(40, 40)
+
+[node name="Player" parent="World" instance=ExtResource("3_player")]
+
+[node name="Hud" parent="." instance=ExtResource("5_hud")]
+
+[node name="DoorMenu" parent="." instance=ExtResource("6_door_menu")]
+
+[node name="RegionMenu" parent="." instance=ExtResource("7_region_menu")]
