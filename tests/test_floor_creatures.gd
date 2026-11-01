@@ -32,11 +32,20 @@ func _light() -> PlayerLight:
 	return _floor.get_node("World/Player/Light")
 
 
+## Quantas criaturas o gerador reservou no andar atual. Em raros mapas ele
+## entrega menos que o parâmetro (ver `MazeParams.entities`), então os testes
+## comparam com o que foi reservado e confirmam o teto pelo parâmetro.
+func _reserved() -> int:
+	return _room().layout.creature_cells.size()
+
+
 func test_amount_follows_the_entities_param() -> void:
-	assert_eq(_floor.get_creatures().size(), _room().params.entities)
+	assert_eq(_floor.get_creatures().size(), _reserved())
+	assert_lte(_floor.get_creatures().size(), _room().params.entities)
 	_room().params.entities = 2
 	_floor.generate_floor()
-	assert_eq(_floor.get_creatures().size(), 2)
+	assert_eq(_floor.get_creatures().size(), _reserved())
+	assert_lte(_floor.get_creatures().size(), 2)
 	_room().params.entities = 0
 	_floor.generate_floor()
 	assert_eq(_floor.get_creatures().size(), 0)
@@ -59,7 +68,7 @@ func test_new_floor_replaces_the_creatures() -> void:
 	var after := _floor.get_creatures()
 	for creature in before:
 		assert_false(creature in after)
-	assert_eq(after.size(), _room().params.entities)
+	assert_eq(after.size(), _reserved())
 
 
 func test_defeating_creatures_is_optional_to_collect_and_climb() -> void:
@@ -101,7 +110,7 @@ func test_scratching_a_creature_through_the_player_raises_the_light() -> void:
 	assert_true(creature.is_defeated())
 	assert_eq(_light().defeated, 1)
 	assert_almost_eq(_light().texture_scale, 0.72, 0.0001)
-	assert_eq(_floor.get_creatures().size(), _room().params.entities - 1)
+	assert_eq(_floor.get_creatures().size(), _reserved() - 1)
 
 
 func test_light_resets_on_the_next_floor_after_defeats() -> void:
