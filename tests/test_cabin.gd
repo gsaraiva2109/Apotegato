@@ -13,6 +13,10 @@ func before_each() -> void:
 	await wait_physics_frames(2)
 
 
+func after_each() -> void:
+	get_tree().paused = false
+
+
 func test_cabin_is_the_main_scene() -> void:
 	var main: String = ProjectSettings.get_setting("application/run/main_scene")
 	assert_eq(main, "res://scenes/cabin/cabin.tscn")
@@ -87,3 +91,47 @@ func test_areas_use_their_own_size() -> void:
 	var shape: RectangleShape2D = journal.get_node("CollisionShape").shape
 	assert_eq(shape.size, journal.size)
 	assert_gt(shape.size.x, 64.0)
+
+
+func test_door_opens_the_region_menu_with_the_six_regions() -> void:
+	var menu: RegionMenu = _cabin.get_node("RegionMenu")
+	assert_false(menu.is_open())
+	var door: InteractionArea = _cabin.get_node("Interactions/Door")
+	var player: Player = _cabin.get_node("World/Player")
+	player.position = door.position
+	await wait_physics_frames(3)
+	assert_true(door.try_interact())
+	assert_true(menu.is_open())
+	assert_true(get_tree().paused, "O jogo pausa enquanto o menu está aberto")
+	for region in Regions.IDS:
+		assert_true(menu.get_button(region).visible)
+	menu.close()
+	assert_false(get_tree().paused)
+
+
+func test_journal_does_not_open_the_region_menu() -> void:
+	var menu: RegionMenu = _cabin.get_node("RegionMenu")
+	var journal: InteractionArea = _cabin.get_node("Interactions/Journal")
+	var player: Player = _cabin.get_node("World/Player")
+	player.position = journal.position
+	await wait_physics_frames(3)
+	assert_true(journal.try_interact())
+	assert_false(menu.is_open())
+
+
+func test_choosing_a_region_starts_floor_one_and_keeps_the_backpack() -> void:
+	GameState.new_game()
+	GameState.backpack.add("buriti", 2)
+	GameState.stock.store("mel")
+	var menu: RegionMenu = _cabin.get_node("RegionMenu")
+	menu.open()
+	menu.get_button(Regions.CERRADO).pressed.emit()
+	# a troca de cena acontece no fim do quadro; limpa o que ela criou
+	await wait_process_frames(2)
+	assert_eq(GameState.current_region, "cerrado")
+	assert_eq(GameState.current_floor, 1)
+	assert_eq(GameState.backpack.count("buriti"), 2)
+	assert_eq(GameState.stock.count("mel"), 1)
+	assert_true(get_tree().current_scene is RegionFloor)
+	get_tree().current_scene.queue_free()
+	GameState.new_game()

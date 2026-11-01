@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="10_1o712"]
 [ext_resource type="PackedScene" path="res://scenes/cabin/interaction_area.tscn" id="11_uo51r"]
 [ext_resource type="Script" path="res://scenes/cabin/interaction_area.gd" id="12_wc7s4"]
+[ext_resource type="PackedScene" path="res://scenes/ui/region_menu.tscn" id="13_region_menu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e5wdj"]
 size = Vector2(96, 32)
@@ -153,3 +154,5 @@ position = Vector2(176, 336)
 script = ExtResource("12_wc7s4")
 id = &"patient"
 size = Vector2(96, 96)
+
+[node name="RegionMenu" parent="." instance=ExtResource("13_region_menu")]
