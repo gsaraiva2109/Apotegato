@@ -114,6 +114,8 @@ func _spawn_creatures(layout: MazeLayout) -> void:
 func _on_player_fainted() -> void:
 	_hud.show_message("Mingau desmaiou... acordando na cabana")
 	await get_tree().create_timer(faint_seconds).timeout
+	# Um menu aberto nesse meio tempo deixaria a cabana em pausa.
+	get_tree().paused = false
 	GameState.leave_region()
 	get_tree().change_scene_to_file(ScenePaths.CABIN)
 

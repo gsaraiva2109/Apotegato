@@ -64,6 +64,18 @@ func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
 	get_tree().current_scene.queue_free()
 
 
+func test_fainting_with_a_menu_open_does_not_leave_the_cabin_paused() -> void:
+	_player().invulnerability_time = 0.0
+	get_tree().paused = true
+	_floor._door_menu.open(1)
+	for i in 7:
+		_player().take_hit()
+	await wait_seconds(0.3)
+	assert_true(get_tree().current_scene is Cabin, "Acordou na cabana")
+	assert_false(get_tree().paused, "A cabana não pode herdar a pausa do menu")
+	get_tree().current_scene.queue_free()
+
+
 func test_hearts_are_back_to_seven_when_the_cat_returns_to_a_region() -> void:
 	_player().invulnerability_time = 0.0
 	for i in 3:
