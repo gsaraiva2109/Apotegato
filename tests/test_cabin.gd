@@ -1,6 +1,5 @@
 extends GutTest
-## Confere a cabana: tamanho do mapa, colisões, Mingau, pontos de interação e
-## se ela é a cena inicial do jogo.
+## Confere a cabana: tamanho do mapa, colisões, Mingau e pontos de interação.
 
 const CabinScene := preload("res://scenes/cabin/cabin.tscn")
 
@@ -15,11 +14,6 @@ func before_each() -> void:
 
 func after_each() -> void:
 	get_tree().paused = false
-
-
-func test_cabin_is_the_main_scene() -> void:
-	var main: String = ProjectSettings.get_setting("application/run/main_scene")
-	assert_eq(main, "res://scenes/cabin/cabin.tscn")
 
 
 func test_tilemap_is_30_by_17_tiles() -> void:

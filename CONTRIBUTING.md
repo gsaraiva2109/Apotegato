@@ -53,11 +53,11 @@ assets/
   fonts/
 data/              CSVs do jogo (ingredientes, créditos)
 scenes/
-  cabin/           a cabana (cena inicial do jogo: cabin.tscn)
+  cabin/           a cabana (cabin.tscn)
   player/          o Mingau
   region/          andares, labirinto, porta, ingrediente no chão
   creatures/
-  ui/              menus, HUD, diário, mochila, estoque, tela Fontes
+  ui/              menu inicial (main_menu.tscn, a cena inicial do jogo), HUD, diário, mochila, estoque, tela Fontes
 scripts/           lógica sem cena (BFS, gerador do labirinto, mochila, luz, save)
 tests/             testes do GUT
 tools/             scripts de linha de comando
