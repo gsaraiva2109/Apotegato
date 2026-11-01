@@ -17,11 +17,13 @@ signal floor_generated(layout: MazeLayout)
 const DEFAULT_REGION := Regions.AMAZONIA
 
 const IngredientPickupScene := preload("res://scenes/region/ingredient_pickup.tscn")
+const CreatureScene := preload("res://scenes/creatures/creature.tscn")
 
 @onready var _room: Room = $Room
 @onready var _player: Player = $World/Player
 @onready var _light: PlayerLight = $World/Player/Light
 @onready var _items: Node2D = $World/Items
+@onready var _creatures: Node2D = $World/Creatures
 @onready var _exit_door: InteractionArea = $World/ExitDoor
 @onready var _hud: Hud = $Hud
 @onready var _door_menu: DoorMenu = $DoorMenu
@@ -55,6 +57,7 @@ func generate_floor() -> void:
 	_hud.show_location(GameState.current_region, GameState.current_floor)
 	_hud.show_backpack(GameState.backpack)
 	_spawn_ingredients(ingredients, layout)
+	_spawn_creatures(layout)
 	floor_generated.emit(layout)
 
 
@@ -71,6 +74,35 @@ func get_pickups() -> Array[IngredientPickup]:
 		if not child.is_queued_for_deletion():
 			result.append(child as IngredientPickup)
 	return result
+
+
+## Criaturas vivas no andar agora.
+func get_creatures() -> Array[Creature]:
+	var result: Array[Creature] = []
+	for child in _creatures.get_children():
+		var creature := child as Creature
+		if not creature.is_queued_for_deletion() and not creature.is_defeated():
+			result.append(creature)
+	return result
+
+
+## Troca as criaturas pelas do andar novo, nas células que o gerador reservou
+## (longe da entrada, sem fechar o caminho). A quantidade vem de
+## `Room.params.entities`.
+func _spawn_creatures(layout: MazeLayout) -> void:
+	for old in _creatures.get_children():
+		old.queue_free()
+	for cell in layout.creature_cells:
+		var creature: Creature = CreatureScene.instantiate()
+		creature.position = _room.cell_to_position(cell)
+		creature.setup(layout.grid, _player)
+		creature.defeated.connect(_on_creature_defeated)
+		_creatures.add_child(creature)
+
+
+## Cada criatura derrotada aumenta a luz do andar.
+func _on_creature_defeated(_creature: Creature) -> void:
+	_light.add_defeat()
 
 
 ## Troca os ingredientes do chão pelos do andar novo, cada um numa das células

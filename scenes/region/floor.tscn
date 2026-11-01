@@ -23,12 +23,14 @@ size = Vector2(40, 40)
 
 [node name="Items" type="Node2D" parent="World"]
 
+[node name="Creatures" type="Node2D" parent="World"]
+
 [node name="Player" parent="World" instance=ExtResource("3_player")]
 
 [node name="Light" parent="World/Player" instance=ExtResource("8_light")]
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0.03, 0.03, 0.05, 1)
+color = Color(0.02, 0.02, 0.04, 1)
 
 [node name="Hud" parent="." instance=ExtResource("5_hud")]
 
