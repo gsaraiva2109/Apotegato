@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://scenes/region/room.tscn" id="2_room"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/cabin/interaction_area.tscn" id="4_door"]
+[ext_resource type="PackedScene" path="res://scenes/region/player_light.tscn" id="8_light"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/door_menu.tscn" id="6_door_menu"]
 [ext_resource type="PackedScene" path="res://scenes/ui/region_menu.tscn" id="7_region_menu"]
@@ -23,6 +24,11 @@ size = Vector2(40, 40)
 [node name="Items" type="Node2D" parent="World"]
 
 [node name="Player" parent="World" instance=ExtResource("3_player")]
+
+[node name="Light" parent="World/Player" instance=ExtResource("8_light")]
+
+[node name="Darkness" type="CanvasModulate" parent="."]
+color = Color(0.03, 0.03, 0.05, 1)
 
 [node name="Hud" parent="." instance=ExtResource("5_hud")]
 

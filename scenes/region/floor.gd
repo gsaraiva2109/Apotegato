@@ -6,6 +6,9 @@ extends Node2D
 ##
 ## A região e o andar vêm do `GameState`. Mochila e estoque também ficam lá, então
 ## subir, voltar à cabana e trocar de região não os perdem.
+##
+## O andar fica no escuro (`Darkness`): só o círculo de luz do gato ilumina, e
+## ele volta ao tamanho inicial a cada andar gerado.
 
 ## Emitido quando um andar novo foi gerado e o gato já está na entrada.
 signal floor_generated(layout: MazeLayout)
@@ -17,6 +20,7 @@ const IngredientPickupScene := preload("res://scenes/region/ingredient_pickup.ts
 
 @onready var _room: Room = $Room
 @onready var _player: Player = $World/Player
+@onready var _light: PlayerLight = $World/Player/Light
 @onready var _items: Node2D = $World/Items
 @onready var _exit_door: InteractionArea = $World/ExitDoor
 @onready var _hud: Hud = $Hud
@@ -45,6 +49,7 @@ func generate_floor() -> void:
 	var layout := _room.generate(GameState.current_region)
 	_player.position = _room.cell_to_position(layout.entry_cell)
 	_player.velocity = Vector2.ZERO
+	_light.reset()
 	_player.set_camera_limits(_room.bounds())
 	_exit_door.position = _room.cell_to_position(layout.exit_cell)
 	_hud.show_location(GameState.current_region, GameState.current_floor)
