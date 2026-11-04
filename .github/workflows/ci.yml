@@ -36,7 +36,7 @@ jobs:
           cache-dependency-path: requirements-dev.txt
 
       - name: Instalar gdtoolkit
-        run: pip install -r requirements-dev.txt
+        run: pip install pillow==11.3.0
 
       # addons/ é código de terceiros (GUT) e fica de fora.
       - name: gdformat
@@ -76,6 +76,9 @@ jobs:
         uses: ./.github/actions/setup-godot
         with:
           version: ${{ env.GODOT_VERSION }}
+
+      - name: Instalar Pillow (recorte da interface)
+        run: pip install pillow==11.3.0
 
       # A arte de terceiros fica num repositório privado. PRs de forks não
       # recebem o secret; nesse caso o projeto roda com a arte provisória.

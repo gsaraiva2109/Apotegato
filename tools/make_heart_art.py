@@ -1,4 +1,4 @@
-"""Gera os corações provisórios do HUD (16 x 16): cheio e vazio.
+"""Gera os corações provisórios do HUD (18 x 15): cheio e vazio.
 
 Uso: python tools/make_heart_art.py
 
@@ -34,9 +34,9 @@ SHAPE = [
 
 
 def heart(fill, edge, light=None):
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    img = Image.new("RGBA", (18, 15), (0, 0, 0, 0))
     px = img.load()
-    ox, oy = 1, 2
+    ox, oy = 2, 2
     cells = {(x, y) for y, row in enumerate(SHAPE) for x, c in enumerate(row) if c == "#"}
     for x, y in cells:
         border = any((x + dx, y + dy) not in cells for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))

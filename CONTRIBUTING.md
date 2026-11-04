@@ -159,6 +159,10 @@ Vários pacotes de arte proíbem redistribuir os arquivos originais, e este repo
 
 Os derivados de arte de terceiros (como a onça, recolor do tigre do MasuOne) também ficam só no repositório privado. Packs CC0 ou CC BY sem cláusula de redistribuição podem ir no repositório público, com crédito na tela Créditos.
 
+### Atalho: `tools/setup.sh`
+
+`bash tools/setup.sh` faz tudo de uma vez: instala o `requirements-dev.txt` (inclui o Pillow, usado no recorte da interface), ativa o `lefthook` e baixa a arte. Você não precisa de token: o `ASSETS_READ_TOKEN` é só da CI, e localmente vale o seu acesso de colaborador ao `ApotegatoAssets`. Sem acesso, o script avisa e o jogo roda com a arte provisória. Depois de um `git pull` que mude algo, o hook `post-merge` do `lefthook` roda o `fetch_assets.sh` de novo.
+
 ### Baixando a arte localmente
 
 1. Peça acesso de leitura ao `ApotegatoAssets` para o Gabriel.
@@ -183,6 +187,10 @@ No Windows, rode pelo Git Bash.
 O `ApotegatoAssets` tem uma pasta `overrides/art/` com recortes do Epic RPG World - House Interiors, com os mesmos nomes e tamanhos da arte provisória de `assets/art/cabin/`. O `tools/fetch_assets.sh` copia esses arquivos por cima da provisória, e a cabana passa a usar a arte definitiva sem mudar nenhuma cena. Como a arte de terceiros não pode ir para o git público, o script marca esses arquivos com `git update-index --skip-worktree`: eles não aparecem em `git status` e não entram em commits. Se você precisar restaurar a arte provisória (por exemplo, antes de um `git pull` que mexe nesses arquivos), rode `git update-index --no-skip-worktree assets/art/cabin/*.png` e depois `git checkout -- assets/art/cabin`. A porta continua provisória.
 
 O mesmo mecanismo vale para os tilesets das regiões (`overrides/art/regions/<id>/tileset.png`, 128 x 32, montados com Forest Tilesets, RPG Beach Tileset e Pixel Trees 32x32) e para o sprite do Mingau (`overrides/art/characters/mingau_placeholder.png`, o gato do pacote da MasuOne). O tile de saída de cada região continua o provisório, na cor da Tabela 3. Quem rodar o jogo sem acesso ao repositório privado vê a arte provisória.
+
+### Interface (UI Medieval Mega)
+
+O pacote da ToffeeCraft é uma spritesheet única (`toffeecraft-ui-medieval-mega/MedievalUiMega/medieval.png` no `ApotegatoAssets`) e a licença proíbe redistribuir. O `tools/fetch_assets.sh` roda o `tools/crop_ui_pack.py` no fim, que recorta as peças do tema (painel, botões e corações do HUD) por coordenadas e as grava em `assets/art/ui/`, por cima da arte provisória de mesmo nome e tamanho (gerada por `tools/make_ui_art.py` e `tools/make_heart_art.py`). Os arquivos ficam com `skip-worktree`, como os da cabana, então o recorte nunca entra em commit. Para trocar uma peça, edite o dicionário `CROPS` do script. O tema `scenes/ui/game_theme.tres` usa 9-slice com margens que valem para a arte provisória e para a definitiva.
 
 ### Músicas
 

@@ -6,7 +6,7 @@ extends CanvasLayer
 
 const HEART_FULL := preload("res://assets/art/ui/heart_full.png")
 const HEART_EMPTY := preload("res://assets/art/ui/heart_empty.png")
-const HEART_SIZE := Vector2(28, 28)
+const HEART_SIZE := Vector2(36, 30)
 
 ## Quanto tempo um aviso fica na tela, em segundos.
 const MESSAGE_SECONDS := 2.5

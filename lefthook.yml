@@ -17,3 +17,10 @@ pre-commit:
       exclude:
         - "addons/**"
       run: gdlint {staged_files}
+
+# Depois de um pull/merge que mexa nas ferramentas de assets, baixa a arte de
+# novo. Só roda se houver credencial e nunca faz o pull falhar.
+post-merge:
+  commands:
+    assets:
+      run: bash tools/fetch_assets.sh || echo "Aviso: não baixei a arte de terceiros (sem acesso ao ApotegatoAssets?)."

@@ -72,5 +72,23 @@ if [[ -d $DEST/audio ]]; then
   echo "Áudio de terceiros instalado em assets/audio/third_party/"
 fi
 
+# Interface (UI Medieval Mega): o pacote vem numa sheet única, que o script de
+# recorte divide nas peças do tema (assets/art/ui/). Sem Python/Pillow, o jogo
+# segue com a arte provisória da interface.
+UI_CROPS=(panel button_normal button_pressed button_disabled heart_full heart_empty)
+if [[ -f $DEST/toffeecraft-ui-medieval-mega/MedievalUiMega/medieval.png ]]; then
+  PYTHON="$(command -v python3 || command -v python || true)"
+  if [[ -n $PYTHON ]] && "$PYTHON" "$ROOT/tools/crop_ui_pack.py"; then
+    # Arquivos versionados com a arte provisória: ninguém deve commitar o recorte.
+    if git -C "$ROOT" rev-parse --git-dir > /dev/null 2>&1; then
+      for name in "${UI_CROPS[@]}"; do
+        git -C "$ROOT" update-index --skip-worktree "assets/art/ui/$name.png" 2> /dev/null || true
+      done
+    fi
+  else
+    echo "Aviso: não recortei a interface (precisa de Python 3 com Pillow); seguindo com a arte provisória." >&2
+  fi
+fi
+
 echo "Arte de terceiros instalada em assets/art/third_party/"
 echo "Abra o projeto no Godot (ou rode 'godot --headless --import') para importar."
