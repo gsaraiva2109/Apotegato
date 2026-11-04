@@ -36,7 +36,7 @@ jobs:
           cache-dependency-path: requirements-dev.txt
 
       - name: Instalar gdtoolkit
-        run: pip install pillow==11.3.0
+        run: pip install -r requirements-dev.txt
 
       # addons/ é código de terceiros (GUT) e fica de fora.
       - name: gdformat
