@@ -48,5 +48,20 @@ mkdir -p "$DEST"
 rm -rf "$tmp/repo/.git"
 cp -a "$tmp/repo/." "$DEST/"
 
+# Arte que substitui a provisória do jogo, com os mesmos nomes e tamanhos
+# (overrides/art/ no repositório de assets vira assets/art/).
+OVERRIDES="$DEST/overrides/art"
+if [[ -d $OVERRIDES ]]; then
+  cp -a "$OVERRIDES/." "$ROOT/assets/art/"
+  # Esses arquivos são versionados com a arte provisória; marcamos como "não alterados"
+  # para ninguém commitar a arte de terceiros por engano no repositório público.
+  if git -C "$ROOT" rev-parse --git-dir > /dev/null 2>&1; then
+    while IFS= read -r -d '' f; do
+      git -C "$ROOT" update-index --skip-worktree "assets/art/${f#./}" 2> /dev/null || true
+    done < <(cd "$OVERRIDES" && find . -type f -name '*.png' -print0)
+  fi
+  echo "Arte substituta aplicada sobre assets/art/ (cabana)."
+fi
+
 echo "Arte de terceiros instalada em assets/art/third_party/"
 echo "Abra o projeto no Godot (ou rode 'godot --headless --import') para importar."

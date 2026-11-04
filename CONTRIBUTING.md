@@ -178,6 +178,10 @@ No Windows, rode pelo Git Bash.
 2. Registre nome, autor, origem e licença em `data/` (créditos) no PR do jogo que passa a usar a arte.
 3. Nunca force o `git add` de algo dentro de `assets/art/third_party/` no repositório público.
 
+### Arte substituta da cabana
+
+O `ApotegatoAssets` tem uma pasta `overrides/art/` com recortes do Epic RPG World - House Interiors, com os mesmos nomes e tamanhos da arte provisória de `assets/art/cabin/`. O `tools/fetch_assets.sh` copia esses arquivos por cima da provisória, e a cabana passa a usar a arte definitiva sem mudar nenhuma cena. Como a arte de terceiros não pode ir para o git público, o script marca esses arquivos com `git update-index --skip-worktree`: eles não aparecem em `git status` e não entram em commits. Se você precisar restaurar a arte provisória (por exemplo, antes de um `git pull` que mexe nesses arquivos), rode `git update-index --no-skip-worktree assets/art/cabin/*.png` e depois `git checkout -- assets/art/cabin`. A porta continua provisória.
+
 ### Na CI
 
 Os workflows **CI** e **Release** rodam `tools/fetch_assets.sh` antes de importar o projeto, usando o secret `ASSETS_READ_TOKEN`. Na CI de PR o passo é pulado se o secret não existir (PRs de forks); na Release ele é obrigatório.
