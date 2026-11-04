@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/region/player_light.tscn" id="8_light"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/door_menu.tscn" id="6_door_menu"]
+[ext_resource type="PackedScene" path="res://scenes/ui/region_banner.tscn" id="9_banner"]
 [ext_resource type="PackedScene" path="res://scenes/ui/region_menu.tscn" id="7_region_menu"]
 
 [node name="Floor" type="Node2D"]
@@ -33,6 +34,8 @@ size = Vector2(40, 40)
 color = Color(0.02, 0.02, 0.04, 1)
 
 [node name="Hud" parent="." instance=ExtResource("5_hud")]
+
+[node name="RegionBanner" parent="." instance=ExtResource("9_banner")]
 
 [node name="DoorMenu" parent="." instance=ExtResource("6_door_menu")]
 

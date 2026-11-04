@@ -31,6 +31,7 @@ const CreatureScene := preload("res://scenes/creatures/creature.tscn")
 @onready var _creatures: Node2D = $World/Creatures
 @onready var _exit_door: InteractionArea = $World/ExitDoor
 @onready var _hud: Hud = $Hud
+@onready var _banner: RegionBanner = $RegionBanner
 @onready var _door_menu: DoorMenu = $DoorMenu
 @onready var _region_menu: RegionMenu = $RegionMenu
 
@@ -65,6 +66,9 @@ func generate_floor() -> void:
 	_exit_door.position = _room.cell_to_position(layout.exit_cell)
 	_hud.show_location(GameState.current_region, GameState.current_floor)
 	_hud.show_backpack(GameState.backpack)
+	_hud.show_light(0)
+	if GameState.current_floor == GameState.FIRST_FLOOR:
+		_banner.show_region(GameState.current_region, GameState.current_floor)
 	_spawn_ingredients(ingredients, layout)
 	_spawn_creatures(layout)
 	floor_generated.emit(layout)
@@ -124,6 +128,7 @@ func _on_player_fainted() -> void:
 ## Cada criatura derrotada aumenta a luz do andar.
 func _on_creature_defeated(_creature: Creature) -> void:
 	_light.add_defeat()
+	_hud.show_light(_light.defeated)
 
 
 ## Troca os ingredientes do chão pelos do andar novo, cada um numa das células

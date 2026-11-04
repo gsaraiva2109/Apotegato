@@ -57,3 +57,18 @@ func test_show_hearts_fills_and_empties() -> void:
 	assert_eq(hud.get_node("Root/HeartsBox").get_child_count(), 7)
 	hud.show_hearts(0, 7)
 	assert_eq(hud.full_hearts(), 0)
+
+
+func test_light_fraction_goes_from_empty_to_full() -> void:
+	assert_eq(Hud.light_fraction(0), 0.0)
+	assert_almost_eq(Hud.light_fraction(5), 0.5, 0.001)
+	assert_eq(Hud.light_fraction(10), 1.0)
+	assert_eq(Hud.light_fraction(50), 1.0, "A luz tem teto")
+
+
+func test_show_light_fills_the_bar() -> void:
+	var hud: Hud = autofree(HudScene.instantiate())
+	add_child(hud)
+	hud.show_light(5)
+	var bar: ProgressBar = hud.get_node("Root/LightBox/LightBar")
+	assert_almost_eq(bar.value, 0.5, 0.001)

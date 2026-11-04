@@ -190,7 +190,7 @@ O mesmo mecanismo vale para os tilesets das regiões (`overrides/art/regions/<id
 
 ### Interface (UI Medieval Mega)
 
-O pacote da ToffeeCraft é uma spritesheet única (`toffeecraft-ui-medieval-mega/MedievalUiMega/medieval.png` no `ApotegatoAssets`) e a licença proíbe redistribuir. O `tools/fetch_assets.sh` roda o `tools/crop_ui_pack.py` no fim, que recorta as peças do tema (painel, botões e corações do HUD) por coordenadas e as grava em `assets/art/ui/`, por cima da arte provisória de mesmo nome e tamanho (gerada por `tools/make_ui_art.py` e `tools/make_heart_art.py`). Os arquivos ficam com `skip-worktree`, como os da cabana, então o recorte nunca entra em commit. Para trocar uma peça, edite o dicionário `CROPS` do script. O tema `scenes/ui/game_theme.tres` usa 9-slice com margens que valem para a arte provisória e para a definitiva.
+O pacote da ToffeeCraft é uma spritesheet única (`toffeecraft-ui-medieval-mega/MedievalUiMega/medieval.png` no `ApotegatoAssets`) e a licença proíbe redistribuir. O `tools/fetch_assets.sh` roda o `tools/crop_ui_pack.py` no fim, que recorta as peças do tema (painel, botões, tábua de madeira das placas, barra, mochila, cursor do mouse e corações do HUD) por coordenadas e as grava em `assets/art/ui/`, por cima da arte provisória de mesmo nome e tamanho (gerada por `tools/make_ui_art.py` e `tools/make_heart_art.py`). Os arquivos ficam com `skip-worktree`, como os da cabana, então o recorte nunca entra em commit. Para trocar uma peça, edite o dicionário `CROPS` do script. O tema `scenes/ui/game_theme.tres` usa 9-slice com margens que valem para a arte provisória e para a definitiva.
 
 ### Músicas
 

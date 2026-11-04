@@ -12,6 +12,7 @@ const HEART_SIZE := Vector2(36, 30)
 const MESSAGE_SECONDS := 2.5
 
 @onready var _hearts_box: HBoxContainer = $Root/HeartsBox
+@onready var _light_bar: ProgressBar = $Root/LightBox/LightBar
 @onready var _location_label: Label = $Root/LocationPanel/LocationLabel
 @onready var _backpack_label: Label = $Root/BackpackPanel/BackpackLabel
 @onready var _message_label: Label = $Root/MessageLabel
@@ -47,6 +48,11 @@ func full_hearts() -> int:
 	return full
 
 
+## Mostra a luz do gato: a barra vai de vazia (luz inicial) a cheia (luz máxima).
+func show_light(defeated: int) -> void:
+	_light_bar.value = light_fraction(defeated)
+
+
 ## Mostra a região e o andar, como "Amazônia - Andar 2".
 func show_location(region: String, floor_number: int) -> void:
 	_location_label.text = location_text(region, floor_number)
@@ -62,6 +68,12 @@ func show_message(text: String) -> void:
 	_message_label.text = text
 	_message_label.show()
 	_message_timer.start()
+
+
+## Quanto da luz (de 0 a 1) o gato tem com `defeated` criaturas derrotadas.
+static func light_fraction(defeated: int) -> float:
+	var light := LightRadius.for_defeated(defeated)
+	return (light - LightRadius.BASE) / (LightRadius.MAX - LightRadius.BASE)
 
 
 ## Texto da região e do andar. Fica separado para ser testado.

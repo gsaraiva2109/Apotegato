@@ -44,6 +44,14 @@ CROPS = {
     "button_normal.png": (256, 336, 48, 16),
     "button_pressed.png": (256, 272, 48, 16),
     "button_disabled.png": (384, 304, 48, 16),
+    # tábua de madeira com rebites: placas do HUD e do banner de região (9-slice, margem 8)
+    "plank.png": (516, 206, 119, 51),
+    # barra de progresso (preenchimento) e cursor do slider
+    "bar_fill.png": (384, 272, 48, 16),
+    "slider_grabber.png": (355, 563, 10, 10),
+    # mochila do HUD e cursor do mouse
+    "backpack_icon.png": (207, 817, 64, 79),
+    "cursor.png": (308, 561, 11, 14),
     # corações do HUD
     "heart_full.png": (903, 8, 18, 15),
     "heart_empty.png": (967, 8, 18, 15),

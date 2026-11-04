@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" path="res://assets/art/ui/button_normal.png" id="3_normal"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/button_pressed.png" id="4_pressed"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/button_disabled.png" id="5_disabled"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/plank.png" id="6_plank"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/bar_fill.png" id="7_bar_fill"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/slider_grabber.png" id="8_grabber"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
 content_margin_left = 14.0
@@ -62,6 +65,31 @@ texture_margin_top = 7.0
 texture_margin_right = 8.0
 texture_margin_bottom = 7.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_plank"]
+content_margin_left = 14.0
+content_margin_top = 7.0
+content_margin_right = 14.0
+content_margin_bottom = 7.0
+texture = ExtResource("6_plank")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bar_bg"]
+texture = ExtResource("4_pressed")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bar_fill"]
+texture = ExtResource("7_bar_fill")
+texture_margin_left = 8.0
+texture_margin_top = 7.0
+texture_margin_right = 8.0
+texture_margin_bottom = 7.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
 draw_center = false
 border_width_left = 2
@@ -96,3 +124,16 @@ Label/colors/font_color = Color(0.9529412, 0.9019608, 0.76862746, 1)
 Label/colors/font_outline_color = Color(0.0627451, 0.039215688, 0.023529412, 1)
 Label/constants/outline_size = 3
 PanelContainer/styles/panel = SubResource("StyleBoxTexture_panel")
+PlankLabel/base_type = &"Label"
+PlankLabel/colors/font_color = Color(0.11764706, 0.07058824, 0.05490196, 1)
+PlankLabel/constants/outline_size = 0
+PlankPanel/base_type = &"PanelContainer"
+PlankPanel/styles/panel = SubResource("StyleBoxTexture_plank")
+ProgressBar/styles/background = SubResource("StyleBoxTexture_bar_bg")
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_bar_fill")
+HSlider/icons/grabber = ExtResource("8_grabber")
+HSlider/icons/grabber_disabled = ExtResource("8_grabber")
+HSlider/icons/grabber_highlight = ExtResource("8_grabber")
+HSlider/styles/grabber_area = SubResource("StyleBoxTexture_bar_fill")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_bar_fill")
+HSlider/styles/slider = SubResource("StyleBoxTexture_bar_bg")
