@@ -77,6 +77,18 @@ jobs:
         with:
           version: ${{ env.GODOT_VERSION }}
 
+      # A arte de terceiros fica num repositório privado. PRs de forks não
+      # recebem o secret; nesse caso o projeto roda com a arte provisória.
+      - name: Baixar arte de terceiros
+        env:
+          ASSETS_TOKEN: ${{ secrets.ASSETS_READ_TOKEN }}
+        run: |
+          if [[ -z $ASSETS_TOKEN ]]; then
+            echo "::notice::ASSETS_READ_TOKEN indisponível; seguindo só com a arte provisória."
+          else
+            bash tools/fetch_assets.sh
+          fi
+
       - name: Importar o projeto
         run: godot --headless --import
 

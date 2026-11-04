@@ -152,3 +152,40 @@ Para gerar um build sem criar release (para testar no Windows, por exemplo), vá
 ## Assets de terceiros
 
 Prefira licença CC0 ou CC BY. Para cada asset, registre nome, autor, origem, finalidade e licença. Os créditos aparecem na tela Fontes.
+
+### Onde fica a arte de terceiros
+
+Vários pacotes de arte proíbem redistribuir os arquivos originais, e este repositório é público. Por isso a arte de terceiros **não vai no git**: ela fica no repositório privado [`ApotegatoAssets`](https://github.com/gsaraiva2109/ApotegatoAssets) e é baixada para `assets/art/third_party/`, pasta que o `.gitignore` ignora. A arte provisória feita por nós continua em `assets/art/` e o projeto abre sem erro mesmo sem a de terceiros.
+
+Os derivados de arte de terceiros (como a onça, recolor do tigre do MasuOne) também ficam só no repositório privado. Packs CC0 ou CC BY sem cláusula de redistribuição podem ir no repositório público, com crédito na tela Fontes.
+
+### Baixando a arte localmente
+
+1. Peça acesso de leitura ao `ApotegatoAssets` para o Gabriel.
+2. Garanta que o git tem credenciais do GitHub (`gh auth login` ou o gerenciador de credenciais; ou use `--ssh` com sua chave).
+3. Na raiz do projeto:
+   ```bash
+   bash tools/fetch_assets.sh        # HTTPS
+   bash tools/fetch_assets.sh --ssh  # SSH
+   ```
+4. Abra o projeto no Godot, que importa os arquivos novos. Repita o comando quando a arte mudar no repositório privado.
+
+No Windows, rode pelo Git Bash.
+
+### Como adicionar ou trocar arte de terceiros
+
+1. Faça o commit dos PNGs e dos `.import` no `ApotegatoAssets`, mantendo as pastas que o jogo espera dentro de `assets/art/third_party/`.
+2. Registre nome, autor, origem e licença em `data/` (créditos) no PR do jogo que passa a usar a arte.
+3. Nunca force o `git add` de algo dentro de `assets/art/third_party/` no repositório público.
+
+### Na CI
+
+Os workflows **CI** e **Release** rodam `tools/fetch_assets.sh` antes de importar o projeto, usando o secret `ASSETS_READ_TOKEN`. Na CI de PR o passo é pulado se o secret não existir (PRs de forks); na Release ele é obrigatório.
+
+**Para quem administra o repositório: criar o token**
+
+1. GitHub → Settings → Developer settings → Personal access tokens → **Fine-grained tokens** → Generate new token.
+2. Resource owner: `gsaraiva2109`. Repository access: **Only select repositories** → `ApotegatoAssets`.
+3. Permissions → Repository permissions → **Contents: Read-only** (o Metadata read-only vem junto). Nada mais.
+4. Defina uma validade e anote a data para renovar.
+5. No repositório público: Settings → Secrets and variables → Actions → **New repository secret**, nome `ASSETS_READ_TOKEN`, valor o token gerado.

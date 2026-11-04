@@ -37,6 +37,17 @@ jobs:
           version: ${{ env.GODOT_VERSION }}
           templates: "true"
 
+      # O build de release precisa da arte correta: sem o token, falha.
+      - name: Baixar arte de terceiros
+        env:
+          ASSETS_TOKEN: ${{ secrets.ASSETS_READ_TOKEN }}
+        run: |
+          if [[ -z $ASSETS_TOKEN ]]; then
+            echo "::error::Secret ASSETS_READ_TOKEN não configurado."
+            exit 1
+          fi
+          bash tools/fetch_assets.sh
+
       - name: Importar o projeto
         run: godot --headless --import
 

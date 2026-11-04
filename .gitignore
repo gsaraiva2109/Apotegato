@@ -28,3 +28,7 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Arte de terceiros: vem do repositório privado ApotegatoAssets
+# (tools/fetch_assets.sh). Nunca versionar aqui: as licenças proíbem redistribuir.
+/assets/art/third_party/
