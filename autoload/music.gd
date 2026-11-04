@@ -28,6 +28,8 @@ const SILENT_DB := -60.0
 var current_track: String = ""
 
 var _player: AudioStreamPlayer
+## Faixa cujo arquivo está de fato tocando (vazio se parada ou sem arquivo).
+var _loaded_track: String = ""
 var _fade: Tween
 
 
@@ -48,6 +50,7 @@ func play(track: String) -> void:
 		stop()
 		current_track = track
 		return
+	_loaded_track = track
 	_crossfade_to(stream)
 
 
@@ -59,6 +62,7 @@ func play_region(region: String) -> void:
 ## Para a música com fade out.
 func stop() -> void:
 	current_track = ""
+	_loaded_track = ""
 	_kill_fade()
 	if _player.playing:
 		_fade = create_tween()
@@ -69,7 +73,7 @@ func stop() -> void:
 ## Se há uma faixa pedida tocando. Durante o fade out de uma faixa que acabou de
 ## ser parada, devolve falso.
 func is_playing() -> bool:
-	return current_track != "" and _player.playing
+	return _loaded_track != "" and _player.playing
 
 
 func _crossfade_to(stream: AudioStream) -> void:
