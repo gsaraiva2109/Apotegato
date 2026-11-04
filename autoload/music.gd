@@ -66,8 +66,10 @@ func stop() -> void:
 		_fade.tween_callback(_player.stop)
 
 
+## Se há uma faixa pedida tocando. Durante o fade out de uma faixa que acabou de
+## ser parada, devolve falso.
 func is_playing() -> bool:
-	return _player.playing
+	return current_track != "" and _player.playing
 
 
 func _crossfade_to(stream: AudioStream) -> void:
