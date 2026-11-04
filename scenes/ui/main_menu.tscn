@@ -1,9 +1,26 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://c54mnestu70y5"]
 
-[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_menu"]
-[ext_resource type="Theme" path="res://scenes/ui/game_theme.tres" id="2_theme"]
+[ext_resource type="Script" uid="uid://dubwsxx8e0hg" path="res://scenes/ui/main_menu.gd" id="1_menu"]
+[ext_resource type="Theme" uid="uid://dkgx8367noml7" path="res://scenes/ui/game_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" uid="uid://83csaas10h1h" path="res://assets/art/ui/title_logo.png" id="3_1g8jr"]
+[ext_resource type="Texture2D" uid="uid://dbwpxlp0fl0sf" path="res://assets/art/ui/menu_background.png" id="3_wb0q5"]
+[ext_resource type="FontFile" uid="uid://22nfq2die8cd" path="res://assets/fonts/PixelifySans-VariableFont_wght.ttf" id="4_x2yvf"]
+[ext_resource type="Texture2D" uid="uid://b353uifxtkyo" path="res://assets/art/ui/scroll_button.png" id="5_uhagc"]
+[ext_resource type="Texture2D" uid="uid://1biq4bdpdcyl" path="res://assets/art/ui/scroll_button_hover.png" id="6_uhagc"]
+[ext_resource type="Texture2D" uid="uid://yhk7rnr5addr" path="res://assets/art/ui/scroll_button_on_press.png" id="7_btxxm"]
 
-[node name="MainMenu" type="Control"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x15ge"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1g8jr"]
+texture = ExtResource("5_uhagc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_btxxm"]
+texture = ExtResource("6_uhagc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wb0q5"]
+texture = ExtResource("7_btxxm")
+
+[node name="MainMenu" type="Control" unique_id=1125915228]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,16 +30,19 @@ grow_vertical = 2
 theme = ExtResource("2_theme")
 script = ExtResource("1_menu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1095303592]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.0980392, 0.0588235, 0.0392157, 1)
+mouse_filter = 2
+texture = ExtResource("3_wb0q5")
+expand_mode = 1
+stretch_mode = 6
 
-[node name="Center" type="CenterContainer" parent="."]
+[node name="Center" type="CenterContainer" parent="." unique_id=1159869690]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,46 +50,87 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="Center"]
+[node name="Panel" type="PanelContainer" parent="Center" unique_id=933885773]
+custom_minimum_size = Vector2(340, 56)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_x15ge")
 
-[node name="Layout" type="VBoxContainer" parent="Center/Panel"]
+[node name="Layout" type="VBoxContainer" parent="Center/Panel" unique_id=1354875912]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="Center/Panel/Layout"]
+[node name="Title" type="TextureRect" parent="Center/Panel/Layout" unique_id=1457085160]
+custom_minimum_size = Vector2(600, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Apotegato"
-horizontal_alignment = 1
+mouse_filter = 2
+texture = ExtResource("3_1g8jr")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Subtitle" type="Label" parent="Center/Panel/Layout"]
+[node name="Subtitle" type="Label" parent="Center/Panel/Layout" unique_id=279483309]
+visible = false
 layout_mode = 2
 text = "Mingau e a cabana da apotecária"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="Center/Panel/Layout"]
+[node name="Spacer" type="Control" parent="Center/Panel/Layout" unique_id=434341740]
 custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
-[node name="NewGameButton" type="Button" parent="Center/Panel/Layout"]
+[node name="NewGameButton" type="Button" parent="Center/Panel/Layout" unique_id=50290526]
+custom_minimum_size = Vector2(340, 76)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_fonts/font = ExtResource("4_x2yvf")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
 text = "Novo Jogo"
 
-[node name="LoadButton" type="Button" parent="Center/Panel/Layout"]
+[node name="LoadButton" type="Button" parent="Center/Panel/Layout" unique_id=237467144]
+custom_minimum_size = Vector2(340, 76)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_fonts/font = ExtResource("4_x2yvf")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
 text = "Carregar Jogo"
 
-[node name="CreditsButton" type="Button" parent="Center/Panel/Layout"]
+[node name="CreditsButton" type="Button" parent="Center/Panel/Layout" unique_id=1977420081]
+custom_minimum_size = Vector2(340, 76)
 layout_mode = 2
-text = "Fontes"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_fonts/font = ExtResource("4_x2yvf")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
+text = "Créditos"
 
-[node name="QuitButton" type="Button" parent="Center/Panel/Layout"]
+[node name="QuitButton" type="Button" parent="Center/Panel/Layout" unique_id=241193468]
+custom_minimum_size = Vector2(340, 76)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_fonts/font = ExtResource("4_x2yvf")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
 text = "Sair"
 
-[node name="CreditsPanel" type="Control" parent="."]
+[node name="CreditsPanel" type="Control" parent="." unique_id=962360315]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -77,7 +138,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dim" type="ColorRect" parent="CreditsPanel"]
+[node name="Dim" type="ColorRect" parent="CreditsPanel" unique_id=410305278]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -86,7 +147,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.75)
 
-[node name="Center" type="CenterContainer" parent="CreditsPanel"]
+[node name="Center" type="CenterContainer" parent="CreditsPanel" unique_id=1247141958]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -94,26 +155,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="CreditsPanel/Center"]
+[node name="Panel" type="PanelContainer" parent="CreditsPanel/Center" unique_id=606768716]
 layout_mode = 2
 
-[node name="Layout" type="VBoxContainer" parent="CreditsPanel/Center/Panel"]
+[node name="Layout" type="VBoxContainer" parent="CreditsPanel/Center/Panel" unique_id=1403159100]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="CreditsPanel/Center/Panel/Layout"]
+[node name="Title" type="Label" parent="CreditsPanel/Center/Panel/Layout" unique_id=1812066785]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Fontes"
 horizontal_alignment = 1
 
-[node name="Text" type="Label" parent="CreditsPanel/Center/Panel/Layout"]
+[node name="Text" type="Label" parent="CreditsPanel/Center/Panel/Layout" unique_id=1672681916]
 layout_mode = 2
 text = "Aqui ficam os créditos de arte, áudio e fontes do jogo, com autor, origem e licença de cada item. A lista ainda está sendo montada."
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="BackButton" type="Button" parent="CreditsPanel/Center/Panel/Layout"]
+[node name="BackButton" type="Button" parent="CreditsPanel/Center/Panel/Layout" unique_id=496259246]
 layout_mode = 2
 text = "Voltar"

@@ -39,7 +39,7 @@ func test_menu_is_the_main_scene() -> void:
 func test_has_the_four_options() -> void:
 	assert_eq(_button("NewGameButton").text, "Novo Jogo")
 	assert_eq(_button("LoadButton").text, "Carregar Jogo")
-	assert_eq(_button("CreditsButton").text, "Fontes")
+	assert_eq(_button("CreditsButton").text, "Créditos")
 	assert_eq(_button("QuitButton").text, "Sair")
 
 
