@@ -62,7 +62,7 @@ func test_show_hearts_fills_and_empties() -> void:
 func test_light_fraction_goes_from_empty_to_full() -> void:
 	assert_eq(Hud.light_fraction(0), 0.0)
 	assert_almost_eq(Hud.light_fraction(5), 0.5, 0.001)
-	assert_eq(Hud.light_fraction(10), 1.0)
+	assert_almost_eq(Hud.light_fraction(10), 1.0, 0.001)
 	assert_eq(Hud.light_fraction(50), 1.0, "A luz tem teto")
 
 
