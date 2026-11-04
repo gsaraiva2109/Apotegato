@@ -63,5 +63,14 @@ if [[ -d $OVERRIDES ]]; then
   echo "Arte substituta aplicada sobre assets/art/ (cabana, regiões e Mingau)."
 fi
 
+# Músicas (audio/music/<id>.ogg no repositório de assets) vão para
+# assets/audio/third_party/music/, também ignorada pelo git.
+if [[ -d $DEST/audio ]]; then
+  rm -rf "$ROOT/assets/audio/third_party"
+  mkdir -p "$ROOT/assets/audio/third_party"
+  cp -a "$DEST/audio/." "$ROOT/assets/audio/third_party/"
+  echo "Áudio de terceiros instalado em assets/audio/third_party/"
+fi
+
 echo "Arte de terceiros instalada em assets/art/third_party/"
 echo "Abra o projeto no Godot (ou rode 'godot --headless --import') para importar."

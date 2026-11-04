@@ -16,6 +16,7 @@ const ROOM := Rect2i(0, 0, 960, 544)
 
 
 func _ready() -> void:
+	Music.play(MusicCatalog.CABIN)
 	_player.set_camera_limits(ROOM)
 	for area: InteractionArea in $Interactions.get_children():
 		area.interacted.connect(_on_interacted)
