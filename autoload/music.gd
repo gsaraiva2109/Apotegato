@@ -8,6 +8,13 @@ extends Node
 ##
 ## Registrado como autoload "Music".
 
+## Catálogo carregado por `preload`, e não pelo `class_name`, porque o autoload
+## é lido antes de o Godot registrar as classes globais novas.
+const Catalog := preload("res://scripts/music_catalog.gd")
+## Ids das faixas fixas, para as cenas pedirem sem depender do catálogo.
+const MENU := Catalog.MENU
+const CABIN := Catalog.CABIN
+
 ## Nome do barramento de áudio das músicas (criado sozinho se não existir).
 const BUS_NAME := "Music"
 ## Duração da transição entre faixas, em segundos.
@@ -46,7 +53,7 @@ func play(track: String) -> void:
 
 ## Toca a faixa da região (ou fica em silêncio se a região for inválida).
 func play_region(region: String) -> void:
-	play(MusicCatalog.track_for_region(region))
+	play(Catalog.track_for_region(region))
 
 
 ## Para a música com fade out.
@@ -92,7 +99,7 @@ func _make_player() -> AudioStreamPlayer:
 func _load_stream(track: String) -> AudioStream:
 	if track.is_empty():
 		return null
-	var path := MusicCatalog.path_for(track)
+	var path: String = Catalog.path_for(track)
 	if not ResourceLoader.exists(path):
 		return null
 	var stream := load(path) as AudioStream
