@@ -39,6 +39,16 @@ func _ready() -> void:
 	_player = _make_player()
 
 
+## Ao fechar o jogo, solta as faixas carregadas para o Godot não avisar de
+## recursos ainda em uso na saída.
+func _exit_tree() -> void:
+	_kill_fade()
+	for child in get_children():
+		if child is AudioStreamPlayer:
+			(child as AudioStreamPlayer).stop()
+			(child as AudioStreamPlayer).stream = null
+
+
 ## Toca a faixa com o id dado, com transição. Id vazio ou desconhecido para a
 ## música com fade out.
 func play(track: String) -> void:
