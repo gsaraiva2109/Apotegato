@@ -32,3 +32,5 @@ desktop.ini
 # Arte de terceiros: vem do repositório privado ApotegatoAssets
 # (tools/fetch_assets.sh). Nunca versionar aqui: as licenças proíbem redistribuir.
 /assets/art/third_party/
+# Músicas de terceiros: também vêm do ApotegatoAssets (tools/fetch_assets.sh).
+/assets/audio/third_party/

@@ -184,6 +184,12 @@ O `ApotegatoAssets` tem uma pasta `overrides/art/` com recortes do Epic RPG Worl
 
 O mesmo mecanismo vale para os tilesets das regiões (`overrides/art/regions/<id>/tileset.png`, 128 x 32, montados com Forest Tilesets, RPG Beach Tileset e Pixel Trees 32x32) e para o sprite do Mingau (`overrides/art/characters/mingau_placeholder.png`, o gato do pacote da MasuOne). O tile de saída de cada região continua o provisório, na cor da Tabela 3. Quem rodar o jogo sem acesso ao repositório privado vê a arte provisória.
 
+### Músicas
+
+A trilha tem oito faixas em loop: `menu`, `cabana` e uma por região (`amazonia`, `caatinga`, `campos_rios`, `cerrado`, `litoral`, `mata_atlantica`). O autoload `Music` (`autoload/music.gd`) troca de faixa com fade, sem reiniciar se a faixa pedida já está tocando. As cenas pedem a música em `_ready` (`Music.play(MusicCatalog.CABIN)`, `Music.play_region(...)`).
+
+Os arquivos ficam no `ApotegatoAssets`, em `audio/music/<id>.ogg` (por exemplo `audio/music/cerrado.ogg`), e o `tools/fetch_assets.sh` os copia para `assets/audio/third_party/music/`, pasta ignorada pelo git. Sem o arquivo, a faixa fica em silêncio e o jogo roda normalmente. Ao incluir uma faixa, registre nome, autor, origem e licença em `data/creditos.csv` (tipo `audio`) no mesmo PR.
+
 ### Na CI
 
 Os workflows **CI** e **Release** rodam `tools/fetch_assets.sh` antes de importar o projeto, usando o secret `ASSETS_READ_TOKEN`. Na CI de PR o passo é pulado se o secret não existir (PRs de forks); na Release ele é obrigatório.

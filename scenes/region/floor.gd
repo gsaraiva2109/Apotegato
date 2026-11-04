@@ -38,6 +38,7 @@ const CreatureScene := preload("res://scenes/creatures/creature.tscn")
 func _ready() -> void:
 	if not Regions.is_valid(GameState.current_region):
 		GameState.start_region(DEFAULT_REGION)
+	Music.play_region(GameState.current_region)
 	_exit_door.interacted.connect(_on_exit_door_interacted)
 	_door_menu.choice_made.connect(_on_door_choice_made)
 	_region_menu.region_selected.connect(_on_region_selected)
