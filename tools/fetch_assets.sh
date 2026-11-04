@@ -60,7 +60,7 @@ if [[ -d $OVERRIDES ]]; then
       git -C "$ROOT" update-index --skip-worktree "assets/art/${f#./}" 2> /dev/null || true
     done < <(cd "$OVERRIDES" && find . -type f -name '*.png' -print0)
   fi
-  echo "Arte substituta aplicada sobre assets/art/ (cabana)."
+  echo "Arte substituta aplicada sobre assets/art/ (cabana, regiões e Mingau)."
 fi
 
 echo "Arte de terceiros instalada em assets/art/third_party/"

@@ -30,7 +30,7 @@ O hook é opcional, mas o CI roda as mesmas verificações. Sem ele, o erro só 
    | `ci/` | Workflows, hooks, exportação | `ci/cache-godot` |
    | `chore/` | Manutenção geral | `chore/atualizar-gut` |
 
-   Nomes em minúsculas, com hífen, sem acento.
+   Nomes em minúsculas, com hífen, sem acento. O nome nunca contém "claude", inclusive nas branches de agentes de IA.
 3. Abra o PR para a `main` e preencha o template. Peça revisão de pelo menos uma pessoa do grupo.
 4. O PR só entra com o check **CI OK** verde. Junte com **Squash and merge**, para cada PR virar um commit só na `main`.
 
@@ -181,6 +181,8 @@ No Windows, rode pelo Git Bash.
 ### Arte substituta da cabana
 
 O `ApotegatoAssets` tem uma pasta `overrides/art/` com recortes do Epic RPG World - House Interiors, com os mesmos nomes e tamanhos da arte provisória de `assets/art/cabin/`. O `tools/fetch_assets.sh` copia esses arquivos por cima da provisória, e a cabana passa a usar a arte definitiva sem mudar nenhuma cena. Como a arte de terceiros não pode ir para o git público, o script marca esses arquivos com `git update-index --skip-worktree`: eles não aparecem em `git status` e não entram em commits. Se você precisar restaurar a arte provisória (por exemplo, antes de um `git pull` que mexe nesses arquivos), rode `git update-index --no-skip-worktree assets/art/cabin/*.png` e depois `git checkout -- assets/art/cabin`. A porta continua provisória.
+
+O mesmo mecanismo vale para os tilesets das regiões (`overrides/art/regions/<id>/tileset.png`, 128 x 32, montados com Forest Tilesets, RPG Beach Tileset e Pixel Trees 32x32) e para o sprite do Mingau (`overrides/art/characters/mingau_placeholder.png`, o gato do pacote da MasuOne). O tile de saída de cada região continua o provisório, na cor da Tabela 3. Quem rodar o jogo sem acesso ao repositório privado vê a arte provisória.
 
 ### Na CI
 

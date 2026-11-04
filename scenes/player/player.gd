@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	facing = facing_for(direction, facing)
+	_sprite.flip_h = flip_for(facing)
 	velocity = velocity_for(direction)
 	move_and_slide()
 
@@ -78,6 +79,12 @@ static func facing_for(direction: Vector2, current: Vector2) -> Vector2:
 	if absf(direction.x) >= absf(direction.y):
 		return Vector2(signf(direction.x), 0.0)
 	return Vector2(0.0, signf(direction.y))
+
+
+## Se o sprite deve ser espelhado. A arte do gato olha para a esquerda, então
+## espelha quando ele olha para a direita; para cima e para baixo não espelha.
+static func flip_for(direction: Vector2) -> bool:
+	return direction.x > 0.0
 
 
 ## Arranha na direção em que o gato olha. Devolve false se ainda estiver no

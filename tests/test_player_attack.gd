@@ -30,6 +30,13 @@ func test_facing_follows_the_last_direction() -> void:
 	assert_eq(Player.facing_for(Vector2.ZERO, Vector2.LEFT), Vector2.LEFT, "Parado, mantém")
 
 
+func test_sprite_flips_only_when_facing_right() -> void:
+	assert_true(Player.flip_for(Vector2.RIGHT))
+	assert_false(Player.flip_for(Vector2.LEFT), "A arte do gato já olha para a esquerda")
+	assert_false(Player.flip_for(Vector2.UP))
+	assert_false(Player.flip_for(Vector2.DOWN))
+
+
 func test_starts_facing_down() -> void:
 	assert_eq(_player.facing, Vector2.DOWN)
 
