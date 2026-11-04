@@ -12,8 +12,8 @@ func test_creates_music_bus() -> void:
 
 
 func test_play_without_file_stays_silent() -> void:
-	Music.play(Music.MENU)
-	assert_eq(Music.current_track, Music.MENU)
+	Music.play("faixa_inexistente")
+	assert_eq(Music.current_track, "faixa_inexistente")
 	assert_false(Music.is_playing())
 
 
