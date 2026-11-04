@@ -22,7 +22,7 @@ var save_path := SAVE_PATH
 
 
 func _ready() -> void:
-	Music.play(MusicCatalog.MENU)
+	Music.play(Music.MENU)
 	_load_button.disabled = not has_save(save_path)
 	_credits_panel.hide()
 	_new_game_button.pressed.connect(_on_new_game_pressed)

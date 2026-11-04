@@ -12,8 +12,8 @@ func test_creates_music_bus() -> void:
 
 
 func test_play_without_file_stays_silent() -> void:
-	Music.play(MusicCatalog.MENU)
-	assert_eq(Music.current_track, MusicCatalog.MENU)
+	Music.play("faixa_inexistente")
+	assert_eq(Music.current_track, "faixa_inexistente")
 	assert_false(Music.is_playing())
 
 
@@ -23,12 +23,12 @@ func test_play_region_uses_region_track() -> void:
 
 
 func test_invalid_region_stops_music() -> void:
-	Music.play(MusicCatalog.CABIN)
+	Music.play(Music.CABIN)
 	Music.play_region("marte")
 	assert_eq(Music.current_track, "")
 
 
 func test_stop_clears_current_track() -> void:
-	Music.play(MusicCatalog.CABIN)
+	Music.play(Music.CABIN)
 	Music.stop()
 	assert_eq(Music.current_track, "")
