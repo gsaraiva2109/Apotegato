@@ -151,7 +151,7 @@ Para gerar um build sem criar release (para testar no Windows, por exemplo), vá
 
 ## Assets de terceiros
 
-Prefira licença CC0 ou CC BY. Para cada asset, registre nome, autor, origem, finalidade e licença. Os créditos aparecem na tela Fontes.
+Prefira licença CC0 ou CC BY. Para cada asset, registre nome, autor, origem, finalidade e licença em `data/creditos.csv` (colunas `nome`, `autor`, `origem`, `finalidade`, `licenca` e `tipo`, que é `arte` ou `audio`). O `tests/test_credits_csv.gd` confere que nenhum campo ficou vazio. Os créditos aparecem na tela Fontes.
 
 ### Onde fica a arte de terceiros
 

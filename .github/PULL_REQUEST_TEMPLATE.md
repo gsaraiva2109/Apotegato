@@ -11,4 +11,4 @@
 - [ ] Abri o projeto no Godot e a mudança funciona
 - [ ] Rodei os testes (painel do GUT ou linha de comando) e passaram
 - [ ] Se mexi no `data/ingredientes.csv`, os testes do CSV continuam passando
-- [ ] Assets novos têm autor, origem e licença registrados para a tela Fontes
+- [ ] Assets novos têm autor, origem e licença registrados no `data/creditos.csv`, para a tela Fontes
