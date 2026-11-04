@@ -1,6 +1,6 @@
 class_name MainMenu
 extends Control
-## Tela inicial do jogo: Novo Jogo, Carregar Jogo, Fontes e Sair. Funciona com o
+## Tela inicial do jogo: Novo Jogo, Carregar Jogo, Créditos e Sair. Funciona com o
 ## mouse e com o teclado. Carregar Jogo fica desabilitado enquanto não houver
 ## save.
 
@@ -45,7 +45,7 @@ static func has_save(path: String = SAVE_PATH) -> bool:
 	return FileAccess.file_exists(path)
 
 
-## Se a tela de Fontes está aberta.
+## Se a tela de Créditos está aberta.
 func is_credits_open() -> bool:
 	return _credits_panel.visible
 

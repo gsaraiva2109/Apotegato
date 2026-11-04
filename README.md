@@ -71,6 +71,6 @@ Professor: Me. Thiago Narak Carvalho de Oliveira
 
 ## Créditos e aviso
 
-Arte e áudio de terceiros vêm de pacotes gratuitos (de preferência CC0 ou CC BY). Autor, origem e licença de cada um ficam registrados e aparecem na tela **Fontes** do jogo.
+Arte e áudio de terceiros vêm de pacotes gratuitos (de preferência CC0 ou CC BY). Autor, origem e licença de cada um ficam registrados e aparecem na tela **Créditos** do jogo.
 
 O jogo se passa num mundo de fantasia. O que ele diz sobre os ingredientes faz parte da história e não é orientação médica; a própria apotecária sempre manda o paciente procurar um médico.

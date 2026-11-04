@@ -88,7 +88,8 @@ theme_override_fonts/font = ExtResource("4_x2yvf")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
 theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Novo Jogo"
 
 [node name="LoadButton" type="Button" parent="Center/Panel/Layout" unique_id=237467144]
@@ -101,7 +102,8 @@ theme_override_fonts/font = ExtResource("4_x2yvf")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
 theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Carregar Jogo"
 
 [node name="CreditsButton" type="Button" parent="Center/Panel/Layout" unique_id=1977420081]
@@ -114,7 +116,8 @@ theme_override_fonts/font = ExtResource("4_x2yvf")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
 theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Créditos"
 
 [node name="QuitButton" type="Button" parent="Center/Panel/Layout" unique_id=241193468]
@@ -127,7 +130,8 @@ theme_override_fonts/font = ExtResource("4_x2yvf")
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
 theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Sair"
 
 [node name="CreditsPanel" type="Control" parent="." unique_id=962360315]
@@ -166,7 +170,7 @@ theme_override_constants/separation = 10
 [node name="Title" type="Label" parent="CreditsPanel/Center/Panel/Layout" unique_id=1812066785]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
-text = "Fontes"
+text = "Créditos"
 horizontal_alignment = 1
 
 [node name="Text" type="Label" parent="CreditsPanel/Center/Panel/Layout" unique_id=1672681916]

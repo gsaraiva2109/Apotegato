@@ -1,5 +1,5 @@
 extends GutTest
-## Valida o data/creditos.csv, o registro de assets de terceiros lido pela tela Fontes.
+## Valida o data/creditos.csv, o registro de assets de terceiros lido pela tela Créditos.
 ##
 ## Todo asset de terceiros entra aqui com nome, autor, origem, finalidade e licença
 ## (GDD, seção 5). Se mudar as colunas, atualize HEADER junto com o CSV.

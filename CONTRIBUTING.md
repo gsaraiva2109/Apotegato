@@ -57,7 +57,7 @@ scenes/
   player/          o Mingau
   region/          andares, labirinto, porta, ingrediente no chão
   creatures/
-  ui/              menu inicial (main_menu.tscn, a cena inicial do jogo), HUD, diário, mochila, estoque, tela Fontes
+  ui/              menu inicial (main_menu.tscn, a cena inicial do jogo), HUD, diário, mochila, estoque, tela Créditos
 scripts/           lógica sem cena (BFS, gerador do labirinto, mochila, luz, save)
 tests/             testes do GUT
 tools/             scripts de linha de comando
@@ -151,13 +151,13 @@ Para gerar um build sem criar release (para testar no Windows, por exemplo), vá
 
 ## Assets de terceiros
 
-Prefira licença CC0 ou CC BY. Para cada asset, registre nome, autor, origem, finalidade e licença em `data/creditos.csv` (colunas `nome`, `autor`, `origem`, `finalidade`, `licenca` e `tipo`, que é `arte` ou `audio`). O `tests/test_credits_csv.gd` confere que nenhum campo ficou vazio. Os créditos aparecem na tela Fontes.
+Prefira licença CC0 ou CC BY. Para cada asset, registre nome, autor, origem, finalidade e licença em `data/creditos.csv` (colunas `nome`, `autor`, `origem`, `finalidade`, `licenca` e `tipo`, que é `arte` ou `audio`). O `tests/test_credits_csv.gd` confere que nenhum campo ficou vazio. Os créditos aparecem na tela Créditos.
 
 ### Onde fica a arte de terceiros
 
 Vários pacotes de arte proíbem redistribuir os arquivos originais, e este repositório é público. Por isso a arte de terceiros **não vai no git**: ela fica no repositório privado [`ApotegatoAssets`](https://github.com/gsaraiva2109/ApotegatoAssets) e é baixada para `assets/art/third_party/`, pasta que o `.gitignore` ignora. A arte provisória feita por nós continua em `assets/art/` e o projeto abre sem erro mesmo sem a de terceiros.
 
-Os derivados de arte de terceiros (como a onça, recolor do tigre do MasuOne) também ficam só no repositório privado. Packs CC0 ou CC BY sem cláusula de redistribuição podem ir no repositório público, com crédito na tela Fontes.
+Os derivados de arte de terceiros (como a onça, recolor do tigre do MasuOne) também ficam só no repositório privado. Packs CC0 ou CC BY sem cláusula de redistribuição podem ir no repositório público, com crédito na tela Créditos.
 
 ### Baixando a arte localmente
 
