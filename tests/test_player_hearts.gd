@@ -116,3 +116,84 @@ func test_defeated_creature_does_not_hurt() -> void:
 	creature.position = _player.position
 	await wait_physics_frames(6)
 	assert_eq(_player.hearts.current, 7)
+
+
+func test_regeneration_waits_for_interval() -> void:
+	_player.set_physics_process(false)
+	_player.take_hit()
+	assert_eq(_player.hearts.current, 6)
+
+	_player._update_regeneration(9.0)
+	assert_eq(_player.hearts.current, 6, "Não recupera antes do intervalo")
+
+	_player._update_regeneration(1.0)
+	assert_eq(_player.hearts.current, 7, "Recupera ao completar o intervalo")
+
+
+func test_damage_restarts_regeneration_interval() -> void:
+	_player.set_physics_process(false)
+	_player.invulnerability_time = 0.0
+	assert_true(_player.take_hit())
+
+	_player._update_regeneration(9.0)
+	assert_eq(_player.hearts.current, 6)
+
+	assert_true(_player.take_hit())
+	assert_eq(_player.hearts.current, 5)
+
+	_player._update_regeneration(1.0)
+	assert_eq(_player.hearts.current, 5, "O novo dano reinicia a espera")
+
+	_player._update_regeneration(9.0)
+	assert_eq(_player.hearts.current, 6, "Recupera após dez segundos do novo dano")
+
+
+func test_scratch_in_empty_space_restarts_regeneration_interval() -> void:
+	_player.set_physics_process(false)
+	_player.take_hit()
+
+	_player._update_regeneration(9.0)
+	assert_eq(_player.hearts.current, 6)
+
+	assert_true(_player.creatures_in_reach().is_empty())
+	assert_true(_player.try_attack())
+
+	_player._update_regeneration(1.0)
+	assert_eq(_player.hearts.current, 6, "Arranhar no vazio reinicia a espera")
+
+	_player._update_regeneration(9.0)
+	assert_eq(_player.hearts.current, 7, "Recupera após dez segundos do arranhão")
+
+
+func test_regeneration_does_not_heal_a_fainted_player() -> void:
+	_player.set_physics_process(false)
+	assert_true(_player.take_hit(Hearts.MAX))
+	assert_true(_player.is_fainted())
+
+	_player._update_regeneration(30.0)
+	assert_eq(_player.hearts.current, 0, "Desmaiado, não recupera corações")
+
+
+func test_regeneration_never_exceeds_maximum_hearts() -> void:
+	_player.set_physics_process(false)
+	_player.regeneration_amount = 3
+	_player.take_hit()
+
+	_player._update_regeneration(10.0)
+	assert_eq(_player.hearts.current, Hearts.MAX, "A cura respeita o limite")
+
+	_player._update_regeneration(30.0)
+	assert_eq(_player.hearts.current, Hearts.MAX, "Continua no limite")
+
+
+func test_regeneration_handles_large_delta_and_keeps_remainder() -> void:
+	_player.set_physics_process(false)
+	_player.regeneration_interval = 2.0
+	_player.take_hit(4)
+	assert_eq(_player.hearts.current, 3)
+
+	_player._update_regeneration(5.0)
+	assert_eq(_player.hearts.current, 5, "Cinco segundos completam dois intervalos")
+
+	_player._update_regeneration(1.0)
+	assert_eq(_player.hearts.current, 6, "Preserva o segundo restante")

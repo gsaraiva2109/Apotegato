@@ -7,6 +7,9 @@ extends CharacterBody2D
 ##
 ## Tem 7 corações (`Hearts`). Cada contato com uma criatura tira um e deixa o gato
 ## invencível por um instante; ao zerar, ele desmaia e emite `fainted`.
+## Recupera automaticamente 1 coração a cada 10 segundos por padrão.
+## Sofrer dano ou executar um arranhão, mesmo sem acertar uma criatura,
+## reinicia a contagem. Não recupera enquanto está desmaiado.
 
 ## Emitido a cada arranhão, com a direção do golpe.
 signal attacked(direction: Vector2)
@@ -31,6 +34,7 @@ const ATTACK_SIZE := Vector2(36, 36)
 ## Quanto tempo o gato fica invencível depois de levar um golpe, em segundos.
 @export var invulnerability_time := 1.0
 ## Intervalo sem dano ou arranhões para recuperar corações, em segundos.
+## Arranhões no vazio também reiniciam a contagem.
 @export var regeneration_interval := 10.0
 ## Quantidade de corações recuperados por intervalo.
 @export var regeneration_amount := 1
@@ -59,7 +63,9 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 
-	_update_regeneration(delta)
+	if _fainted or hearts.is_full() or regeneration_interval <= 0.0 or regeneration_amount <= 0:
+		_regeneration_elapsed = 0.0
+		return
 
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	facing = facing_for(direction, facing)
