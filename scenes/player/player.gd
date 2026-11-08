@@ -58,15 +58,10 @@ var _regeneration_elapsed := 0.0
 func _physics_process(delta: float) -> void:
 	_cooldown_left = maxf(_cooldown_left - delta, 0.0)
 	_update_invulnerability(delta)
-
 	if _fainted:
 		velocity = Vector2.ZERO
 		return
-
-	if _fainted or hearts.is_full() or regeneration_interval <= 0.0 or regeneration_amount <= 0:
-		_regeneration_elapsed = 0.0
-		return
-
+	_update_regeneration(delta)
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	facing = facing_for(direction, facing)
 	_sprite.flip_h = flip_for(facing)
@@ -107,13 +102,10 @@ static func flip_for(direction: Vector2) -> bool:
 func try_attack() -> bool:
 	if _cooldown_left > 0.0 or _fainted:
 		return false
-
 	_cooldown_left = attack_cooldown
 	_regeneration_elapsed = 0.0
-
 	for creature in creatures_in_reach():
 		creature.take_scratch(facing)
-
 	_scratch.play(facing)
 	attacked.emit(facing)
 	return true
@@ -161,11 +153,7 @@ func heal(amount: int = 1) -> int:
 
 ## Recupera corações após um intervalo sem dano ou arranhões.
 func _update_regeneration(delta: float) -> void:
-	if _fainted or hearts.is_full():
-		_regeneration_elapsed = 0.0
-		return
-
-	if regeneration_interval <= 0.0 or regeneration_amount <= 0:
+	if _fainted or hearts.is_full() or regeneration_interval <= 0.0 or regeneration_amount <= 0:
 		_regeneration_elapsed = 0.0
 		return
 

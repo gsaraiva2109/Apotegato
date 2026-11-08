@@ -72,3 +72,34 @@ func test_rejected_attack_does_not_restart_regeneration() -> void:
 	assert_false(_player.try_attack(), "O cooldown ainda está ativo neste teste")
 	_player._update_regeneration(1.0)
 	assert_eq(_player.hearts.current, 6, "Tentativa rejeitada não reinicia a espera")
+
+
+func test_physics_updates_regeneration_without_blocking_movement() -> void:
+	var initial_position := _player.position
+	Input.action_press("move_right")
+
+	_player._physics_process(1.0 / 60.0)
+	var moved_with_full_health := _player.position.x > initial_position.x
+
+	_player.regeneration_interval = 0.1
+	_player.take_hit()
+	_player._physics_process(0.1)
+	var recovered_hearts := _player.hearts.current
+
+	_player.regeneration_interval = 0.0
+	var position_before_disabled := _player.position
+	_player._physics_process(1.0 / 60.0)
+	var moved_with_disabled_interval := _player.position.x > position_before_disabled.x
+
+	_player.regeneration_interval = 10.0
+	_player.regeneration_amount = 0
+	var position_before_zero_amount := _player.position
+	_player._physics_process(1.0 / 60.0)
+	var moved_with_zero_amount := _player.position.x > position_before_zero_amount.x
+
+	Input.action_release("move_right")
+
+	assert_true(moved_with_full_health, "Vida cheia não bloqueia o movimento")
+	assert_eq(recovered_hearts, Hearts.MAX, "A física atualiza a recuperação")
+	assert_true(moved_with_disabled_interval, "Intervalo zero não bloqueia o movimento")
+	assert_true(moved_with_zero_amount, "Quantidade zero não bloqueia o movimento")
