@@ -147,6 +147,7 @@ func take_hit(amount: int = 1) -> bool:
 		_invulnerable_left = invulnerability_time
 	return true
 
+
 ## Recupera corações (até 7). Devolve quantos recuperou.
 func heal(amount: int = 1) -> int:
 	return hearts.heal(amount)
