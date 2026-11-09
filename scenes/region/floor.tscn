@@ -1,42 +1,45 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://6hn3uvwilfxn"]
 
-[ext_resource type="Script" path="res://scenes/region/floor.gd" id="1_floor"]
+[ext_resource type="Script" uid="uid://b4qt8j1qsfm81" path="res://scenes/region/floor.gd" id="1_floor"]
 [ext_resource type="PackedScene" path="res://scenes/region/room.tscn" id="2_room"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
 [ext_resource type="PackedScene" path="res://scenes/cabin/interaction_area.tscn" id="4_door"]
-[ext_resource type="PackedScene" path="res://scenes/region/player_light.tscn" id="8_light"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/door_menu.tscn" id="6_door_menu"]
-[ext_resource type="PackedScene" path="res://scenes/ui/region_banner.tscn" id="9_banner"]
 [ext_resource type="PackedScene" path="res://scenes/ui/region_menu.tscn" id="7_region_menu"]
+[ext_resource type="PackedScene" path="res://scenes/region/player_light.tscn" id="8_light"]
+[ext_resource type="PackedScene" path="res://scenes/ui/region_banner.tscn" id="9_banner"]
+[ext_resource type="PackedScene" uid="uid://ctt1dhfms7gc" path="res://scenes/ui/journal.tscn" id="10_nkq4g"]
 
-[node name="Floor" type="Node2D"]
+[node name="Floor" type="Node2D" unique_id=396978738]
 script = ExtResource("1_floor")
 
-[node name="Room" parent="." instance=ExtResource("2_room")]
+[node name="Room" parent="." unique_id=1519536696 instance=ExtResource("2_room")]
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=1477931949]
 y_sort_enabled = true
 
-[node name="ExitDoor" parent="World" instance=ExtResource("4_door")]
+[node name="ExitDoor" parent="World" unique_id=1689304068 instance=ExtResource("4_door")]
 id = &"exit"
 size = Vector2(40, 40)
 
-[node name="Items" type="Node2D" parent="World"]
+[node name="Items" type="Node2D" parent="World" unique_id=1556155382]
 
-[node name="Creatures" type="Node2D" parent="World"]
+[node name="Creatures" type="Node2D" parent="World" unique_id=1428604283]
 
-[node name="Player" parent="World" instance=ExtResource("3_player")]
+[node name="Player" parent="World" unique_id=1075137964 instance=ExtResource("3_player")]
 
-[node name="Light" parent="World/Player" instance=ExtResource("8_light")]
+[node name="Light" parent="World/Player" unique_id=1725804253 instance=ExtResource("8_light")]
 
-[node name="Darkness" type="CanvasModulate" parent="."]
+[node name="Darkness" type="CanvasModulate" parent="." unique_id=563605624]
 color = Color(0.02, 0.02, 0.04, 1)
 
-[node name="Hud" parent="." instance=ExtResource("5_hud")]
+[node name="Hud" parent="." unique_id=1886318502 instance=ExtResource("5_hud")]
 
-[node name="RegionBanner" parent="." instance=ExtResource("9_banner")]
+[node name="RegionBanner" parent="." unique_id=1580232468 instance=ExtResource("9_banner")]
 
-[node name="DoorMenu" parent="." instance=ExtResource("6_door_menu")]
+[node name="DoorMenu" parent="." unique_id=396560177 instance=ExtResource("6_door_menu")]
 
-[node name="RegionMenu" parent="." instance=ExtResource("7_region_menu")]
+[node name="RegionMenu" parent="." unique_id=592468811 instance=ExtResource("7_region_menu")]
+
+[node name="JournalUI" parent="." unique_id=1694554464 instance=ExtResource("10_nkq4g")]
