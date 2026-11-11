@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bktlcisoc6lc7"
+
+[deps]
+
+files=["res://data/elenco.nome.translation", "res://data/elenco.condicao.translation", "res://data/elenco.descricao.translation"]
+
+source_file="res://data/elenco.csv"
+dest_files=["res://data/elenco.nome.translation", "res://data/elenco.condicao.translation", "res://data/elenco.descricao.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true
