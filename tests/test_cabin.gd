@@ -54,7 +54,7 @@ func test_has_door_journal_and_patient_points() -> void:
 	for area: InteractionArea in _cabin.get_node("Interactions").get_children():
 		ids.append(String(area.id))
 	ids.sort()
-	assert_eq(ids, ["door", "journal", "patient"])
+	assert_eq(ids, ["door", "journal", "patient", "stock"])
 
 
 func test_prompt_shows_only_when_mingau_is_near() -> void:
@@ -101,6 +101,32 @@ func test_door_opens_the_region_menu_with_the_six_regions() -> void:
 		assert_true(menu.get_button(region).visible)
 	menu.close()
 	assert_false(get_tree().paused)
+
+
+func test_shelf_opens_the_stock_menu_and_pauses() -> void:
+	var menu: StockMenu = _cabin.get_node("StockMenu")
+	assert_false(menu.is_open())
+	var stock_point: InteractionArea = _cabin.get_node("Interactions/Stock")
+	var player: Player = _cabin.get_node("World/Player")
+	player.position = stock_point.position
+	await wait_physics_frames(3)
+	assert_true(stock_point.try_interact())
+	assert_true(menu.is_open())
+	assert_true(get_tree().paused)
+	menu.close()
+	assert_false(get_tree().paused)
+
+
+func test_mingau_reaches_the_stock_point_walking() -> void:
+	var stock_point: InteractionArea = _cabin.get_node("Interactions/Stock")
+	var player: Player = _cabin.get_node("World/Player")
+	player.position = Vector2(stock_point.position.x, 300)
+	await wait_physics_frames(2)
+	for i in 120:
+		player.velocity = Vector2.UP * player.speed
+		player.move_and_slide()
+	await wait_physics_frames(3)
+	assert_true(stock_point.try_interact(), "O gato alcança a estante pelo chão")
 
 
 func test_journal_does_not_open_the_region_menu() -> void:
