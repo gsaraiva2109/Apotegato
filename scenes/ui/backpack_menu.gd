@@ -80,7 +80,10 @@ func open(patient_condition: String = "") -> void:
 	_message_label.text = ""
 	refresh()
 	visible = true
-	_deliver_button.grab_focus() if not _deliver_button.disabled else _back_button.grab_focus()
+	if _deliver_button.disabled:
+		_back_button.grab_focus()
+	else:
+		_deliver_button.grab_focus()
 
 
 func close() -> void:

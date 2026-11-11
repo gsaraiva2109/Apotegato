@@ -13,14 +13,14 @@ signal delivery_completed(condition: String)
 ## Tamanho da cabana em pixels (30 x 17 tiles de 32 px).
 const ROOM := Rect2i(0, 0, 960, 544)
 
+## Condição do paciente que está na cabana (id do CSV), definida por quem cuida
+## do atendimento. Vazia: não há paciente, e a mochila só mostra o conteúdo.
+var current_condition: String = ""
+
 @onready var _player: Player = $World/Player
 @onready var _region_menu: RegionMenu = $RegionMenu
 @onready var _stock_menu: StockMenu = $StockMenu
 @onready var _backpack_menu: BackpackMenu = $BackpackMenu
-
-## Condição do paciente que está na cabana (id do CSV), definida por quem cuida
-## do atendimento. Vazia: não há paciente, e a mochila só mostra o conteúdo.
-var current_condition: String = ""
 
 
 func _ready() -> void:
