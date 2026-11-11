@@ -50,7 +50,46 @@ func test_tileset_has_collision_only_on_wall_and_barrier() -> void:
 	}
 	for tile: Vector2i in solid:
 		var data := source.get_tile_data(tile, 0)
-		assert_eq(data.get_collision_polygons_count(0), solid[tile], "Colisão do tile %s" % tile)
+		if solid[tile] == 0:
+			assert_eq(data.get_collision_polygons_count(0), 0, "Sem colisão no tile %s" % tile)
+		else:
+			assert_gt(data.get_collision_polygons_count(0), 0, "Colisão do tile %s" % tile)
+
+
+func _polygons_area(polygons: Array[PackedVector2Array]) -> float:
+	var area := 0.0
+	for polygon in polygons:
+		var points := polygon
+		var twice := 0.0
+		for i in points.size():
+			var a := points[i]
+			var b := points[(i + 1) % points.size()]
+			twice += a.x * b.y - b.x * a.y
+		area += absf(twice) / 2.0
+	return area
+
+
+func test_silhouette_of_an_opaque_tile_is_the_whole_square() -> void:
+	var image := Image.create_empty(32, 32, false, Image.FORMAT_RGBA8)
+	image.fill(Color.WHITE)
+	var polygons := RegionTileSet.silhouette_polygons(image)
+	assert_almost_eq(_polygons_area(polygons), 1024.0, 1.0)
+
+
+func test_silhouette_follows_the_visible_pixels() -> void:
+	var image := Image.create_empty(32, 32, false, Image.FORMAT_RGBA8)
+	image.fill_rect(Rect2i(4, 6, 24, 20), Color.WHITE)
+	var polygons := RegionTileSet.silhouette_polygons(image)
+	assert_almost_eq(_polygons_area(polygons), 24.0 * 20.0, 6.0)
+	for polygon in polygons:
+		for point in polygon:
+			assert_between(point.x, -12.5, 12.5)
+			assert_between(point.y, -10.5, 10.5)
+
+
+func test_silhouette_of_an_empty_tile_falls_back_to_the_square() -> void:
+	var image := Image.create_empty(32, 32, false, Image.FORMAT_RGBA8)
+	assert_almost_eq(_polygons_area(RegionTileSet.silhouette_polygons(image)), 1024.0, 1.0)
 
 
 func test_tileset_is_cached_per_region() -> void:
