@@ -1,0 +1,388 @@
+{
+	"intro": [
+		{
+			"speaker": "apothecary",
+			"text": "Olá, gatinho. Eu sou a apotecária. Costumava cuidar de pessoas doentes e feridas, mas sofri uma queda e machuquei as costelas. Ainda não consigo sair para buscar os ingredientes de que preciso. Qual é o seu nome?"
+		},
+		{
+			"speaker": "mingau",
+			"text": "Me chamo Mingau. Mas onde estou? Como vim parar aqui? E, principalmente, como faço para voltar para casa?"
+		},
+		{
+			"speaker": "apothecary",
+			"text": "Fui eu quem abriu um portal em busca de ajuda, e você foi quem apareceu! Ainda não descobri como abrir outro portal para mandá-lo de volta. Mas, se me ajudar enquanto me recupero, prometo procurar uma maneira de devolver você ao seu mundo."
+		},
+		{
+			"speaker": "mingau",
+			"text": "Não era exatamente assim que eu imaginava minha aventura... Mas, se existem pessoas precisando de ajuda, posso fazer alguma coisa. O que preciso fazer?"
+		},
+		{
+			"speaker": "apothecary",
+			"text": "Os pacientes aparecerão na cabana, e não posso deixá-los sem atendimento. Preciso que você busque os ingredientes necessários para preparar os cuidados de que eles precisam."
+		},
+		{
+			"speaker": "mingau",
+			"text": "Entendi. E onde encontro esses ingredientes?"
+		},
+		{
+			"speaker": "apothecary",
+			"text": "Existem seis regiões, cada uma com ingredientes próprios. Você precisará explorar seus labirintos para encontrá-los. Mas tome cuidado: há criaturas agressivas por lá. Se elas perceberem sua presença, irão persegui-lo, mas você poderá despistá-las ou se defender."
+		},
+		{
+			"speaker": "apothecary",
+			"text": "Sua visão também será limitada por uma escuridão mágica. Quando derrotar uma criatura, sua luz aumentará um pouco. Mas os ingredientes estarão no chão, em algum lugar do labirinto. Você não precisa lutar para encontrar os itens. Use a barra de espaço para atacar e a tecla E quando encontrar uma porta."
+		},
+		{
+			"speaker": "apothecary",
+			"text": "Os mapas são labirintos que mudam quando você encontra uma saída para outro andar ou retorna à cabana. Não espere encontrar o mesmo caminho duas vezes!"
+		},
+		{
+			"speaker": "apothecary",
+			"text": "Tudo o que você precisa saber sobre os ingredientes e as regiões está neste diário. Para consultá-lo, basta apertar a tecla J no teclado."
+		},
+		{
+			"speaker": "mingau",
+			"text": "Certo! Vou consultar o diário, encontrar os ingredientes e ajudar quem precisar. E espero que, no final, você consiga me mandar de volta para casa!"
+		}
+	],
+	"first_visit_reminder": [
+		{
+			"speaker": "apothecary",
+			"text": "Temos um paciente. Vá perguntar a ele o que houve para ele vir nos visitar."
+		}
+	],
+	"conditions": {
+		"anemia_ferropriva": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Tenho me sentido muito cansado e fraco. Às vezes, até tarefas simples ficam difíceis. Estou comendo pouco ferro. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Seu cansaço pode ter várias causas, mas vamos seguir a pista da anemia que suspeito. Preciso de Fígado Bovino, de Campos e Rios; Castanha de Caju, da Caatinga; e Camu-Camu, da Amazônia, ou Acerola, da Caatinga. Você só precisa trazer uma dessas duas frutas."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "O Fígado Bovino é rico em ferro e ajuda a compor uma refeição nutritiva. A Castanha de Caju complementa a alimentação com minerais e outros nutrientes. O Camu-Camu ou a Acerola acrescenta vitamina C, que ajuda o organismo a aproveitar o ferro dos alimentos. Como o cansaço pode ter outras causas, marque uma consulta e faça os exames necessários; a alimentação sozinha pode não resolver a anemia."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Entendi. Vou procurar atendimento e seguir suas orientações sobre alimentação. Obrigado pela ajuda!"
+				}
+			]
+		},
+		"diarreia": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Desde que acordei, estou com diarreia e já estou me sentindo muito fraco. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Parece que você está com diarreia e já está sentindo a fraqueza. Para o cuidado que vou preparar, preciso de Água de Coco, do Litoral Brasileiro; Folha de Goiabeira, da Mata Atlântica; e Banana da Terra, de Campos e Rios."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "A Água de Coco ajuda a repor líquidos enquanto você se mantém hidratado. Vou preparar um chá de Folha de Goiabeira, tradicionalmente usado por aqui para acalmar o intestino enquanto você organiza a consulta. A Banana da Terra ajuda você a voltar a se alimentar e recuperar as forças enquanto o intestino se recupera. Continue se hidratando enquanto organiza seu atendimento; se a perda de líquidos for intensa, uma solução de reidratação oral pode ser necessária. Também quero que você procure um médico para avaliar a causa da diarreia, principalmente porque já está se sentindo fraco."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Muito obrigado a vocês dois pela ajuda!"
+				}
+			]
+		},
+		"dor_muscular": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Ontem carreguei caixas pesadas o dia todo e agora estou com muita dor muscular. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Para o bálsamo que uso nos casos de desconforto muscular, preciso de Erva Baleeira, da Mata Atlântica; Unha de Gato, da Amazônia; e Arnica Brasileira, do Cerrado."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "A Erva Baleeira será a base do bálsamo de massagem. A Arnica Brasileira complementa o preparo de uso externo, e a Unha de Gato entra como ingrediente da tradição amazônica. Vou preparar a mistura e explicar como usá-la com cuidado. Se a dor for muito forte, tiver começado após uma lesão ou não melhorar, procure avaliação médica."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Vou descansar e seguir suas orientações. Obrigado pela ajuda."
+				}
+			]
+		},
+		"escorbuto": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Tenho me sentido fraco e percebi que minhas gengivas estão sangrando. Estou preocupado com esses sintomas. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "A fraqueza e as mudanças nas gengivas precisam ser investigadas. Para a preparação que vou fazer, preciso de Camu-Camu, da Amazônia; Acerola, da Caatinga; e Aroeira-da-praia, do Litoral Brasileiro."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "O Camu-Camu e a Acerola são frutas ricas em vitamina C, importante para a formação e manutenção dos tecidos do corpo. A Aroeira-da-praia entra no preparo tradicional da região e completa a combinação. Como os sintomas podem indicar uma deficiência importante, procure avaliação médica para confirmar a causa e receber o tratamento adequado."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Vou procurar atendimento e seguir as orientações. Obrigado pela ajuda."
+				}
+			]
+		},
+		"gastrite": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Sinto uma queimação no estômago, principalmente depois de comer. Isso tem acontecido com frequência. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "A queimação frequente merece atenção. Para a preparação que vou fazer, preciso de Espinheira Santa, da Mata Atlântica; Erva Cidreira, de Campos e Rios; e Aroeira-da-praia, do Litoral Brasileiro."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "A Espinheira Santa entra na preparação tradicional que uso para desconfortos do estômago. A Erva Cidreira acrescenta uma infusão suave, e a Aroeira-da-praia completa a mistura conhecida na região. Como isso tem acontecido com frequência, procure avaliação médica para investigar a causa."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Vou prestar atenção nisso e seguir sua orientação. Obrigado."
+				}
+			]
+		},
+		"insonia": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Faz várias noites que não consigo dormir direito. Durante o dia, fico cansado e sem concentração. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Parece que a falta de sono já está atrapalhando sua rotina. Para o preparo que uso nesses casos, preciso de Flor de Maracujá, da Mata Atlântica; Erva Cidreira, de Campos e Rios; e Mulungu, do Cerrado."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "A Flor de Maracujá compõe a infusão para ajudar você a relaxar. A Erva Cidreira acrescenta um aroma suave e ajuda a criar um momento de descanso. O Mulungu completa a preparação tradicional que uso para noites difíceis. Tente manter uma rotina de sono; se a insônia continuar prejudicando seus dias, procure um profissional de saúde para investigar a causa."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Vou tentar manter uma rotina de descanso. Obrigado pela ajuda."
+				}
+			]
+		},
+		"queimaduras": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Derramei água quente em um dos meus braços. Está ardendo muito. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Isso parece uma queimadura forte. Mingau, para o curativo que vou preparar, preciso de Pele de Tilápia, de Campos e Rios; Resina de Copaíba, da Amazônia; e Mel, do Litoral Brasileiro."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "A Pele de Tilápia será preparada como uma cobertura protetora, e a Resina de Copaíba e o Mel farão parte do meu preparo mágico. Esse procedimento é algo que somente eu posso realizar com segurança aqui na cabana, então não tente reproduzi-lo por conta própria. Você ainda precisará procurar atendimento médico para acompanhar a queimadura."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Obrigado por me ajudar, já estou me sentindo mais aliviado. Vou fazer como você sugeriu."
+				}
+			]
+		},
+		"resfriado": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Estou espirrando, com o nariz escorrendo e a garganta irritada. Tudo isso tem me atrapalhado bastante. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Vamos cuidar do desconforto e acompanhar sua recuperação. Preciso de Folha de Guaco, da Mata Atlântica; Mel, do Litoral Brasileiro; Flor de Assa-peixe, do Cerrado; e Alecrim-pimenta, da Caatinga."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "A Folha de Guaco entra na infusão tradicional que preparo para acompanhar a tosse. O Mel ajuda a suavizar a sensação de irritação na garganta. A Flor de Assa-peixe e o Alecrim-pimenta completam o preparo de conforto da cabana. Descanse e mantenha-se hidratado; se os sintomas piorarem, persistirem ou surgir dificuldade para respirar, procure atendimento médico."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Obrigado. Vou descansar e observar como me sinto."
+				}
+			]
+		},
+		"ossos_fracos": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Tenho sentido dores nos ossos e estou preocupado com a possibilidade de sofrer alguma fratura. Gostaria de melhorar minha alimentação."
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Para a refeição nutritiva que quero preparar, preciso de Sardinha, do Litoral Brasileiro; Castanha de Caju, da Caatinga; e Semente de Chia, de Campos e Rios."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "A Sardinha contribui com nutrientes importantes para a manutenção dos ossos. A Castanha de Caju complementa a refeição, e a Semente de Chia fornece minerais e fibras. Esses alimentos ajudam a compor uma alimentação variada, mas não explicam, sozinhos, a sensação de ossos fracos. Procure um profissional de saúde para investigar a causa e orientar os cuidados adequados."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Vou marcar uma consulta e seguir as recomendações que receber. Obrigado por me ajudar."
+				}
+			]
+		},
+		"xeroftalmia": {
+			"patient_intro": [
+				{
+					"speaker": "patient",
+					"text": "Meus olhos estão muito secos e minha visão anda estranha. Estou preocupado. Você poderia me ajudar, por favor?"
+				}
+			],
+			"apothecary_request": [
+				{
+					"speaker": "apothecary",
+					"text": "Olhos muito secos junto com mudanças na visão precisam de atenção. Marque uma avaliação com um profissional de saúde ocular o quanto antes. Mingau, para a refeição nutritiva que quero preparar para esse paciente, traga Buriti, da Amazônia; Pequi, do Cerrado; Fígado Bovino, de Campos e Rios; e Licuri, da Caatinga."
+				}
+			],
+			"apothecary_guidance": [
+				{
+					"speaker": "apothecary",
+					"text": "O Buriti e o Pequi fornecem nutrientes importantes para a alimentação e para a manutenção da visão. O Fígado Bovino acrescenta vitamina A, e o Licuri complementa a refeição com gorduras e outros nutrientes. Vou preparar a refeição para complementar sua alimentação enquanto você cuida disso."
+				}
+			],
+			"patient_thanks": [
+				{
+					"speaker": "patient",
+					"text": "Obrigado. Vou cuidar disso e seguir as orientações que receber."
+				}
+			]
+		}
+	},
+	"delivery": {
+		"partial": [
+			{
+				"speaker": "mingau",
+				"text": "Trouxe o que consegui encontrar por enquanto."
+			},
+			{
+				"speaker": "apothecary",
+				"text": "Obrigada. Vou guardar esses ingredientes. Ainda faltam: {lista}. Você pode continuar a busca e voltar quando tiver o restante."
+			}
+		],
+		"surplus": [
+			{
+				"speaker": "apothecary",
+				"text": "Estes ingredientes não são necessários para o paciente atual, mas serão úteis depois. Vou guardá-los no estoque para não desperdiçarmos nada."
+			}
+		],
+		"empty_backpack": [
+			{
+				"speaker": "mingau",
+				"text": "Ainda não encontrei nenhum ingrediente."
+			},
+			{
+				"speaker": "apothecary",
+				"text": "Tudo bem. Consulte o diário, escolha uma região e comece por lá. Você pode voltar quando encontrar algum item."
+			}
+		]
+	},
+	"ending": {
+		"lines": [
+			{
+				"speaker": "apothecary",
+				"text": "Você ajudou todos os pacientes que chegaram até aqui. Minhas costelas estão melhores e acho que já consigo cuidar de parte das tarefas sozinha."
+			},
+			{
+				"speaker": "mingau",
+				"text": "Então quer dizer que posso voltar para casa?"
+			},
+			{
+				"speaker": "apothecary",
+				"text": "Acho que sim. O portal pode levar você de volta à Unifor. Mas ainda aparecem pessoas precisando de ajuda. Você quer voltar para casa ou continuar aqui comigo?"
+			}
+		],
+		"choices": {
+			"go_home": "Voltar para a Unifor",
+			"keep_helping": "Continuar ajudando"
+		},
+		"go_home": [
+			{
+				"speaker": "mingau",
+				"text": "Estou com saudade de casa. Vou voltar, mas não vou esquecer as pessoas que conheci aqui."
+			},
+			{
+				"speaker": "apothecary",
+				"text": "Você sempre será bem-vindo nesta cabana. Obrigada por tudo. Boa viagem!"
+			}
+		],
+		"keep_helping": [
+			{
+				"speaker": "mingau",
+				"text": "Prefiro continuar ajudando. Ainda há muita coisa para descobrir e outras pessoas podem precisar de nós."
+			},
+			{
+				"speaker": "apothecary",
+				"text": "Então vamos continuar. Vou receber novas pessoas e preparar outras solicitações. Talvez você encontre condições conhecidas, mas a ordem dos atendimentos e das explorações será diferente."
+			},
+			{
+				"speaker": "mingau",
+				"text": "Pode contar comigo!"
+			}
+		]
+	}
+}
