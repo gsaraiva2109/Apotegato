@@ -73,11 +73,49 @@ static func _build(texture: Texture2D) -> TileSet:
 	)
 	for tile in [FLOOR_TILE, WALL_TILE, BARRIER_TILE, EXIT_TILE]:
 		source.create_tile(tile)
-	for tile in [WALL_TILE, BARRIER_TILE]:
+	# A parede é um quadrado inteiro (a borda do andar não pode ter frestas); a
+	# barreira segue o desenho, para o gato só esbarrar onde ela aparece.
+	var image := texture.get_image()
+	var barrier_image := image.get_region(Rect2i(BARRIER_TILE * tile_size, tile_size))
+	var shapes := {WALL_TILE: [square], BARRIER_TILE: silhouette_polygons(barrier_image)}
+	for tile: Vector2i in shapes:
 		var data := source.get_tile_data(tile, 0)
-		data.add_collision_polygon(0)
-		data.set_collision_polygon_points(0, 0, square)
+		for index in shapes[tile].size():
+			data.add_collision_polygon(0)
+			data.set_collision_polygon_points(0, index, shapes[tile][index])
 	return tile_set
+
+
+## Polígonos convexos, centrados no tile, que cobrem os pixels visíveis (não
+## transparentes) da imagem. Imagem toda opaca dá um quadrado; imagem toda
+## transparente também (cai no quadrado para a barreira nunca sumir).
+static func silhouette_polygons(tile_image: Image) -> Array[PackedVector2Array]:
+	var size := tile_image.get_size()
+	var half := Vector2(size) / 2.0
+	var bitmap := BitMap.new()
+	bitmap.create_from_image_alpha(tile_image, 0.1)
+	var result: Array[PackedVector2Array] = []
+	for outline in bitmap.opaque_to_polygons(Rect2i(Vector2i.ZERO, size), 1.0):
+		var pieces := Geometry2D.decompose_polygon_in_convex(outline)
+		if pieces.is_empty():
+			pieces = [Geometry2D.convex_hull(outline)]
+		for piece in pieces:
+			var centered := PackedVector2Array()
+			for point in piece:
+				centered.append(point - half)
+			result.append(centered)
+	if result.is_empty():
+		result.append(
+			PackedVector2Array(
+				[
+					Vector2(-half.x, -half.y),
+					Vector2(half.x, -half.y),
+					half,
+					Vector2(-half.x, half.y)
+				]
+			)
+		)
+	return result
 
 
 ## Cria a fonte da água animada, se a região tiver `water.png`. Devolve os tiles
