@@ -155,3 +155,13 @@ func test_choosing_a_region_starts_floor_one_and_keeps_the_backpack() -> void:
 	assert_true(get_tree().current_scene is RegionFloor)
 	get_tree().current_scene.queue_free()
 	GameState.new_game()
+
+
+func test_patient_point_opens_the_backpack_and_pauses() -> void:
+	var patient_point: InteractionArea = _cabin.get_node("Interactions/Patient")
+	var player: Player = _cabin.get_node("World/Player")
+	player.position = patient_point.position
+	await wait_physics_frames(2)
+	assert_true(patient_point.try_interact())
+	assert_true(get_tree().paused)
+	assert_true((_cabin.get_node("BackpackMenu") as BackpackMenu).is_open())
