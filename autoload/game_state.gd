@@ -1,7 +1,8 @@
 extends Node
 ## Estado da campanha que sobrevive à troca de cena: região e andar atuais,
-## a mochila e o estoque da apotecária. Ir à cabana, voltar ou trocar de região
-## não mexe na mochila nem no estoque; só `new_game()` esvazia os dois.
+## a mochila, o estoque da apotecária e os pacientes já atendidos. Ir à cabana,
+## voltar ou trocar de região não mexe na mochila, no
+## estoque nem nos pacientes; só `new_game()` zera tudo.
 ##
 ## Registrado como autoload "GameState".
 
@@ -20,6 +21,8 @@ var current_region: String = ""
 var current_floor: int = FIRST_FLOOR
 var backpack := Backpack.new()
 var stock := Stock.new()
+## Quais condições já foram atendidas e o sorteio do próximo paciente.
+var patients := PatientPicker.new()
 
 
 ## Começa uma região: sempre pelo andar 1. Mochila e estoque ficam como estão.
@@ -52,3 +55,4 @@ func new_game() -> void:
 	leave_region()
 	backpack.clear()
 	stock.clear()
+	patients.reset()
