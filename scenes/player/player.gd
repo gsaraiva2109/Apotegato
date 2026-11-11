@@ -22,8 +22,12 @@ const BLINK_SECONDS := 0.08
 
 ## Camada de colisão das criaturas (a 2ª).
 const CREATURE_MASK := 2
+## Camada de colisão do cenário: paredes e arbustos (a 1ª).
+const WORLD_MASK := 1
 ## Distância do centro do gato até o centro do golpe, em pixels.
 const ATTACK_REACH := 26.0
+## Deslocamento do centro do corpo da criatura em relação à origem dela.
+const CREATURE_CENTER_OFFSET := Vector2(0, 4)
 ## Tamanho da área do golpe, em pixels.
 const ATTACK_SIZE := Vector2(36, 36)
 
@@ -112,6 +116,7 @@ func try_attack() -> bool:
 
 
 ## Criaturas dentro da área do golpe agora (a área fica na frente do gato).
+## Criatura do outro lado de uma parede ou arbusto não é atingida.
 func creatures_in_reach() -> Array[Creature]:
 	var hitbox := RectangleShape2D.new()
 	hitbox.size = ATTACK_SIZE
@@ -123,9 +128,16 @@ func creatures_in_reach() -> Array[Creature]:
 	var found: Array[Creature] = []
 	for hit in get_world_2d().direct_space_state.intersect_shape(query):
 		var creature := hit["collider"] as Creature
-		if creature != null and not creature.is_defeated():
+		if creature != null and not creature.is_defeated() and _has_clear_path_to(creature):
 			found.append(creature)
 	return found
+
+
+## Se não há parede nem arbusto entre o centro do gato e o centro da criatura.
+func _has_clear_path_to(creature: Creature) -> bool:
+	var target := creature.global_position + CREATURE_CENTER_OFFSET
+	var ray := PhysicsRayQueryParameters2D.create(global_position, target, WORLD_MASK, [get_rid()])
+	return get_world_2d().direct_space_state.intersect_ray(ray).is_empty()
 
 
 ## Leva um golpe de criatura: tira `amount` corações e deixa o gato invencível

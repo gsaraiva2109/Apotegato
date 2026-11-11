@@ -51,6 +51,38 @@ func test_attack_hits_a_creature_in_front() -> void:
 	assert_false(creature.is_defeated())
 
 
+func _wall_at(offset: Vector2) -> StaticBody2D:
+	var wall: StaticBody2D = autofree(StaticBody2D.new())
+	var shape := CollisionShape2D.new()
+	var rect := RectangleShape2D.new()
+	rect.size = Vector2(32, 32)
+	shape.shape = rect
+	wall.add_child(shape)
+	wall.position = _player.position + offset
+	add_child(wall)
+	return wall
+
+
+func test_attack_does_not_pass_through_a_wall() -> void:
+	_player.facing = Vector2.RIGHT
+	var creature := _creature_at(Vector2(40, 0))
+	_wall_at(Vector2(20, 0))
+	await wait_physics_frames(2)
+	assert_true(_player.creatures_in_reach().is_empty(), "A parede protege a criatura")
+	_player.attack_cooldown = 0.0
+	for i in creature.hits_to_defeat:
+		assert_true(_player.try_attack())
+	assert_false(creature.is_defeated(), "Nenhum arranhão atravessou a parede")
+
+
+func test_attack_hits_when_the_wall_is_not_in_the_way() -> void:
+	_player.facing = Vector2.RIGHT
+	var creature := _creature_at(Vector2(28, 0))
+	_wall_at(Vector2(0, 40))
+	await wait_physics_frames(2)
+	assert_eq(_player.creatures_in_reach(), [creature])
+
+
 func test_attack_misses_creatures_behind_or_far() -> void:
 	_player.facing = Vector2.RIGHT
 	_creature_at(Vector2(-28, 0))

@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" path="res://assets/art/ui/plank.png" id="6_plank"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/bar_fill.png" id="7_bar_fill"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/slider_grabber.png" id="8_grabber"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/parchment.png" id="9_parchment"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
 content_margin_left = 14.0
@@ -90,6 +91,31 @@ texture_margin_top = 7.0
 texture_margin_right = 8.0
 texture_margin_bottom = 7.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_parchment"]
+content_margin_left = 34.0
+content_margin_top = 36.0
+content_margin_right = 28.0
+content_margin_bottom = 38.0
+texture = ExtResource("9_parchment")
+texture_margin_left = 14.0
+texture_margin_top = 26.0
+texture_margin_right = 10.0
+texture_margin_bottom = 29.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ink"]
+color = Color(0.4, 0.27, 0.16, 1)
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scroll_track"]
+bg_color = Color(0.45, 0.33, 0.2, 0.35)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scroll_grabber"]
+bg_color = Color(0.4, 0.27, 0.16, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
 draw_center = false
 border_width_left = 2
@@ -137,3 +163,24 @@ HSlider/icons/grabber_highlight = ExtResource("8_grabber")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_bar_fill")
 HSlider/styles/grabber_area_highlight = SubResource("StyleBoxTexture_bar_fill")
 HSlider/styles/slider = SubResource("StyleBoxTexture_bar_bg")
+ParchmentLabel/base_type = &"Label"
+ParchmentLabel/colors/font_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+ParchmentLabel/constants/outline_size = 0
+ParchmentLabel/constants/line_spacing = 3
+ParchmentLabel/font_sizes/font_size = 17
+ParchmentPanel/base_type = &"PanelContainer"
+ParchmentPanel/styles/panel = SubResource("StyleBoxTexture_parchment")
+ParchmentSubtitle/base_type = &"Label"
+ParchmentSubtitle/colors/font_color = Color(0.4, 0.27, 0.16, 1)
+ParchmentSubtitle/constants/outline_size = 0
+ParchmentSubtitle/font_sizes/font_size = 15
+ParchmentTitle/base_type = &"Label"
+ParchmentTitle/colors/font_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+ParchmentTitle/constants/outline_size = 0
+ParchmentTitle/font_sizes/font_size = 26
+HSeparator/constants/separation = 6
+HSeparator/styles/separator = SubResource("StyleBoxLine_ink")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_scroll_grabber")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_scroll_grabber")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_scroll_grabber")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_scroll_track")

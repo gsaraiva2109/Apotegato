@@ -49,6 +49,11 @@ func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
 	GameState.backpack.add("licuri", 2)
 	GameState.backpack.add("mel")
 	GameState.stock.store("sardinha", 3)
+	# O andar é sorteado e o gato pode ter pegado um ingrediente logo na saída:
+	# o que importa é a mochila ficar igual à de antes do desmaio.
+	var licuri := GameState.backpack.count("licuri")
+	var mel := GameState.backpack.count("mel")
+	var slots := GameState.backpack.used_slots()
 	_player().invulnerability_time = 0.0
 	for i in 7:
 		_player().take_hit()
@@ -57,9 +62,9 @@ func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
 	await wait_seconds(0.3)
 	assert_true(get_tree().current_scene is Cabin, "Acordou na cabana")
 	assert_eq(GameState.current_region, "")
-	assert_eq(GameState.backpack.count("licuri"), 2)
-	assert_eq(GameState.backpack.count("mel"), 1)
-	assert_eq(GameState.backpack.used_slots(), 2)
+	assert_eq(GameState.backpack.count("licuri"), licuri)
+	assert_eq(GameState.backpack.count("mel"), mel)
+	assert_eq(GameState.backpack.used_slots(), slots)
 	assert_eq(GameState.stock.count("sardinha"), 3)
 	get_tree().current_scene.queue_free()
 
