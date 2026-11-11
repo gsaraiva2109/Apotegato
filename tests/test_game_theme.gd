@@ -35,6 +35,21 @@ func test_plank_variation_uses_nine_slice_texture() -> void:
 	assert_true(THEME.get_color("font_color", "PlankLabel").v < 0.2, "Texto escuro sobre a tábua")
 
 
+func test_parchment_variation_uses_nine_slice_texture() -> void:
+	var style := THEME.get_stylebox("panel", "ParchmentPanel")
+	assert_true(style is StyleBoxTexture)
+	assert_eq((style as StyleBoxTexture).texture_margin_top, 26.0)
+	for label_type in ["ParchmentLabel", "ParchmentTitle", "ParchmentSubtitle"]:
+		assert_true(THEME.get_color("font_color", label_type).v < 0.5, "Texto escuro no pergaminho")
+
+
+func test_journal_uses_the_game_theme_and_parchment() -> void:
+	var journal: CanvasLayer = autofree(load("res://scenes/ui/journal.tscn").instantiate())
+	add_child(journal)
+	assert_eq(journal.get_node("Root").theme, THEME)
+	assert_eq(journal.get_node("Root/Center/Panel").theme_type_variation, &"ParchmentPanel")
+
+
 func test_bars_and_slider_use_the_pack_style() -> void:
 	assert_true(THEME.get_stylebox("fill", "ProgressBar") is StyleBoxTexture)
 	assert_true(THEME.get_stylebox("slider", "HSlider") is StyleBoxTexture)
@@ -48,6 +63,7 @@ func test_extra_art_has_the_expected_size() -> void:
 		"slider_grabber": Vector2(10, 10),
 		"backpack_icon": Vector2(64, 79),
 		"cursor": Vector2(11, 14),
+		"parchment": Vector2(150, 89),
 	}
 	for art: String in sizes:
 		var texture: Texture2D = load("res://assets/art/ui/%s.png" % art)

@@ -75,7 +75,7 @@ fi
 # Interface (UI Medieval Mega): o pacote vem numa sheet única, que o script de
 # recorte divide nas peças do tema (assets/art/ui/). Sem Python/Pillow, o jogo
 # segue com a arte provisória da interface.
-UI_CROPS=(panel button_normal button_pressed button_disabled plank bar_fill slider_grabber backpack_icon cursor heart_full heart_empty)
+UI_CROPS=(panel button_normal button_pressed button_disabled plank parchment bar_fill slider_grabber backpack_icon cursor heart_full heart_empty)
 if [[ -f $DEST/toffeecraft-ui-medieval-mega/MedievalUiMega/medieval.png ]]; then
   PYTHON="$(command -v python3 || command -v python || true)"
   if [[ -n $PYTHON ]] && "$PYTHON" "$ROOT/tools/crop_ui_pack.py"; then

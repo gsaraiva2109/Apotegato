@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ctt1dhfms7gc"]
 
 [ext_resource type="Script" uid="uid://mb35kpkemff1" path="res://scenes/ui/journal.gd" id="1_6tv0q"]
+[ext_resource type="Theme" uid="uid://dkgx8367noml7" path="res://scenes/ui/game_theme.tres" id="2_theme"]
 
 [node name="Journal" type="CanvasLayer" unique_id=1694554464]
 script = ExtResource("1_6tv0q")
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_theme")
 
 [node name="Backdrop" type="ColorRect" parent="Root" unique_id=994576276]
 layout_mode = 1
@@ -31,8 +33,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="PanelContainer" parent="Root/Center" unique_id=413045480]
-custom_minimum_size = Vector2(760, 440)
+custom_minimum_size = Vector2(800, 480)
 layout_mode = 2
+theme_type_variation = &"ParchmentPanel"
 
 [node name="Layout" type="VBoxContainer" parent="Root/Center/Panel" unique_id=949128013]
 layout_mode = 2
@@ -40,9 +43,13 @@ theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="Root/Center/Panel/Layout" unique_id=1185463304]
 layout_mode = 2
+theme_type_variation = &"ParchmentTitle"
+horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="Root/Center/Panel/Layout" unique_id=597914273]
 layout_mode = 2
+theme_type_variation = &"ParchmentSubtitle"
+horizontal_alignment = 1
 
 [node name="Separator" type="HSeparator" parent="Root/Center/Panel/Layout" unique_id=1119070107]
 layout_mode = 2
@@ -57,9 +64,10 @@ size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="PageContent" type="Label" parent="Root/Center/Panel/Layout/Scroll" unique_id=763556481]
-custom_minimum_size = Vector2(680, 0)
+custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"ParchmentLabel"
 text = "Página 1"
 autowrap_mode = 3
 
@@ -73,6 +81,7 @@ text = "← Anterior"
 [node name="PageCounter" type="Label" parent="Root/Center/Panel/Layout/Footer" unique_id=853746319]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_type_variation = &"ParchmentLabel"
 text = "Página 1 / 10"
 horizontal_alignment = 1
 
