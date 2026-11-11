@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" format=3]
+[gd_resource type="TileSet" format=3 uid="uid://bh4gxas1ta2ly"]
 
 [ext_resource type="Texture2D" path="res://assets/art/cabin/cabin_tileset.png" id="1_f5p87"]
 
