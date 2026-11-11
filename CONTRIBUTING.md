@@ -51,7 +51,7 @@ assets/
     music/
     sfx/
   fonts/
-data/              CSVs do jogo (ingredientes, créditos)
+data/              dados do jogo (CSVs, diário e diálogos em JSON)
 scenes/
   cabin/           a cabana (cabin.tscn)
   player/          o Mingau
@@ -134,6 +134,20 @@ O jogo lê o CSV pelo autoload `IngredientData` (`autoload/ingredient_data.gd`),
 O arquivo tem um `.import` com `importer="keep"`. Sem isso o Godot importaria o CSV como tabela de tradução. Não apague esse arquivo.
 
 `tests/test_ingredients_csv.gd` confere o CSV contra o GDD: total de ingredientes, ids únicos, regiões e paridades válidas e quantidade de ingredientes por condição. Se o time mudar alguma dessas regras, atualize as constantes do teste junto.
+
+## O arquivo de diálogos
+
+`data/dialogos.json` guarda todas as falas do `Roteiro_Mingau.txt`, sem texto no código. Quem escreve ou revisa uma fala edita só esse arquivo e confere com o roteiro. Cada fala é `{"speaker": ..., "text": ...}`, e `speaker` é `apothecary`, `mingau` ou `patient`. As chaves:
+
+| Chave | Conteúdo |
+| --- | --- |
+| `intro` | Primeira conversa na cabana |
+| `first_visit_reminder` | Lembrete da apotecária antes de falar com o paciente novo |
+| `conditions.<id da condição>` | `patient_intro`, `apothecary_request`, `apothecary_guidance` e `patient_thanks` |
+| `delivery` | `partial` (o texto tem `{lista}`, trocado pelos ingredientes que faltam), `surplus` e `empty_backpack` |
+| `ending` | `lines`, `choices` (`go_home` e `keep_helping`), `go_home` e `keep_helping` |
+
+`tests/test_dialogues_data.gd` confere a estrutura: as 10 condições com os quatro passos e o falante certo em cada um, o pedido citando os ingredientes exigidos, a recomendação de procurar atendimento de saúde, o `{lista}` da entrega parcial, a introdução, o lembrete e o encerramento. Ele não compara o texto com o roteiro; isso é conferência de quem revisa.
 
 ## Versões e entregas
 
