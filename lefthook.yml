@@ -24,9 +24,13 @@ pre-commit:
 post-merge:
   commands:
     assets:
-      run: bash tools/fetch_assets.sh || echo "Aviso: não baixei a arte de terceiros (sem acesso ao ApotegatoAssets?)."
+      run: >-
+        bash tools/fetch_assets.sh ||
+        echo "Aviso - não baixei a arte de terceiros (sem acesso ao ApotegatoAssets?)."
 
 post-checkout:
   commands:
     assets:
-      run: bash tools/fetch_assets.sh || echo "Aviso: não baixei a arte de terceiros (sem acesso ao ApotegatoAssets?)."
+      run: >-
+        bash tools/fetch_assets.sh ||
+        echo "Aviso - não baixei a arte de terceiros (sem acesso ao ApotegatoAssets?)."
