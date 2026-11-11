@@ -86,3 +86,12 @@ func test_walls_stop_a_body() -> void:
 		body.velocity = Vector2.LEFT * 200.0
 		body.move_and_slide()
 	assert_gt(body.position.x, 32.0 - 1.0, "Não atravessa a borda do andar")
+
+
+func test_water_region_draws_walls_and_barriers_from_the_water_source() -> void:
+	var layout := _room.generate(Regions.CAMPOS_RIOS, 1)
+	var tiles := _tiles()
+	assert_eq(tiles.get_cell_source_id(Vector2i(0, 0)), RegionTileSet.WATER_SOURCE_ID)
+	assert_eq(tiles.get_cell_atlas_coords(Vector2i(0, 0)), RegionTileSet.WALL_TILE)
+	assert_eq(tiles.get_cell_source_id(layout.entry_cell), RegionTileSet.SOURCE_ID)
+	assert_eq(tiles.get_cell_source_id(layout.exit_cell), RegionTileSet.SOURCE_ID)

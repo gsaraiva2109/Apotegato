@@ -44,5 +44,11 @@ static func tileset_path(region: String) -> String:
 	return "%s/%s/tileset.png" % [ART_DIR, region]
 
 
+## Caminho do PNG da água animada da região (128 de largura, quadros em coluna).
+## Nem toda região tem.
+static func water_path(region: String) -> String:
+	return "%s/%s/water.png" % [ART_DIR, region]
+
+
 static func is_valid(region: String) -> bool:
 	return region in IDS

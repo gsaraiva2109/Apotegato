@@ -53,5 +53,5 @@ func _draw_layout(map: MazeLayout, region: String) -> void:
 				tile = (
 					RegionTileSet.WALL_TILE if grid.is_border(cell) else RegionTileSet.BARRIER_TILE
 				)
-			_tiles.set_cell(cell, RegionTileSet.SOURCE_ID, tile)
+			_tiles.set_cell(cell, RegionTileSet.source_for(region, tile), tile)
 	_tiles.set_cell(map.exit_cell, RegionTileSet.SOURCE_ID, RegionTileSet.EXIT_TILE)
