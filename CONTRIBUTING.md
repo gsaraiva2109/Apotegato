@@ -174,6 +174,8 @@ Os derivados de arte de terceiros (como a onça, recolor do tigre do MasuOne) ta
    ```
 4. Abra o projeto no Godot, que importa os arquivos novos. Repita o comando quando a arte mudar no repositório privado.
 
+Como a arte provisória (cabana, regiões, interface e Mingau) e a de terceiros ficam no `.gitignore`, **trocar de branch com `git checkout` nunca conflita com elas**. O `fetch_assets.sh` primeiro gera a arte provisória (`tools/gerar_provisorios.sh`, precisa de Python 3 com Pillow) e depois aplica a do pacote. Ele só baixa o `ApotegatoAssets` quando o repositório mudou desde a última vez (guarda o commit em `assets/art/third_party/.commit`); sem rede, reaproveita a cópia local. Use `--forcar` para baixar de novo. O `lefthook` roda o script depois de cada `pull`/`merge` e de cada troca de branch. A arte provisória nova entra pelos scripts `tools/make_*_art.py` (o Mingau provisório fica em `tools/provisorio/`), nunca como PNG commitado.
+
 No Windows, rode pelo Git Bash.
 
 ### Como adicionar ou trocar arte de terceiros
@@ -184,13 +186,13 @@ No Windows, rode pelo Git Bash.
 
 ### Arte substituta da cabana
 
-O `ApotegatoAssets` tem uma pasta `overrides/art/` com recortes do Epic RPG World - House Interiors, com os mesmos nomes e tamanhos da arte provisória de `assets/art/cabin/`. O `tools/fetch_assets.sh` copia esses arquivos por cima da provisória, e a cabana passa a usar a arte definitiva sem mudar nenhuma cena. Como a arte de terceiros não pode ir para o git público, o script marca esses arquivos com `git update-index --skip-worktree`: eles não aparecem em `git status` e não entram em commits. Se você precisar restaurar a arte provisória (por exemplo, antes de um `git pull` que mexe nesses arquivos), rode `git update-index --no-skip-worktree assets/art/cabin/*.png` e depois `git checkout -- assets/art/cabin`. A porta continua provisória.
+O `ApotegatoAssets` tem uma pasta `overrides/art/` com recortes do Epic RPG World - House Interiors, com os mesmos nomes e tamanhos da arte provisória de `assets/art/cabin/`. O `tools/fetch_assets.sh` copia esses arquivos por cima da provisória, e a cabana passa a usar a arte definitiva sem mudar nenhuma cena. Como a arte de terceiros não pode ir para o git público, esses PNGs não são versionados (estão no `.gitignore`): `tools/gerar_provisorios.sh` gera a arte provisória na sua máquina e o `fetch_assets.sh` aplica a do pacote por cima. A porta continua provisória.
 
 O mesmo mecanismo vale para os tilesets das regiões (`overrides/art/regions/<id>/tileset.png`, 128 x 32, montados com Forest Tilesets, RPG Beach Tileset e Pixel Trees 32x32) e para o sprite do Mingau (`overrides/art/characters/mingau_placeholder.png`, o gato do pacote da MasuOne). O tile de saída de cada região continua o provisório, na cor da Tabela 3. Quem rodar o jogo sem acesso ao repositório privado vê a arte provisória.
 
 ### Interface (UI Medieval Mega)
 
-O pacote da ToffeeCraft é uma spritesheet única (`toffeecraft-ui-medieval-mega/MedievalUiMega/medieval.png` no `ApotegatoAssets`) e a licença proíbe redistribuir. O `tools/fetch_assets.sh` roda o `tools/crop_ui_pack.py` no fim, que recorta as peças do tema (painel, botões, tábua de madeira das placas, barra, mochila, cursor do mouse e corações do HUD) por coordenadas e as grava em `assets/art/ui/`, por cima da arte provisória de mesmo nome e tamanho (gerada por `tools/make_ui_art.py` e `tools/make_heart_art.py`). Os arquivos ficam com `skip-worktree`, como os da cabana, então o recorte nunca entra em commit. Para trocar uma peça, edite o dicionário `CROPS` do script. O tema `scenes/ui/game_theme.tres` usa 9-slice com margens que valem para a arte provisória e para a definitiva.
+O pacote da ToffeeCraft é uma spritesheet única (`toffeecraft-ui-medieval-mega/MedievalUiMega/medieval.png` no `ApotegatoAssets`) e a licença proíbe redistribuir. O `tools/fetch_assets.sh` roda o `tools/crop_ui_pack.py` no fim, que recorta as peças do tema (painel, botões, tábua de madeira das placas, barra, mochila, cursor do mouse e corações do HUD) por coordenadas e as grava em `assets/art/ui/`, por cima da arte provisória de mesmo nome e tamanho (gerada por `tools/make_ui_art.py` e `tools/make_heart_art.py`). Esses arquivos também estão no `.gitignore`, então o recorte nunca entra em commit. Para trocar uma peça, edite o dicionário `CROPS` do script. O tema `scenes/ui/game_theme.tres` usa 9-slice com margens que valem para a arte provisória e para a definitiva.
 
 ### Músicas
 

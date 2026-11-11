@@ -18,9 +18,15 @@ pre-commit:
         - "addons/**"
       run: gdlint {staged_files}
 
-# Depois de um pull/merge que mexa nas ferramentas de assets, baixa a arte de
-# novo. Só roda se houver credencial e nunca faz o pull falhar.
+# Depois de um pull/merge ou de trocar de branch, regenera a arte provisória (que o git
+# não versiona) e reaplica a de terceiros; só baixa se o ApotegatoAssets mudou e nunca faz
+# a operação falhar.
 post-merge:
+  commands:
+    assets:
+      run: bash tools/fetch_assets.sh || echo "Aviso: não baixei a arte de terceiros (sem acesso ao ApotegatoAssets?)."
+
+post-checkout:
   commands:
     assets:
       run: bash tools/fetch_assets.sh || echo "Aviso: não baixei a arte de terceiros (sem acesso ao ApotegatoAssets?)."
