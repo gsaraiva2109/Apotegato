@@ -97,3 +97,39 @@ func test_tileset_is_cached_per_region() -> void:
 		RegionTileSet.for_region(Regions.CERRADO), RegionTileSet.for_region(Regions.CERRADO)
 	)
 	assert_ne(RegionTileSet.for_region(Regions.CERRADO), RegionTileSet.for_region(Regions.LITORAL))
+
+
+func test_water_regions_have_animated_wall_and_barrier() -> void:
+	var tile_set := RegionTileSet.for_region(Regions.CAMPOS_RIOS)
+	var source := tile_set.get_source(RegionTileSet.WATER_SOURCE_ID) as TileSetAtlasSource
+	assert_not_null(source, "Campos e Rios tem a fonte da água")
+	for tile in [RegionTileSet.WALL_TILE, RegionTileSet.BARRIER_TILE]:
+		assert_eq(
+			RegionTileSet.source_for(Regions.CAMPOS_RIOS, tile), RegionTileSet.WATER_SOURCE_ID
+		)
+		assert_gt(source.get_tile_animation_frames_count(tile), 1, "Quadros do tile %s" % tile)
+		var data := source.get_tile_data(tile, 0)
+		assert_eq(data.get_collision_polygons_count(0), 1, "A água bloqueia o gato")
+	assert_eq(
+		RegionTileSet.source_for(Regions.CAMPOS_RIOS, RegionTileSet.FLOOR_TILE),
+		RegionTileSet.SOURCE_ID
+	)
+
+
+func test_only_the_wall_is_water_on_the_coast() -> void:
+	assert_eq(
+		RegionTileSet.source_for(Regions.LITORAL, RegionTileSet.WALL_TILE),
+		RegionTileSet.WATER_SOURCE_ID
+	)
+	assert_eq(
+		RegionTileSet.source_for(Regions.LITORAL, RegionTileSet.BARRIER_TILE),
+		RegionTileSet.SOURCE_ID
+	)
+
+
+func test_regions_without_water_use_only_the_plain_source() -> void:
+	var tile_set := RegionTileSet.for_region(Regions.CERRADO)
+	assert_false(tile_set.has_source(RegionTileSet.WATER_SOURCE_ID))
+	assert_eq(
+		RegionTileSet.source_for(Regions.CERRADO, RegionTileSet.WALL_TILE), RegionTileSet.SOURCE_ID
+	)
