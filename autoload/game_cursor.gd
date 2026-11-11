@@ -18,6 +18,13 @@ func _ready() -> void:
 	Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2.ZERO)
 
 
+## Ao fechar o jogo, devolve o cursor padrão: o `Input` guarda a textura e, sem
+## isso, o Godot avisa que ela vazou na saída.
+func _exit_tree() -> void:
+	if DisplayServer.get_name() != "headless":
+		Input.set_custom_mouse_cursor(null, Input.CURSOR_ARROW)
+
+
 ## Amplia `source` por um fator inteiro, sem suavizar os pixels.
 static func scaled_image(source: Image, factor: int) -> Image:
 	var result := source.duplicate() as Image
