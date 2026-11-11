@@ -46,6 +46,8 @@ CROPS = {
     "button_disabled.png": (384, 304, 48, 16),
     # tábua de madeira com rebites: placas do HUD e do banner de região (9-slice, margem 8)
     "plank.png": (516, 206, 119, 51),
+    # pergaminho do diário, com os dois rolos (9-slice: esquerda 14, direita 10, topo 26, base 29)
+    "parchment.png": (454, 803, 150, 89),
     # barra de progresso (preenchimento) e cursor do slider
     "bar_fill.png": (384, 272, 48, 16),
     "slider_grabber.png": (355, 563, 10, 10),
@@ -56,6 +58,39 @@ CROPS = {
     "heart_full.png": (903, 8, 18, 15),
     "heart_empty.png": (967, 8, 18, 15),
 }
+
+
+def straighten_parchment(piece: Image.Image) -> Image.Image:
+    """Alisa as bordas esquerda e direita do miolo do pergaminho.
+
+    A arte original tem entalhes irregulares nas laterais; no 9-slice o miolo é
+    esticado na vertical e os entalhes viram listras compridas. Aqui o miolo
+    (linhas 26 a 60) ganha laterais retas, com o mesmo contorno escuro.
+    """
+    piece = piece.copy()
+    px = piece.load()
+    edge, shade = (10, 0, 0, 255), (192, 171, 130, 255)
+    clear = (0, 0, 0, 0)
+    paper = (228, 203, 155, 255)
+    for y in range(26, 61):
+        # contorno solto dentro do papel (os entalhes) vira papel
+        for x in list(range(7, 14)) + list(range(130, 140)):
+            if px[x, y][3] and sum(px[x, y][:3]) < 60:
+                px[x, y] = paper
+        for x in range(0, 4):
+            px[x, y] = clear
+        px[4, y] = px[5, y] = edge
+        px[6, y] = shade
+        px[7, y] = shade if px[7, y][3] else px[7, y]
+        px[140, y] = shade
+        px[141, y] = px[142, y] = edge
+        for x in range(143, 150):
+            px[x, y] = clear
+    return piece
+
+
+# peças que precisam de ajuste depois do recorte
+FIXES = {"parchment.png": straighten_parchment}
 
 
 def main() -> int:
@@ -78,7 +113,7 @@ def main() -> int:
         if piece.getchannel("A").getbbox() is None:
             print(f"Erro: o recorte {name} saiu vazio; confira as coordenadas.", file=sys.stderr)
             return 1
-        crops[name] = piece
+        crops[name] = FIXES[name](piece) if name in FIXES else piece
 
     for name, piece in crops.items():
         piece.save(OUT / name)

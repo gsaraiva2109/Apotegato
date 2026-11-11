@@ -1,5 +1,5 @@
 """Gera a arte provisória do tema da interface: painel, botões, tábua, barra,
-mochila, cursor e cursor do slider.
+mochila, pergaminho do diário, cursor e cursor do slider.
 
 Uso: python tools/make_ui_art.py
 
@@ -67,6 +67,26 @@ def grabber() -> Image.Image:
     return img
 
 
+def parchment() -> Image.Image:
+    """Pergaminho com os dois rolos (9-slice: esquerda 14, direita 10, topo 26, base 29)."""
+    edge = (0x0A, 0x00, 0x00, 255)
+    paper = (0xE4, 0xCB, 0x9B, 255)
+    shade = (0xC0, 0xAB, 0x82, 255)
+    img = Image.new("RGBA", (150, 89), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    # miolo, com o contorno escuro nas laterais e as duas faixas de sombra
+    d.rectangle((4, 17, 142, 72), fill=edge)
+    d.rectangle((6, 19, 140, 70), fill=paper)
+    d.rectangle((6, 19, 140, 25), fill=shade)
+    d.rectangle((6, 61, 140, 70), fill=shade)
+    # rolos de cima e de baixo
+    for y0, y1 in ((0, 17), (72, 88)):
+        d.rounded_rectangle((2, y0, 149, y1), radius=6, fill=edge)
+        d.rounded_rectangle((3, y0 + 1, 148, y1 - 1), radius=5, fill=paper)
+        d.rectangle((6, y1 - 6, 145, y1 - 2), fill=shade)
+    return img
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     panel().save(OUT / "panel.png")
@@ -75,6 +95,7 @@ def main() -> None:
     pill((0x8A, 0x70, 0x60, 255), (0x6B, 0x56, 0x4A, 255)).save(OUT / "button_disabled.png")
     pill((0xBD, 0x6D, 0x29, 255), (0x8A, 0x4C, 0x1C, 255)).save(OUT / "bar_fill.png")
     plank().save(OUT / "plank.png")
+    parchment().save(OUT / "parchment.png")
     backpack().save(OUT / "backpack_icon.png")
     cursor().save(OUT / "cursor.png")
     grabber().save(OUT / "slider_grabber.png")
