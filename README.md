@@ -26,9 +26,15 @@ Pelo caminho tem criaturas. O combate é sem armas e sem sangue, e é opcional: 
 | Abrir a mochila | I | `backpack` |
 | Abrir o diário | J | `journal` |
 | Pausar | Esc | `pause` |
+| Tela cheia | F11 | `toggle_fullscreen` |
+| Pixel perfeito ou preencher a tela | F10 | `toggle_scale_mode` |
 | Menus | Mouse | |
 
 As teclas são físicas: WASD fica no mesmo lugar em qualquer layout de teclado. O código usa sempre o nome da ação (`Input.is_action_pressed("attack")`), nunca a tecla. Para mudar uma tecla, edite em Projeto > Configurações do Projeto > Mapa de Entrada e atualize `tests/test_input_map.gd`.
+
+### Tamanho da janela
+
+O jogo é desenhado em 960 x 544 e ampliado para o monitor de quem joga, em qualquer resolução. Ao abrir, a janela ganha o maior tamanho que cabe na tela. No modo **pixel perfeito** (padrão) a ampliação é sempre inteira (2x, 3x...), sem deformar os pixels, e pode sobrar borda preta; no modo **preencher a tela** (F10) a imagem ocupa o máximo possível, com uma leve irregularidade nos pixels. Em telas menores que 960 x 544 a imagem é reduzida até caber. A tela cheia (F11) e o modo ficam salvos em `user://settings.cfg`.
 
 ## Números que já estão fechados
 

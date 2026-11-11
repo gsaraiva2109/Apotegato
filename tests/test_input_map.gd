@@ -13,6 +13,8 @@ const ACTIONS := {
 	"backpack": [KEY_I],
 	"journal": [KEY_J],
 	"pause": [KEY_ESCAPE],
+	"toggle_fullscreen": [KEY_F11],
+	"toggle_scale_mode": [KEY_F10],
 }
 ## Pastas com código do jogo. addons/ e tests/ ficam de fora.
 const CODE_DIRS := ["res://autoload", "res://scenes", "res://scripts"]
