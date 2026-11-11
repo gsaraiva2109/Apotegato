@@ -26,6 +26,25 @@ func pick(rng: RandomNumberGenerator) -> String:
 	return candidates[rng.randi_range(0, candidates.size() - 1)]
 
 
+## Sorteio do modo contínuo, depois dos 10 atendimentos da campanha: qualquer
+## uma das condições possíveis pode voltar. Se `previous` (a condição do
+## paciente anterior) não for a única possível, ela não repete em seguida.
+func pick_continuous(rng: RandomNumberGenerator, previous: String = "") -> String:
+	var candidates: Array[String] = []
+	for condition in IngredientData.get_conditions():
+		if is_feasible(condition) and condition != previous:
+			candidates.append(condition)
+	if candidates.is_empty():
+		return previous if is_feasible(previous) else ""
+	return candidates[rng.randi_range(0, candidates.size() - 1)]
+
+
+## true quando todas as condições possíveis já foram atendidas e começa o
+## encerramento da campanha principal.
+func is_campaign_complete() -> bool:
+	return remaining().is_empty() and not _attended.is_empty()
+
+
 ## Condições que ainda podem ser sorteadas: não atendidas e possíveis, na
 ## ordem do CSV.
 func remaining() -> Array[String]:

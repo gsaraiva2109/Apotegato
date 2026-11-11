@@ -104,3 +104,22 @@ func test_game_state_holds_picker_and_new_game_resets_it() -> void:
 	assert_eq(GameState.patients.attended_count(), 1)
 	GameState.new_game()
 	assert_eq(GameState.patients.attended_count(), 0)
+
+
+func test_campaign_complete_after_ten_attendances() -> void:
+	assert_false(_picker.is_campaign_complete())
+	_serve_all()
+	assert_true(_picker.is_campaign_complete())
+
+
+func test_continuous_mode_draws_any_condition_without_immediate_repeat() -> void:
+	_serve_all()
+	var seen := {}
+	var previous := "diarreia"
+	for i in 200:
+		var condition := _picker.pick_continuous(_rng, previous)
+		assert_true(condition in IngredientData.get_conditions())
+		assert_ne(condition, previous)
+		seen[condition] = true
+		previous = condition
+	assert_eq(seen.size(), 10)
