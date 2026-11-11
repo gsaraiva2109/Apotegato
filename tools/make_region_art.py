@@ -7,8 +7,11 @@ com quatro tiles lado a lado:
 
     0  chão
     1  parede da borda do andar
-    2  barreira dentro do andar
-    3  porta de saída
+    2  barreira dentro do andar (fundo transparente)
+    3  porta de saída (fundo transparente)
+
+O chão (tile 0) é desenhado por baixo de todos os tiles, então barreira e porta
+precisam de fundo transparente.
 
 Cada região usa três cores (chão, parede e destaque). É só um quebra-galho até a
 arte definitiva: para trocar, basta sobrescrever os PNGs com as mesmas dimensões
@@ -80,8 +83,12 @@ def wall_tile(wall, accent, seed):
 
 
 def barrier_tile(floor, wall, accent, seed):
-    """Moita ou rocha em cima do chão, para as barreiras internas."""
-    tile = floor_tile(floor, accent, seed)
+    """Moita ou rocha com fundo transparente, para as barreiras internas.
+
+    O chão normal é desenhado por baixo pelo `Room`, então a grama fica igual
+    ao redor do obstáculo.
+    """
+    tile = Image.new("RGBA", (TILE, TILE), (0, 0, 0, 0))
     d = ImageDraw.Draw(tile)
     d.ellipse([3, 6, 28, 29], fill=shade(wall, 10), outline=OUTLINE)
     d.ellipse([7, 9, 19, 17], fill=shade(wall, 34))
@@ -92,8 +99,8 @@ def barrier_tile(floor, wall, accent, seed):
 
 
 def door_tile(floor, wall, accent, seed):
-    """Arco de passagem com o destaque da região."""
-    tile = floor_tile(floor, accent, seed)
+    """Arco de passagem com fundo transparente e o destaque da região."""
+    tile = Image.new("RGBA", (TILE, TILE), (0, 0, 0, 0))
     d = ImageDraw.Draw(tile)
     d.rectangle([4, 2, 27, 29], fill=shade(wall, -20), outline=OUTLINE)
     d.rectangle([8, 7, 23, 29], fill=shade(accent, -40), outline=OUTLINE)
