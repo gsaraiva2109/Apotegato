@@ -34,3 +34,29 @@ desktop.ini
 /assets/art/third_party/
 # Músicas de terceiros: também vêm do ApotegatoAssets (tools/fetch_assets.sh).
 /assets/audio/third_party/
+
+# Arte provisória substituível pela de terceiros (ver tools/gerar_provisorios.sh e
+# tools/fetch_assets.sh). Não é versionada: é gerada na sua máquina, e a arte do pacote
+# entra por cima. Assim trocar de branch nunca briga com ela.
+/assets/art/cabin/bed.png
+/assets/art/cabin/cabin_tileset.png
+/assets/art/cabin/plant.png
+/assets/art/cabin/rug.png
+/assets/art/cabin/shelf.png
+/assets/art/cabin/table.png
+/assets/art/characters/mingau_placeholder.png
+/assets/art/regions/*/tileset.png
+/assets/art/regions/*/water.png
+/assets/art/regions/*/exit.png
+/assets/art/ui/backpack_icon.png
+/assets/art/ui/bar_fill.png
+/assets/art/ui/button_disabled.png
+/assets/art/ui/button_normal.png
+/assets/art/ui/button_pressed.png
+/assets/art/ui/cursor.png
+/assets/art/ui/heart_empty.png
+/assets/art/ui/heart_full.png
+/assets/art/ui/panel.png
+/assets/art/ui/parchment.png
+/assets/art/ui/plank.png
+/assets/art/ui/slider_grabber.png

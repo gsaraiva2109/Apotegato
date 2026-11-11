@@ -37,7 +37,7 @@ jobs:
           version: ${{ env.GODOT_VERSION }}
           templates: "true"
 
-      - name: Instalar Pillow (recorte da interface)
+      - name: Instalar Pillow (arte provisória e recorte da interface)
         run: pip install pillow==11.3.0
 
       # O build de release precisa da arte correta: sem o token, falha.
