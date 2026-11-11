@@ -4,8 +4,8 @@ extends Node2D
 ## partem a porta para as regiões, o diário e o atendimento do paciente.
 
 ## Emitido quando o Mingau interage com um ponto da cabana (`door`,
-## `journal` ou `patient`). A porta abre a escolha de região; as próximas
-## sprints ligam o diário e o paciente a uma tela.
+## `journal`, `stock` ou `patient`). A porta abre a escolha de região e a
+## estante abre o estoque; as próximas sprints ligam o paciente a uma tela.
 signal interacted(id: StringName)
 
 ## Tamanho da cabana em pixels (30 x 17 tiles de 32 px).
@@ -13,6 +13,7 @@ const ROOM := Rect2i(0, 0, 960, 544)
 
 @onready var _player: Player = $World/Player
 @onready var _region_menu: RegionMenu = $RegionMenu
+@onready var _stock_menu: StockMenu = $StockMenu
 
 
 func _ready() -> void:
@@ -22,6 +23,7 @@ func _ready() -> void:
 		area.interacted.connect(_on_interacted)
 	_region_menu.region_selected.connect(_on_region_selected)
 	_region_menu.closed.connect(_on_region_menu_closed)
+	_stock_menu.closed.connect(_on_stock_menu_closed)
 
 
 func _on_interacted(id: StringName) -> void:
@@ -29,6 +31,9 @@ func _on_interacted(id: StringName) -> void:
 	if id == &"door":
 		get_tree().paused = true
 		_region_menu.open()
+	elif id == &"stock":
+		get_tree().paused = true
+		_stock_menu.open()
 
 
 ## A região escolhida sempre começa no andar 1. A mochila e o estoque seguem
@@ -39,4 +44,8 @@ func _on_region_selected(region: String) -> void:
 
 
 func _on_region_menu_closed() -> void:
+	get_tree().paused = false
+
+
+func _on_stock_menu_closed() -> void:
 	get_tree().paused = false
