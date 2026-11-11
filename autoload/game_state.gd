@@ -1,7 +1,8 @@
 extends Node
 ## Estado da campanha que sobrevive à troca de cena: região e andar atuais,
 ## a mochila, o estoque da apotecária e os pacientes já atendidos. Ir à cabana,
-## voltar ou trocar de região não mexe na mochila, no estoque nem nos pacientes; só `new_game()` zera tudo.
+## voltar ou trocar de região não mexe na mochila, no
+## estoque nem nos pacientes; só `new_game()` zera tudo.
 ##
 ## Registrado como autoload "GameState".
 
