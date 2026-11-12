@@ -25,6 +25,7 @@ func before_each() -> void:
 func after_each() -> void:
 	_remove_test_file()
 	AudioSettings.settings_path = _old_audio_path
+	InputSettings.settings_path = InputSettings.SETTINGS_PATH
 	DisplaySettings.settings_path = _old_display_path
 	AudioSettings.load_settings()
 	AudioSettings.apply()
@@ -52,10 +53,15 @@ func test_starts_closed_and_opens_on_the_sound_tab_with_focus() -> void:
 
 func test_tabs_show_one_page_at_a_time() -> void:
 	_menu.open()
-	for tab in [OptionsMenu.Tab.VIDEO, OptionsMenu.Tab.ACCESSIBILITY, OptionsMenu.Tab.SOUND]:
+	for tab in [
+		OptionsMenu.Tab.VIDEO,
+		OptionsMenu.Tab.KEYS,
+		OptionsMenu.Tab.ACCESSIBILITY,
+		OptionsMenu.Tab.SOUND
+	]:
 		_menu.show_tab(tab)
 		var visible_pages := 0
-		for page in ["SoundPage", "VideoPage", "AccessPage"]:
+		for page in ["SoundPage", "VideoPage", "KeysPage", "AccessPage"]:
 			if (_node("Pages/%s" % page) as Control).visible:
 				visible_pages += 1
 		assert_eq(visible_pages, 1)
@@ -183,3 +189,11 @@ func test_every_interactive_control_can_take_keyboard_focus() -> void:
 func _remove_test_file() -> void:
 	if FileAccess.file_exists(TEST_SETTINGS):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(TEST_SETTINGS))
+
+
+func test_large_text_switch_updates_the_setting() -> void:
+	_menu.open()
+	_node("Pages/AccessPage/LargeTextRow/LargeTextSwitch").button_pressed = true
+	assert_true(AudioSettings.large_text)
+	assert_eq(_node("Pages/AccessPage/LargeTextRow/LargeTextState").text, "Ligado")
+	AudioSettings.set_large_text(false)

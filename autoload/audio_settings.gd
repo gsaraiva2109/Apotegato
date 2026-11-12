@@ -1,6 +1,6 @@
 extends Node
 ## Opções de som e de acessibilidade: volume da música e dos efeitos (0 a 100%),
-## mudo de cada um e "reduzir efeitos visuais". Os volumes são aplicados nos
+## mudo de cada um, "reduzir efeitos visuais" e "texto grande". Os volumes são aplicados nos
 ## barramentos "Music" e "SFX" e tudo fica salvo em `user://settings.cfg`, no
 ## mesmo arquivo do `DisplaySettings` (cada um mexe só nas suas seções).
 ##
@@ -33,6 +33,8 @@ var music_muted := false
 var sfx_muted := false
 ## Troca piscadas e oscilações por versões estáticas (acessibilidade).
 var reduce_effects := false
+## Aumenta os textos da interface (aplicado pelo autoload `TextSize`).
+var large_text := false
 
 
 func _ready() -> void:
@@ -66,6 +68,11 @@ func set_reduce_effects(value: bool) -> void:
 	_commit(true)
 
 
+func set_large_text(value: bool) -> void:
+	large_text = value
+	_commit(true)
+
+
 ## Volta tudo ao padrão e salva. Não mexe nas opções de vídeo.
 func reset_to_defaults() -> void:
 	music_volume = DEFAULT_MUSIC_VOLUME
@@ -73,6 +80,7 @@ func reset_to_defaults() -> void:
 	music_muted = false
 	sfx_muted = false
 	reduce_effects = false
+	large_text = false
 	_commit(true)
 
 
@@ -100,6 +108,7 @@ func load_settings() -> void:
 	music_muted = bool(config.get_value(SECTION_AUDIO, "music_muted", false))
 	sfx_muted = bool(config.get_value(SECTION_AUDIO, "sfx_muted", false))
 	reduce_effects = bool(config.get_value(SECTION_ACCESSIBILITY, "reduce_effects", false))
+	large_text = bool(config.get_value(SECTION_ACCESSIBILITY, "large_text", false))
 
 
 ## Grava as escolhas, mantendo as outras seções do arquivo (ex.: vídeo).
@@ -111,6 +120,7 @@ func save_settings() -> void:
 	config.set_value(SECTION_AUDIO, "music_muted", music_muted)
 	config.set_value(SECTION_AUDIO, "sfx_muted", sfx_muted)
 	config.set_value(SECTION_ACCESSIBILITY, "reduce_effects", reduce_effects)
+	config.set_value(SECTION_ACCESSIBILITY, "large_text", large_text)
 	config.save(settings_path)
 
 
