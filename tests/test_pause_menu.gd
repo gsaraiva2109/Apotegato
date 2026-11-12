@@ -81,8 +81,9 @@ func test_pause_is_refused_while_another_menu_is_open() -> void:
 
 func test_options_open_and_return_to_the_pause_panel() -> void:
 	_key("pause")
-	var options: OptionsMenu = _menu.get_node("OptionsMenu")
+	assert_null(_menu.get_node_or_null("OptionsMenu"), "Só é criada quando se abre")
 	_button("MainButtons/OptionsButton").pressed.emit()
+	var options: OptionsMenu = _menu.get_node("OptionsMenu")
 	assert_true(options.is_open())
 	assert_false((_menu.get_node("Root/Center") as Control).visible)
 	assert_true(_menu.is_open(), "Continua pausado atrás das opções")
