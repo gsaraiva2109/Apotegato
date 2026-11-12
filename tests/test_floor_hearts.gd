@@ -51,8 +51,12 @@ func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
 	GameState.backpack.add("licuri", 2)
 	GameState.backpack.add("mel")
 	GameState.stock.store("sardinha", 3)
-	# O andar é sorteado e o gato pode ter pegado um ingrediente logo na saída:
-	# o que importa é a mochila ficar igual à de antes do desmaio.
+	# O andar é sorteado e o gato pode ter pegado um ingrediente logo na saída, ou
+	# ser empurrado até um durante o desmaio: tirando os do chão, o que importa é
+	# a mochila ficar igual à de antes do desmaio.
+	for pickup in _floor.get_pickups():
+		pickup.queue_free()
+	await wait_physics_frames(1)
 	var licuri := GameState.backpack.count("licuri")
 	var mel := GameState.backpack.count("mel")
 	var slots := GameState.backpack.used_slots()
@@ -105,6 +109,10 @@ func test_hearts_survive_going_up_a_floor() -> void:
 
 
 func test_creature_touching_the_cat_in_the_floor_hurts() -> void:
+	# O andar é sorteado e pode sair sem criatura: sorteia de novo até ter uma.
+	while _floor.get_creatures().is_empty():
+		_floor.generate_floor()
+		await wait_physics_frames(1)
 	var creature := _floor.get_creatures()[0]
 	creature.global_position = _player().global_position + Vector2(20, 0)
 	await wait_physics_frames(4)
