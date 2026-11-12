@@ -21,6 +21,7 @@ IngredientData="*res://autoload/ingredient_data.gd"
 DialogueData="*res://autoload/dialogue_data.gd"
 GameState="*res://autoload/game_state.gd"
 Music="*res://autoload/music.gd"
+AudioSettings="*res://autoload/audio_settings.gd"
 DisplaySettings="*res://autoload/display_settings.gd"
 GameCursor="*res://autoload/game_cursor.gd"
 

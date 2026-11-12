@@ -1,0 +1,286 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/options_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://scenes/ui/game_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icon_gear.png" id="3_gear"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icon_sound.png" id="4_sound"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icon_close.png" id="5_close"]
+
+[node name="OptionsMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 20
+visible = false
+script = ExtResource("1_menu")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+
+[node name="Dim" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7)
+
+[node name="Center" type="CenterContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Center"]
+layout_mode = 2
+
+[node name="Layout" type="VBoxContainer" parent="Root/Center/Panel"]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleRow" type="HBoxContainer" parent="Root/Center/Panel/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TitleIcon" type="TextureRect" parent="Root/Center/Panel/Layout/TitleRow"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("3_gear")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="TitlePlank" type="PanelContainer" parent="Root/Center/Panel/Layout/TitleRow"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+theme_type_variation = &"PlankPanel"
+
+[node name="Title" type="Label" parent="Root/Center/Panel/Layout/TitleRow/TitlePlank"]
+layout_mode = 2
+theme_type_variation = &"PlankLabel"
+theme_override_font_sizes/font_size = 24
+text = "Opções"
+horizontal_alignment = 1
+
+[node name="Tabs" type="HBoxContainer" parent="Root/Center/Panel/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="SoundTab" type="Button" parent="Root/Center/Panel/Layout/Tabs"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Som"
+
+[node name="VideoTab" type="Button" parent="Root/Center/Panel/Layout/Tabs"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Vídeo"
+
+[node name="AccessTab" type="Button" parent="Root/Center/Panel/Layout/Tabs"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+toggle_mode = true
+text = "Acessibilidade"
+
+[node name="Separator" type="HSeparator" parent="Root/Center/Panel/Layout"]
+layout_mode = 2
+
+[node name="Pages" type="MarginContainer" parent="Root/Center/Panel/Layout"]
+custom_minimum_size = Vector2(0, 180)
+layout_mode = 2
+
+[node name="SoundPage" type="VBoxContainer" parent="Root/Center/Panel/Layout/Pages"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MusicRow" type="HBoxContainer" parent="Root/Center/Panel/Layout/Pages/SoundPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MusicIcon" type="TextureRect" parent="Root/Center/Panel/Layout/Pages/SoundPage/MusicRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_sound")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="MusicLabel" type="Label" parent="Root/Center/Panel/Layout/Pages/SoundPage/MusicRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Música"
+
+[node name="MusicSlider" type="HSlider" parent="Root/Center/Panel/Layout/Pages/SoundPage/MusicRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 5.0
+value = 80.0
+
+[node name="MusicValue" type="Label" parent="Root/Center/Panel/Layout/Pages/SoundPage/MusicRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 2
+
+[node name="MusicMuteRow" type="HBoxContainer" parent="Root/Center/Panel/Layout/Pages/SoundPage"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="MusicMuteSwitch" type="CheckButton" parent="Root/Center/Panel/Layout/Pages/SoundPage/MusicMuteRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Silenciar música"
+
+[node name="MusicMuteState" type="Label" parent="Root/Center/Panel/Layout/Pages/SoundPage/MusicMuteRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Desligado"
+horizontal_alignment = 2
+
+[node name="SfxRow" type="HBoxContainer" parent="Root/Center/Panel/Layout/Pages/SoundPage"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SfxIcon" type="TextureRect" parent="Root/Center/Panel/Layout/Pages/SoundPage/SfxRow"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("4_sound")
+expand_mode = 1
+stretch_mode = 5
+mouse_filter = 2
+
+[node name="SfxLabel" type="Label" parent="Root/Center/Panel/Layout/Pages/SoundPage/SfxRow"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Efeitos"
+
+[node name="SfxSlider" type="HSlider" parent="Root/Center/Panel/Layout/Pages/SoundPage/SfxRow"]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 5.0
+value = 80.0
+
+[node name="SfxValue" type="Label" parent="Root/Center/Panel/Layout/Pages/SoundPage/SfxRow"]
+custom_minimum_size = Vector2(56, 0)
+layout_mode = 2
+text = "80%"
+horizontal_alignment = 2
+
+[node name="SfxMuteRow" type="HBoxContainer" parent="Root/Center/Panel/Layout/Pages/SoundPage"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SfxMuteSwitch" type="CheckButton" parent="Root/Center/Panel/Layout/Pages/SoundPage/SfxMuteRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Silenciar efeitos"
+
+[node name="SfxMuteState" type="Label" parent="Root/Center/Panel/Layout/Pages/SoundPage/SfxMuteRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Desligado"
+horizontal_alignment = 2
+
+[node name="VideoPage" type="VBoxContainer" parent="Root/Center/Panel/Layout/Pages"]
+layout_mode = 2
+visible = false
+theme_override_constants/separation = 8
+
+[node name="FullscreenRow" type="HBoxContainer" parent="Root/Center/Panel/Layout/Pages/VideoPage"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FullscreenSwitch" type="CheckButton" parent="Root/Center/Panel/Layout/Pages/VideoPage/FullscreenRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Tela cheia (F11)"
+
+[node name="FullscreenState" type="Label" parent="Root/Center/Panel/Layout/Pages/VideoPage/FullscreenRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Desligado"
+horizontal_alignment = 2
+
+[node name="PixelRow" type="HBoxContainer" parent="Root/Center/Panel/Layout/Pages/VideoPage"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PixelSwitch" type="CheckButton" parent="Root/Center/Panel/Layout/Pages/VideoPage/PixelRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Pixel perfeito (F10)"
+
+[node name="PixelState" type="Label" parent="Root/Center/Panel/Layout/Pages/VideoPage/PixelRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Desligado"
+horizontal_alignment = 2
+
+[node name="Hint" type="Label" parent="Root/Center/Panel/Layout/Pages/VideoPage"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.85, 0.8, 0.7, 1)
+text = "Pixel perfeito amplia o jogo só por números inteiros, sem deformar os pixels; desligado, preenche a maior área possível da tela."
+autowrap_mode = 3
+
+[node name="AccessPage" type="VBoxContainer" parent="Root/Center/Panel/Layout/Pages"]
+layout_mode = 2
+visible = false
+theme_override_constants/separation = 8
+
+[node name="ReduceRow" type="HBoxContainer" parent="Root/Center/Panel/Layout/Pages/AccessPage"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ReduceSwitch" type="CheckButton" parent="Root/Center/Panel/Layout/Pages/AccessPage/ReduceRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reduzir efeitos visuais"
+
+[node name="ReduceState" type="Label" parent="Root/Center/Panel/Layout/Pages/AccessPage/ReduceRow"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Desligado"
+horizontal_alignment = 2
+
+[node name="Hint" type="Label" parent="Root/Center/Panel/Layout/Pages/AccessPage"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0.85, 0.8, 0.7, 1)
+text = "Troca as piscadas (como a do Mingau ao levar dano) por versões estáticas e vale também para efeitos futuros, como o tremor de câmera."
+autowrap_mode = 3
+
+[node name="Footer" type="HBoxContainer" parent="Root/Center/Panel/Layout"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="Root/Center/Panel/Layout/Footer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Restaurar padrões"
+
+[node name="BackButton" type="Button" parent="Root/Center/Panel/Layout/Footer"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+text = "Voltar"
+icon = ExtResource("5_close")

@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" path="res://assets/art/ui/bar_fill.png" id="7_bar_fill"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/slider_grabber.png" id="8_grabber"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/parchment.png" id="9_parchment"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/switch_on.png" id="10_switch_on"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/switch_off.png" id="11_switch_off"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_panel"]
 content_margin_left = 14.0
@@ -116,6 +118,12 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_switch"]
+content_margin_left = 6.0
+content_margin_top = 4.0
+content_margin_right = 6.0
+content_margin_bottom = 4.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
 draw_center = false
 border_width_left = 2
@@ -146,6 +154,25 @@ Button/styles/hover = SubResource("StyleBoxTexture_hover")
 Button/styles/hover_pressed = SubResource("StyleBoxTexture_pressed")
 Button/styles/normal = SubResource("StyleBoxTexture_normal")
 Button/styles/pressed = SubResource("StyleBoxTexture_pressed")
+CheckButton/colors/font_color = Color(0.9529412, 0.9019608, 0.76862746, 1)
+CheckButton/colors/font_disabled_color = Color(0.85, 0.8, 0.7, 1)
+CheckButton/colors/font_focus_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_hover_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+CheckButton/colors/font_outline_color = Color(0.11764706, 0.07058824, 0.05490196, 1)
+CheckButton/colors/font_pressed_color = Color(0.9529412, 0.9019608, 0.76862746, 1)
+CheckButton/constants/h_separation = 12
+CheckButton/constants/outline_size = 2
+CheckButton/icons/checked = ExtResource("10_switch_on")
+CheckButton/icons/checked_disabled = ExtResource("10_switch_on")
+CheckButton/icons/unchecked = ExtResource("11_switch_off")
+CheckButton/icons/unchecked_disabled = ExtResource("11_switch_off")
+CheckButton/styles/disabled = SubResource("StyleBoxEmpty_switch")
+CheckButton/styles/focus = SubResource("StyleBoxFlat_focus")
+CheckButton/styles/hover = SubResource("StyleBoxEmpty_switch")
+CheckButton/styles/hover_pressed = SubResource("StyleBoxEmpty_switch")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_switch")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_switch")
 Label/colors/font_color = Color(0.9529412, 0.9019608, 0.76862746, 1)
 Label/colors/font_outline_color = Color(0.0627451, 0.039215688, 0.023529412, 1)
 Label/constants/outline_size = 3
