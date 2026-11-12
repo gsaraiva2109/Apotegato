@@ -23,6 +23,10 @@ func before_each() -> void:
 
 
 func after_each() -> void:
+	# Sem arquivo salvo, o carregamento não desfaz o que o teste mudou: volta ao padrão.
+	AudioSettings.reset_to_defaults()
+	DisplaySettings.pixel_perfect = true
+	DisplaySettings.fullscreen = false
 	_remove_test_file()
 	AudioSettings.settings_path = _old_audio_path
 	InputSettings.settings_path = InputSettings.SETTINGS_PATH

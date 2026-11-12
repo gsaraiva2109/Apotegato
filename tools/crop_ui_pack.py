@@ -6,7 +6,8 @@ assets/art/third_party/ pelo tools/fetch_assets.sh, que roda este script no
 final). Aqui ficam apenas as coordenadas dos recortes, nunca a arte.
 
 Cada recorte sobrescreve a arte provisória de assets/art/ui/ que tem o mesmo
-nome e o mesmo tamanho (gerada por tools/make_ui_art.py e make_heart_art.py).
+nome e o mesmo tamanho (gerada por tools/make_ui_art.py e make_heart_art.py). Os
+interruptores e os ícones das opções não têm provisória: são só do pacote.
 Se a sheet não existir ou não tiver o formato esperado, nada é gravado e o
 jogo segue com a arte provisória.
 
@@ -93,6 +94,7 @@ def straighten_parchment(piece: Image.Image) -> Image.Image:
 # peças que precisam de ajuste depois do recorte
 FIXES = {"parchment.png": straighten_parchment}
 
+# Peças sem arte provisória (só existem com o pacote baixado).
 # Ícones (contorno escuro e miolo creme): glifo na sheet (x, y, largura, altura).
 # Cada um é ampliado 2x e centralizado numa tela de 28 x 28.
 ICON_GLYPHS = {
@@ -173,11 +175,8 @@ def main() -> int:
     }
     for name, box in ICON_GLYPHS.items():
         composed[name] = make_icon(sheet, box)
+    # Estas peças não têm arte provisória: só existem com o pacote baixado.
     for name, piece in composed.items():
-        current = Image.open(OUT / name)
-        if current.size != piece.size:
-            print(f"Erro: {name} provisório tem {current.size}, a peça {piece.size}.", file=sys.stderr)
-            return 1
         if piece.getchannel("A").getbbox() is None:
             print(f"Erro: a peça {name} saiu vazia; confira as coordenadas.", file=sys.stderr)
             return 1
