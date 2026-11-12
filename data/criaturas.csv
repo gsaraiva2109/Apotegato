@@ -1,0 +1,13 @@
+id,nome,regiao,dano,golpes,velocidade,andar_minimo,peso
+sombra_amazonia,Sombra,amazonia,1,3,70,1,2
+sombra_grande_amazonia,Sombra grande,amazonia,2,4,80,3,1
+sombra_caatinga,Sombra,caatinga,1,3,70,1,2
+sombra_grande_caatinga,Sombra grande,caatinga,2,4,80,3,1
+sombra_campos_rios,Sombra,campos_rios,1,3,70,1,2
+sombra_grande_campos_rios,Sombra grande,campos_rios,2,4,80,3,1
+sombra_cerrado,Sombra,cerrado,1,3,70,1,2
+sombra_grande_cerrado,Sombra grande,cerrado,2,4,80,3,1
+sombra_litoral,Sombra,litoral,1,3,70,1,2
+sombra_grande_litoral,Sombra grande,litoral,2,4,80,3,1
+sombra_mata_atlantica,Sombra,mata_atlantica,1,3,70,1,2
+sombra_grande_mata_atlantica,Sombra grande,mata_atlantica,2,4,80,3,1
