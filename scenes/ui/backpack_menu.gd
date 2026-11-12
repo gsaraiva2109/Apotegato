@@ -43,8 +43,13 @@ var stock: Stock = null
 var hearts: Hearts = null
 ## Condição do paciente atual (id do CSV). Vazia: não há entrega a fazer.
 var condition: String = ""
+## Se a tela mostra a fala da apotecária no próprio painel. A cabana desliga:
+## lá quem fala é a caixa de diálogo.
+var show_messages := true
 
 var _delivery: Delivery = null
+## A entrega desta abertura já se completou: só restam as sobras.
+var _completed := false
 
 @onready var _slots: VBoxContainer = $Root/Center/Panel/Layout/Slots
 @onready var _count_label: Label = $Root/Center/Panel/Layout/CountLabel
@@ -77,7 +82,9 @@ func open(patient_condition: String = "") -> void:
 		stock = GameState.stock
 	condition = patient_condition
 	_delivery = Delivery.new(condition, backpack, stock) if not condition.is_empty() else null
+	_completed = false
 	_message_label.text = ""
+	_message_label.visible = show_messages
 	refresh()
 	visible = true
 	if _deliver_button.disabled:
@@ -96,12 +103,15 @@ func is_open() -> bool:
 
 
 ## Entrega os ingredientes ao paciente atual e mostra o que a apotecária diz.
-## Devolve null se não há paciente.
+## Devolve null se não há paciente ou se a entrega já se completou.
 func deliver() -> DeliveryResult:
 	if _delivery == null:
 		_message_label.text = TEXT_NO_PATIENT
 		return null
+	if _completed:
+		return null
 	var result := _delivery.deliver()
+	_completed = result.outcome == Delivery.Outcome.COMPLETE
 	match result.outcome:
 		Delivery.Outcome.EMPTY_BACKPACK:
 			_message_label.text = TEXT_EMPTY
@@ -146,7 +156,7 @@ func refresh() -> void:
 		else:
 			_slots.add_child(_new_slot(index, "", 0))
 	_count_label.text = "Mochila %d/%d" % [backpack.used_slots(), Backpack.MAX_SLOTS]
-	_deliver_button.disabled = _delivery == null
+	_deliver_button.disabled = _delivery == null or _completed
 	var surplus := _delivery.surplus() if _delivery != null else {}
 	for id: String in surplus:
 		_surplus_list.add_child(_new_surplus_row(id, surplus[id]))

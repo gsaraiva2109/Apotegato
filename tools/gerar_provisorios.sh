@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Gera a arte provisória que o git não versiona (cabana, regiões, interface e o Mingau),
+# Gera a arte provisória que o git não versiona (cabana, regiões, interface, o Mingau,
+# a apotecária e o paciente),
 # para o jogo abrir sem a arte de terceiros. O tools/fetch_assets.sh roda este script antes
 # de aplicar a arte do pacote por cima.
 #
@@ -17,7 +18,7 @@ if [[ -z $PYTHON ]]; then
   exit 1
 fi
 
-for script in make_cabin_art make_region_art make_ui_art make_heart_art; do
+for script in make_cabin_art make_region_art make_ui_art make_heart_art make_character_art; do
   "$PYTHON" "tools/$script.py" > /dev/null
 done
 mkdir -p assets/art/characters

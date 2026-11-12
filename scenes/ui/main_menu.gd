@@ -22,6 +22,8 @@ var save_path := SAVE_PATH
 
 
 func _ready() -> void:
+	# O menu inicial nunca fica congelado, mesmo vindo do fim da campanha.
+	GameState.flow.reset()
 	Music.play(Music.MENU)
 	_load_button.disabled = not has_save(save_path)
 	_credits_panel.hide()

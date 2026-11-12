@@ -7,12 +7,16 @@ var _cabin: Cabin
 
 
 func before_each() -> void:
+	GameState.new_game()
+	# A introdução e o atendimento têm testes próprios (test_cabin_attendance).
+	GameState.attendance.intro_done = true
 	_cabin = autofree(CabinScene.instantiate())
 	add_child(_cabin)
 	await wait_physics_frames(2)
 
 
 func after_each() -> void:
+	GameState.new_game()
 	get_tree().paused = false
 
 
@@ -54,19 +58,19 @@ func test_has_door_journal_and_patient_points() -> void:
 	for area: InteractionArea in _cabin.get_node("Interactions").get_children():
 		ids.append(String(area.id))
 	ids.sort()
-	assert_eq(ids, ["door", "journal", "patient", "stock"])
+	assert_eq(ids, ["apothecary", "door", "patient", "stock"])
 
 
 func test_prompt_shows_only_when_mingau_is_near() -> void:
 	var player: Player = _cabin.get_node("World/Player")
-	var journal: InteractionArea = _cabin.get_node("Interactions/Journal")
-	assert_false(journal.is_prompt_visible(), "Longe: sem aviso")
-	player.position = journal.position
+	var apothecary: InteractionArea = _cabin.get_node("Interactions/Apothecary")
+	assert_false(apothecary.is_prompt_visible(), "Longe: sem aviso")
+	player.position = apothecary.position
 	await wait_physics_frames(3)
-	assert_true(journal.is_prompt_visible(), "Perto: mostra o E")
+	assert_true(apothecary.is_prompt_visible(), "Perto: mostra o E")
 	player.position = Vector2(480, 440)
 	await wait_physics_frames(3)
-	assert_false(journal.is_prompt_visible(), "Saiu: some o aviso")
+	assert_false(apothecary.is_prompt_visible(), "Saiu: some o aviso")
 
 
 func test_interact_emits_the_point_id() -> void:
@@ -81,9 +85,9 @@ func test_interact_emits_the_point_id() -> void:
 
 
 func test_areas_use_their_own_size() -> void:
-	var journal: InteractionArea = _cabin.get_node("Interactions/Journal")
-	var shape: RectangleShape2D = journal.get_node("CollisionShape").shape
-	assert_eq(shape.size, journal.size)
+	var apothecary: InteractionArea = _cabin.get_node("Interactions/Apothecary")
+	var shape: RectangleShape2D = apothecary.get_node("CollisionShape").shape
+	assert_eq(shape.size, apothecary.size)
 	assert_gt(shape.size.x, 64.0)
 
 
@@ -96,10 +100,12 @@ func test_door_opens_the_region_menu_with_the_six_regions() -> void:
 	await wait_physics_frames(3)
 	assert_true(door.try_interact())
 	assert_true(menu.is_open())
+	assert_true(GameState.flow.is_in(GameFlow.State.MENU))
 	assert_true(get_tree().paused, "O jogo pausa enquanto o menu está aberto")
 	for region in Regions.IDS:
 		assert_true(menu.get_button(region).visible)
 	menu.close()
+	assert_true(GameState.flow.is_in(GameFlow.State.EXPLORATION))
 	assert_false(get_tree().paused)
 
 
@@ -112,8 +118,10 @@ func test_shelf_opens_the_stock_menu_and_pauses() -> void:
 	await wait_physics_frames(3)
 	assert_true(stock_point.try_interact())
 	assert_true(menu.is_open())
+	assert_true(GameState.flow.is_in(GameFlow.State.MENU))
 	assert_true(get_tree().paused)
 	menu.close()
+	assert_true(GameState.flow.is_in(GameFlow.State.EXPLORATION))
 	assert_false(get_tree().paused)
 
 
@@ -129,14 +137,26 @@ func test_mingau_reaches_the_stock_point_walking() -> void:
 	assert_true(stock_point.try_interact(), "O gato alcança a estante pelo chão")
 
 
-func test_journal_does_not_open_the_region_menu() -> void:
+func test_apothecary_does_not_open_the_region_menu() -> void:
 	var menu: RegionMenu = _cabin.get_node("RegionMenu")
-	var journal: InteractionArea = _cabin.get_node("Interactions/Journal")
+	var apothecary: InteractionArea = _cabin.get_node("Interactions/Apothecary")
 	var player: Player = _cabin.get_node("World/Player")
-	player.position = journal.position
+	player.position = apothecary.position
 	await wait_physics_frames(3)
-	assert_true(journal.try_interact())
+	assert_true(apothecary.try_interact())
 	assert_false(menu.is_open())
+
+
+func test_no_interaction_while_a_menu_is_open() -> void:
+	var door: InteractionArea = _cabin.get_node("Interactions/Door")
+	var player: Player = _cabin.get_node("World/Player")
+	player.position = door.position
+	await wait_physics_frames(3)
+	assert_true(door.try_interact())
+	assert_false(door.is_prompt_visible(), "O aviso some com o menu aberto")
+	assert_false(door.try_interact(), "Com o menu aberto, o E não abre outro")
+	(_cabin.get_node("RegionMenu") as RegionMenu).close()
+	assert_true(door.is_prompt_visible())
 
 
 func test_choosing_a_region_starts_floor_one_and_keeps_the_backpack() -> void:
@@ -157,11 +177,13 @@ func test_choosing_a_region_starts_floor_one_and_keeps_the_backpack() -> void:
 	GameState.new_game()
 
 
-func test_patient_point_opens_the_backpack_and_pauses() -> void:
-	var patient_point: InteractionArea = _cabin.get_node("Interactions/Patient")
-	var player: Player = _cabin.get_node("World/Player")
-	player.position = patient_point.position
-	await wait_physics_frames(2)
-	assert_true(patient_point.try_interact())
+func test_backpack_key_opens_the_backpack_as_a_menu_before_the_request() -> void:
+	_cabin.open_backpack()
+	var menu: BackpackMenu = _cabin.get_node("BackpackMenu")
+	assert_true(menu.is_open())
+	assert_eq(menu.condition, "", "Antes do pedido, a mochila só mostra o conteúdo")
+	assert_true(GameState.flow.is_in(GameFlow.State.MENU))
 	assert_true(get_tree().paused)
-	assert_true((_cabin.get_node("BackpackMenu") as BackpackMenu).is_open())
+	menu.close()
+	assert_true(GameState.flow.is_in(GameFlow.State.EXPLORATION))
+	assert_false(get_tree().paused)
