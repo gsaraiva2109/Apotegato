@@ -1,6 +1,6 @@
 class_name MainMenu
 extends Control
-## Tela inicial do jogo: Novo Jogo, Carregar Jogo, Créditos e Sair. Funciona com o
+## Tela inicial do jogo: Novo Jogo, Carregar Jogo, Opções, Créditos e Sair. Funciona com o
 ## mouse e com o teclado. Carregar Jogo fica desabilitado enquanto não houver
 ## save.
 
@@ -15,6 +15,8 @@ var save_path := SAVE_PATH
 
 @onready var _new_game_button: Button = $Center/Panel/Layout/NewGameButton
 @onready var _load_button: Button = $Center/Panel/Layout/LoadButton
+@onready var _options_button: Button = $Center/Panel/Layout/OptionsButton
+@onready var _options_menu: OptionsMenu = $OptionsMenu
 @onready var _credits_button: Button = $Center/Panel/Layout/CreditsButton
 @onready var _quit_button: Button = $Center/Panel/Layout/QuitButton
 @onready var _credits_panel: Control = $CreditsPanel
@@ -29,6 +31,8 @@ func _ready() -> void:
 	_credits_panel.hide()
 	_new_game_button.pressed.connect(_on_new_game_pressed)
 	_load_button.pressed.connect(_on_load_pressed)
+	_options_button.pressed.connect(_options_menu.open)
+	_options_menu.closed.connect(_options_button.grab_focus)
 	_credits_button.pressed.connect(_credits_panel.show)
 	_credits_back_button.pressed.connect(_close_credits)
 	_quit_button.pressed.connect(_on_quit_pressed)

@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="16_dialogue_box"]
 [ext_resource type="Texture2D" path="res://assets/art/characters/apothecary_placeholder.png" id="17_apothecary"]
 [ext_resource type="Texture2D" path="res://assets/art/characters/patient_placeholder.png" id="18_patient"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="99_pause_menu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e5wdj"]
 size = Vector2(96, 32)
@@ -187,3 +188,5 @@ size = Vector2(112, 64)
 [node name="BackpackMenu" parent="." instance=ExtResource("15_backpack_menu")]
 
 [node name="DialogueBox" parent="." instance=ExtResource("16_dialogue_box")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("99_pause_menu")]
