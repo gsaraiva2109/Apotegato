@@ -162,6 +162,7 @@ CheckButton/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
 CheckButton/colors/font_outline_color = Color(0.11764706, 0.07058824, 0.05490196, 1)
 CheckButton/colors/font_pressed_color = Color(0.9529412, 0.9019608, 0.76862746, 1)
 CheckButton/constants/h_separation = 12
+CheckButton/constants/icon_max_width = 64
 CheckButton/constants/outline_size = 2
 CheckButton/icons/checked = ExtResource("10_switch_on")
 CheckButton/icons/checked_disabled = ExtResource("10_switch_on")

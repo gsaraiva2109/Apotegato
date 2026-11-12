@@ -95,32 +95,32 @@ RED_EDGE = (0x5A, 0x22, 0x1E, 255)
 
 
 def switch(on: bool) -> Image.Image:
-    """Interruptor 52 x 26. Ligado: trilha verde, botão à direita e marca de
+    """Interruptor 60 x 26. Ligado: trilha verde, botão à direita e marca de
     visto. Desligado: trilha vermelha, botão à esquerda e um X. O estado se vê
     pela posição e pelo símbolo, não só pela cor."""
     fill, edge = (GREEN, GREEN_EDGE) if on else (RED, RED_EDGE)
-    img = Image.new("RGBA", (52, 26), (0, 0, 0, 0))
+    img = Image.new("RGBA", (60, 26), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    d.rounded_rectangle((0, 0, 51, 25), radius=12, fill=edge)
-    d.rounded_rectangle((2, 2, 49, 23), radius=10, fill=fill)
-    knob_x = 29 if on else 3
+    d.rounded_rectangle((0, 0, 59, 25), radius=12, fill=edge)
+    d.rounded_rectangle((2, 2, 57, 23), radius=10, fill=fill)
+    knob_x = 37 if on else 3
     d.ellipse((knob_x, 3, knob_x + 19, 22), fill=FRAME_EDGE)
     d.ellipse((knob_x + 1, 4, knob_x + 18, 21), fill=CREAM)
     d.ellipse((knob_x + 5, 8, knob_x + 14, 17), fill=(0xD8, 0xC0, 0x90, 255))
     if on:
         for i in range(4):
-            d.rectangle((9 + i, 12 + i, 10 + i, 13 + i), fill=CREAM)
+            d.rectangle((11 + i, 12 + i, 12 + i, 13 + i), fill=CREAM)
         for i in range(7):
-            d.rectangle((13 + i, 15 - i, 14 + i, 16 - i), fill=CREAM)
+            d.rectangle((15 + i, 15 - i, 16 + i, 16 - i), fill=CREAM)
     else:
         for i in range(8):
-            d.rectangle((30 + i, 9 + i, 31 + i, 10 + i), fill=CREAM)
-            d.rectangle((37 - i, 9 + i, 38 - i, 10 + i), fill=CREAM)
+            d.rectangle((34 + i, 9 + i, 35 + i, 10 + i), fill=CREAM)
+            d.rectangle((41 - i, 9 + i, 42 - i, 10 + i), fill=CREAM)
     return img
 
 
 def icon(draw) -> Image.Image:
-    """Ícone 24 x 24: miolo creme com contorno escuro, para botões de ícone."""
+    """Ícone 28 x 28: miolo creme com contorno escuro, para botões de ícone."""
     big = Image.new("RGBA", (24, 24), (0, 0, 0, 0))
     mask = Image.new("L", (24, 24), 0)
     draw(ImageDraw.Draw(mask))
@@ -131,7 +131,9 @@ def icon(draw) -> Image.Image:
             outline.paste(255, (dx, dy), mask)
     big.paste(Image.new("RGBA", (24, 24), FRAME_EDGE), (0, 0), outline)
     big.paste(Image.new("RGBA", (24, 24), CREAM), (0, 0), mask)
-    return big
+    framed = Image.new("RGBA", (28, 28), (0, 0, 0, 0))
+    framed.paste(big, (2, 2))
+    return framed
 
 
 def draw_close(d) -> None:

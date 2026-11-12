@@ -90,14 +90,59 @@ def straighten_parchment(piece: Image.Image) -> Image.Image:
     return piece
 
 
-# Ainda sem coordenadas (a arte provisória de mesmo nome já está em assets/art/ui/ e o
-# tema usa as duas igual): switch_on.png e switch_off.png (52 x 26, interruptores) e
-# icon_close, icon_gear, icon_sound, icon_mute, icon_home e icon_play (24 x 24). Para
-# trocar pela arte do UI Mega, ache a peça na sheet, ajuste o tamanho da provisória em
-# tools/make_ui_art.py e acrescente a linha em CROPS.
-
 # peças que precisam de ajuste depois do recorte
 FIXES = {"parchment.png": straighten_parchment}
+
+# Ícones (contorno escuro e miolo creme): glifo na sheet (x, y, largura, altura).
+# Cada um é ampliado 2x e centralizado numa tela de 28 x 28.
+ICON_GLYPHS = {
+    "icon_close.png": (851, 515, 10, 9),
+    "icon_gear.png": (849, 528, 14, 14),
+    "icon_sound.png": (866, 513, 13, 12),
+    "icon_mute.png": (865, 530, 13, 12),
+    "icon_home.png": (835, 514, 9, 10),
+    "icon_play.png": (886, 530, 6, 10),
+}
+ICON_CANVAS = 28
+
+# Interruptor de 30 x 13 na sheet, ampliado 2x (60 x 26): trilha marrom escura com o
+# botão à esquerda (desligado) e trilha laranja com o botão à direita (ligado).
+SWITCH_OFF_BOX = (353, 705, 30, 13)
+SWITCH_ON_TRACK_BOX = (321, 705, 30, 13)
+SWITCH_SCALE = 2
+
+
+def make_icon(sheet: Image.Image, box: tuple) -> Image.Image:
+    x, y, w, h = box
+    glyph = sheet.crop((x, y, x + w, y + h))
+    glyph = glyph.resize((w * 2, h * 2), Image.NEAREST)
+    canvas = Image.new("RGBA", (ICON_CANVAS, ICON_CANVAS), (0, 0, 0, 0))
+    canvas.paste(glyph, ((ICON_CANVAS - glyph.width) // 2, (ICON_CANVAS - glyph.height) // 2), glyph)
+    return canvas
+
+
+def make_switch_off(sheet: Image.Image) -> Image.Image:
+    x, y, w, h = SWITCH_OFF_BOX
+    piece = sheet.crop((x, y, x + w, y + h))
+    return piece.resize((w * SWITCH_SCALE, h * SWITCH_SCALE), Image.NEAREST)
+
+
+def make_switch_on(sheet: Image.Image) -> Image.Image:
+    """Trilha laranja com o botão do interruptor desligado, espelhado para a direita."""
+    off = sheet.crop((SWITCH_OFF_BOX[0], SWITCH_OFF_BOX[1], SWITCH_OFF_BOX[0] + 30, SWITCH_OFF_BOX[1] + 13))
+    x, y, w, h = SWITCH_ON_TRACK_BOX
+    track = sheet.crop((x, y, x + w, y + h))
+    knob = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    off_px, knob_px = off.load(), knob.load()
+    for yy in range(h):
+        for xx in range(w):
+            r, g, b, a = off_px[xx, yy]
+            # o botão é a parte clara (pêssego) e o contorno dele
+            if a and xx < 15 and r > 200 and g > 150:
+                knob_px[xx, yy] = (r, g, b, a)
+    mirrored = knob.transpose(Image.FLIP_LEFT_RIGHT)
+    track.alpha_composite(mirrored)
+    return track.resize((w * SWITCH_SCALE, h * SWITCH_SCALE), Image.NEAREST)
 
 
 def main() -> int:
@@ -121,6 +166,22 @@ def main() -> int:
             print(f"Erro: o recorte {name} saiu vazio; confira as coordenadas.", file=sys.stderr)
             return 1
         crops[name] = FIXES[name](piece) if name in FIXES else piece
+
+    composed = {
+        "switch_off.png": make_switch_off(sheet),
+        "switch_on.png": make_switch_on(sheet),
+    }
+    for name, box in ICON_GLYPHS.items():
+        composed[name] = make_icon(sheet, box)
+    for name, piece in composed.items():
+        current = Image.open(OUT / name)
+        if current.size != piece.size:
+            print(f"Erro: {name} provisório tem {current.size}, a peça {piece.size}.", file=sys.stderr)
+            return 1
+        if piece.getchannel("A").getbbox() is None:
+            print(f"Erro: a peça {name} saiu vazia; confira as coordenadas.", file=sys.stderr)
+            return 1
+        crops[name] = piece
 
     for name, piece in crops.items():
         piece.save(OUT / name)
