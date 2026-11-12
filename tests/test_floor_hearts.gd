@@ -40,11 +40,16 @@ func test_hud_shows_seven_full_hearts_in_the_top_left_corner() -> void:
 
 
 func test_hud_follows_the_hearts() -> void:
-	_player().take_hit()
+	_player().invulnerability_time = 0.0
+	_player().take_hit(2)
 	assert_eq(_hud().full_hearts(), 6)
 	assert_eq(_hud().get_node("Root/HeartsBox").get_child_count(), 7, "Os vazios continuam na tela")
-	_player().heal()
+	_player().take_hit(1)
+	assert_eq(_hud().full_hearts(), 5)
+	assert_eq(_hud().half_hearts(), 1, "Meio coração aparece pela metade")
+	_player().heal(3)
 	assert_eq(_hud().full_hearts(), 7)
+	assert_eq(_hud().half_hearts(), 0)
 
 
 func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
@@ -61,8 +66,7 @@ func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
 	var mel := GameState.backpack.count("mel")
 	var slots := GameState.backpack.used_slots()
 	_player().invulnerability_time = 0.0
-	for i in 7:
-		_player().take_hit()
+	_player().take_hit(Hearts.MAX)
 	var message: Label = _hud().get_node("Root/MessageLabel")
 	assert_true(message.visible)
 	await wait_seconds(0.3)
@@ -79,8 +83,7 @@ func test_fainting_with_a_menu_open_does_not_leave_the_cabin_paused() -> void:
 	_player().invulnerability_time = 0.0
 	_floor._on_exit_door_interacted(&"door")
 	assert_true(GameState.flow.is_in(GameFlow.State.MENU))
-	for i in 7:
-		_player().take_hit()
+	_player().take_hit(Hearts.MAX)
 	await wait_seconds(0.3)
 	assert_true(get_tree().current_scene is Cabin, "Acordou na cabana")
 	assert_false(get_tree().paused, "A cabana não pode herdar a pausa do menu")
@@ -88,33 +91,43 @@ func test_fainting_with_a_menu_open_does_not_leave_the_cabin_paused() -> void:
 	get_tree().current_scene.queue_free()
 
 
-func test_hearts_are_back_to_seven_when_the_cat_returns_to_a_region() -> void:
+func test_hearts_are_back_to_full_when_the_cat_returns_to_a_region() -> void:
 	_player().invulnerability_time = 0.0
-	for i in 3:
-		_player().take_hit()
+	_player().take_hit(5)
 	_floor._on_door_choice_made(DoorMenu.CABIN)
 	await wait_process_frames(2)
 	get_tree().current_scene.queue_free()
 	GameState.start_region(Regions.CERRADO)
 	var again: RegionFloor = autofree(FloorScene.instantiate())
 	add_child(again)
-	assert_eq((again.get_node("World/Player") as Player).hearts.current, 7)
+	assert_eq((again.get_node("World/Player") as Player).hearts.current, Hearts.MAX)
 
 
 func test_hearts_survive_going_up_a_floor() -> void:
-	_player().take_hit()
+	_player().take_hit(2)
 	_floor._on_door_choice_made(DoorMenu.UP)
-	assert_eq(_player().hearts.current, 6)
+	assert_eq(_player().hearts.current, 12)
 	assert_eq(_hud().full_hearts(), 6)
 
 
-func test_creature_touching_the_cat_in_the_floor_hurts() -> void:
-	# O andar é sorteado e pode sair sem criatura: sorteia de novo até ter uma.
+## Uma criatura do andar, sorteando de novo se o andar saiu sem nenhuma.
+func _first_creature() -> Creature:
 	while _floor.get_creatures().is_empty():
 		_floor.generate_floor()
 		await wait_physics_frames(1)
-	var creature := _floor.get_creatures()[0]
+	return _floor.get_creatures()[0]
+
+
+func test_creature_touching_the_cat_in_the_floor_does_not_hurt() -> void:
+	var creature := await _first_creature()
 	creature.global_position = _player().global_position + Vector2(20, 0)
-	await wait_physics_frames(4)
-	assert_eq(_player().hearts.current, 6)
-	assert_eq(_hud().full_hearts(), 6)
+	await wait_physics_frames(10)
+	assert_eq(_player().hearts.current, Hearts.MAX, "Ainda no aviso")
+
+
+func test_creature_lunge_in_the_floor_hurts_and_the_hud_follows() -> void:
+	var creature := await _first_creature()
+	creature.global_position = _player().global_position + Vector2(20, 0)
+	await wait_seconds(1.0)
+	assert_lt(_player().hearts.current, Hearts.MAX)
+	assert_lt(_hud().full_hearts(), 7)

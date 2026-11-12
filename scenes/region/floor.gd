@@ -7,7 +7,8 @@ extends Node2D
 ## A região e o andar vêm do `GameState`. Mochila e estoque também ficam lá, então
 ## subir, voltar à cabana e trocar de região não os perdem.
 ##
-## O Mingau tem 7 corações; se zerarem, ele desmaia e acorda na cabana.
+## O Mingau tem 7 corações (14 meios); se zerarem, ele desmaia e acorda na
+## cabana.
 ##
 ## O andar fica no escuro (`Darkness`): só o círculo de luz do gato ilumina, e
 ## ele volta ao tamanho inicial a cada andar gerado.
@@ -23,6 +24,11 @@ const CreatureScene := preload("res://scenes/creatures/creature.tscn")
 
 ## Segundos entre o desmaio do gato e a chegada à cabana.
 @export var faint_seconds := 1.5
+
+## As criaturas que podem aparecer, lidas do data/criaturas.csv.
+var creature_catalog := CreatureCatalog.load_default()
+## Sorteia as criaturas de cada célula. Os testes trocam por uma com semente fixa.
+var creature_rng := RandomNumberGenerator.new()
 
 @onready var _room: Room = $Room
 @onready var _player: Player = $World/Player
@@ -110,14 +116,18 @@ func get_creatures() -> Array[Creature]:
 
 ## Troca as criaturas pelas do andar novo, nas células que o gerador reservou
 ## (longe da entrada, sem fechar o caminho). A quantidade vem de
-## `Room.params.entities`.
+## `Room.params.entities` e a criatura de cada célula é sorteada pelo catálogo,
+## segundo a região e o andar.
 func _spawn_creatures(layout: MazeLayout) -> void:
 	for old in _creatures.get_children():
 		old.queue_free()
 	for cell in layout.creature_cells:
 		var creature: Creature = CreatureScene.instantiate()
 		creature.position = _room.cell_to_position(cell)
-		creature.setup(layout.grid, _player)
+		var data := creature_catalog.pick(
+			GameState.current_region, GameState.current_floor, creature_rng
+		)
+		creature.setup(layout.grid, _player, data)
 		creature.defeated.connect(_on_creature_defeated)
 		_creatures.add_child(creature)
 

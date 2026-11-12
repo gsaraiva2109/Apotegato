@@ -6,8 +6,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 11.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_contact"]
-radius = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_strike"]
+radius = 13.0
 
 [node name="Creature" type="CharacterBody2D"]
 collision_layer = 2
@@ -22,9 +22,9 @@ texture = ExtResource("2_sprite")
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_body")
 
-[node name="ContactArea" type="Area2D" parent="."]
+[node name="StrikeArea" type="Area2D" parent="."]
+position = Vector2(0, 4)
 collision_layer = 0
 
-[node name="CollisionShape" type="CollisionShape2D" parent="ContactArea"]
-position = Vector2(0, 4)
-shape = SubResource("CircleShape2D_contact")
+[node name="CollisionShape" type="CollisionShape2D" parent="StrikeArea"]
+shape = SubResource("CircleShape2D_strike")
