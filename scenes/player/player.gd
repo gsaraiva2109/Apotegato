@@ -5,11 +5,11 @@ extends CharacterBody2D
 ## com a ação `attack`: golpe de curto alcance na direção em que ele olha, com um
 ## pequeno intervalo entre os golpes. Sem armas e sem sangue.
 ##
-## Tem 7 corações (`Hearts`). Cada contato com uma criatura tira um e deixa o gato
-## invencível por um instante; ao zerar, ele desmaia e emite `fainted`.
-## Recupera automaticamente 1 coração a cada 10 segundos por padrão.
-## Sofrer dano ou executar um arranhão, mesmo sem acertar uma criatura,
-## reinicia a contagem. Não recupera enquanto está desmaiado.
+## Tem 7 corações, contados em meios (`Hearts`). Cada golpe de criatura tira o
+## dano dela, deixa o gato invencível por um instante e o empurra para longe dela;
+## ao zerar, ele desmaia e emite `fainted`. Recupera automaticamente meio coração
+## a cada 5 segundos por padrão. Sofrer dano ou executar um arranhão, mesmo sem
+## acertar uma criatura, reinicia a contagem. Não recupera enquanto está desmaiado.
 
 ## Emitido a cada arranhão, com a direção do golpe.
 signal attacked(direction: Vector2)
@@ -24,23 +24,27 @@ const BLINK_SECONDS := 0.08
 const CREATURE_MASK := 2
 ## Camada de colisão do cenário: paredes e arbustos (a 1ª).
 const WORLD_MASK := 1
-## Distância do centro do gato até o centro do golpe, em pixels.
-const ATTACK_REACH := 26.0
 ## Deslocamento do centro do corpo da criatura em relação à origem dela.
 const CREATURE_CENTER_OFFSET := Vector2(0, 4)
-## Tamanho da área do golpe, em pixels.
-const ATTACK_SIZE := Vector2(36, 36)
 
 ## Velocidade de caminhada, em pixels por segundo.
 @export var speed := 160.0
+## Distância do centro do gato até o centro do arranhão, em pixels.
+@export var attack_reach := 26.0
+## Tamanho da área do arranhão, em pixels.
+@export var attack_size := Vector2(36, 36)
 ## Intervalo mínimo entre dois arranhões, em segundos.
 @export var attack_cooldown := 0.4
 ## Quanto tempo o gato fica invencível depois de levar um golpe, em segundos.
 @export var invulnerability_time := 1.0
-## Intervalo sem dano ou arranhões para recuperar corações, em segundos.
+## Velocidade do empurrão ao levar um golpe, em pixels por segundo.
+@export var knockback_speed := 220.0
+## Duração do empurrão, em segundos. Durante ele o gato não anda nem arranha.
+@export var knockback_seconds := 0.12
+## Intervalo sem dano ou arranhões para recuperar vida, em segundos.
 ## Arranhões no vazio também reiniciam a contagem.
-@export var regeneration_interval := 10.0
-## Quantidade de corações recuperados por intervalo.
+@export var regeneration_interval := 5.0
+## Quantidade de meios corações recuperados por intervalo.
 @export var regeneration_amount := 1
 
 ## Para onde o gato olha: a última direção em que andou (uma das quatro).
@@ -53,6 +57,8 @@ var _cooldown_left := 0.0
 var _invulnerable_left := 0.0
 var _fainted := false
 var _regeneration_elapsed := 0.0
+var _knockback_left := 0.0
+var _knockback := Vector2.ZERO
 
 @onready var _camera: Camera2D = $Camera
 @onready var _scratch: ScratchEffect = $Scratch
@@ -66,6 +72,11 @@ func _physics_process(delta: float) -> void:
 		velocity = Vector2.ZERO
 		return
 	_update_regeneration(delta)
+	if _knockback_left > 0.0:
+		_knockback_left -= delta
+		velocity = _knockback
+		move_and_slide()
+		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	facing = facing_for(direction, facing)
 	_sprite.flip_h = flip_for(facing)
@@ -104,7 +115,7 @@ static func flip_for(direction: Vector2) -> bool:
 ## Arranha na direção em que o gato olha. Devolve false se ainda estiver no
 ## intervalo entre golpes. Cada criatura na área do golpe leva um arranhão.
 func try_attack() -> bool:
-	if _cooldown_left > 0.0 or _fainted:
+	if _cooldown_left > 0.0 or _fainted or is_knocked_back():
 		return false
 	_cooldown_left = attack_cooldown
 	_regeneration_elapsed = 0.0
@@ -119,10 +130,10 @@ func try_attack() -> bool:
 ## Criatura do outro lado de uma parede ou arbusto não é atingida.
 func creatures_in_reach() -> Array[Creature]:
 	var hitbox := RectangleShape2D.new()
-	hitbox.size = ATTACK_SIZE
+	hitbox.size = attack_size
 	var query := PhysicsShapeQueryParameters2D.new()
 	query.shape = hitbox
-	query.transform = Transform2D(0.0, global_position + facing * ATTACK_REACH)
+	query.transform = Transform2D(0.0, global_position + facing * attack_reach)
 	query.collision_mask = CREATURE_MASK
 	query.collide_with_bodies = true
 	var found: Array[Creature] = []
@@ -140,30 +151,34 @@ func _has_clear_path_to(creature: Creature) -> bool:
 	return get_world_2d().direct_space_state.intersect_ray(ray).is_empty()
 
 
-## Leva um golpe de criatura: tira `amount` corações e deixa o gato invencível
-## por `invulnerability_time`. Devolve false se o golpe foi ignorado (gato
-## invencível ou desmaiado). Ao zerar os corações o gato desmaia.
-func take_hit(amount: int = 1) -> bool:
+## Leva um golpe de criatura: tira `halves` meios corações, deixa o gato invencível
+## por `invulnerability_time` e o empurra para longe de `from` (posição de quem
+## bateu; sem ela, não há empurrão). Devolve false se o golpe foi ignorado (gato
+## invencível ou desmaiado). Ao zerar a vida o gato desmaia.
+func take_hit(halves: int = 1, from: Vector2 = Vector2.INF) -> bool:
 	if _fainted or is_invulnerable():
 		return false
-	hearts.hurt(amount)
-	if amount > 0:
+	hearts.hurt(halves)
+	if halves > 0:
 		_regeneration_elapsed = 0.0
 	if hearts.is_empty():
 		_fainted = true
+		_knockback_left = 0.0
 		_set_blink(false)
 		fainted.emit()
 	else:
 		_invulnerable_left = invulnerability_time
+		if halves > 0 and from.is_finite():
+			_start_knockback(from)
 	return true
 
 
-## Recupera corações (até 7). Devolve quantos recuperou.
+## Recupera meios corações (até o máximo). Devolve quantos recuperou.
 func heal(amount: int = 1) -> int:
 	return hearts.heal(amount)
 
 
-## Recupera corações após um intervalo sem dano ou arranhões.
+## Recupera vida após um intervalo sem dano ou arranhões.
 func _update_regeneration(delta: float) -> void:
 	if _fainted or hearts.is_full() or regeneration_interval <= 0.0 or regeneration_amount <= 0:
 		_regeneration_elapsed = 0.0
@@ -178,6 +193,21 @@ func _update_regeneration(delta: float) -> void:
 		if hearts.is_full():
 			_regeneration_elapsed = 0.0
 			return
+
+
+## Se o gato está sendo empurrado e, por isso, sem controle.
+func is_knocked_back() -> bool:
+	return _knockback_left > 0.0
+
+
+## Empurra o gato para longe de `from`. Se estiver exatamente em cima, empurra para
+## trás de onde olha.
+func _start_knockback(from: Vector2) -> void:
+	var away := (global_position - from).normalized()
+	if away.is_zero_approx():
+		away = -facing
+	_knockback = away * knockback_speed
+	_knockback_left = knockback_seconds
 
 
 func is_invulnerable() -> bool:

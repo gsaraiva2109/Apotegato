@@ -1,9 +1,11 @@
 extends GutTest
 ## Confere a criatura: fica parada, persegue quando o gato chega perto, respeita
 ## as paredes do labirinto, desiste quando ele se afasta e cai com três
-## arranhões, sem sangue.
+## arranhões, sem sangue. Ao chegar perto, avisa, dá o bote e descansa; só o
+## bote machuca.
 
 const CreatureScene := preload("res://scenes/creatures/creature.tscn")
+const PlayerScene := preload("res://scenes/player/player.tscn")
 
 var _target: Node2D
 

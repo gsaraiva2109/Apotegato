@@ -120,3 +120,44 @@ func test_light_resets_on_the_next_floor_after_defeats() -> void:
 	assert_gt(_light().texture_scale, 0.6)
 	_floor._on_door_choice_made(DoorMenu.UP)
 	assert_almost_eq(_light().texture_scale, 0.6, 0.0001)
+
+
+func _all_creatures_over(floors: int) -> Array[Creature]:
+	var result: Array[Creature] = []
+	for i in floors:
+		_floor.generate_floor()
+		result.append_array(_floor.get_creatures())
+	return result
+
+
+func test_floor_one_has_only_weak_creatures_of_the_region() -> void:
+	_floor.creature_rng.seed = 1
+	for creature in _all_creatures_over(20):
+		assert_true(creature.creature_id.ends_with("mata_atlantica"), creature.creature_id)
+		assert_false(creature.creature_id.contains("grande"), "Forte no andar 1")
+		assert_eq(creature.damage, 1)
+		assert_eq(creature.hits_to_defeat, 3)
+		assert_eq(creature.speed, 70.0)
+
+
+func test_floor_three_can_have_strong_creatures_too() -> void:
+	GameState.current_floor = 3
+	_floor.creature_rng.seed = 1
+	var strong := 0
+	var weak := 0
+	for creature in _all_creatures_over(30):
+		if creature.creature_id.contains("grande"):
+			strong += 1
+			assert_eq(creature.damage, 2)
+			assert_eq(creature.hits_to_defeat, 4)
+			assert_eq(creature.speed, 80.0)
+		else:
+			weak += 1
+	assert_gt(strong, 0, "A forte aparece a partir do andar 3")
+	assert_gt(weak, strong, "A fraca é mais comum (peso 2 contra 1)")
+
+
+func test_creatures_follow_the_region_of_the_floor() -> void:
+	GameState.start_region(Regions.LITORAL)
+	for creature in _all_creatures_over(10):
+		assert_true(creature.creature_id.ends_with("litoral"), creature.creature_id)
