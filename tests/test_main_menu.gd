@@ -1,5 +1,5 @@
 extends GutTest
-## Confere o menu inicial: é a cena principal do projeto, tem as quatro opções,
+## Confere o menu inicial: é a cena principal do projeto, tem as cinco opções,
 ## Carregar Jogo só vale com save, e dá para navegar com o mouse.
 
 const MenuScene := preload("res://scenes/ui/main_menu.tscn")
@@ -36,9 +36,10 @@ func test_menu_is_the_main_scene() -> void:
 	assert_true(ResourceLoader.exists(ScenePaths.MENU))
 
 
-func test_has_the_four_options() -> void:
+func test_has_the_five_options() -> void:
 	assert_eq(_button("NewGameButton").text, "Novo Jogo")
 	assert_eq(_button("LoadButton").text, "Carregar Jogo")
+	assert_eq(_button("OptionsButton").text, "Opções")
 	assert_eq(_button("CreditsButton").text, "Créditos")
 	assert_eq(_button("QuitButton").text, "Sair")
 
@@ -59,7 +60,7 @@ func test_load_is_enabled_with_a_save() -> void:
 
 
 func test_buttons_work_with_the_mouse() -> void:
-	for button_name in ["NewGameButton", "LoadButton", "CreditsButton", "QuitButton"]:
+	for button_name in ["NewGameButton", "LoadButton", "OptionsButton", "CreditsButton", "QuitButton"]:
 		var button := _button(button_name)
 		assert_eq(button.mouse_filter, Control.MOUSE_FILTER_STOP)
 		assert_ne(button.focus_mode, Control.FOCUS_NONE)
@@ -116,3 +117,13 @@ func test_quit_is_connected_to_closing_the_game() -> void:
 
 func test_new_game_has_the_initial_focus() -> void:
 	assert_true(_button("NewGameButton").has_focus())
+
+
+func test_options_button_opens_the_options_menu_and_focus_returns() -> void:
+	var options: OptionsMenu = _menu.get_node("OptionsMenu")
+	assert_false(options.is_open())
+	_button("OptionsButton").pressed.emit()
+	assert_true(options.is_open())
+	options.close()
+	assert_false(options.is_open())
+	assert_true(_button("OptionsButton").has_focus())

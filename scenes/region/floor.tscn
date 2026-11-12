@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://scenes/region/player_light.tscn" id="8_light"]
 [ext_resource type="PackedScene" path="res://scenes/ui/region_banner.tscn" id="9_banner"]
 [ext_resource type="PackedScene" uid="uid://ctt1dhfms7gc" path="res://scenes/ui/journal.tscn" id="10_nkq4g"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="99_pause_menu"]
 
 [node name="Floor" type="Node2D" unique_id=396978738]
 script = ExtResource("1_floor")
@@ -43,3 +44,5 @@ color = Color(0.02, 0.02, 0.04, 1)
 [node name="RegionMenu" parent="." unique_id=592468811 instance=ExtResource("7_region_menu")]
 
 [node name="JournalUI" parent="." unique_id=1694554464 instance=ExtResource("10_nkq4g")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("99_pause_menu")]
