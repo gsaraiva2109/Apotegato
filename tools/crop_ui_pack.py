@@ -56,6 +56,7 @@ CROPS = {
     "cursor.png": (308, 561, 11, 14),
     # corações do HUD
     "heart_full.png": (903, 8, 18, 15),
+    "heart_half.png": (935, 8, 18, 15),
     "heart_empty.png": (967, 8, 18, 15),
 }
 

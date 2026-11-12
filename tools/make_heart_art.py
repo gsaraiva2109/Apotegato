@@ -1,4 +1,4 @@
-"""Gera os corações provisórios do HUD (18 x 15): cheio e vazio.
+"""Gera os corações provisórios do HUD (18 x 15): cheio, meio e vazio.
 
 Uso: python tools/make_heart_art.py
 
@@ -49,9 +49,20 @@ def heart(fill, edge, light=None):
     return img
 
 
+def half_heart():
+    """Meio coração: a metade esquerda cheia e a direita vazia, com o mesmo contorno."""
+    img = Image.new("RGBA", (18, 15), (0, 0, 0, 0))
+    full = heart(FULL, OUTLINE, FULL_LIGHT)
+    empty = heart(EMPTY, EMPTY_EDGE)
+    img.paste(empty.crop((9, 0, 18, 15)), (9, 0))
+    img.paste(full.crop((0, 0, 9, 15)), (0, 0))
+    return img
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     heart(FULL, OUTLINE, FULL_LIGHT).save(OUT / "heart_full.png")
+    half_heart().save(OUT / "heart_half.png")
     heart(EMPTY, EMPTY_EDGE).save(OUT / "heart_empty.png")
 
 

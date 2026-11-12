@@ -105,14 +105,24 @@ func test_needed_ingredient_is_not_surplus() -> void:
 	assert_false(_delivery.store_surplus("castanha_caju"))
 
 
-func test_surplus_recovers_one_heart_each() -> void:
+func test_surplus_recovers_one_whole_heart_each() -> void:
 	_backpack.add("mel", 2)
 	_delivery.deliver()
 	var hearts := Hearts.new()
-	hearts.hurt(3)
-	assert_eq(_delivery.use_surplus("mel", hearts), 1)
-	assert_eq(hearts.current, 5)
+	hearts.hurt(6)
+	assert_eq(_delivery.use_surplus("mel", hearts), 2, "Um coração são 2 meios")
+	assert_eq(hearts.current, 10)
 	assert_eq(_backpack.count("mel"), 1)
+
+
+func test_surplus_heals_only_a_half_when_that_is_all_that_is_missing() -> void:
+	_backpack.add("mel", 2)
+	_delivery.deliver()
+	var hearts := Hearts.new()
+	hearts.hurt(1)
+	assert_eq(_delivery.use_surplus("mel", hearts), 1, "Cura o meio que faltava")
+	assert_true(hearts.is_full())
+	assert_eq(_backpack.count("mel"), 1, "O ingrediente é gasto mesmo assim")
 
 
 func test_surplus_is_kept_when_hearts_are_full() -> void:

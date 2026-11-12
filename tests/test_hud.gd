@@ -50,13 +50,38 @@ func test_message_shows_and_then_hides() -> void:
 func test_show_hearts_fills_and_empties() -> void:
 	var hud: Hud = autofree(HudScene.instantiate())
 	add_child(hud)
-	hud.show_hearts(7, 7)
+	hud.show_hearts(14, 14)
 	assert_eq(hud.full_hearts(), 7)
-	hud.show_hearts(3, 7)
+	assert_eq(hud.half_hearts(), 0)
+	hud.show_hearts(6, 14)
 	assert_eq(hud.full_hearts(), 3)
 	assert_eq(hud.get_node("Root/HeartsBox").get_child_count(), 7)
-	hud.show_hearts(0, 7)
+	hud.show_hearts(0, 14)
 	assert_eq(hud.full_hearts(), 0)
+	assert_eq(hud.half_hearts(), 0)
+
+
+func test_show_hearts_with_an_odd_value_shows_a_half_heart() -> void:
+	var hud: Hud = autofree(HudScene.instantiate())
+	add_child(hud)
+	hud.show_hearts(13, 14)
+	assert_eq(hud.full_hearts(), 6)
+	assert_eq(hud.half_hearts(), 1)
+	var box: HBoxContainer = hud.get_node("Root/HeartsBox")
+	assert_eq(
+		(box.get_child(6) as TextureRect).texture, Hud.HEART_HALF, "O último fica pela metade"
+	)
+	hud.show_hearts(1, 14)
+	assert_eq(hud.full_hearts(), 0)
+	assert_eq(hud.half_hearts(), 1)
+	assert_eq((box.get_child(0) as TextureRect).texture, Hud.HEART_HALF)
+	assert_eq((box.get_child(1) as TextureRect).texture, Hud.HEART_EMPTY)
+
+
+func test_heart_texture_matches_each_fill() -> void:
+	assert_eq(Hud.heart_texture(Hearts.Fill.FULL), Hud.HEART_FULL)
+	assert_eq(Hud.heart_texture(Hearts.Fill.HALF), Hud.HEART_HALF)
+	assert_eq(Hud.heart_texture(Hearts.Fill.EMPTY), Hud.HEART_EMPTY)
 
 
 func test_light_fraction_goes_from_empty_to_full() -> void:

@@ -3,7 +3,8 @@ extends CanvasLayer
 ## Tela da mochila, aberta na cabana: mostra os 6 espaços (ícone, nome e
 ## quantidade) e entrega os ingredientes à apotecária para o paciente atual.
 ## Depois da entrega, cada sobra pode ser guardada no estoque ou usada para
-## recuperar 1 coração. Esc, o atalho da mochila ou o botão Voltar fecham.
+## recuperar vida (+1 coração, ou +½ se falta só meio). Esc, o atalho da mochila
+## ou o botão Voltar fecham.
 ##
 ## A regra da entrega está em `Delivery`; aqui só se mostra o resultado. Quem
 ## cuida do paciente (diálogo, saída da cabana) escuta `delivery_completed`.
@@ -136,7 +137,8 @@ func store_surplus(id: String) -> bool:
 	return true
 
 
-## Usa uma unidade da sobra para recuperar 1 coração. Devolve quantos recuperou.
+## Usa uma unidade da sobra para recuperar vida. Devolve quantos meios corações
+## recuperou.
 func use_surplus(id: String) -> int:
 	if _delivery == null:
 		return 0
@@ -241,11 +243,19 @@ func _new_surplus_row(id: String, amount: int) -> HBoxContainer:
 
 	var use_button := Button.new()
 	use_button.name = "UseButton"
-	use_button.text = "Usar (+1 coração)"
+	use_button.text = use_text(hearts)
 	use_button.disabled = hearts == null or hearts.is_full()
 	use_button.pressed.connect(use_surplus.bind(id))
 	row.add_child(use_button)
 	return row
+
+
+## Texto do botão de usar a sobra, com o quanto ela cura de verdade: um coração,
+## ou meio se é só o que falta.
+static func use_text(current_hearts: Hearts) -> String:
+	if current_hearts != null and current_hearts.missing() == 1:
+		return "Usar (+½ coração)"
+	return "Usar (+1 coração)"
 
 
 func _display_name(id: String) -> String:

@@ -10,7 +10,7 @@ extends RefCounted
 ## - Quando mochila e estoque cobrem todos os requisitos (um id por grupo "ou"),
 ##   a entrega se completa e um de cada requisito é gasto.
 ## - O que sobra na mochila não serve a este paciente: cada sobra pode ser
-##   guardada no estoque ou usada para recuperar 1 coração.
+##   guardada no estoque ou usada para recuperar vida.
 ##
 ## É só dado, sem cena: a tela da mochila chama `deliver()` e mostra o resultado.
 
@@ -23,8 +23,8 @@ enum Outcome {
 	COMPLETE,
 }
 
-## Quantos corações uma sobra recupera.
-const HEARTS_PER_SURPLUS := 1
+## Quantos meios corações uma sobra recupera (um coração inteiro).
+const HALVES_PER_SURPLUS := Hearts.HALVES_PER_HEART
 
 ## Id da condição do paciente atual (o mesmo do CSV).
 var condition: String
@@ -118,15 +118,16 @@ func store_surplus(id: String) -> bool:
 	return true
 
 
-## Usa uma unidade da sobra para recuperar coração. Só gasta o ingrediente se
-## recuperou de fato (com os corações cheios, a sobra fica na mochila). Devolve
-## quantos corações recuperou.
+## Usa uma unidade da sobra para recuperar vida. Só gasta o ingrediente se
+## recuperou de fato (com a vida cheia, a sobra fica na mochila). Se falta só meio
+## coração, cura esse meio e gasta o ingrediente do mesmo jeito. Devolve quantos
+## meios corações recuperou (0, 1 ou 2).
 func use_surplus(id: String, hearts: Hearts) -> int:
 	if hearts == null or hearts.is_full() or not surplus().has(id):
 		return 0
 	if not backpack.remove(id):
 		return 0
-	return hearts.heal(HEARTS_PER_SURPLUS)
+	return hearts.heal(HALVES_PER_SURPLUS)
 
 
 ## Nomes legíveis dos requisitos que faltam, como "Camu-Camu ou Acerola".
