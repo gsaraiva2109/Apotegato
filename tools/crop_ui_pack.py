@@ -90,6 +90,12 @@ def straighten_parchment(piece: Image.Image) -> Image.Image:
     return piece
 
 
+# Ainda sem coordenadas (a arte provisória de mesmo nome já está em assets/art/ui/ e o
+# tema usa as duas igual): switch_on.png e switch_off.png (52 x 26, interruptores) e
+# icon_close, icon_gear, icon_sound, icon_mute, icon_home e icon_play (24 x 24). Para
+# trocar pela arte do UI Mega, ache a peça na sheet, ajuste o tamanho da provisória em
+# tools/make_ui_art.py e acrescente a linha em CROPS.
+
 # peças que precisam de ajuste depois do recorte
 FIXES = {"parchment.png": straighten_parchment}
 

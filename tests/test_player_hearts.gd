@@ -50,6 +50,29 @@ func test_hits_during_invulnerability_are_ignored() -> void:
 	assert_eq(_player.hearts.current, 12)
 
 
+func test_invulnerability_blinks_by_default() -> void:
+	_player.invulnerability_time = 1.0
+	_player.take_hit(1)
+	var alphas := {}
+	for i in 12:
+		_player._update_invulnerability(Player.BLINK_SECONDS)
+		alphas[_player.get_node("Sprite").modulate.a] = true
+	assert_gt(alphas.size(), 1, "Alterna entre transparente e opaco")
+
+
+func test_invulnerability_is_steady_with_reduced_effects() -> void:
+	AudioSettings.reduce_effects = true
+	_player.invulnerability_time = 1.0
+	_player.take_hit(1)
+	var alphas := {}
+	for i in 12:
+		_player._update_invulnerability(Player.BLINK_SECONDS)
+		alphas[_player.get_node("Sprite").modulate.a] = true
+	AudioSettings.reduce_effects = false
+	assert_eq(alphas.size(), 1, "Sem piscar")
+	assert_almost_eq(alphas.keys()[0], Player.REDUCED_DIM_ALPHA, 0.001)
+
+
 func test_invulnerability_lasts_one_second_by_default() -> void:
 	assert_eq(_player.invulnerability_time, 1.0)
 

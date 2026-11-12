@@ -34,6 +34,9 @@ const WARNING_BLINKS := 3
 const WARNING_HOP_HEIGHT := 4.0
 ## Cor do sprite no pico da piscada do aviso.
 const WARNING_COLOR := Color(1.8, 0.35, 0.35)
+## Com os efeitos reduzidos: mistura fixa com a cor de aviso e brilho suave no golpe.
+const REDUCED_WARNING_MIX := 0.6
+const REDUCED_FLASH := 1.4
 ## Provisório da criatura forte, até a arte própria (#38): maior e mais escura.
 const STRONG_SCALE := 1.25
 const STRONG_TINT := Color(0.55, 0.45, 0.55)
@@ -247,7 +250,8 @@ func _hurt_in_strike_area() -> void:
 
 ## Aviso: pisca em vermelho e dá um pulinho, de acordo com o quanto já passou.
 func _set_telegraph(progress: float) -> void:
-	var pulse := 0.5 - 0.5 * cos(progress * TAU * WARNING_BLINKS)
+	# Com "reduzir efeitos visuais" a cor do aviso fica fixa, sem pulsar.
+	var pulse := REDUCED_WARNING_MIX if AudioSettings.reduce_effects else 0.5 - 0.5 * cos(progress * TAU * WARNING_BLINKS)
 	_sprite.modulate = _base_color.lerp(WARNING_COLOR, pulse)
 	_sprite.position.y = -sin(progress * PI) * WARNING_HOP_HEIGHT
 
@@ -258,7 +262,8 @@ func _clear_telegraph() -> void:
 
 
 func _flash() -> void:
-	_sprite.modulate = Color(3.0, 3.0, 3.0)
+	var brightness := REDUCED_FLASH if AudioSettings.reduce_effects else 3.0
+	_sprite.modulate = Color(brightness, brightness, brightness)
 	create_tween().tween_property(_sprite, "modulate", _base_color, 0.15)
 
 
