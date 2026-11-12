@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_menu"]
 [ext_resource type="Theme" path="res://scenes/ui/game_theme.tres" id="2_theme"]
-[ext_resource type="PackedScene" path="res://scenes/ui/options_menu.tscn" id="3_options"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/icon_play.png" id="4_play"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/icon_gear.png" id="5_gear"]
 [ext_resource type="Texture2D" path="res://assets/art/ui/icon_home.png" id="6_home"]
@@ -105,5 +104,3 @@ icon = ExtResource("6_home")
 layout_mode = 2
 text = "Não, continuar pausado"
 icon = ExtResource("7_close")
-
-[node name="OptionsMenu" parent="." instance=ExtResource("3_options")]

@@ -12,6 +12,11 @@ signal opened
 ## Emitido ao retomar o jogo.
 signal resumed
 
+const OPTIONS_SCENE := preload("res://scenes/ui/options_menu.tscn")
+
+## Tela de opções, criada só na primeira vez que é aberta (não pesa em cada andar).
+var _options: OptionsMenu
+
 @onready var _main_buttons: Control = $Root/Center/Panel/Layout/MainButtons
 @onready var _resume_button: Button = $Root/Center/Panel/Layout/MainButtons/ResumeButton
 @onready var _options_button: Button = $Root/Center/Panel/Layout/MainButtons/OptionsButton
@@ -21,7 +26,6 @@ signal resumed
 @onready var _yes_button: Button = $Root/Center/Panel/Layout/ConfirmBox/YesButton
 @onready var _no_button: Button = $Root/Center/Panel/Layout/ConfirmBox/NoButton
 @onready var _panel_center: Control = $Root/Center
-@onready var _options: OptionsMenu = $OptionsMenu
 
 
 func _ready() -> void:
@@ -30,7 +34,6 @@ func _ready() -> void:
 	_menu_button.pressed.connect(_ask_to_leave)
 	_yes_button.pressed.connect(_leave_to_main_menu)
 	_no_button.pressed.connect(_cancel_leave)
-	_options.closed.connect(_on_options_closed)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -42,7 +45,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif _confirm_box.visible:
 		_cancel_leave()
 		get_viewport().set_input_as_handled()
-	elif not _options.is_open():
+	elif _options == null or not _options.is_open():
 		resume()
 		get_viewport().set_input_as_handled()
 
@@ -64,7 +67,8 @@ func resume() -> void:
 	if not visible:
 		return
 	visible = false
-	_options.close()
+	if _options != null:
+		_options.close()
 	GameState.flow.close_menu()
 	resumed.emit()
 
@@ -81,6 +85,10 @@ func _show_main() -> void:
 
 
 func _open_options() -> void:
+	if _options == null:
+		_options = OPTIONS_SCENE.instantiate()
+		add_child(_options)
+		_options.closed.connect(_on_options_closed)
 	_panel_center.hide()
 	_options.open()
 
