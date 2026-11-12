@@ -87,6 +87,103 @@ def parchment() -> Image.Image:
     return img
 
 
+CREAM = (0xF3, 0xE6, 0xC4, 255)
+GREEN = (0x6E, 0xA8, 0x4A, 255)
+GREEN_EDGE = (0x2F, 0x5A, 0x22, 255)
+RED = (0xA8, 0x46, 0x3C, 255)
+RED_EDGE = (0x5A, 0x22, 0x1E, 255)
+
+
+def switch(on: bool) -> Image.Image:
+    """Interruptor 52 x 26. Ligado: trilha verde, botão à direita e marca de
+    visto. Desligado: trilha vermelha, botão à esquerda e um X. O estado se vê
+    pela posição e pelo símbolo, não só pela cor."""
+    fill, edge = (GREEN, GREEN_EDGE) if on else (RED, RED_EDGE)
+    img = Image.new("RGBA", (52, 26), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rounded_rectangle((0, 0, 51, 25), radius=12, fill=edge)
+    d.rounded_rectangle((2, 2, 49, 23), radius=10, fill=fill)
+    knob_x = 29 if on else 3
+    d.ellipse((knob_x, 3, knob_x + 19, 22), fill=FRAME_EDGE)
+    d.ellipse((knob_x + 1, 4, knob_x + 18, 21), fill=CREAM)
+    d.ellipse((knob_x + 5, 8, knob_x + 14, 17), fill=(0xD8, 0xC0, 0x90, 255))
+    if on:
+        for i in range(4):
+            d.rectangle((9 + i, 12 + i, 10 + i, 13 + i), fill=CREAM)
+        for i in range(7):
+            d.rectangle((13 + i, 15 - i, 14 + i, 16 - i), fill=CREAM)
+    else:
+        for i in range(8):
+            d.rectangle((30 + i, 9 + i, 31 + i, 10 + i), fill=CREAM)
+            d.rectangle((37 - i, 9 + i, 38 - i, 10 + i), fill=CREAM)
+    return img
+
+
+def icon(draw) -> Image.Image:
+    """Ícone 24 x 24: miolo creme com contorno escuro, para botões de ícone."""
+    big = Image.new("RGBA", (24, 24), (0, 0, 0, 0))
+    mask = Image.new("L", (24, 24), 0)
+    draw(ImageDraw.Draw(mask))
+    # contorno de 1 pixel em volta da forma
+    outline = Image.new("L", (24, 24), 0)
+    for dx in (-1, 0, 1):
+        for dy in (-1, 0, 1):
+            outline.paste(255, (dx, dy), mask)
+    big.paste(Image.new("RGBA", (24, 24), FRAME_EDGE), (0, 0), outline)
+    big.paste(Image.new("RGBA", (24, 24), CREAM), (0, 0), mask)
+    return big
+
+
+def draw_close(d) -> None:
+    d.line((5, 5, 18, 18), fill=255, width=3)
+    d.line((18, 5, 5, 18), fill=255, width=3)
+
+
+def draw_gear(d) -> None:
+    d.ellipse((6, 6, 17, 17), fill=255)
+    for box in ((10, 2, 13, 21), (2, 10, 21, 13)):
+        d.rectangle(box, fill=255)
+    d.line((4, 4, 19, 19), fill=255, width=3)
+    d.line((19, 4, 4, 19), fill=255, width=3)
+    d.ellipse((9, 9, 14, 14), fill=0)
+
+
+def draw_speaker(d) -> None:
+    d.rectangle((3, 9, 7, 14), fill=255)
+    d.polygon([(7, 9), (13, 4), (13, 19), (7, 14)], fill=255)
+
+
+def draw_sound(d) -> None:
+    draw_speaker(d)
+    d.arc((9, 6, 17, 17), -50, 50, fill=255, width=2)
+    d.arc((9, 2, 21, 21), -50, 50, fill=255, width=2)
+
+
+def draw_mute(d) -> None:
+    draw_speaker(d)
+    d.line((15, 8, 22, 15), fill=255, width=2)
+    d.line((22, 8, 15, 15), fill=255, width=2)
+
+
+def draw_home(d) -> None:
+    d.polygon([(12, 3), (22, 12), (19, 12), (19, 21), (5, 21), (5, 12), (2, 12)], fill=255)
+    d.rectangle((10, 14, 14, 21), fill=0)
+
+
+def draw_play(d) -> None:
+    d.polygon([(7, 3), (21, 12), (7, 21)], fill=255)
+
+
+ICONS = {
+    "icon_close.png": draw_close,
+    "icon_gear.png": draw_gear,
+    "icon_sound.png": draw_sound,
+    "icon_mute.png": draw_mute,
+    "icon_home.png": draw_home,
+    "icon_play.png": draw_play,
+}
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     panel().save(OUT / "panel.png")
@@ -99,6 +196,10 @@ def main() -> None:
     backpack().save(OUT / "backpack_icon.png")
     cursor().save(OUT / "cursor.png")
     grabber().save(OUT / "slider_grabber.png")
+    switch(True).save(OUT / "switch_on.png")
+    switch(False).save(OUT / "switch_off.png")
+    for name, draw in ICONS.items():
+        icon(draw).save(OUT / name)
 
 
 if __name__ == "__main__":
