@@ -164,11 +164,18 @@ func test_cancel_does_nothing_when_closed() -> void:
 
 func test_every_interactive_control_can_take_keyboard_focus() -> void:
 	for path in [
-		"Tabs/SoundTab", "Tabs/VideoTab", "Tabs/AccessTab",
-		"Pages/SoundPage/MusicRow/MusicSlider", "Pages/SoundPage/SfxRow/SfxSlider",
-		"Pages/SoundPage/MusicMuteRow/MusicMuteSwitch", "Pages/SoundPage/SfxMuteRow/SfxMuteSwitch",
-		"Pages/VideoPage/FullscreenRow/FullscreenSwitch", "Pages/VideoPage/PixelRow/PixelSwitch",
-		"Pages/AccessPage/ReduceRow/ReduceSwitch", "Footer/ResetButton", "Footer/BackButton",
+		"Tabs/SoundTab",
+		"Tabs/VideoTab",
+		"Tabs/AccessTab",
+		"Pages/SoundPage/MusicRow/MusicSlider",
+		"Pages/SoundPage/SfxRow/SfxSlider",
+		"Pages/SoundPage/MusicMuteRow/MusicMuteSwitch",
+		"Pages/SoundPage/SfxMuteRow/SfxMuteSwitch",
+		"Pages/VideoPage/FullscreenRow/FullscreenSwitch",
+		"Pages/VideoPage/PixelRow/PixelSwitch",
+		"Pages/AccessPage/ReduceRow/ReduceSwitch",
+		"Footer/ResetButton",
+		"Footer/BackButton",
 	]:
 		assert_ne((_node(path) as Control).focus_mode, Control.FOCUS_NONE, path)
 

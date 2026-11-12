@@ -232,7 +232,9 @@ func _update_invulnerability(delta: float) -> void:
 	# Com "reduzir efeitos visuais" não pisca: fica um pouco transparente
 	# durante toda a invulnerabilidade.
 	var steady := AudioSettings.reduce_effects
-	_set_blink(_invulnerable_left > 0.0 and (steady or int(_invulnerable_left / BLINK_SECONDS) % 2 == 0))
+	_set_blink(
+		_invulnerable_left > 0.0 and (steady or int(_invulnerable_left / BLINK_SECONDS) % 2 == 0)
+	)
 
 
 ## Liga ou desliga a piscada do sprite (mais transparente enquanto "piscando").
