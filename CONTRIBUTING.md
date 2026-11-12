@@ -148,6 +148,14 @@ O arquivo tem um `.import` com `importer="keep"`. Sem isso o Godot importaria o 
 
 `tests/test_treatments_data.gd` confere a estrutura: as 10 condições com as quatro partes e o falante certo em cada uma, o pedido citando os ingredientes exigidos e a recomendação de procurar atendimento de saúde. Ele não compara o texto com o roteiro; isso é conferência de quem revisa. As conversas gerais (introdução, entrega parcial, encerramento) ficam em `data/dialogos.json`, do sistema de diálogo.
 
+## Diálogos e estados do jogo
+
+`data/dialogos.json` guarda as conversas gerais do roteiro, por id em `conversations`: `intro`, `patient_reminder`, `delivery_partial` (o texto tem `{missing}`, trocado pelos ingredientes que faltam), `delivery_extras`, `delivery_empty`, `ending` (a última fala tem `choices`, com `go_home` e `keep_helping`), `ending_go_home` e `ending_keep_helping`. As falas têm o mesmo formato do `data/atendimentos.json`. O autoload `DialogueData` lê os dois arquivos e o `data/elenco.csv` (nome do paciente na caixa) uma vez; nenhum outro script abre esses arquivos. `tests/test_dialogue_data.gd` confere a estrutura.
+
+A caixa de diálogo é `scenes/ui/dialogue_box.tscn`: nome de quem fala, texto aparecendo letra por letra, E ou clique para avançar, páginas para falas longas e botões para as escolhas. Em que ponto do roteiro o atendimento está (introdução, paciente atual, queixa, pedido, saída) fica em `GameState.attendance` (`scripts/attendance.gd`), e a cabana só mostra.
+
+O jogo tem uma máquina de estados, `GameState.flow` (`scripts/game_flow.gd`): exploração, diálogo, entrega, menu e conclusão, com as transições permitidas em `GameFlow.TRANSITIONS`. Só a exploração deixa o gato andar, atacar e interagir; em qualquer outro estado o `GameState` pausa a árvore de cenas, e só a interface (`process_mode` Always) responde. **Nenhuma cena pausa o jogo direto**: um menu novo pede `GameState.flow.open_menu()` ao abrir e `close_menu()` ao fechar.
+
 ## Versões e entregas
 
 Cada sprint termina com uma tag de versão. Quando a `main` estiver pronta para a entrega:

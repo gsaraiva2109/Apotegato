@@ -5,6 +5,7 @@ const JournalScene := preload("res://scenes/ui/journal.tscn")
 
 
 func after_each() -> void:
+	GameState.flow.reset()
 	get_tree().paused = false
 
 
@@ -253,16 +254,25 @@ func test_open_and_close_journal_restores_pause_state() -> void:
 	assert_false(get_tree().paused)
 
 
-func test_close_restores_previously_paused_game() -> void:
+func test_journal_is_a_menu_of_the_state_machine() -> void:
+	var journal := _create_journal()
+
+	journal.call("open")
+	assert_true(GameState.flow.is_in(GameFlow.State.MENU))
+
+	journal.call("close")
+	assert_true(GameState.flow.is_in(GameFlow.State.EXPLORATION))
+
+
+func test_does_not_open_outside_exploration() -> void:
 	var journal := _create_journal()
 	var root: Control = journal.get_node("Root")
 
-	get_tree().paused = true
-
+	GameState.flow.request(GameFlow.State.DIALOGUE)
 	journal.call("open")
-	assert_true(root.visible)
+	assert_false(root.visible, "Não abre por cima de um diálogo")
 
-	journal.call("close")
-
-	assert_false(root.visible)
-	assert_true(get_tree().paused)
+	GameState.flow.reset()
+	GameState.flow.open_menu()
+	journal.call("open")
+	assert_false(root.visible, "Não abre por cima de outro menu")

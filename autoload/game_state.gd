@@ -1,8 +1,13 @@
 extends Node
 ## Estado da campanha que sobrevive à troca de cena: região e andar atuais,
-## a mochila, o estoque da apotecária e os pacientes já atendidos. Ir à cabana,
-## voltar ou trocar de região não mexe na mochila, no
+## a mochila, o estoque da apotecária, os pacientes já atendidos, o atendimento
+## em andamento e o estado do jogo (exploração, diálogo, entrega, menu,
+## conclusão). Ir à cabana, voltar ou trocar de região não mexe na mochila, no
 ## estoque nem nos pacientes; só `new_game()` zera tudo.
+##
+## O jogo só roda na exploração: em qualquer outro estado de `flow` a árvore de
+## cenas fica pausada, e só a interface (`PROCESS_MODE_ALWAYS`) responde. Este é
+## o único lugar que pausa o jogo.
 ##
 ## Registrado como autoload "GameState".
 
@@ -23,6 +28,14 @@ var backpack := Backpack.new()
 var stock := Stock.new()
 ## Quais condições já foram atendidas e o sorteio do próximo paciente.
 var patients := PatientPicker.new()
+## Em que modo o jogo está (exploração, diálogo, entrega, menu, conclusão).
+var flow := GameFlow.new()
+## O atendimento na cabana: introdução, paciente atual e em que ponto ele está.
+var attendance := Attendance.new()
+
+
+func _ready() -> void:
+	flow.state_changed.connect(_on_flow_state_changed)
 
 
 ## Começa uma região: sempre pelo andar 1. Mochila e estoque ficam como estão.
@@ -56,3 +69,9 @@ func new_game() -> void:
 	backpack.clear()
 	stock.clear()
 	patients.reset()
+	attendance.reset()
+	flow.reset()
+
+
+func _on_flow_state_changed(_from: GameFlow.State, _to: GameFlow.State) -> void:
+	get_tree().paused = flow.is_frozen()

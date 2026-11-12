@@ -9,6 +9,8 @@ var _floor: RegionFloor
 
 func before_each() -> void:
 	GameState.new_game()
+	# Ao desmaiar o gato acorda na cabana; sem isso, a introdução tocaria lá.
+	GameState.attendance.intro_done = true
 	GameState.start_region(Regions.CAATINGA)
 	_floor = autofree(FloorScene.instantiate())
 	_floor.faint_seconds = 0.05
@@ -71,13 +73,14 @@ func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
 
 func test_fainting_with_a_menu_open_does_not_leave_the_cabin_paused() -> void:
 	_player().invulnerability_time = 0.0
-	get_tree().paused = true
-	_floor._door_menu.open(1)
+	_floor._on_exit_door_interacted(&"door")
+	assert_true(GameState.flow.is_in(GameFlow.State.MENU))
 	for i in 7:
 		_player().take_hit()
 	await wait_seconds(0.3)
 	assert_true(get_tree().current_scene is Cabin, "Acordou na cabana")
 	assert_false(get_tree().paused, "A cabana não pode herdar a pausa do menu")
+	assert_true(GameState.flow.is_in(GameFlow.State.EXPLORATION))
 	get_tree().current_scene.queue_free()
 
 

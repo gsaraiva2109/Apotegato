@@ -37,6 +37,9 @@ const CreatureScene := preload("res://scenes/creatures/creature.tscn")
 
 
 func _ready() -> void:
+	# O andar sempre abre explorando, mesmo que a cena anterior tenha saído com
+	# um menu aberto.
+	GameState.flow.reset()
 	if not Regions.is_valid(GameState.current_region):
 		GameState.start_region(DEFAULT_REGION)
 	Music.play_region(GameState.current_region)
@@ -51,6 +54,12 @@ func _ready() -> void:
 	_door_menu.closed.connect(_on_menu_closed)
 	_region_menu.closed.connect(_on_menu_closed)
 	generate_floor()
+
+
+## Ao sair da cena (troca de cena), o jogo volta a explorar: a próxima cena não
+## herda um diálogo ou menu que ficou aberto.
+func _exit_tree() -> void:
+	GameState.flow.reset()
 
 
 ## Gera o andar da região e do andar atuais do `GameState` e leva o gato à
@@ -120,7 +129,7 @@ func _on_player_fainted() -> void:
 	_hud.show_message("Mingau desmaiou... acordando na cabana")
 	await get_tree().create_timer(faint_seconds).timeout
 	# Um menu aberto nesse meio tempo deixaria a cabana em pausa.
-	get_tree().paused = false
+	GameState.flow.reset()
 	GameState.leave_region()
 	get_tree().change_scene_to_file(ScenePaths.CABIN)
 
@@ -165,8 +174,8 @@ func _on_backpack_rejected(id: String) -> void:
 
 
 func _on_exit_door_interacted(_id: StringName) -> void:
-	get_tree().paused = true
-	_door_menu.open(GameState.current_floor)
+	if GameState.flow.open_menu():
+		_door_menu.open(GameState.current_floor)
 
 
 func _on_door_choice_made(choice: StringName) -> void:
@@ -178,8 +187,8 @@ func _on_door_choice_made(choice: StringName) -> void:
 			GameState.leave_region()
 			get_tree().change_scene_to_file(ScenePaths.CABIN)
 		DoorMenu.OTHER_REGION:
-			get_tree().paused = true
-			_region_menu.open(GameState.current_region)
+			if GameState.flow.open_menu():
+				_region_menu.open(GameState.current_region)
 
 
 func _on_region_selected(region: String) -> void:
@@ -187,7 +196,7 @@ func _on_region_selected(region: String) -> void:
 	generate_floor()
 
 
-## Qualquer menu fechado volta a rodar o jogo, a não ser que a escolha tenha
-## aberto outro menu logo em seguida.
+## Qualquer menu fechado volta à exploração. Se a escolha abrir outro menu (ir a
+## outra região), ele pede o estado de menu de novo.
 func _on_menu_closed() -> void:
-	get_tree().paused = false
+	GameState.flow.close_menu()

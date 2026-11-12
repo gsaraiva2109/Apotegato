@@ -20,7 +20,6 @@ const PARITY_NAMES := {
 # CONTROLE DO DIÁRIO
 # =====================================================
 
-var _paused_before_open: bool = false
 var _current_page: int = 0
 
 var _journal_data: Dictionary = {}
@@ -427,45 +426,21 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 # =====================================================
-# VERIFICAÇÃO DE OUTROS MENUS
-# =====================================================
-
-
-func _has_other_menu_open() -> bool:
-	var scene_parent := get_parent()
-
-	if scene_parent == null:
-		return false
-
-	for sibling: Node in scene_parent.get_children():
-		if sibling == self:
-			continue
-
-		if not sibling.has_method("is_open"):
-			continue
-
-		if bool(sibling.call("is_open")):
-			return true
-
-	return false
-
-
-# =====================================================
 # ABRIR E FECHAR O DIÁRIO
 # =====================================================
 
 
+## Abre o diário. Ele é um menu da máquina de estados: só abre durante a
+## exploração, então não aparece por cima de diálogos, da mochila nem dos
+## outros menus.
 func open() -> void:
 	if _root.visible:
 		return
 
-	if _has_other_menu_open():
+	if not GameState.flow.open_menu():
 		return
 
-	_paused_before_open = get_tree().paused
-
 	_root.show()
-	get_tree().paused = true
 
 
 func close() -> void:
@@ -473,7 +448,7 @@ func close() -> void:
 		return
 
 	_root.hide()
-	get_tree().paused = _paused_before_open
+	GameState.flow.close_menu()
 
 
 func is_open() -> bool:

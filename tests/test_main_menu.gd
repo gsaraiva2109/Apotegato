@@ -73,6 +73,10 @@ func test_new_game_opens_the_cabin_with_a_clean_state() -> void:
 	assert_true(get_tree().current_scene is Cabin)
 	assert_true(GameState.backpack.is_empty())
 	assert_true(GameState.stock.is_empty())
+	assert_true(
+		(get_tree().current_scene as Cabin).is_in_dialogue(),
+		"Novo jogo começa com a conversa introdutória"
+	)
 	get_tree().current_scene.queue_free()
 
 

@@ -10,6 +10,7 @@ var _floor: RegionFloor
 
 func before_each() -> void:
 	GameState.new_game()
+	GameState.attendance.intro_done = true
 	GameState.start_region(Regions.CAATINGA)
 	_floor = autofree(FloorScene.instantiate())
 	add_child(_floor)
