@@ -158,3 +158,10 @@ func test_scratch_in_empty_space_restarts_regeneration_interval() -> void:
 
 	_player._update_regeneration(4.0)
 	assert_eq(_player.hearts.current, 13, "Recupera 5 segundos depois do arranhão")
+
+
+func test_scratch_is_refused_outside_the_exploration() -> void:
+	GameState.flow.request(GameFlow.State.DIALOGUE)
+	assert_false(_player.try_attack(), "Em diálogo o gato não arranha")
+	GameState.flow.reset()
+	assert_true(_player.try_attack())

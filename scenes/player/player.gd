@@ -113,9 +113,13 @@ static func flip_for(direction: Vector2) -> bool:
 
 
 ## Arranha na direção em que o gato olha. Devolve false se ainda estiver no
-## intervalo entre golpes. Cada criatura na área do golpe leva um arranhão.
+## intervalo entre golpes, desmaiado, empurrado ou se o jogo não está na
+## exploração (diálogo, entrega ou menu). Cada criatura na área do golpe leva um
+## arranhão.
 func try_attack() -> bool:
 	if _cooldown_left > 0.0 or _fainted or is_knocked_back():
+		return false
+	if not GameState.flow.can_player_act():
 		return false
 	_cooldown_left = attack_cooldown
 	_regeneration_elapsed = 0.0
