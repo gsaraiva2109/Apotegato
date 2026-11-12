@@ -60,7 +60,9 @@ func test_load_is_enabled_with_a_save() -> void:
 
 
 func test_buttons_work_with_the_mouse() -> void:
-	for button_name in ["NewGameButton", "LoadButton", "OptionsButton", "CreditsButton", "QuitButton"]:
+	for button_name in [
+		"NewGameButton", "LoadButton", "OptionsButton", "CreditsButton", "QuitButton"
+	]:
 		var button := _button(button_name)
 		assert_eq(button.mouse_filter, Control.MOUSE_FILTER_STOP)
 		assert_ne(button.focus_mode, Control.FOCUS_NONE)

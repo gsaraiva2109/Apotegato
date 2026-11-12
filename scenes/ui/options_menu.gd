@@ -10,44 +10,51 @@ extends CanvasLayer
 ## Emitido sempre que a tela se fecha.
 signal closed
 
+enum Tab { SOUND, VIDEO, ACCESSIBILITY }
+
 const ICON_SOUND := preload("res://assets/art/ui/icon_sound.png")
 const ICON_MUTE := preload("res://assets/art/ui/icon_mute.png")
 const TEXT_ON := "Ligado"
 const TEXT_OFF := "Desligado"
-
-enum Tab { SOUND, VIDEO, ACCESSIBILITY }
-
-@onready var _tab_buttons: Array[Button] = [
-	$Root/Center/Panel/Layout/Tabs/SoundTab,
-	$Root/Center/Panel/Layout/Tabs/VideoTab,
-	$Root/Center/Panel/Layout/Tabs/AccessTab,
-]
-@onready var _pages: Array[Control] = [
-	$Root/Center/Panel/Layout/Pages/SoundPage,
-	$Root/Center/Panel/Layout/Pages/VideoPage,
-	$Root/Center/Panel/Layout/Pages/AccessPage,
-]
-@onready var _music_slider: HSlider = $Root/Center/Panel/Layout/Pages/SoundPage/MusicRow/MusicSlider
-@onready var _music_value: Label = $Root/Center/Panel/Layout/Pages/SoundPage/MusicRow/MusicValue
-@onready var _music_icon: TextureRect = $Root/Center/Panel/Layout/Pages/SoundPage/MusicRow/MusicIcon
-@onready var _music_mute: CheckButton = $Root/Center/Panel/Layout/Pages/SoundPage/MusicMuteRow/MusicMuteSwitch
-@onready var _music_mute_state: Label = $Root/Center/Panel/Layout/Pages/SoundPage/MusicMuteRow/MusicMuteState
-@onready var _sfx_slider: HSlider = $Root/Center/Panel/Layout/Pages/SoundPage/SfxRow/SfxSlider
-@onready var _sfx_value: Label = $Root/Center/Panel/Layout/Pages/SoundPage/SfxRow/SfxValue
-@onready var _sfx_icon: TextureRect = $Root/Center/Panel/Layout/Pages/SoundPage/SfxRow/SfxIcon
-@onready var _sfx_mute: CheckButton = $Root/Center/Panel/Layout/Pages/SoundPage/SfxMuteRow/SfxMuteSwitch
-@onready var _sfx_mute_state: Label = $Root/Center/Panel/Layout/Pages/SoundPage/SfxMuteRow/SfxMuteState
-@onready var _fullscreen_switch: CheckButton = $Root/Center/Panel/Layout/Pages/VideoPage/FullscreenRow/FullscreenSwitch
-@onready var _fullscreen_state: Label = $Root/Center/Panel/Layout/Pages/VideoPage/FullscreenRow/FullscreenState
-@onready var _pixel_switch: CheckButton = $Root/Center/Panel/Layout/Pages/VideoPage/PixelRow/PixelSwitch
-@onready var _pixel_state: Label = $Root/Center/Panel/Layout/Pages/VideoPage/PixelRow/PixelState
-@onready var _reduce_switch: CheckButton = $Root/Center/Panel/Layout/Pages/AccessPage/ReduceRow/ReduceSwitch
-@onready var _reduce_state: Label = $Root/Center/Panel/Layout/Pages/AccessPage/ReduceRow/ReduceState
-@onready var _reset_button: Button = $Root/Center/Panel/Layout/Footer/ResetButton
-@onready var _back_button: Button = $Root/Center/Panel/Layout/Footer/BackButton
+const _LAYOUT := "Root/Center/Panel/Layout/"
 
 var _music_dragging := false
 var _sfx_dragging := false
+
+@onready var _tab_buttons: Array[Button] = [
+	get_node(_LAYOUT + "Tabs/SoundTab"),
+	get_node(_LAYOUT + "Tabs/VideoTab"),
+	get_node(_LAYOUT + "Tabs/AccessTab"),
+]
+@onready var _pages: Array[Control] = [
+	get_node(_LAYOUT + "Pages/SoundPage"),
+	get_node(_LAYOUT + "Pages/VideoPage"),
+	get_node(_LAYOUT + "Pages/AccessPage"),
+]
+@onready var _music_slider: HSlider = get_node(_LAYOUT + "Pages/SoundPage/MusicRow/MusicSlider")
+@onready var _music_value: Label = get_node(_LAYOUT + "Pages/SoundPage/MusicRow/MusicValue")
+@onready var _music_icon: TextureRect = get_node(_LAYOUT + "Pages/SoundPage/MusicRow/MusicIcon")
+@onready
+var _music_mute: CheckButton = get_node(_LAYOUT + "Pages/SoundPage/MusicMuteRow/MusicMuteSwitch")
+@onready
+var _music_mute_state: Label = get_node(_LAYOUT + "Pages/SoundPage/MusicMuteRow/MusicMuteState")
+@onready var _sfx_slider: HSlider = get_node(_LAYOUT + "Pages/SoundPage/SfxRow/SfxSlider")
+@onready var _sfx_value: Label = get_node(_LAYOUT + "Pages/SoundPage/SfxRow/SfxValue")
+@onready var _sfx_icon: TextureRect = get_node(_LAYOUT + "Pages/SoundPage/SfxRow/SfxIcon")
+@onready var _sfx_mute: CheckButton = get_node(_LAYOUT + "Pages/SoundPage/SfxMuteRow/SfxMuteSwitch")
+@onready var _sfx_mute_state: Label = get_node(_LAYOUT + "Pages/SoundPage/SfxMuteRow/SfxMuteState")
+@onready var _fullscreen_switch: CheckButton = get_node(
+	_LAYOUT + "Pages/VideoPage/FullscreenRow/FullscreenSwitch"
+)
+@onready
+var _fullscreen_state: Label = get_node(_LAYOUT + "Pages/VideoPage/FullscreenRow/FullscreenState")
+@onready var _pixel_switch: CheckButton = get_node(_LAYOUT + "Pages/VideoPage/PixelRow/PixelSwitch")
+@onready var _pixel_state: Label = get_node(_LAYOUT + "Pages/VideoPage/PixelRow/PixelState")
+@onready
+var _reduce_switch: CheckButton = get_node(_LAYOUT + "Pages/AccessPage/ReduceRow/ReduceSwitch")
+@onready var _reduce_state: Label = get_node(_LAYOUT + "Pages/AccessPage/ReduceRow/ReduceState")
+@onready var _reset_button: Button = get_node(_LAYOUT + "Footer/ResetButton")
+@onready var _back_button: Button = get_node(_LAYOUT + "Footer/BackButton")
 
 
 func _ready() -> void:

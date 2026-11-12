@@ -251,7 +251,11 @@ func _hurt_in_strike_area() -> void:
 ## Aviso: pisca em vermelho e dá um pulinho, de acordo com o quanto já passou.
 func _set_telegraph(progress: float) -> void:
 	# Com "reduzir efeitos visuais" a cor do aviso fica fixa, sem pulsar.
-	var pulse := REDUCED_WARNING_MIX if AudioSettings.reduce_effects else 0.5 - 0.5 * cos(progress * TAU * WARNING_BLINKS)
+	var pulse := (
+		REDUCED_WARNING_MIX
+		if AudioSettings.reduce_effects
+		else 0.5 - 0.5 * cos(progress * TAU * WARNING_BLINKS)
+	)
 	_sprite.modulate = _base_color.lerp(WARNING_COLOR, pulse)
 	_sprite.position.y = -sin(progress * PI) * WARNING_HOP_HEIGHT
 

@@ -67,7 +67,9 @@ func test_volume_is_applied_to_the_buses() -> void:
 func test_mute_silences_the_bus_but_keeps_the_volume() -> void:
 	_settings.set_music_volume(70)
 	_settings.set_music_muted(true)
-	assert_eq(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")), VolumeCurve.SILENT_DB)
+	assert_eq(
+		AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")), VolumeCurve.SILENT_DB
+	)
 	_settings.set_music_muted(false)
 	assert_eq(_settings.music_volume, 70)
 	assert_gt(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")), -10.0)
