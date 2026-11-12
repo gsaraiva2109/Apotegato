@@ -19,6 +19,9 @@ signal fainted
 
 ## Quanto o sprite pisca durante a invencibilidade, em segundos por piscada.
 const BLINK_SECONDS := 0.08
+## Opacidade do sprite na parte "apagada" da piscada e na versão sem piscar.
+const DIM_ALPHA := 0.35
+const REDUCED_DIM_ALPHA := 0.6
 
 ## Camada de colisão das criaturas (a 2ª).
 const CREATURE_MASK := 2
@@ -226,12 +229,17 @@ func _update_invulnerability(delta: float) -> void:
 	if _invulnerable_left <= 0.0:
 		return
 	_invulnerable_left = maxf(_invulnerable_left - delta, 0.0)
-	_set_blink(_invulnerable_left > 0.0 and int(_invulnerable_left / BLINK_SECONDS) % 2 == 0)
+	# Com "reduzir efeitos visuais" não pisca: fica um pouco transparente
+	# durante toda a invulnerabilidade.
+	var steady := AudioSettings.reduce_effects
+	_set_blink(_invulnerable_left > 0.0 and (steady or int(_invulnerable_left / BLINK_SECONDS) % 2 == 0))
 
 
 ## Liga ou desliga a piscada do sprite (mais transparente enquanto "piscando").
+## Com os efeitos reduzidos, a transparência é fixa e mais suave.
 func _set_blink(dimmed: bool) -> void:
-	_sprite.modulate.a = 0.35 if dimmed else 1.0
+	var dim_alpha := REDUCED_DIM_ALPHA if AudioSettings.reduce_effects else DIM_ALPHA
+	_sprite.modulate.a = dim_alpha if dimmed else 1.0
 
 
 ## Impede a câmera de mostrar o que está fora da sala (em pixels do mundo).

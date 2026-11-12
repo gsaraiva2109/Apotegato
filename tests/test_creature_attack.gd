@@ -106,6 +106,22 @@ func test_stops_and_warns_when_the_player_is_in_range() -> void:
 	assert_eq(creature.position, stopped_at, "Parada durante o aviso")
 
 
+func test_warning_does_not_pulse_with_reduced_effects() -> void:
+	AudioSettings.reduce_effects = true
+	var creature := _creature(_corridor(), Vector2i(1, 1))
+	_target.position = creature.position + Vector2(20, 0)
+	assert_true(await _wait_for_state(creature, CreatureBrain.State.WARNING))
+	var sprite: Sprite2D = creature.get_node("Sprite")
+	var greens := {}
+	for i in 20:
+		await wait_physics_frames(1)
+		if creature.brain.state == CreatureBrain.State.WARNING:
+			greens[snappedf(sprite.modulate.g, 0.001)] = true
+	AudioSettings.reduce_effects = false
+	assert_eq(greens.size(), 1, "A cor do aviso fica fixa")
+	assert_lt(greens.keys()[0], 0.9, "Ainda avisa com a cor")
+
+
 func test_warning_blinks_red_and_hops() -> void:
 	var creature := _creature(_corridor(), Vector2i(1, 1))
 	_target.position = creature.position + Vector2(20, 0)

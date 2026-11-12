@@ -156,6 +156,8 @@ A caixa de diálogo é `scenes/ui/dialogue_box.tscn`: nome de quem fala, texto a
 
 O jogo tem uma máquina de estados, `GameState.flow` (`scripts/game_flow.gd`): exploração, diálogo, entrega, menu e conclusão, com as transições permitidas em `GameFlow.TRANSITIONS`. Só a exploração deixa o gato andar, atacar e interagir; em qualquer outro estado o `GameState` pausa a árvore de cenas, e só a interface (`process_mode` Always) responde. **Nenhuma cena pausa o jogo direto**: um menu novo pede `GameState.flow.open_menu()` ao abrir e `close_menu()` ao fechar.
 
+As opções do jogador ficam em `user://settings.cfg`, uma seção por autoload: `[display]` no `DisplaySettings` e `[audio]` e `[accessibility]` no `AudioSettings` (volumes dos barramentos `Music` e `SFX`, mudo e `reduce_effects`). Cada autoload grava só as suas seções e preserva as outras. **Todo efeito que pisca ou treme respeita `AudioSettings.reduce_effects`** (ver a piscada em `player.gd` e o aviso em `creature.gd`); o tremor de câmera, quando existir, também. Efeitos sonoros novos tocam no barramento `SFX`. A tela de opções é `scenes/ui/options_menu.tscn` e o menu de pausa, `scenes/ui/pause_menu.tscn` (uma instância em cada cena de jogo, abre com a ação `pause`).
+
 ## Versões e entregas
 
 Cada sprint termina com uma tag de versão. Quando a `main` estiver pronta para a entrega:
