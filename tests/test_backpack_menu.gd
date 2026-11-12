@@ -92,12 +92,46 @@ func test_surplus_row_can_be_stored() -> void:
 
 func test_surplus_row_can_heal() -> void:
 	_backpack.add("mel")
-	_hearts.hurt(2)
+	_hearts.hurt(4)
+	_menu.open("anemia_ferropriva")
+	_menu.deliver()
+	assert_eq(_menu.use_surplus("mel"), 2)
+	assert_eq(_hearts.current, 12)
+	assert_true(_backpack.is_empty())
+
+
+func test_surplus_row_heals_half_a_heart_and_spends_the_ingredient() -> void:
+	_backpack.add("mel")
+	_hearts.hurt(1)
 	_menu.open("anemia_ferropriva")
 	_menu.deliver()
 	assert_eq(_menu.use_surplus("mel"), 1)
-	assert_eq(_hearts.current, 6)
+	assert_true(_hearts.is_full())
 	assert_true(_backpack.is_empty())
+
+
+func test_use_button_is_off_with_full_hearts_and_nothing_is_spent() -> void:
+	_backpack.add("mel")
+	_menu.open("anemia_ferropriva")
+	_menu.deliver()
+	var button: Button = _menu.get_surplus_row("mel").get_node("UseButton")
+	assert_true(button.disabled)
+	assert_eq(_menu.use_surplus("mel"), 0)
+	assert_eq(_backpack.count("mel"), 1)
+
+
+func test_use_button_text_shows_how_much_it_heals() -> void:
+	_backpack.add("mel")
+	_hearts.hurt(4)
+	_menu.open("anemia_ferropriva")
+	_menu.deliver()
+	var button: Button = _menu.get_surplus_row("mel").get_node("UseButton")
+	assert_eq(button.text, "Usar (+1 coração)")
+	assert_false(button.disabled)
+	assert_eq(BackpackMenu.use_text(_hearts), "Usar (+1 coração)")
+	_hearts.restore()
+	_hearts.hurt(1)
+	assert_eq(BackpackMenu.use_text(_hearts), "Usar (+½ coração)")
 
 
 func test_close_emits_closed() -> void:

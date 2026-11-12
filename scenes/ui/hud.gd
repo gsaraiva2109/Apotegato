@@ -5,6 +5,7 @@ extends CanvasLayer
 ## Buriti", "Mochila cheia").
 
 const HEART_FULL := preload("res://assets/art/ui/heart_full.png")
+const HEART_HALF := preload("res://assets/art/ui/heart_half.png")
 const HEART_EMPTY := preload("res://assets/art/ui/heart_empty.png")
 const HEART_SIZE := Vector2(36, 30)
 
@@ -25,27 +26,40 @@ func _ready() -> void:
 	_message_label.hide()
 
 
-## Mostra os corações: `current` cheios e o resto vazios, até `maximum`.
+## Mostra os corações. `current` e `maximum` vêm em meios corações: cada ícone
+## fica cheio, pela metade ou vazio.
 func show_hearts(current: int, maximum: int) -> void:
-	while _hearts_box.get_child_count() > maximum:
+	var count := ceili(float(maximum) / Hearts.HALVES_PER_HEART)
+	while _hearts_box.get_child_count() > count:
 		var extra := _hearts_box.get_child(_hearts_box.get_child_count() - 1)
 		_hearts_box.remove_child(extra)
 		extra.queue_free()
-	while _hearts_box.get_child_count() < maximum:
+	while _hearts_box.get_child_count() < count:
 		_hearts_box.add_child(_new_heart())
-	for i in maximum:
-		(_hearts_box.get_child(i) as TextureRect).texture = (
-			HEART_FULL if i < current else HEART_EMPTY
+	for i in count:
+		(_hearts_box.get_child(i) as TextureRect).texture = heart_texture(
+			Hearts.fill_of(i, current)
 		)
 
 
 ## Quantos corações cheios estão na tela.
 func full_hearts() -> int:
-	var full := 0
-	for heart: TextureRect in _hearts_box.get_children():
-		if heart.texture == HEART_FULL:
-			full += 1
-	return full
+	return _hearts_with(HEART_FULL)
+
+
+## Quantos corações pela metade estão na tela.
+func half_hearts() -> int:
+	return _hearts_with(HEART_HALF)
+
+
+## Imagem do coração para cada preenchimento.
+static func heart_texture(fill: Hearts.Fill) -> Texture2D:
+	match fill:
+		Hearts.Fill.FULL:
+			return HEART_FULL
+		Hearts.Fill.HALF:
+			return HEART_HALF
+	return HEART_EMPTY
 
 
 ## Mostra a luz do gato: a barra vai de vazia (luz inicial) a cheia (luz máxima).
@@ -89,6 +103,14 @@ static func backpack_text(backpack: Backpack) -> String:
 		var item_name := ingredient.display_name if ingredient != null else id
 		lines.append("%s x%d" % [item_name, backpack.count(id)])
 	return "\n".join(lines)
+
+
+func _hearts_with(texture: Texture2D) -> int:
+	var found := 0
+	for heart: TextureRect in _hearts_box.get_children():
+		if heart.texture == texture:
+			found += 1
+	return found
 
 
 func _new_heart() -> TextureRect:
