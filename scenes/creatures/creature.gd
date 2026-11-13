@@ -37,7 +37,7 @@ const WARNING_COLOR := Color(1.8, 0.35, 0.35)
 ## Com os efeitos reduzidos: mistura fixa com a cor de aviso e brilho suave no golpe.
 const REDUCED_WARNING_MIX := 0.6
 const REDUCED_FLASH := 1.4
-## Provisório da criatura forte, até a arte própria (#38): maior e mais escura.
+## Provisório da criatura forte, só quando falta a arte do bicho: maior e mais escura.
 const STRONG_SCALE := 1.25
 const STRONG_TINT := Color(0.55, 0.45, 0.55)
 
@@ -82,6 +82,11 @@ var _knockback := Vector2.ZERO
 var _strike_direction := Vector2.DOWN
 var _lunge_connected := false
 var _strong := false
+var _sprite_name := ""
+var _walk_sheet: Texture2D
+var _strike_sheet: Texture2D
+var _walk_time := 0.0
+var _showing_strike := false
 var _base_color := Color.WHITE
 
 @onready var _sprite: Sprite2D = $Sprite
@@ -99,10 +104,34 @@ func _ready() -> void:
 	)
 	_hits_left = hits_to_defeat
 	_strike_area.position = BODY_OFFSET
-	if _strong:
-		_base_color = STRONG_TINT
-		_sprite.scale = Vector2.ONE * STRONG_SCALE
-		_sprite.modulate = _base_color
+	use_sheets(CreatureSprites.load_walk(_sprite_name), CreatureSprites.load_strike(_sprite_name))
+
+
+## Põe as folhas de andar e de golpe do bicho (ver `CreatureSprites`). Se faltar
+## uma delas, a criatura segue com o sprite provisório da cena.
+func use_sheets(walk: Texture2D, strike: Texture2D) -> void:
+	if walk == null or strike == null:
+		_walk_sheet = null
+		_strike_sheet = null
+	else:
+		_walk_sheet = walk
+		_strike_sheet = strike
+		_show_walk(CreatureSprites.STAND_FRAME)
+	_refresh_strong_marking()
+
+
+## Sem a arte do bicho, a forte se distingue pelo tamanho e pela cor; com a arte,
+## o próprio bicho já é diferente.
+func _refresh_strong_marking() -> void:
+	var marked := _strong and not has_art()
+	_base_color = STRONG_TINT if marked else Color.WHITE
+	_sprite.scale = Vector2.ONE * (STRONG_SCALE if marked else 1.0)
+	_sprite.modulate = _base_color
+
+
+## Se a criatura tem a arte do bicho (e não o sprite provisório).
+func has_art() -> bool:
+	return _walk_sheet != null
 
 
 ## Liga a criatura ao andar (grade para achar o caminho) e ao gato (alvo). Com
@@ -113,6 +142,7 @@ func setup(grid: MazeGrid, target: Node2D, data: CreatureCatalog.Entry = null) -
 	_target = target
 	if data != null:
 		creature_id = data.id
+		_sprite_name = data.sprite
 		damage = data.damage
 		hits_to_defeat = data.hits
 		speed = data.speed
@@ -142,6 +172,7 @@ func _physics_process(delta: float) -> void:
 				_think()
 		velocity = _velocity_for(brain.state)
 	move_and_slide()
+	_animate(delta, current)
 	if brain.can_hurt():
 		_hurt_in_strike_area()
 
@@ -236,6 +267,48 @@ func _on_state_changed(before: CreatureBrain.State, current: CreatureBrain.State
 			# Voltando do descanso, o caminho antigo não vale mais.
 			if before == CreatureBrain.State.REST:
 				_repath_left = 0.0
+
+
+## Escolhe o quadro e o lado para onde o bicho olha. As folhas olham para a
+## esquerda, então ele é espelhado quando vai para a direita. O aviso, o bote e o
+## descanso mostram os quadros do golpe; perseguindo, o andar; parado, em pé.
+func _animate(delta: float, state: CreatureBrain.State) -> void:
+	if not has_art():
+		return
+	var strike_frame := CreatureSprites.strike_frame(state)
+	if strike_frame >= 0:
+		_face(_strike_direction.x)
+		_show_strike(strike_frame)
+		return
+	if state == CreatureBrain.State.CHASING and _knockback_left <= 0.0:
+		_face(velocity.x)
+		_walk_time += delta
+		_show_walk(CreatureSprites.walk_frame(_walk_time))
+	else:
+		_walk_time = 0.0
+		_show_walk(CreatureSprites.STAND_FRAME)
+
+
+## Espelha o bicho para o lado do movimento (ignora movimento quase parado).
+func _face(direction_x: float) -> void:
+	if absf(direction_x) > 1.0:
+		_sprite.flip_h = direction_x > 0.0
+
+
+func _show_walk(frame: int) -> void:
+	if _showing_strike or _sprite.texture != _walk_sheet:
+		_sprite.texture = _walk_sheet
+		_sprite.hframes = CreatureSprites.WALK_FRAMES
+		_showing_strike = false
+	_sprite.frame = frame
+
+
+func _show_strike(frame: int) -> void:
+	if not _showing_strike or _sprite.texture != _strike_sheet:
+		_sprite.texture = _strike_sheet
+		_sprite.hframes = CreatureSprites.STRIKE_FRAMES
+		_showing_strike = true
+	_sprite.frame = frame
 
 
 ## Tira vida do gato se ele estiver na área do golpe. Cada bote acerta uma vez.

@@ -43,7 +43,7 @@ O jogo é desenhado em 960 x 544 e ampliado para o monitor de quem joga, em qual
 ## Números que já estão fechados
 
 - 7 corações, contados em meios (14 meios). Se zerar, o gato desmaia e acorda na cabana com a mochila intacta e a vida cheia. Criaturas não atacam um gato desmaiado.
-- Cada região tem uma criatura fraca (tira meio coração, 3 arranhões, 70 px/s, desde o andar 1) e uma forte (tira um coração, 4 arranhões, 80 px/s, a partir do andar 3). Os valores ficam em `data/criaturas.csv`.
+- Cada região tem uma criatura fraca (tira meio coração, 3 arranhões, 70 px/s, desde o andar 1) e uma forte (tira um coração, 4 arranhões, 80 px/s, a partir do andar 3). Os valores e o bicho de cada criatura (coluna `sprite`) ficam em `data/criaturas.csv`: tucano e onça-pintada na Amazônia, cascavel e onça-parda na Caatinga, seriema e capivara nos Campos e Rios, lobo-guará e tamanduá no Cerrado, caranguejo e jacaré no Litoral, macaco-prego e mico-leão na Mata Atlântica.
 - A criatura só machuca no bote: com o gato a 24 px ela para e avisa por 0,4 s, dá o bote por 0,12 s e descansa 0,7 s. Arranhar durante o aviso cancela o bote. Encostar nela não machuca. Quem leva o golpe fica 1 s invencível e é empurrado.
 - Cura: meio coração a cada 5 s sem levar dano nem arranhar. Cada sobra de ingrediente cura 1 coração (ou meio, se falta só isso); com a vida cheia nada é gasto.
 - Luz: começa em 0,6, ganha 0,12 por criatura derrotada, teto de 1,8, e volta a 0,6 a cada andar novo.
