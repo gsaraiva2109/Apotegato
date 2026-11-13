@@ -3,7 +3,7 @@ extends GutTest
 ## região e andar e o sorteio por peso (com semente fixa).
 
 const TEST_CSV := "user://test_criaturas.csv"
-const HEADER := "id,nome,regiao,dano,golpes,velocidade,andar_minimo,peso\n"
+const HEADER := "id,nome,regiao,dano,golpes,velocidade,andar_minimo,peso,sprite\n"
 
 var _catalog: CreatureCatalog
 var _rng: RandomNumberGenerator
@@ -30,9 +30,9 @@ func _load_sample() -> void:
 	_write(
 		(
 			HEADER
-			+ "fraca,Fraca,cerrado,1,3,70,1,2\n"
-			+ "forte,Forte,cerrado,2,4,80,3,1\n"
-			+ "outra,Outra,litoral,1,3,70,1,1\n"
+			+ "fraca,Fraca,cerrado,1,3,70,1,2,maned_wolf\n"
+			+ "forte,Forte,cerrado,2,4,80,3,1,anteater\n"
+			+ "outra,Outra,litoral,1,3,70,1,1,crab\n"
 		)
 	)
 	assert_true(_catalog.load_csv(TEST_CSV))
@@ -49,6 +49,7 @@ func test_reads_every_column() -> void:
 	assert_eq(strong.speed, 80.0)
 	assert_eq(strong.min_floor, 3)
 	assert_eq(strong.weight, 1)
+	assert_eq(strong.sprite, "anteater")
 	assert_true(strong.is_strong())
 	assert_false(_catalog.get_entry("fraca").is_strong())
 	assert_null(_catalog.get_entry("nao_existe"))
@@ -63,7 +64,7 @@ func test_missing_file_or_wrong_header_fails() -> void:
 
 
 func test_invalid_rows_are_skipped() -> void:
-	_write(HEADER + "boa,Boa,cerrado,1,3,70,1,2\nquebrada,Quebrada\n\n")
+	_write(HEADER + "boa,Boa,cerrado,1,3,70,1,2,crab\nquebrada,Quebrada\n\n")
 	assert_true(_catalog.load_csv(TEST_CSV))
 	assert_eq(_catalog.all().size(), 1)
 	assert_push_error("linha inválida")

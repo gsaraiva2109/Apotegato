@@ -71,3 +71,7 @@ desktop.ini
 /assets/art/ui/icon_mute.png
 /assets/art/ui/icon_home.png
 /assets/art/ui/icon_play.png
+
+# Arte dos bichos das criaturas (uma pasta por bicho, vinda do ApotegatoAssets por
+# tools/fetch_assets.sh): derivada de arte de terceiros, nunca versionar aqui.
+/assets/art/creatures/*/

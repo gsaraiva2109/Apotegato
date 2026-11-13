@@ -3,14 +3,17 @@ extends RefCounted
 ## O catálogo das criaturas, lido do data/criaturas.csv. Cada linha é uma
 ## criatura, com a região onde aparece, o dano que causa (em meios corações),
 ## quantos arranhões a derrotam, a velocidade, o primeiro andar em que pode
-## aparecer e o peso dela no sorteio.
+## aparecer, o peso dela no sorteio e a pasta da arte dela (`sprite`, ver
+## `CreatureSprites`).
 ##
 ## É lógica pura, sem cena e sem autoload: quem precisa (o andar) cria um
 ## catálogo com `load_default()`. O sorteio recebe o gerador de números
 ## aleatórios, então os testes usam uma semente fixa.
 
 const CSV_PATH := "res://data/criaturas.csv"
-const HEADER := ["id", "nome", "regiao", "dano", "golpes", "velocidade", "andar_minimo", "peso"]
+const HEADER := [
+	"id", "nome", "regiao", "dano", "golpes", "velocidade", "andar_minimo", "peso", "sprite"
+]
 
 
 ## Uma criatura do catálogo.
@@ -29,6 +32,8 @@ class Entry:
 	var min_floor: int
 	## Chance relativa no sorteio.
 	var weight: int
+	## Nome da pasta de arte em `assets/art/creatures/` (o bicho que a criatura é).
+	var sprite: String
 
 	## Se ela machuca um coração inteiro ou mais (usado só para a arte provisória
 	## da forte, até a #38 trazer a arte de verdade).
@@ -75,6 +80,7 @@ func load_csv(path: String) -> bool:
 		entry.speed = row[5].to_float()
 		entry.min_floor = row[6].to_int()
 		entry.weight = row[7].to_int()
+		entry.sprite = row[8]
 		_entries.append(entry)
 	return true
 

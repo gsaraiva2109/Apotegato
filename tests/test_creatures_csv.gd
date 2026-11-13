@@ -54,3 +54,17 @@ func test_weak_creatures_are_the_ones_on_floor_one() -> void:
 	for region in Regions.IDS:
 		for entry in _catalog.entries_for(region, 1):
 			assert_false(entry.is_strong(), "%s aparece no andar 1 sendo forte" % entry.id)
+
+
+func test_every_creature_has_a_sprite_folder_name() -> void:
+	var regex := RegEx.create_from_string("^[a-z]+(_[a-z]+)*$")
+	for entry in _catalog.all():
+		assert_not_null(regex.search(entry.sprite), "sprite de %s: '%s'" % [entry.id, entry.sprite])
+
+
+func test_weak_and_strong_of_a_region_are_different_animals() -> void:
+	for region in Regions.IDS:
+		var animals := []
+		for entry in _catalog.entries_for(region, 99):
+			assert_does_not_have(animals, entry.sprite, "bicho repetido em %s" % region)
+			animals.append(entry.sprite)
