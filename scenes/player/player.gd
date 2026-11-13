@@ -50,7 +50,7 @@ const CREATURE_CENTER_OFFSET := Vector2(0, 4)
 ## Quantidade de meios corações recuperados por intervalo.
 @export var regeneration_amount := 1
 
-## Para onde o gato olha: a última direção em que andou (uma das quatro).
+## Para onde o gato olha: a última direção em que andou (uma das oito, unitária).
 var facing := Vector2.DOWN
 
 ## Os corações do gato.
@@ -62,10 +62,18 @@ var _fainted := false
 var _regeneration_elapsed := 0.0
 var _knockback_left := 0.0
 var _knockback := Vector2.ZERO
+var _walk_time := 0.0
+## Segundos desde o início do arranhão; negativo quando não está arranhando.
+var _scratch_time := -1.0
+var _has_art := false
 
 @onready var _camera: Camera2D = $Camera
 @onready var _scratch: ScratchEffect = $Scratch
 @onready var _sprite: Sprite2D = $Sprite
+
+
+func _ready() -> void:
+	_install_art()
 
 
 func _physics_process(delta: float) -> void:
@@ -73,18 +81,20 @@ func _physics_process(delta: float) -> void:
 	_update_invulnerability(delta)
 	if _fainted:
 		velocity = Vector2.ZERO
+		_animate(delta)
 		return
 	_update_regeneration(delta)
 	if _knockback_left > 0.0:
 		_knockback_left -= delta
 		velocity = _knockback
 		move_and_slide()
+		_animate(delta)
 		return
 	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	facing = facing_for(direction, facing)
-	_sprite.flip_h = flip_for(facing)
 	velocity = velocity_for(direction)
 	move_and_slide()
+	_animate(delta)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -98,19 +108,15 @@ func velocity_for(direction: Vector2) -> Vector2:
 	return direction.limit_length(1.0) * speed
 
 
-## Direção para onde o gato passa a olhar: a das quatro direções mais próxima da
-## entrada (na diagonal, vale a horizontal). Sem entrada, continua olhando para
-## `current`.
+## Direção para onde o gato passa a olhar: a das oito direções (as quatro retas e
+## as quatro diagonais) mais próxima da entrada. Sem entrada, continua olhando
+## para `current`.
 static func facing_for(direction: Vector2, current: Vector2) -> Vector2:
-	if direction.is_zero_approx():
-		return current
-	if absf(direction.x) >= absf(direction.y):
-		return Vector2(signf(direction.x), 0.0)
-	return Vector2(0.0, signf(direction.y))
+	return MingauSprites.snap(direction, current)
 
 
-## Se o sprite deve ser espelhado. A arte do gato olha para a esquerda, então
-## espelha quando ele olha para a direita; para cima e para baixo não espelha.
+## Se o sprite deve ser espelhado. Só vale para o sprite provisório, que olha para
+## a esquerda; a folha de arte já traz as oito direções.
 static func flip_for(direction: Vector2) -> bool:
 	return direction.x > 0.0
 
@@ -129,6 +135,7 @@ func try_attack() -> bool:
 	for creature in creatures_in_reach():
 		creature.take_scratch(facing)
 	_scratch.play(facing)
+	_scratch_time = 0.0
 	attacked.emit(facing)
 	return true
 
@@ -242,6 +249,49 @@ func _update_invulnerability(delta: float) -> void:
 func _set_blink(dimmed: bool) -> void:
 	var dim_alpha := REDUCED_DIM_ALPHA if AudioSettings.reduce_effects else DIM_ALPHA
 	_sprite.modulate.a = dim_alpha if dimmed else 1.0
+
+
+## Troca a textura pela folha de arte, se estiver instalada.
+func _install_art() -> void:
+	var sheet := MingauSprites.load_sheet()
+	if sheet == null:
+		return
+	_has_art = true
+	_sprite.texture = sheet
+	_sprite.hframes = MingauSprites.COLUMNS
+	_sprite.vframes = MingauSprites.ROWS
+	_sprite.flip_h = false
+
+
+## Se o gato está usando a folha de arte (e não o sprite provisório).
+func has_art() -> bool:
+	return _has_art
+
+
+## Quadro atual da folha (coluna e linha), para os testes.
+func current_frame() -> int:
+	return _sprite.frame
+
+
+## Escolhe o quadro: arranhão, andar ou parado, na direção em que o gato olha.
+func _animate(delta: float) -> void:
+	if not _has_art:
+		_sprite.flip_h = flip_for(facing)
+		return
+	var column := MingauSprites.IDLE_FRAME
+	if _scratch_time >= 0.0:
+		_scratch_time += delta
+		column = MingauSprites.scratch_frame(_scratch_time)
+		if column < 0:
+			_scratch_time = -1.0
+			column = MingauSprites.IDLE_FRAME
+	if _scratch_time < 0.0:
+		if velocity.length() > 1.0 and not is_knocked_back() and not _fainted:
+			_walk_time += delta
+			column = MingauSprites.walk_frame(_walk_time)
+		else:
+			_walk_time = 0.0
+	_sprite.frame = (MingauSprites.direction_index(facing) * MingauSprites.COLUMNS + column)
 
 
 ## Impede a câmera de mostrar o que está fora da sala (em pixels do mundo).

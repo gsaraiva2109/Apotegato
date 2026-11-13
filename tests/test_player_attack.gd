@@ -25,7 +25,12 @@ func test_facing_follows_the_last_direction() -> void:
 	assert_eq(Player.facing_for(Vector2.LEFT, Vector2.DOWN), Vector2.LEFT)
 	assert_eq(Player.facing_for(Vector2(0.2, -1), Vector2.DOWN), Vector2.UP)
 	assert_eq(
-		Player.facing_for(Vector2(1, 1), Vector2.DOWN), Vector2.RIGHT, "Na diagonal, horizontal"
+		Player.facing_for(Vector2(0.2, -1), Vector2.DOWN), Vector2.UP, "Quase reto, vale reto"
+	)
+	assert_eq(
+		Player.facing_for(Vector2(1, 1), Vector2.DOWN),
+		MingauSprites.DIRECTIONS[1],
+		"Na diagonal, olha na diagonal"
 	)
 	assert_eq(Player.facing_for(Vector2.ZERO, Vector2.LEFT), Vector2.LEFT, "Parado, mantém")
 
