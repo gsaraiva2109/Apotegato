@@ -50,11 +50,11 @@ func test_player_works_without_the_sheet() -> void:
 
 
 func test_player_shows_scratch_frames_in_the_facing_row() -> void:
-	if not MingauSprites.is_installed():
-		pending("Folha do Mingau não instalada (tools/fetch_assets.sh)")
-		return
 	var player: Player = autofree(PlayerScene.instantiate())
 	add_child(player)
+	if not player.has_art():
+		pending("Folha do Mingau não instalada (tools/fetch_assets.sh)")
+		return
 	player.facing = Vector2.RIGHT
 	await wait_physics_frames(1)
 	assert_eq(player.current_frame(), 2 * MingauSprites.COLUMNS + MingauSprites.IDLE_FRAME)
