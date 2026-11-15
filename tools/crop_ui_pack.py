@@ -94,7 +94,7 @@ def straighten_parchment(piece: Image.Image) -> Image.Image:
 # peças que precisam de ajuste depois do recorte
 FIXES = {"parchment.png": straighten_parchment}
 
-# Peças sem arte provisória (só existem com o pacote baixado).
+# Peças que substituem os ícones e os interruptores provisórios.
 # Ícones (contorno escuro e miolo creme): glifo na sheet (x, y, largura, altura).
 # Cada um é ampliado 2x e centralizado numa tela de 28 x 28.
 ICON_GLYPHS = {

@@ -43,6 +43,10 @@ const DIRECTIONS: Array[Vector2] = [
 
 
 static func is_installed() -> bool:
+	# No editor, um .import existente pode apontar para um PNG ausente.
+	# Nas exportações, a textura importada pode existir sem o PNG original.
+	if OS.has_feature("editor") and not FileAccess.file_exists(SHEET_PATH):
+		return false
 	return ResourceLoader.exists(SHEET_PATH)
 
 
