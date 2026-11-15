@@ -29,6 +29,8 @@ const CreatureScene := preload("res://scenes/creatures/creature.tscn")
 var creature_catalog := CreatureCatalog.load_default()
 ## Sorteia as criaturas de cada célula. Os testes trocam por uma com semente fixa.
 var creature_rng := RandomNumberGenerator.new()
+## Caminho do save automático. Os testes usam um arquivo separado.
+var save_path := SaveGame.PATH
 
 @onready var _room: Room = $Room
 @onready var _player: Player = $World/Player
@@ -138,10 +140,18 @@ func _spawn_creatures(layout: MazeLayout) -> void:
 func _on_player_fainted() -> void:
 	_hud.show_message("Mingau desmaiou... acordando na cabana")
 	await get_tree().create_timer(faint_seconds).timeout
+	_return_to_cabin(Hearts.MAX)
+
+
+func _return_to_cabin(hearts: int) -> void:
 	# Um menu aberto nesse meio tempo deixaria a cabana em pausa.
 	GameState.flow.reset()
 	GameState.leave_region()
-	get_tree().change_scene_to_file(ScenePaths.CABIN)
+	GameState.cabin_entry_hearts = hearts
+	if get_tree().change_scene_to_file(ScenePaths.CABIN) == OK:
+		var result := SaveGame.write(save_path, hearts)
+		if result != OK:
+			push_warning("Não foi possível salvar a campanha: %s" % error_string(result))
 
 
 ## Cada criatura derrotada aumenta a luz do andar.
@@ -194,8 +204,7 @@ func _on_door_choice_made(choice: StringName) -> void:
 			GameState.climb_floor()
 			generate_floor()
 		DoorMenu.CABIN:
-			GameState.leave_region()
-			get_tree().change_scene_to_file(ScenePaths.CABIN)
+			_return_to_cabin(Hearts.MAX if _player.hearts.is_empty() else _player.hearts.current)
 		DoorMenu.OTHER_REGION:
 			if GameState.flow.open_menu():
 				_region_menu.open(GameState.current_region)
