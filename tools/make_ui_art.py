@@ -1,5 +1,5 @@
 """Gera a arte provisória do tema da interface: painel, botões, tábua, barra,
-mochila, pergaminho do diário, cursor e cursor do slider.
+mochila, pergaminho do diário, cursores, ícones e interruptores.
 
 Uso: python tools/make_ui_art.py
 
@@ -87,6 +87,48 @@ def parchment() -> Image.Image:
     return img
 
 
+def icons() -> dict[str, Image.Image]:
+    """Desenha ícones provisórios próprios em telas de 28 x 28."""
+    cream = (0xF3, 0xE6, 0xC4, 255)
+    result: dict[str, Image.Image] = {}
+    for name in ("close", "gear", "sound", "mute", "home", "play"):
+        img = Image.new("RGBA", (28, 28))
+        d = ImageDraw.Draw(img)
+        if name == "close":
+            d.line((7, 7, 20, 20), fill=cream, width=4)
+            d.line((20, 7, 7, 20), fill=cream, width=4)
+        elif name == "gear":
+            d.rectangle((11, 4, 16, 23), fill=cream)
+            d.rectangle((4, 11, 23, 16), fill=cream)
+            d.ellipse((6, 6, 21, 21), fill=cream)
+            d.ellipse((11, 11, 16, 16), fill=FRAME_EDGE)
+        elif name in ("sound", "mute"):
+            d.polygon([(4, 10), (9, 10), (15, 5), (15, 22), (9, 17), (4, 17)], fill=cream)
+            if name == "sound":
+                d.arc((11, 6, 24, 21), -65, 65, fill=cream, width=2)
+            else:
+                d.line((18, 10, 24, 17), fill=cream, width=2)
+                d.line((24, 10, 18, 17), fill=cream, width=2)
+        elif name == "home":
+            d.polygon([(4, 13), (14, 4), (24, 13)], fill=cream)
+            d.rectangle((7, 13, 21, 23), fill=cream)
+            d.rectangle((12, 17, 16, 23), fill=FRAME_EDGE)
+        else:
+            d.polygon([(8, 4), (23, 14), (8, 23)], fill=cream)
+        result[name] = img
+    return result
+
+
+def switch(on: bool) -> Image.Image:
+    img = Image.new("RGBA", (60, 26))
+    d = ImageDraw.Draw(img)
+    track = (0xBD, 0x6D, 0x29, 255) if on else PANEL_FILL
+    d.rounded_rectangle((0, 0, 59, 25), radius=12, fill=track, outline=FRAME_EDGE, width=2)
+    x = 37 if on else 4
+    d.ellipse((x, 4, x + 18, 21), fill=(0xF3, 0xE6, 0xC4, 255), outline=FRAME_EDGE)
+    return img
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     panel().save(OUT / "panel.png")
@@ -99,6 +141,10 @@ def main() -> None:
     backpack().save(OUT / "backpack_icon.png")
     cursor().save(OUT / "cursor.png")
     grabber().save(OUT / "slider_grabber.png")
+    for name, img in icons().items():
+        img.save(OUT / f"icon_{name}.png")
+    switch(False).save(OUT / "switch_off.png")
+    switch(True).save(OUT / "switch_on.png")
 
 
 if __name__ == "__main__":
