@@ -12,7 +12,10 @@ signal closed
 
 const LINK_COLOR := "#7a3b12"
 const HEADING_COLOR := "#3b2417"
+## Tamanhos dos títulos no texto normal; o "Texto grande" multiplica pelo
+## fator do `TextSize`, como faz com o resto do tema.
 const HEADING_SIZE := 20
+const INGREDIENT_SIZE := 18
 const SECTION_SIZE := 16
 
 ## Arquivo lido. Só muda nos testes.
@@ -33,6 +36,7 @@ func _ready() -> void:
 	_build_condition_buttons()
 	_content.meta_clicked.connect(_on_link_clicked)
 	_back_button.pressed.connect(close)
+	AudioSettings.changed.connect(_refresh)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -86,7 +90,7 @@ static func build_text(condition: Dictionary) -> String:
 	parts.append(
 		(
 			"[font_size=%d][color=%s]%s[/color][/font_size]"
-			% [HEADING_SIZE, HEADING_COLOR, _escape(condition.get("name", ""))]
+			% [TextSize.scaled(HEADING_SIZE), HEADING_COLOR, _escape(condition.get("name", ""))]
 		)
 	)
 	for ingredient: Dictionary in condition.get("ingredients", []):
@@ -97,7 +101,10 @@ static func build_text(condition: Dictionary) -> String:
 static func _ingredient_text(ingredient: Dictionary) -> String:
 	var lines: PackedStringArray = []
 	lines.append(
-		"[font_size=%d][u]%s[/u][/font_size]" % [HEADING_SIZE - 2, _ingredient_name(ingredient)]
+		(
+			"[font_size=%d][u]%s[/u][/font_size]"
+			% [TextSize.scaled(INGREDIENT_SIZE), _ingredient_name(ingredient)]
+		)
 	)
 	var summary: String = ingredient.get("summary", "")
 	if not summary.is_empty():
@@ -123,7 +130,10 @@ static func _reference_text(number: int, reference: Dictionary) -> String:
 
 
 static func _section_title(title: String) -> String:
-	return "[font_size=%d][color=%s]%s[/color][/font_size]" % [SECTION_SIZE, HEADING_COLOR, title]
+	return (
+		"[font_size=%d][color=%s]%s[/color][/font_size]"
+		% [TextSize.scaled(SECTION_SIZE), HEADING_COLOR, title]
+	)
 
 
 ## Nome do ingrediente como aparece no jogo (do CSV), ou o id se não existir.
@@ -154,7 +164,19 @@ func _build_condition_buttons() -> void:
 		_condition_buttons[condition_id] = button
 
 
+## Redesenha o texto quando o "Texto grande" muda.
+func _refresh() -> void:
+	if not _current.is_empty():
+		show_condition(_current)
+
+
 func _on_link_clicked(meta: Variant) -> void:
 	var url := str(meta)
-	if url.begins_with("https://") or url.begins_with("http://"):
+	if is_web_link(url):
 		OS.shell_open(url)
+
+
+## Só links da web abrem; outros esquemas (file://, javascript: etc.) são
+## ignorados, para um texto do JSON não conseguir abrir arquivos do computador.
+static func is_web_link(url: String) -> bool:
+	return url.begins_with("https://") or url.begins_with("http://")

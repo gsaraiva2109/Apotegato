@@ -8,8 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b353uifxtkyo" path="res://assets/art/ui/scroll_button.png" id="5_uhagc"]
 [ext_resource type="Texture2D" uid="uid://1biq4bdpdcyl" path="res://assets/art/ui/scroll_button_hover.png" id="6_uhagc"]
 [ext_resource type="PackedScene" path="res://scenes/ui/options_menu.tscn" id="99_options"]
-
-[ext_resource type="PackedScene" path="res://scenes/ui/sources_menu.tscn" id="98_sources"]
+[ext_resource type="PackedScene" path="res://scenes/ui/sources_menu.tscn" id="100_sources"]
 [ext_resource type="Texture2D" uid="uid://yhk7rnr5addr" path="res://assets/art/ui/scroll_button_on_press.png" id="7_btxxm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x15ge"]
@@ -238,7 +237,7 @@ autowrap_mode = 3
 layout_mode = 2
 text = "Voltar"
 
-[node name="SourcesMenu" parent="." instance=ExtResource("98_sources")]
+[node name="SourcesMenu" parent="." instance=ExtResource("100_sources")]
 visible = false
 
 [node name="OptionsMenu" parent="." instance=ExtResource("99_options")]
