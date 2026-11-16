@@ -51,12 +51,47 @@ func test_load_is_disabled_without_a_save() -> void:
 
 
 func test_load_is_enabled_with_a_save() -> void:
+	assert_eq(SaveGame.write(TEST_SAVE, Hearts.MAX), OK)
+	_menu = _make_menu()
+	assert_true(MainMenu.has_save(TEST_SAVE))
+	assert_false(_button("LoadButton").disabled)
+
+
+func test_load_is_disabled_with_an_invalid_save() -> void:
 	var file := FileAccess.open(TEST_SAVE, FileAccess.WRITE)
 	file.store_string("{}")
 	file.close()
 	_menu = _make_menu()
-	assert_true(MainMenu.has_save(TEST_SAVE))
-	assert_false(_button("LoadButton").disabled)
+	assert_false(MainMenu.has_save(TEST_SAVE))
+	assert_true(_button("LoadButton").disabled)
+
+
+func test_load_restores_the_campaign_in_the_cabin() -> void:
+	var conditions := IngredientData.get_conditions()
+	GameState.patients.mark_attended(conditions[0])
+	GameState.attendance.finish_intro()
+	GameState.attendance.arrive(conditions[1])
+	GameState.attendance.talk_to_patient()
+	GameState.attendance.talk_to_apothecary()
+	GameState.backpack.add("mel", 2)
+	GameState.stock.store("sardinha", 3)
+	assert_eq(SaveGame.write(TEST_SAVE, Hearts.MAX - 3), OK)
+	GameState.new_game()
+	_menu = _make_menu()
+	_button("LoadButton").pressed.emit()
+	await wait_process_frames(2)
+	var cabin := get_tree().current_scene as Cabin
+	assert_not_null(cabin)
+	if cabin == null:
+		return
+	var player: Player = cabin.get_node("World/Player")
+	assert_eq(player.hearts.current, Hearts.MAX - 3)
+	assert_eq(GameState.backpack.count("mel"), 2)
+	assert_eq(GameState.stock.count("sardinha"), 3)
+	assert_true(GameState.patients.is_attended(conditions[0]))
+	assert_eq(cabin.current_condition, conditions[1])
+	assert_false(cabin.is_in_dialogue())
+	cabin.queue_free()
 
 
 func test_buttons_work_with_the_mouse() -> void:

@@ -49,7 +49,9 @@ O jogo é desenhado em 960 x 544 e ampliado para o monitor de quem joga, em qual
 - Luz: começa em 0,6, ganha 0,12 por criatura derrotada, teto de 1,8, e volta a 0,6 a cada andar novo.
 - Mochila com 6 espaços e itens empilháveis. O que sobra da entrega vai para o estoque da apotecária ou cura vida (1 coração por item).
 - 26 ingredientes e 10 condições, todos num CSV único com id estável.
-- Save em JSON local, com campo de versão, gravado ao voltar para a cabana.
+- Ao voltar de uma região para a cabana, o jogo salva em `user://save.json`. Carregar Jogo retoma
+  na cabana com os corações, a mochila, o estoque e o atendimento salvos. O botão fica indisponível
+  se o arquivo estiver ausente, inválido ou em uma versão incompatível.
 
 XP, moedas, upgrades e mochila que cresce estão em discussão e **não** fazem parte do escopo atual.
 

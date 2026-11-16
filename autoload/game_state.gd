@@ -24,6 +24,8 @@ const PARITY_EVEN := "par"
 ## Id da região atual (o mesmo do CSV). Vazio enquanto o gato está na cabana.
 var current_region: String = ""
 var current_floor: int = FIRST_FLOOR
+## Vida na chegada à cabana, em meios corações.
+var cabin_entry_hearts: int = Hearts.MAX
 var backpack := Backpack.new()
 var stock := Stock.new()
 ## Quais condições já foram atendidas e o sorteio do próximo paciente.
@@ -66,6 +68,7 @@ func leave_region() -> void:
 ## Zera tudo para uma campanha nova.
 func new_game() -> void:
 	leave_region()
+	cabin_entry_hearts = Hearts.MAX
 	backpack.clear()
 	stock.clear()
 	patients.reset()

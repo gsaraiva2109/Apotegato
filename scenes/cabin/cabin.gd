@@ -70,6 +70,7 @@ func _ready() -> void:
 	GameState.flow.reset()
 	Music.play(Music.CABIN)
 	_player.set_camera_limits(ROOM)
+	_player.hearts.hurt(Hearts.MAX - GameState.cabin_entry_hearts)
 	for area: InteractionArea in $Interactions.get_children():
 		area.interacted.connect(_on_interacted)
 	_region_menu.region_selected.connect(_on_region_selected)
