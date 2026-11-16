@@ -1,19 +1,19 @@
-[gd_scene format=3 uid="uid://plyuide3cmm0"]
+[gd_scene format=3]
 
-[ext_resource type="Script" uid="uid://rfbpfv6q7rpm" path="res://scenes/ui/pause_menu.gd" id="1_menu"]
-[ext_resource type="Theme" uid="uid://dkgx8367noml7" path="res://scenes/ui/game_theme.tres" id="2_theme"]
-[ext_resource type="Texture2D" uid="uid://dkfw37j0dhc3l" path="res://assets/art/ui/icon_play.png" id="4_play"]
-[ext_resource type="Texture2D" uid="uid://d1rd2jl1c7go3" path="res://assets/art/ui/icon_gear.png" id="5_gear"]
-[ext_resource type="Texture2D" uid="uid://wr0muwoxbuyg" path="res://assets/art/ui/icon_home.png" id="6_home"]
-[ext_resource type="Texture2D" uid="uid://umq68lx3n7ag" path="res://assets/art/ui/icon_close.png" id="7_close"]
+[ext_resource type="Script" path="res://scenes/ui/pause_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://scenes/ui/game_theme.tres" id="2_theme"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icon_play.png" id="4_play"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icon_gear.png" id="5_gear"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icon_home.png" id="6_home"]
+[ext_resource type="Texture2D" path="res://assets/art/ui/icon_close.png" id="7_close"]
 
-[node name="PauseMenu" type="CanvasLayer" unique_id=1815087062]
+[node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
 layer = 15
 visible = false
 script = ExtResource("1_menu")
 
-[node name="Root" type="Control" parent="." unique_id=646491949]
+[node name="Root" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_theme")
 
-[node name="Dim" type="ColorRect" parent="Root" unique_id=204229881]
+[node name="Dim" type="ColorRect" parent="Root"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,7 +31,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.6)
 
-[node name="Center" type="CenterContainer" parent="Root" unique_id=1278450566]
+[node name="Center" type="CenterContainer" parent="Root"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,68 +39,68 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="Root/Center" unique_id=119147349]
+[node name="Panel" type="PanelContainer" parent="Root/Center"]
 layout_mode = 2
 
-[node name="Layout" type="VBoxContainer" parent="Root/Center/Panel" unique_id=356379123]
+[node name="Layout" type="VBoxContainer" parent="Root/Center/Panel"]
 custom_minimum_size = Vector2(340, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TitlePlank" type="PanelContainer" parent="Root/Center/Panel/Layout" unique_id=1021506422]
+[node name="TitlePlank" type="PanelContainer" parent="Root/Center/Panel/Layout"]
 layout_mode = 2
 theme_type_variation = &"PlankPanel"
 
-[node name="Title" type="Label" parent="Root/Center/Panel/Layout/TitlePlank" unique_id=1531776048]
+[node name="Title" type="Label" parent="Root/Center/Panel/Layout/TitlePlank"]
 layout_mode = 2
 theme_type_variation = &"PlankLabel"
 theme_override_font_sizes/font_size = 24
 text = "Jogo pausado"
 horizontal_alignment = 1
 
-[node name="MainButtons" type="VBoxContainer" parent="Root/Center/Panel/Layout" unique_id=459386617]
+[node name="MainButtons" type="VBoxContainer" parent="Root/Center/Panel/Layout"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ResumeButton" type="Button" parent="Root/Center/Panel/Layout/MainButtons" unique_id=1745649809]
+[node name="ResumeButton" type="Button" parent="Root/Center/Panel/Layout/MainButtons"]
 layout_mode = 2
 text = "Continuar"
 icon = ExtResource("4_play")
 
-[node name="OptionsButton" type="Button" parent="Root/Center/Panel/Layout/MainButtons" unique_id=1207324915]
+[node name="OptionsButton" type="Button" parent="Root/Center/Panel/Layout/MainButtons"]
 layout_mode = 2
 text = "Opções"
 icon = ExtResource("5_gear")
 
-[node name="MenuButton" type="Button" parent="Root/Center/Panel/Layout/MainButtons" unique_id=2082038645]
+[node name="MenuButton" type="Button" parent="Root/Center/Panel/Layout/MainButtons"]
 layout_mode = 2
 text = "Voltar ao menu inicial"
 icon = ExtResource("6_home")
 
-[node name="Hint" type="Label" parent="Root/Center/Panel/Layout/MainButtons" unique_id=783655076]
+[node name="Hint" type="Label" parent="Root/Center/Panel/Layout/MainButtons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.8, 0.7, 1)
 text = "Esc também continua o jogo"
 horizontal_alignment = 1
 
-[node name="ConfirmBox" type="VBoxContainer" parent="Root/Center/Panel/Layout" unique_id=159586478]
+[node name="ConfirmBox" type="VBoxContainer" parent="Root/Center/Panel/Layout"]
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="ConfirmText" type="Label" parent="Root/Center/Panel/Layout/ConfirmBox" unique_id=814432691]
+[node name="ConfirmText" type="Label" parent="Root/Center/Panel/Layout/ConfirmBox"]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 text = "Voltar ao menu inicial? Apenas o progresso já salvo será mantido."
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="YesButton" type="Button" parent="Root/Center/Panel/Layout/ConfirmBox" unique_id=1960447000]
+[node name="YesButton" type="Button" parent="Root/Center/Panel/Layout/ConfirmBox"]
 layout_mode = 2
 text = "Sim, voltar ao menu"
 icon = ExtResource("6_home")
 
-[node name="NoButton" type="Button" parent="Root/Center/Panel/Layout/ConfirmBox" unique_id=313919186]
+[node name="NoButton" type="Button" parent="Root/Center/Panel/Layout/ConfirmBox"]
 layout_mode = 2
 text = "Não, continuar pausado"
 icon = ExtResource("7_close")

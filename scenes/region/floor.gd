@@ -148,6 +148,7 @@ func _return_to_cabin(hearts: int) -> void:
 	GameState.flow.reset()
 	GameState.leave_region()
 	GameState.cabin_entry_hearts = hearts
+	# A troca é adiada. Grave o ponto de retomada só se o retorno foi agendado.
 	if get_tree().change_scene_to_file(ScenePaths.CABIN) == OK:
 		var result := SaveGame.write(save_path, hearts)
 		if result != OK:

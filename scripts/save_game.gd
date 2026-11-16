@@ -77,6 +77,7 @@ static func restore(path: String) -> bool:
 	if data.is_empty():
 		return false
 	GameState.new_game()
+	# A validação já garantiu IDs, quantidades e espaço para todos os itens.
 	for id: String in data["backpack"]:
 		GameState.backpack.add(id, int(data["backpack"][id]))
 	for id: String in data["stock"]:
@@ -132,10 +133,11 @@ static func _valid_attendance(attendance: Variant, conditions: Array[String]) ->
 	if (
 		not attendance.get("intro_done") is bool
 		or not attendance.get("continuous") is bool
-		or not _is_integer(phase, Attendance.Phase.NONE, Attendance.Phase.LEAVING)
+		or not _is_integer(phase, -MAX_EXACT_INTEGER, MAX_EXACT_INTEGER)
+		or int(phase) not in Attendance.Phase.values()
 		or not condition is String
 		or not last_condition is String
 		or (last_condition != "" and last_condition not in conditions)
 	):
 		return false
-	return condition == "" if phase == Attendance.Phase.NONE else condition in conditions
+	return condition == "" if int(phase) == Attendance.Phase.NONE else condition in conditions

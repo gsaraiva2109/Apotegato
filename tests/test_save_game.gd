@@ -35,8 +35,17 @@ func test_invalid_or_missing_save_leaves_the_campaign_intact() -> void:
 	unsupported_version["versao"] = SaveGame.VERSION + 1
 	var fractional_count := valid.duplicate(true)
 	fractional_count["backpack"]["mel"] = 1.5
+	var unknown_phase := valid.duplicate(true)
+	unknown_phase["attendance"]["phase"] = 999
+	var fractional_phase := valid.duplicate(true)
+	fractional_phase["attendance"]["phase"] = 0.5
 	for contents: String in [
-		"{", "{}", JSON.stringify(unsupported_version), JSON.stringify(fractional_count)
+		"{",
+		"{}",
+		JSON.stringify(unsupported_version),
+		JSON.stringify(fractional_count),
+		JSON.stringify(unknown_phase),
+		JSON.stringify(fractional_phase),
 	]:
 		var file := FileAccess.open(TEST_SAVE, FileAccess.WRITE)
 		file.store_string(contents)
