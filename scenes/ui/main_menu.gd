@@ -1,8 +1,8 @@
 class_name MainMenu
 extends Control
-## Tela inicial do jogo: Novo Jogo, Carregar Jogo, Opções, Créditos e Sair. Funciona com o
-## mouse e com o teclado. Carregar Jogo fica desabilitado enquanto não houver
-## save.
+## Tela inicial do jogo: Novo Jogo, Carregar Jogo, Opções, Fontes, Créditos e Sair.
+## Funciona com o mouse e com o teclado. Carregar Jogo fica desabilitado enquanto
+## não houver save.
 
 ## Emitido quando o jogador pede para sair do jogo.
 signal quit_requested
@@ -17,6 +17,8 @@ var save_path := SAVE_PATH
 @onready var _load_button: Button = $Center/Panel/Layout/LoadButton
 @onready var _options_button: Button = $Center/Panel/Layout/OptionsButton
 @onready var _options_menu: OptionsMenu = $OptionsMenu
+@onready var _sources_button: Button = $Center/Panel/Layout/SourcesButton
+@onready var _sources_menu: SourcesMenu = $SourcesMenu
 @onready var _credits_button: Button = $Center/Panel/Layout/CreditsButton
 @onready var _quit_button: Button = $Center/Panel/Layout/QuitButton
 @onready var _credits_panel: Control = $CreditsPanel
@@ -33,6 +35,8 @@ func _ready() -> void:
 	_load_button.pressed.connect(_on_load_pressed)
 	_options_button.pressed.connect(_options_menu.open)
 	_options_menu.closed.connect(_options_button.grab_focus)
+	_sources_button.pressed.connect(_sources_menu.open)
+	_sources_menu.closed.connect(_sources_button.grab_focus)
 	_credits_button.pressed.connect(_credits_panel.show)
 	_credits_back_button.pressed.connect(_close_credits)
 	_quit_button.pressed.connect(_on_quit_pressed)
@@ -49,6 +53,11 @@ func _unhandled_input(event: InputEvent) -> void:
 ## Se existe um save no caminho dado.
 static func has_save(path: String = SAVE_PATH) -> bool:
 	return FileAccess.file_exists(path)
+
+
+## Se a tela Fontes está aberta.
+func is_sources_open() -> bool:
+	return _sources_menu.is_open()
 
 
 ## Se a tela de Créditos está aberta.

@@ -1,0 +1,913 @@
+{
+	"condition_order": [
+		"anemia_ferropriva",
+		"diarreia",
+		"dor_muscular",
+		"escorbuto",
+		"gastrite",
+		"insonia",
+		"ossos_fracos",
+		"queimaduras",
+		"resfriado",
+		"xeroftalmia"
+	],
+	"conditions": {
+		"anemia_ferropriva": {
+			"name": "Anemia ferropriva",
+			"ingredients": [
+				{
+					"id": "figado_bovino",
+					"summary": "O fígado bovino é tradicionalmente consumido na alimentação brasileira e frequentemente recomendado como alimento rico em ferro.\n\nPreparações como fígado acebolado são comuns em diferentes regiões do país.",
+					"limitations": "• O ensaio da UFC não apresentou confirmação completa da anemia ferropriva por ferritina e outros marcadores de ferro.\n• O estudo envolveu poucas unidades de creche, com apenas quatro agrupamentos institucionais, o que limita a força da comparação entre os grupos.\n• A prevalência de anemia no grupo experimental diminuiu, mas a diferença não atingiu significância estatística convencional.\n• A composição nutricional do fígado cru não deve ser transferida diretamente para todas as preparações cozidas.\n• Nem todo o ferro presente no fígado é ferro heme.\n• O fígado contém uma quantidade muito elevada de vitamina A pré-formada. Isso exige moderação, principalmente em situações nas quais o excesso de retinol representa um risco, como na gestação.\n• Não deve ser apresentado como substituto de suplementação de ferro ou de avaliação médica em casos de anemia diagnosticada.",
+					"references": [
+						{
+							"text": "FRANÇA, Lídia Maria de Sousa. Uso de fígado bovino reduz anemia em lactentes: um ensaio clínico randomizado. 2025. Dissertação (Mestrado em Ciências da Saúde) — Universidade Federal do Ceará, Campus de Sobral, Sobral, 2025. Repositório Institucional da UFC.",
+							"url": "https://repositorio.ufc.br/handle/riufc/84414"
+						},
+						{
+							"text": "VALENZUELA, Carolina; LÓPEZ DE ROMAÑA, Daniel; OLIVARES, Manuel; MORALES, María Sol; PIZARRO, Fernando. Total iron and heme iron content and their distribution in beef meat and viscera. Biological Trace Element Research, v. 132, n. 1–3, p. 103–111, 2009. DOI: 10.1007/s12011-009-8400-3.",
+							"url": "https://link.springer.com/article/10.1007/s12011-009-8400-3"
+						},
+						{
+							"text": "UNIVERSIDADE DE SÃO PAULO. Food Research Center. Tabela Brasileira de Composição de Alimentos — Fígado bovino cru, Brasil, código BRC0052F. Consultar TBCA.",
+							"url": "https://www.tbca.net.br/"
+						}
+					]
+				},
+				{
+					"id": "castanha_caju",
+					"summary": "A castanha de caju é um alimento tradicionalmente consumido no Brasil, especialmente no Nordeste, onde o cajueiro possui grande importância econômica e cultural.\n\nÉ consumida torrada, salgada, em doces, farinhas e preparações culinárias.\n\nA associação é principalmente nutricional: a castanha fornece ferro de origem vegetal, além de proteínas, gorduras insaturadas e outros minerais.",
+					"limitations": "• O ferro presente na castanha é não heme, cuja absorção é mais influenciada pela composição da refeição.\n• A presença de fitatos e outros compostos pode reduzir o aproveitamento mineral.\n• Os estudos de bioacessibilidade realizados em laboratório não representam diretamente a absorção real em pessoas.\n• Os valores nutricionais variam conforme variedade, processamento, torrefação e armazenamento.\n• Uma porção habitual fornece menos ferro total do que a quantidade apresentada por 100 g.\n• A castanha é energeticamente densa, portanto não seria adequado recomendar grandes quantidades apenas para aumentar o consumo de ferro.\n• Não há evidência clínica suficiente para classificá-la como alimento capaz de recuperar uma anemia ferropriva já estabelecida.",
+					"references": [
+						{
+							"text": "NASCIMENTO, Angerson Nogueira do. Especiação e biodisponibilidade de metaloproteínas de Ca, Cu, Fe, Mg, Zn em castanha de caju (Anacardium occidentale). 2011. Tese (Doutorado em Química) — Instituto de Química, Universidade de São Paulo, São Paulo, 2011. DOI: 10.11606/T.46.2011.tde-07022012-082107.",
+							"url": "https://teses.usp.br/teses/disponiveis/46/46136/tde-07022012-082107/pt-br.html"
+						},
+						{
+							"text": "XAVIER, Alexsandra Dias Souza; FURTADO, Danielle Zildeana Sousa; ASSUNÇÃO, Nilson Antonio; NASCIMENTO, Angerson Nogueira. Bioaccessibility of Fe and Zn (associated to proteins) in cashew nut. Journal of Food Composition and Analysis, v. 83, art. 103259, 2019. DOI: 10.1016/j.jfca.2019.103259.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0889157519301528"
+						}
+					]
+				},
+				{
+					"id": "camu_camu",
+					"summary": "O camu-camu é um fruto amazônico tradicionalmente consumido como alimento, suco e preparação regional.\n\nPossui destaque por sua elevada concentração de vitamina C.\n\nSua associação com essa condição é principalmente nutricional: a vitamina C presente no fruto pode favorecer o aproveitamento do ferro de origem vegetal consumido na mesma refeição.",
+					"limitations": "• O camu-camu possui grande variação na concentração de vitamina C, conforme população vegetal, ambiente e características do fruto.\n• Processamento, armazenamento, aquecimento e diluição podem reduzir a quantidade efetivamente consumida.\n• A concentração elevada de vitamina C não significa que o fruto seja uma fonte importante de ferro.\n• O ensaio brasileiro que investigou sua associação com anemia não demonstrou diferença significativa de hemoglobina entre os grupos.\n• Nesse ensaio, o camu-camu foi utilizado em combinação com açaí, impossibilitando atribuir efeitos específicos ao fruto.\n• Não há demonstração clínica suficiente de que o camu-camu, isoladamente, previna ou recupere a anemia ferropriva.",
+					"references": [
+						{
+							"text": "YUYAMA, Kaoru; AGUIAR, Jaime P. L.; YUYAMA, Lucia K. O. Camu-camu: um fruto fantástico como fonte de vitamina C. Acta Amazonica, v. 32, n. 1, p. 169–174, 2002. DOI: 10.1590/1809-43922002321174.",
+							"url": "https://www.scielo.br/j/aa/a/4SST3bRPjcbnQX3f9xTxnkb/"
+						},
+						{
+							"text": "YUYAMA, Lucia Kiyoko Ozaki; ROSA, Rosane Dias; AGUIAR, Jaime Paiva Lopes; NAGAHAMA, Dionísia; ALENCAR, Fernando Hélio; YUYAMA, Kaoru; CORDEIRO, George William de Oliveira; MARQUES, Hedylamar de Oliveira. Açaí (Euterpe oleracea Mart.) e camu-camu (Myrciaria dubia (H.B.K.) McVaugh) possuem ação anti-anêmica? Acta Amazonica, v. 32, n. 4, p. 625–633, 2002. DOI: 10.1590/1809-43922002324623.",
+							"url": "https://www.scielo.br/j/aa/a/gT65qhKPgXcXB7ypJkxkhSs/"
+						},
+						{
+							"text": "NYAKUNDI, Patrick N. et al. Does consuming ascorbate-rich fruits and fruit juices with meals improve iron bioavailability? A systematic review and meta-analysis of interventions. The American Journal of Clinical Nutrition, v. 124, n. 3, art. 101418, 2026. DOI: 10.1016/j.ajcnut.2026.101418.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S0002916526002273"
+						}
+					]
+				},
+				{
+					"id": "acerola",
+					"summary": "A acerola é amplamente consumida no Brasil, especialmente na forma de suco, polpa e fruta in natura.\n\nÉ bastante conhecida por sua elevada concentração de vitamina C e frequentemente utilizada na alimentação para complementar a ingestão dessa vitamina.\n\nSua associação com essa condição possui principalmente uma justificativa nutricional: a vitamina C pode favorecer a absorção do ferro não heme presente em outros alimentos.",
+					"limitations": "• A acerola apresenta concentrações variáveis de vitamina C conforme maturação, variedade e processamento.\n• O teor de vitamina C pode diminuir durante armazenamento e processamento.\n• A acerola contém pouco ferro, portanto não deve ser apresentada como fonte significativa desse mineral.\n• O estudo brasileiro com crianças não possuía grupo controle e não confirmou laboratorialmente que todas as crianças com hemoglobina baixa tinham deficiência de ferro.\n• Não se pode atribuir todo o aumento de hemoglobina exclusivamente ao aumento da absorção de ferro.\n• A metanálise de 2026 investigou diversas frutas e sucos, não exclusivamente a acerola.\n• A vitamina C pode favorecer a absorção do ferro não heme, mas isso não transforma a acerola em tratamento isolado para anemia ferropriva.",
+					"references": [
+						{
+							"text": "COSTA, Maria José de Carvalho; TERTO, Aline Lacerda de Queiroga; SANTOS, Leonor Maria Pacheco; RIVERA, Maria Amélia Amado; MOURA, Luiza Sônia Ascciuti. Efeito da suplementação com acerola nos níveis sanguíneos de vitamina C e de hemoglobina em crianças pré-escolares. Revista de Nutrição, v. 14, n. 1, p. 13–20, 2001. DOI: 10.1590/S1415-52732001000100003.",
+							"url": "https://www.scielo.br/j/rn/a/Wz4h9zFb3FKc44FFQ3q7QnR/"
+						},
+						{
+							"text": "RIGHETTO, A. M.; NETTO, F. M.; CARRARO, F. Chemical Composition and Antioxidant Activity of Juices from Mature and Immature Acerola (Malpighia emarginata DC). Food Science and Technology International, v. 11, n. 4, p. 315–321, 2005. DOI: 10.1177/1082013205056785.",
+							"url": "https://journals.sagepub.com/doi/10.1177/1082013205056785"
+						},
+						{
+							"text": "NYAKUNDI, Patrick N. et al. Does consuming ascorbate-rich fruits and fruit juices with meals improve iron bioavailability? A systematic review and meta-analysis of interventions. The American Journal of Clinical Nutrition, v. 124, n. 3, art. 101418, 2026. DOI: 10.1016/j.ajcnut.2026.101418.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S0002916526002273"
+						}
+					]
+				}
+			]
+		},
+		"dor_muscular": {
+			"name": "Dor muscular",
+			"ingredients": [
+				{
+					"id": "erva_baleeira",
+					"summary": "A erva-baleeira é uma planta medicinal brasileira tradicionalmente utilizada para tratar dores, contusões, inchaços e inflamações.\n\nAs folhas são as partes mais utilizadas. Na medicina popular, aparecem em preparações como:\n• Compressas e aplicações locais.\n• Pomadas e cremes.\n• Infusões e outras preparações caseiras.\nSeu uso tópico para dores musculares e contusões está documentado em publicações brasileiras sobre plantas medicinais.\n\nÉ importante observar que o uso tradicional de uma infusão ou compressa não equivale à eficácia demonstrada para um medicamento industrializado feito com extrato padronizado da planta.",
+					"limitations": "Embora existam resultados clínicos favoráveis, eles se referem a formulações tópicas específicas, com concentração e composição padronizadas. Não é possível presumir que um chá, uma compressa ou uma pomada caseira produza o mesmo efeito. Parte dos estudos clínicos antigos também possui limitações de publicação e detalhamento metodológico. A própria Anvisa aponta lacunas importantes nos dados de toxicidade do óleo essencial e considera insuficientes as evidências para sustentar determinadas preparações tradicionais, como infusões e decoctos. Portanto, a evidência favorável não deve ser generalizada para qualquer forma de consumo ou aplicação da planta.",
+					"references": [
+						{
+							"text": "FERNANDES, E. S. et al. Anti-inflammatory effects of compounds alpha-humulene and (−)-trans-caryophyllene isolated from the essential oil of Cordia verbenacea. European Journal of Pharmacology, v. 569, n. 3, p. 228–236, 2007. DOI: 10.1016/j.ejphar.2007.04.059.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0014299907005419"
+						},
+						{
+							"text": "PASSOS, G. F. et al. Anti-inflammatory and anti-allergic properties of the essential oil and active compounds from Cordia verbenacea. Journal of Ethnopharmacology, v. 110, n. 2, p. 323–333, 2007. DOI: 10.1016/j.jep.2006.09.032.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S037887410600506X"
+						},
+						{
+							"text": "BRANDÃO, D. C. et al. Estudo fase III, duplo-cego, aleatório, comparativo para avaliar a eficácia e tolerabilidade da Cordia verbenacea e do diclofenaco dietilamônio, em pacientes portadores de contusões, entorses, traumas e lesões musculares, com início inferior a 24h. Revista Brasileira de Medicina, v. 63, n. 8, p. 408–415, 2006.",
+							"url": "https://ru.dgb.unam.mx/items/6bafc553-c334-4231-855a-e98e2dbc9832"
+						},
+						{
+							"text": "AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA (ANVISA). Relatório de Avaliação de Cordia verbenacea (D.C.), folium. Brasília: Anvisa, [s.d.]. O documento consultado não apresenta ano de publicação claramente identificável. Relatório oficial em PDF.",
+							"url": "https://www.gov.br/anvisa/pt-br/setorregulado/regularizacao/medicamentos/fitoterapicos-dinamizados-e-especificos/registro-simplificado-de-fitoterapicos/relatorios-de-avaliacao/relatorio_cordia_verbenacea.pdf"
+						}
+					]
+				},
+				{
+					"id": "unha_de_gato",
+					"summary": "A unha-de-gato é tradicionalmente utilizada por populações indígenas e comunidades amazônicas para diferentes condições inflamatórias.\n\nNa medicina popular, aparecem preparações feitas principalmente com cascas, raízes e outras partes da planta, dependendo da espécie e da tradição local.\n\nEntre os usos registrados estão:\n• Dores e inflamações articulares.\n• Reumatismo.\n• Problemas inflamatórios crônicos.\n• Algumas condições relacionadas ao sistema digestivo.\nO uso tradicional para dores e inflamações está documentado em revisões brasileiras de etnofarmacologia, mas isso não significa que haja comprovação clínica para todas essas indicações.",
+					"limitations": "A maior parte das evidências é pré-clínica ou relacionada a doenças articulares, e não a dores musculares. Os estudos humanos investigaram espécies, extratos e condições diferentes, de modo que seus resultados não podem ser reunidos como se demonstrassem um único efeito terapêutico.",
+					"references": [
+						{
+							"text": "VALENTE, L. M. M. Unha-de-gato [Uncaria tomentosa (Willd.) DC. e Uncaria guianensis (Aubl.) Gmel.]: um panorama sobre seus aspectos mais relevantes. Revista Fitos, v. 2, n. 1, p. 48–58, 2006. DOI: 10.32712/2446-4775.2006.40.",
+							"url": "https://revistafitos.far.fiocruz.br/index.php/revista-fitos/pt_BR/article/view/40"
+						},
+						{
+							"text": "CARVALHO, M. V. et al. Investigations on the anti-inflammatory and anti-allergic activities of the leaves of Uncaria guianensis (Aublet) J. F. Gmelin. Inflammopharmacology, v. 14, n. 1–2, p. 48–56, 2006. DOI: 10.1007/s10787-006-1509-5.",
+							"url": "https://link.springer.com/article/10.1007/s10787-006-1509-5"
+						},
+						{
+							"text": "PISCOYA, J. et al. Efficacy and safety of freeze-dried cat's claw in osteoarthritis of the knee: mechanisms of action of the species Uncaria guianensis. Inflammation Research, v. 50, n. 9, p. 442–448, 2001. DOI: 10.1007/PL00000268.",
+							"url": "https://link.springer.com/article/10.1007/PL00000268"
+						},
+						{
+							"text": "MUR, E. et al. Randomized double blind trial of an extract from the pentacyclic alkaloid-chemotype of Uncaria tomentosa for the treatment of rheumatoid arthritis. The Journal of Rheumatology, v. 29, n. 4, p. 678–681, 2002. Registro PubMed, PMID 11950006. Não localizei DOI verificável.",
+							"url": "https://pubmed.ncbi.nlm.nih.gov/11950006/"
+						},
+						{
+							"text": "SORDI, R. et al. Randomized, Double-Blind, Placebo-Controlled Phase II Clinical Trial on the Use of Uncaria tomentosa (Cat’s Claw) for Aromatase Inhibitor-Induced Arthralgia: A Pilot Study. Journal of Natural Remedies, v. 19, n. 1, 2019. DOI: 10.18311/jnr/2019/22867.",
+							"url": "https://www.informaticsjournals.co.in/index.php/jnr/article/view/22867"
+						},
+						{
+							"text": "JÜRGENSEN, S. et al. Involvement of 5-HT2 receptors in the antinociceptive effect of Uncaria tomentosa. Pharmacology Biochemistry and Behavior, v. 81, n. 3, p. 466–477, 2005. DOI: 10.1016/j.pbb.2005.04.004.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S009130570500119X"
+						},
+						{
+							"text": "ARADO, G. M. et al. Anti-inflammatory and/or immunomodulatory activities of Uncaria tomentosa (cat’s claw) extracts: A systematic review and meta-analysis of in vivo studies. Frontiers in Pharmacology, v. 15, art. 1378408, 2024. DOI: 10.3389/fphar.2024.1378408.",
+							"url": "https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2024.1378408/"
+						}
+					]
+				},
+				{
+					"id": "arnica_brasileira",
+					"summary": "A Solidago chilensis é utilizada popularmente no Brasil, principalmente em preparações externas, para contusões, hematomas, dores e inflamações.\n\nEntre as partes vegetais tradicionalmente empregadas estão:\n• Inflorescências.\n• Folhas.\n• Raízes.\nAs preparações populares incluem aplicações locais, tinturas e formulações destinadas a contusões e dores musculoesqueléticas.\n\nUma publicação da Fiocruz registra o emprego de inflorescências e raízes como anti-inflamatório e no tratamento popular de contusões e dores de cabeça.",
+					"limitations": "A principal limitação é a pequena quantidade de estudos clínicos. O ensaio em seres humanos envolveu apenas 20 voluntários e investigou dor lombar, não contusões ou lesões musculares específicas. Os demais estudos são principalmente experimentais, realizados em animais, e não comprovam o mesmo benefício em pessoas. Também é fundamental identificar corretamente a espécie vegetal, pois diversas plantas brasileiras recebem o nome popular de arnica, mas apresentam composições químicas diferentes. Os resultados de Solidago chilensis não devem ser atribuídos automaticamente a Lychnophora ericoides, Lychnophora pinaster ou Arnica montana.",
+					"references": [
+						{
+							"text": "SILVA, A. G. da et al. Evaluation of an extract of Brazilian arnica (Solidago chilensis Meyen, Asteraceae) in treating lumbago. Phytotherapy Research, v. 24, n. 2, p. 283–287, 2010. DOI: 10.1002/ptr.2934.",
+							"url": "https://onlinelibrary.wiley.com/doi/10.1002/ptr.2934"
+						},
+						{
+							"text": "TAMURA, E. K. et al. Inhibitory effects of Solidago chilensis Meyen hydroalcoholic extract on acute inflammation. Journal of Ethnopharmacology, v. 122, n. 3, p. 478–485, 2009. DOI: 10.1016/j.jep.2009.01.029.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874109000506"
+						},
+						{
+							"text": "GOULART, S. et al. Anti-inflammatory evaluation of Solidago chilensis Meyen in a murine model of pleurisy. Journal of Ethnopharmacology, v. 113, n. 2, p. 346–353, 2007. DOI: 10.1016/j.jep.2007.07.003.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874107003248"
+						},
+						{
+							"text": "LIZ, R. et al. The anti-inflammatory modulatory role of Solidago chilensis Meyen in the murine model of the air pouch. Journal of Pharmacy and Pharmacology, v. 60, n. 4, p. 515–521, 2008. DOI: 10.1211/jpp.60.4.0015.",
+							"url": "https://academic.oup.com/jpp/article-abstract/60/4/515/6148038"
+						},
+						{
+							"text": "ATHAYDE, A. E. de et al. “Arnicas” from Brazil: comparative analysis among ten species. Revista Brasileira de Farmacognosia, v. 29, p. 401–424, 2019. DOI: 10.1016/j.bjp.2019.02.006.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S0102695X18306161"
+						},
+						{
+							"text": "VALVERDE, S. S.; OLIVEIRA, T. B. de; SOUZA, S. P. de. Solidago chilensis Meyen (Asteraceae). Revista Fitos, v. 7, n. 3, p. 131–136, 2012. DOI: 10.32712/2446-4775.2012.147.",
+							"url": "https://revistafitos.far.fiocruz.br/index.php/revista-fitos/pt_BR/article/view/147"
+						}
+					]
+				}
+			]
+		},
+		"resfriado": {
+			"name": "Resfriado",
+			"ingredients": [
+				{
+					"id": "folha_guaco",
+					"summary": "O guaco é uma das plantas medicinais brasileiras mais conhecidas para problemas respiratórios. São utilizadas principalmente as folhas, em preparações como chás, infusões, xaropes e extratos.\n\nNa medicina popular, é associado a propriedades expectorantes, broncodilatadoras e antitussígenas. As duas espécies, M. glomerata e M. laevigata, são frequentemente chamadas pelo mesmo nome popular e podem ser utilizadas de maneira intercambiável, embora não sejam botanicamente a mesma planta.",
+					"limitations": "A associação depende principalmente do conhecimento tradicional e de resultados pré-clínicos. Os estudos clínicos são escassos, apresentam limitações metodológicas e não demonstram de maneira convincente a melhora de sintomas de resfriados. Além disso, M. glomerata e M. laevigata não devem ser tratadas como espécies idênticas: a composição química pode variar entre elas e entre diferentes preparações.",
+					"references": [
+						{
+							"text": "PERSON, O. C.; SOUZA FILHO, J. R.; PUGA, M. E. S.; ATALLAH, Á. N. A. Benefícios clínicos do guaco (Mikania) em humanos: uma revisão de escopo. Diagnóstico e Tratamento, v. 30, n. 3, p. 98–102, 2025. Artigo científico.",
+							"url": "https://periodicosapm.emnuvens.com.br/rdt/article/view/3912"
+						},
+						{
+							"text": "GARCIA, C. G. et al. Evaluation of the Bronchodilator Effect of Guaco Syrup: a Randomized, Double-blind, Crossover Clinical Trial. Revista Brasileira de Farmacognosia, v. 30, n. 1, p. 111–117, 2020. DOI: 10.1007/s43450-020-00006-8.",
+							"url": "https://link.springer.com/article/10.1007/s43450-020-00006-8"
+						},
+						{
+							"text": "BERTOL, G. et al. Safety evaluation of Mikania glomerata and Mikania laevigata in healthy volunteers: A randomized, open label and multiple dose phase I clinical trial. Journal of Ethnopharmacology, v. 318, parte B, 117018, 2024. DOI: 10.1016/j.jep.2023.117018.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874123008863"
+						},
+						{
+							"text": "GARCIA, C. G. et al. Biological Activities of Mikania glomerata and Mikania laevigata: A Scoping Review and Evidence Gap Mapping. Pharmaceuticals, v. 18, n. 4, art. 552, 2025. DOI: 10.3390/ph18040552.",
+							"url": "https://www.mdpi.com/1424-8247/18/4/552"
+						}
+					]
+				},
+				{
+					"id": "mel",
+					"summary": "O mel é utilizado tradicionalmente no Brasil para aliviar a tosse, irritação na garganta e rouquidão.\n\nÉ comum seu uso em preparações caseiras com limão, gengibre, alho e plantas medicinais, além de seu consumo puro ou dissolvido em bebidas mornas.\n\nDiferentemente dos ingredientes vegetais desta pesquisa, o mel não depende de uma única espécie botânica. Sua composição varia conforme as flores utilizadas pelas abelhas, a região de produção e a espécie produtora.",
+					"limitations": "Os estudos apresentam diferenças nas quantidades de mel, duração do uso, população estudada e critérios de avaliação dos sintomas. Grande parte das pesquisas foi realizada em crianças, portanto os resultados não devem ser automaticamente generalizados para adultos. O efeito também pode variar conforme a origem floral e a composição do mel. Além disso, não há comprovação de que o consumo de mel reduza a carga viral ou impeça a progressão de uma infecção respiratória. O mel não deve ser oferecido a crianças menores de um ano, devido ao risco de botulismo infantil.",
+					"references": [
+						{
+							"text": "PEIXOTO, D. M. et al. Uso do mel de abelha associado ao Ananas comosus (Bromelin) no tratamento da tosse irritativa aguda. Revista Paulista de Pediatria, v. 34, n. 4, p. 412–417, 2016. DOI: 10.1016/j.rppede.2016.04.002.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S2359348216300069"
+						},
+						{
+							"text": "ODUWOLE, O.; UDOH, E. E.; OYO-ITA, A.; MEREMIKWU, M. M. Honey for acute cough in children. Cochrane Database of Systematic Reviews, n. 4, CD007094, 2018. DOI: 10.1002/14651858.CD007094.pub5.",
+							"url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD007094.pub5/"
+						},
+						{
+							"text": "ABUELGASIM, H.; ALBURY, C.; LEE, J. Effectiveness of honey for symptomatic relief in upper respiratory tract infections: a systematic review and meta-analysis. BMJ Evidence-Based Medicine, v. 26, n. 2, p. 57–64, 2021. DOI: 10.1136/bmjebm-2020-111336.",
+							"url": "https://ebm.bmj.com/content/26/2/57"
+						},
+						{
+							"text": "KUITUNEN, I. et al. Honey for acute cough in children — a systematic review. European Journal of Pediatrics, 2023. DOI: 10.1007/s00431-023-05026-5.",
+							"url": "https://pubmed.ncbi.nlm.nih.gov/37355498/"
+						},
+						{
+							"text": "BRUN, M. T.; BRAGA, M. C. A. V.; GRUNEWALD, S. T. F. Honey vs. pharmacological treatment for acute cough in children: a systematic review and meta-analysis of randomized controlled trials. European Journal of Pediatrics, 2026. DOI: 10.1007/s00431-026-07348-w.",
+							"url": "https://link.springer.com/article/10.1007/s00431-026-07348-w"
+						}
+					]
+				},
+				{
+					"id": "flor_assa_peixe",
+					"summary": "O assa-peixe possui uso tradicional brasileiro bem documentado. A monografia do Ministério da Saúde registra o emprego de folhas, brotos e partes aéreas em preparações populares para problemas respiratórios.\n\nEntre as formas de utilização descritas estão:\n• Infusão das folhas.\n• Xaropes e sucos preparados com as folhas.\n• Decocções e infusões de diferentes partes da planta.\nOs usos populares registrados incluem tosse, bronquite, gripe, pneumonia e resfriado. Algumas fontes etnobotânicas também mencionam o emprego de flores e raízes em preparações para bronquite e tosse persistente.",
+					"limitations": "A associação com sintomas respiratórios é sustentada principalmente pelo uso tradicional. Os estudos laboratoriais não demonstram eficácia em pessoas e investigam atividades diferentes das necessárias para comprovar alívio da tosse. É importante também não misturar os resultados das flores com os das folhas: o estudo antimicrobiano avaliou as flores, enquanto o estudo anti-inflamatório em animais utilizou extrato das folhas. A composição dos extratos depende do método de preparação, e não há dose clínica respiratória validada.",
+					"references": [
+						{
+							"text": "BRASIL. Ministério da Saúde. Secretaria de Ciência, Tecnologia e Inovação e do Complexo Econômico-Industrial da Saúde. Informações Sistematizadas da Relação Nacional de Plantas Medicinais de Interesse ao SUS: Vernonia polyanthes (Spreng.) Less., Asteraceae (Assa-peixe). Brasília: Ministério da Saúde, 2024. 76 p. ISBN 978-65-5993-673-1. Documento oficial.",
+							"url": "https://bvsms.saude.gov.br/bvs/publicacoes/plantas_medicinais_vemonia.pdf"
+						},
+						{
+							"text": "WALTRICH, K. K.; HOSCHEID, J.; PROCHNAU, I. S. Antimicrobial activity of crude extracts and fractions of Vernonia polyanthes Less (assa-peixe) flowers. Revista Brasileira de Plantas Medicinais, v. 17, n. 4, supl. 2, p. 909–914, 2015. DOI: 10.1590/1983-084X/14_110.",
+							"url": "https://www.scielo.br/j/rbpm/a/kCkvFFrz5VcgBXBjhqVFgKD/"
+						},
+						{
+							"text": "TEMPONI, V. D. S. et al. Antinociceptive and Anti-Inflammatory Effects of Ethanol Extract from Vernonia polyanthes Leaves in Rodents. International Journal of Molecular Sciences, v. 13, n. 3, p. 3887–3899, 2012. DOI: 10.3390/ijms13033887.",
+							"url": "https://www.mdpi.com/1422-0067/13/3/3887"
+						},
+						{
+							"text": "SOUZA, P. V. R.; MAZZEI, J. L.; SIANI, A. C.; BEHRENS, M. D. D. Vernonia polyanthes (Spreng.) Less.: uma visão geral da sua utilização como planta medicinal, composição química e atividades farmacológicas. Revista Fitos, v. 11, suplemento, p. 105–115, 2017. DOI: 10.5935/2446-4775.20170021.",
+							"url": "https://revistafitos.far.fiocruz.br/index.php/revista-fitos/pt_BR/article/view/453"
+						},
+						{
+							"text": "VEGA, A. J.; DEMATTEIS, M. The transfer of Vernonia perangusta to the genus Vernonanthura (Vernonieae, Asteraceae) and the correct name for Vernonanthura phosphorica. Phytotaxa, v. 8, n. 1, p. 46–50. DOI: 10.11646/phytotaxa.8.1.5.",
+							"url": "https://phytotaxa.mapress.com/pt/article/view/phytotaxa.8.1.5"
+						}
+					]
+				},
+				{
+					"id": "alecrim_pimenta",
+					"summary": "O alecrim-pimenta é uma planta medicinal bastante conhecida no Nordeste brasileiro.\n\nA monografia do Ministério da Saúde registra o uso popular de suas folhas em infusões e preparações com finalidade antisséptica e antimicrobiana.\n\nEntre os usos tradicionais descritos estão:\n• Preparações para rinite.\n• Uso em problemas da boca e da garganta.\n• Preparações associadas a infecções respiratórias.\n• Uso como antisséptico e antimicrobiano.\nTambém é tradicionalmente utilizado em enxaguatórios bucais e preparações para problemas da pele.",
+					"limitations": "Não foram identificados ensaios clínicos que demonstrem melhora da tosse, da congestão nasal ou de outros sintomas do resfriado. A maior parte das evidências vem de experimentos in vitro ou em animais, frequentemente utilizando óleo essencial concentrado, cuja composição e concentração não são equivalentes às de um chá caseiro. Os estudos de atividade anti-inflamatória avaliaram principalmente inflamação tópica, e o resultado antiviral encontrado refere-se ao vírus da febre amarela, não a vírus respiratórios. Além disso, a aplicação repetida do óleo essencial em um dos modelos experimentais apresentou efeito pró-inflamatório. Assim, não se deve apresentar o óleo essencial concentrado como uma preparação de uso respiratório comprovadamente segura ou eficaz.",
+					"references": [
+						{
+							"text": "BRASIL. Ministério da Saúde. Secretaria de Ciência, Tecnologia e Insumos Estratégicos. Departamento de Assistência Farmacêutica e Insumos Estratégicos. Informações Sistematizadas da Relação Nacional de Plantas Medicinais de Interesse ao SUS: Lippia sidoides Cham., Verbenaceae (Alecrim-pimenta). Brasília: Ministério da Saúde, 2018. 72 p. ISBN 978-85-334-2659-7. Documento oficial.",
+							"url": "https://www.gov.br/saude/pt-br/composicao/sectics/daf/cbaf/arquivos/arquivos-plantas-medicinais-e-fitoterapicos/lippia-sidoides.pdf"
+						},
+						{
+							"text": "VERAS, H. N. H. et al. Synergistic antibiotic activity of volatile compounds from the essential oil of Lippia sidoides and thymol. Fitoterapia, v. 83, n. 3, p. 508–512, 2012. DOI: 10.1016/j.fitote.2011.12.024.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S0367326X1200007X"
+						},
+						{
+							"text": "BOTELHO, M. A. et al. Antimicrobial activity of the essential oil from Lippia sidoides, carvacrol and thymol against oral pathogens. Brazilian Journal of Medical and Biological Research, v. 40, n. 3, p. 349–356, 2007. DOI: 10.1590/S0100-879X2007000300010.",
+							"url": "https://www.scielo.br/j/bjmbr/a/pJxYMYWyNgQxDn77q5BHb8y/?lang=en"
+						},
+						{
+							"text": "VERAS, H. N. H. et al. Topical antiinflammatory activity of essential oil of Lippia sidoides Cham: possible mechanism of action. Phytotherapy Research, v. 27, n. 2, p. 179–185, 2013. DOI: 10.1002/ptr.4695.",
+							"url": "https://onlinelibrary.wiley.com/doi/10.1002/ptr.4695"
+						},
+						{
+							"text": "RODRIGUES, I. S. C. et al. Antiplaque and antigingivitis effect of Lippia sidoides: a double-blind clinical study in humans. Journal of Applied Oral Science, v. 17, n. 5, p. 404–407, 2009. DOI: 10.1590/S1678-77572009000500010.",
+							"url": "https://www.scielo.br/j/jaos/a/5F5vfhy4hkB9Vs9rnPXwWqR/"
+						}
+					]
+				}
+			]
+		},
+		"ossos_fracos": {
+			"name": "Ossos fracos",
+			"ingredients": [
+				{
+					"id": "sardinha",
+					"summary": "A sardinha é consumida tradicionalmente como alimento no Brasil, sobretudo assada, frita, em conservas e preparações com molho. Em algumas formas de preparo, o peixe é consumido inteiro ou com suas espinhas amolecidas.\n\nA associação com a saúde óssea é principalmente nutricional.",
+					"limitations": "Os valores nutricionais variam conforme espécie, preparo e parte consumida. As tabelas consultadas não permitem isolar precisamente a contribuição das espinhas na sardinha-verdadeira. Além disso, a quantidade de vitamina D não é especialmente elevada e não foram localizados estudos clínicos que demonstrem benefícios diretos sobre densidade óssea ou ocorrência de fraturas.",
+					"references": [
+						{
+							"text": "FIGUEIREDO, J. L.; SALLES, A. C. R.; RABELO, L. B. Sardinella brasiliensis (Steindachner, 1879), nome válido aplicado à sardinha-verdadeira no sudeste do Brasil. Papéis Avulsos de Zoologia, v. 50, n. 18, p. 281–283, 2010. DOI: 10.1590/S0031-10492010001800001.",
+							"url": "https://www.scielo.br/j/paz/a/4WpsBcDqBTtHgptMHkrhkfb/"
+						},
+						{
+							"text": "NATIONAL INSTITUTES OF HEALTH. Office of Dietary Supplements. Calcium – Fact Sheet for Health Professionals. Disponível em: NIH ODS – Calcium.",
+							"url": "https://ods.od.nih.gov/factsheets/Calcium-HealthProfessional/"
+						},
+						{
+							"text": "NATIONAL INSTITUTES OF HEALTH. Office of Dietary Supplements. Vitamin D – Fact Sheet for Health Professionals. Disponível em: NIH ODS – Vitamin D.",
+							"url": "https://ods.od.nih.gov/factsheets/VitaminD-HealthProfessional/"
+						}
+					]
+				},
+				{
+					"id": "castanha_caju",
+					"summary": "A castanha de caju é consumida tradicionalmente em diferentes regiões brasileiras, especialmente no Nordeste. É utilizada como alimento em sua forma torrada, em preparações culinárias, doces e outras receitas.\n\nSua associação com a saúde óssea decorre principalmente de sua composição mineral.",
+					"limitations": "Essa relação deve ser apresentada como contribuição nutricional indireta. A castanha não é uma fonte expressiva de cálcio e não existem evidências clínicas suficientes de que seu consumo trate ou previna diretamente a osteoporose.",
+					"references": [
+						{
+							"text": "SOARES, D. J.; SABINO, L. B. S.; SOUSA, M. S. M. L.; MAGALHÃES, C. E. C.; ALMEIDA, M. M. B.; SOUSA, P. H. M.; FIGUEIREDO, R. W. Teor de minerais, baseado na Ingestão Diária Recomendada, em castanhas de caju obtidas dos cultivos convencional e orgânico em diferentes etapas de processamento. Semina: Ciências Agrárias, v. 33, n. 5, p. 1869–1876, 2012. DOI: 10.5433/1679-0359.2012v33n5p1869.",
+							"url": "https://ojs.uel.br/revistas/uel/index.php/semagrarias/article/view/11517"
+						},
+						{
+							"text": "NAOZUKA, J.; VIEIRA, E. C.; NASCIMENTO, A. N.; OLIVEIRA, P. V. Elemental analysis of nuts and seeds by axially viewed ICP-OES. Food Chemistry, v. 124, p. 1667–1672, 2011. DOI: 10.1016/j.foodchem.2010.07.051.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0308814610009040"
+						},
+						{
+							"text": "ZHAO, K. et al. Anacardic acid inhibits RANKL-induced osteoclastogenesis in vitro and prevents ovariectomy-induced bone loss in vivo. FASEB Journal, v. 33, n. 8, p. 9100–9115, 2019. DOI: 10.1096/fj.201802575RR.",
+							"url": "https://faseb.onlinelibrary.wiley.com/doi/10.1096/fj.201802575RR"
+						}
+					]
+				},
+				{
+					"id": "semente_chia",
+					"summary": "A chia é originária de regiões do México e da Guatemala, onde possui histórico de consumo alimentar por populações indígenas.\n\nNo Brasil, seu consumo se popularizou mais recentemente, principalmente em preparações como vitaminas, iogurtes, pães, sobremesas e misturas com frutas.\n\nSua associação com a saúde óssea é principalmente nutricional e experimental.",
+					"limitations": "O elevado teor de cálcio da chia não significa que todo esse mineral seja absorvido. O ácido fítico e outros compostos da semente podem reduzir a biodisponibilidade de minerais. Embora a trituração tenha melhorado a bioacessibilidade em estudos laboratoriais, isso não comprova automaticamente um benefício clínico em humanos. Os estudos com animais apresentam resultados variados e não substituem ensaios clínicos. Portanto, a chia deve ser considerada uma fonte complementar de nutrientes, não um alimento com eficácia comprovada contra a osteoporose.",
+					"references": [
+						{
+							"text": "BARRETO, A. D. et al. Characterization and Bioaccessibility of Minerals in Seeds of Salvia hispanica L. American Journal of Plant Sciences, v. 7, p. 2323–2337, 2016. DOI: 10.4236/ajps.2016.715204.",
+							"url": "https://www.scirp.org/journal/paperinformation?paperid=72250"
+						},
+						{
+							"text": "VERA-CESPEDES, N.; MUÑOZ, L. A.; RINCÓN, M. Á.; HAROS, C. M. Physico-Chemical and Nutritional Properties of Chia Seeds from Latin American Countries. Foods, v. 12, n. 16, artigo 3013, 2023. DOI: 10.3390/foods12163013.",
+							"url": "https://www.mdpi.com/2304-8158/12/16/3013"
+						},
+						{
+							"text": "SILVA, B. P. et al. Effects of chia (Salvia hispanica L.) on calcium bioavailability and inflammation in Wistar rats. Food Research International, v. 116, p. 592–599, 2019. DOI: 10.1016/j.foodres.2018.08.078.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0963996918306951"
+						},
+						{
+							"text": "MISHIMA, M. D. V. et al. Bioavailability of Calcium from Chia (Salvia hispanica L.) in Ovariectomized Rats Fed a High Fat Diet. Journal of the American College of Nutrition, v. 40, n. 5, p. 454–464, 2021. DOI: 10.1080/07315724.2020.1790441.",
+							"url": "https://www.tandfonline.com/doi/full/10.1080/07315724.2020.1790441"
+						},
+						{
+							"text": "MONTES CHAÑI, E. M. et al. Long-Term Dietary Intake of Chia Seed Is Associated with Increased Bone Mineral Content and Improved Hepatic and Intestinal Morphology in Sprague-Dawley Rats. Nutrients, v. 10, n. 7, artigo 922, 2018. DOI: 10.3390/nu10070922.",
+							"url": "https://www.mdpi.com/2072-6643/10/7/922"
+						}
+					]
+				}
+			]
+		},
+		"insonia": {
+			"name": "Insônia",
+			"ingredients": [
+				{
+					"id": "flor_maracuja",
+					"summary": "Preparações de maracujá são tradicionalmente utilizadas como calmantes. No entanto, é comum que o uso popular e os estudos científicos se refiram às folhas ou às partes aéreas da planta — e não exclusivamente às flores.",
+					"limitations": "A associação com relaxamento é defensável, mas deve ser identificada como uma associação experimental quando o ingrediente representado for especificamente a flor. Para uma associação com suporte humano, seria mais correto especificar P. incarnata e indicar que os estudos utilizaram chá ou extratos da planta, não exclusivamente flores.",
+					"references": [
+						{
+							"text": "Dhawan, K.; Kumar, S.; Sharma, A. Anxiolytic activity of aerial and underground parts of Passiflora incarnata. Fitoterapia, 72(8), 922–926, 2001. DOI: 10.1016/S0367-326X(01)00322-7.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0367326X01003227"
+						},
+						{
+							"text": "Ngan, A.; Conduit, R. A double-blind, placebo-controlled investigation of the effects of Passiflora incarnata (passionflower) herbal tea on subjective sleep quality. Phytotherapy Research, 25(8), 1153–1159, 2011. DOI: 10.1002/ptr.3400.",
+							"url": "https://onlinelibrary.wiley.com/doi/10.1002/ptr.3400"
+						},
+						{
+							"text": "da Cunha, R. S. et al. Herbal medicines as anxiolytics prior to third molar surgical extraction. A randomized controlled clinical trial. Clinical Oral Investigations, 25(3), 1579–1586, 2021. DOI: 10.1007/s00784-020-03468-1. Estudo com participação da Universidade Federal de Sergipe e da Universidade Estadual de Campinas.",
+							"url": "https://link.springer.com/article/10.1007/s00784-020-03468-1"
+						},
+						{
+							"text": "Petry, R. D. et al. Comparative pharmacological study of hydroethanol extracts of Passiflora alata and Passiflora edulis leaves. Phytotherapy Research, 15(2), 162–164, 2001. DOI: 10.1002/ptr.694.",
+							"url": "https://onlinelibrary.wiley.com/doi/10.1002/ptr.694"
+						}
+					]
+				},
+				{
+					"id": "erva_cidreira",
+					"summary": "As folhas são utilizadas em infusões e preparações tradicionais para aliviar nervosismo, ansiedade leve e dificuldades para dormir. É uma das plantas mais frequentemente associadas ao efeito calmante da erva-cidreira.\n\nO nome popular “erva-cidreira” pode se referir a diferentes espécies botânicas no Brasil. As três mais importantes para esta pesquisa são:\nMelissa officinalis L. — Melissa, erva-cidreira verdadeira\nLippia alba (Mill.) N.E.Br. ex Britton & P.Wilson — Erva-cidreira, erva-cidreira-brasileira, cidreira\nCymbopogon citratus (DC.) Stapf — Capim-cidreira, capim-limão, capim-santo\nHá ainda uma quarta espécie que merece atenção: Aloysia citrodora Paláu, também conhecida em algumas regiões como cidró, cidreira ou erva-cidreira. Ela não deve ser confundida com as três anteriores.",
+					"limitations": "Os estudos utilizam extratos padronizados e formulações específicas, e não necessariamente a infusão doméstica. Alguns ensaios têm amostras pequenas e períodos curtos. Os resultados indicam potencial de apoio para sintomas leves, não cura de transtornos de ansiedade ou insônia crônica.",
+					"references": [
+						{
+							"text": "Dias, R. B.; Jamal, C. M. Review and benefit-risk assessment applied to medicinal plants used in Brazil to treat anxiety, depression and sleep disorders. Brazilian Journal of Pharmaceutical Sciences, 62, 2026. DOI: 10.1590/s2175-97902026e25170. Revisão conduzida por pesquisadores vinculados à Universidade Federal do Espírito Santo.",
+							"url": "https://www.scielo.br/j/bjps/a/6WQLXQVdhvFbjGnJqJpPvVx/"
+						},
+						{
+							"text": "Cases, J.; Ibarra, A.; Feuillère, N.; Roller, M.; Sukkar, S. G. Pilot trial of Melissa officinalis L. leaf extract in the treatment of volunteers suffering from mild-to-moderate anxiety disorders and sleep disturbances. Mediterranean Journal of Nutrition and Metabolism, 4, 211–218, 2011. DOI: 10.1007/s12349-010-0045-4.",
+							"url": "https://journals.sagepub.com/doi/10.3233/s12349-010-0045-4"
+						},
+						{
+							"text": "Ghazizadeh, J. et al. The effects of lemon balm (Melissa officinalis L.) on depression and anxiety in clinical trials: A systematic review and meta-analysis. Phytotherapy Research, 35(12), 6690–6705, 2021. DOI: 10.1002/ptr.7252.",
+							"url": "https://onlinelibrary.wiley.com/doi/10.1002/ptr.7252"
+						},
+						{
+							"text": "Di Pierro, F. et al. Effects of Melissa officinalis Phytosome on Sleep Quality: Results of a Prospective, Double-Blind, Placebo-Controlled, and Cross-Over Study. Nutrients, 16(23), 4199, 2024. DOI: 10.3390/nu16234199.",
+							"url": "https://www.mdpi.com/2072-6643/16/23/4199"
+						},
+						{
+							"text": "Vale, T. G. et al. Behavioral effects of essential oils from Lippia alba (Mill.) N.E. Brown chemotypes. Journal of Ethnopharmacology, 67(2), 127–133, 1999. DOI: 10.1016/S0378-8741(98)00215-3.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874198002153"
+						},
+						{
+							"text": "Hatano, V. Y. et al. Anxiolytic effects of repeated treatment with an essential oil from Lippia alba and (R)-(-)-carvone in the elevated T-maze. Brazilian Journal of Medical and Biological Research, 45(3), 238–243, 2012. DOI: 10.1590/S0100-879X2012007500021.",
+							"url": "https://www.scielo.br/j/bjmbr/a/JSpH6yPkg5BLCvpnVtj39tG/"
+						},
+						{
+							"text": "Leite, J. R. et al. Pharmacology of lemongrass (Cymbopogon citratus Stapf). III. Assessment of eventual toxic, hypnotic and anxiolytic effects on humans. Journal of Ethnopharmacology, 17(1), 75–83, 1986. DOI: 10.1016/0378-8741(86)90074-7.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/0378874186900747"
+						},
+						{
+							"text": "Goes, T. C. et al. Effect of lemongrass aroma on experimental anxiety in humans. Journal of Alternative and Complementary Medicine, 21(12), 766–773, 2015. DOI: 10.1089/acm.2015.0099.",
+							"url": "https://journals.sagepub.com/doi/abs/10.1089/acm.2015.0099"
+						},
+						{
+							"text": "Afrasiabian, F. et al. Aloysia citriodora Palau (lemon verbena) for insomnia patients: A randomized, double-blind, placebo-controlled clinical trial of efficacy and safety. Phytotherapy Research, 33(2), 350–359, 2019. DOI: 10.1002/ptr.6228.",
+							"url": "https://onlinelibrary.wiley.com/doi/10.1002/ptr.6228"
+						},
+						{
+							"text": "Pérez-Piñero, S. et al. Dietary Supplementation with an Extract of Aloysia citrodora (Lemon verbena) Improves Sleep Quality in Healthy Subjects: A Randomized Double-Blind Controlled Study. Nutrients, 16(10), 1523, 2024. DOI: 10.3390/nu16101523.",
+							"url": "https://www.mdpi.com/2072-6643/16/10/1523"
+						}
+					]
+				},
+				{
+					"id": "mulungu",
+					"summary": "O mulungu é uma planta brasileira tradicionalmente utilizada em preparações feitas com a casca do caule, especialmente decocções. Seu uso popular está relacionado ao alívio do nervosismo, à tranquilização e ao auxílio para dormir.\n\nA literatura também registra o uso de flores e outras partes da planta, mas os estudos não utilizam necessariamente o mesmo material vegetal. Essa distinção importa porque a composição química pode variar conforme a parte empregada.",
+					"limitations": "Há algumas limitações importantes para o uso do mulungu como ingrediente associado ao relaxamento ou ao sono no jogo:\n• Os resultados mais favoráveis vêm de estudos com animais, que não comprovam eficácia em seres humanos.\n• Os ensaios clínicos sobre ansiedade são limitados e incluem um estudo maior em que o mulungu não conseguiu controlar a ansiedade no contexto avaliado.\n• Não há estudos clínicos que demonstrem benefício para a insônia.\n• Extratos de casca, flores e inflorescências não são necessariamente equivalentes em composição química.\n• A ausência de efeitos adversos importantes em estudos pequenos não deve ser interpretada como comprovação de segurança para uso prolongado ou combinado com sedativos.\nObservação botânica: há literatura antiga e documentos brasileiros que apresentam variações na nomenclatura de espécies do gênero Erythrina. Uma revisão taxonômica brasileira publicada em 2023 trata E. mulungu e E. verna como espécies distintas. Além disso, Erythrina velutina, conhecida em alguns locais como mulungu-da-caatinga, também é uma espécie separada. Portanto, resultados de uma dessas espécies não devem ser automaticamente atribuídos às outras.",
+					"references": [
+						{
+							"text": "Onusic, G. M.; Nogueira, R. L.; Pereira, A. M. S.; Viana, M. B. Effect of acute treatment with a water-alcohol extract of Erythrina mulungu on anxiety-related responses in rats. Brazilian Journal of Medical and Biological Research, 35(4), 473–477, 2002. DOI: 10.1590/S0100-879X2002000400011.",
+							"url": "https://www.scielo.br/j/bjmbr/a/kcbmL68d7wP6gFg6P8GCykg/"
+						},
+						{
+							"text": "Onusic, G. M. et al. Effects of chronic treatment with a water-alcohol extract from Erythrina mulungu on anxiety-related responses in rats. Biological and Pharmaceutical Bulletin, 26(11), 1538–1542, 2003. DOI: 10.1248/bpb.26.1538.",
+							"url": "https://www.jstage.jst.go.jp/article/bpb/26/11/26_11_1538/_article"
+						},
+						{
+							"text": "Flausino Jr., O. A. et al. Effects of erythrinian alkaloids isolated from Erythrina mulungu (Papilionaceae) in mice submitted to animal models of anxiety. Biological and Pharmaceutical Bulletin, 30(2), 375–378, 2007. DOI: 10.1248/bpb.30.375.",
+							"url": "https://www.jstage.jst.go.jp/article/bpb/30/2/30_2_375/_article"
+						},
+						{
+							"text": "Setti-Perdigão, P. et al. Erythrina mulungu Alkaloids Are Potent Inhibitors of Neuronal Nicotinic Receptor Currents in Mammalian Cells. PLOS ONE, 8(12), e82726, 2013. DOI: 10.1371/journal.pone.0082726. Pesquisa com participação da Universidade Federal do Rio de Janeiro e da Universidade Estadual Paulista.",
+							"url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0082726"
+						},
+						{
+							"text": "Silveira-Souto, M. L.; São-Mateus, C. R.; de Almeida-Souza, L. M.; Groppo, F. C. Effect of Erythrina mulungu on anxiety during extraction of third molars. Medicina Oral, Patología Oral y Cirugía Bucal, 19(5), e518–e524, 2014. DOI: 10.4317/medoral.19511.",
+							"url": "https://www.medicinaoral.com/pubmed/medoralv19_i5_p518.pdf"
+						},
+						{
+							"text": "da Cunha, R. S. et al. Herbal medicines as anxiolytics prior to third molar surgical extraction. A randomized controlled clinical trial. Clinical Oral Investigations, 25(3), 1579–1586, 2021. DOI: 10.1007/s00784-020-03468-1.",
+							"url": "https://link.springer.com/article/10.1007/s00784-020-03468-1"
+						},
+						{
+							"text": "Drager, L. F. et al. 2023 Guidelines on the Diagnosis and Treatment of Insomnia in Adults – Brazilian Sleep Association. Sleep Science, 16(Suppl 2), 507–549, 2023. DOI: 10.1055/s-0043-1776281.",
+							"url": "https://www.thieme-connect.de/products/ejournals/abstract/10.1055/s-0043-1776281"
+						},
+						{
+							"text": "Erythrina L. (Phaseoleae, Papilionoideae, Leguminosae) of Brazil: an updated nomenclatural treatment with notes on etymology and vernacular names. PhytoKeys, 232, 1–43, 2023. DOI: 10.3897/phytokeys.232.101105.",
+							"url": "https://phytokeys.pensoft.net/article/101105/"
+						}
+					]
+				}
+			]
+		},
+		"gastrite": {
+			"name": "Gastrite",
+			"ingredients": [
+				{
+					"id": "espinheira_santa",
+					"summary": "A espinheira-santa é uma das plantas medicinais brasileiras mais conhecidas para problemas digestivos.\n\nAs folhas são utilizadas principalmente em infusões e preparações aquosas, popularmente chamadas de chás. Seu uso tradicional inclui:\n• Azia e sensação de queimação no estômago.\n• Má digestão e desconforto abdominal.\n• Gastrite.\n• Úlceras gástricas.\nO uso é reconhecido em documentos oficiais brasileiros. O Memento Fitoterápico da Farmacopeia Brasileira, da Anvisa, registra indicações antidispépticas, antiácidas e de proteção da mucosa gástrica.\n\nA Instrução Normativa nº 2/2014 da Anvisa também registra extratos das folhas de espinheira-santa para dispepsias e como coadjuvantes no tratamento de gastrite e úlcera gastroduodenal.\n\nÉ importante observar que o reconhecimento de uma indicação em documentos oficiais não significa que qualquer preparação caseira tenha eficácia clínica comprovada.",
+					"limitations": "A maior parte das evidências de gastroproteção vem de estudos em animais e experimentos com tecidos isolados. Os estudos clínicos são limitados e investigam principalmente dispepsia e refluxo, sem demonstrar de forma convincente a cicatrização de gastrite confirmada por biópsia. As preparações estudadas também variam bastante, de modo que os resultados obtidos com extratos padronizados não podem ser automaticamente atribuídos a chás caseiros. Há ainda limitações de segurança: a Anvisa contraindica o uso durante gravidez, lactação e em crianças menores de seis anos, e informa que faltam estudos adequados de interação com medicamentos.",
+					"references": [
+						{
+							"text": "AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA (ANVISA). Memento Fitoterápico da Farmacopeia Brasileira. 1. ed. Brasília: Anvisa, 2016. Verbete: Maytenus ilicifolia e Maytenus aquifolia, p. 67–70. Documento oficial.",
+							"url": "https://www.gov.br/anvisa/en/pharmacopeia/arquivos/memento-fitoterapico.pdf"
+						},
+						{
+							"text": "JORGES, R. M. et al. Evaluation of antinociceptive, anti-inflammatory and antiulcerogenic activities of Maytenus ilicifolia. Journal of Ethnopharmacology, v. 94, p. 93–100, 2004. DOI: 10.1016/j.jep.2004.04.019.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874104002181"
+						},
+						{
+							"text": "FERREIRA, P. M. et al. A lyophilized aqueous extract of Maytenus ilicifolia leaves inhibits histamine-mediated acid secretion in isolated frog gastric mucosa. Planta, v. 219, n. 2, p. 319–324, 2004. DOI: 10.1007/s00425-004-1222-9.",
+							"url": "https://link.springer.com/article/10.1007/s00425-004-1222-9"
+						},
+						{
+							"text": "BAGGIO, C. H. et al. Flavonoid-rich fraction of Maytenus ilicifolia Mart. ex Reiss protects the gastric mucosa of rodents through inhibition of both H+,K+-ATPase activity and formation of nitric oxide. Journal of Ethnopharmacology, v. 113, n. 3, p. 433–440, 2007. DOI: 10.1016/j.jep.2007.06.015.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874107003133"
+						},
+						{
+							"text": "CIPRIANI, T. R. et al. A Polysaccharide from a Tea (Infusion) of Maytenus ilicifolia Leaves with Anti-Ulcer Protective Effects. Journal of Natural Products, v. 69, p. 1018–1021, 2006. DOI: 10.1021/np060045z.",
+							"url": "https://pubs.acs.org/jnprdf/article-abstract/69/7/1018/3611959/A-Polysaccharide-from-a-Tea-Infusion-of-Maytenus"
+						},
+						{
+							"text": "SANTOS-OLIVEIRA, R.; COULAUD-CUNHA, S.; COLAÇO, W. Revisão da Maytenus ilicifolia Mart. ex Reissek, Celastraceae. Contribuição ao estudo das propriedades farmacológicas. Revista Brasileira de Farmacognosia, v. 19, n. 2B, 2009. DOI: 10.1590/S0102-695X2009000400025.",
+							"url": "https://www.scielo.br/j/rbfar/a/bFJZWPwj5kTDCXmtnYRHwYB/"
+						},
+						{
+							"text": "SILVA, M. S. et al. Pharmacological Evaluation of the Traditional Brazilian Medicinal Plant Monteverdia ilicifolia in Gastroesophageal Reflux Disease: Preliminary Results of a Randomized Double-Blind Controlled Clinical Trial. Pharmaceuticals, v. 17, n. 11, art. 1559, 2024. DOI: 10.3390/ph17111559.",
+							"url": "https://www.mdpi.com/1424-8247/17/11/1559"
+						}
+					]
+				},
+				{
+					"id": "erva_cidreira",
+					"summary": "É essencial não tratar todas essas plantas como se fossem a mesma espécie.\n\nA Lippia alba é uma planta nativa da América do Sul, bastante utilizada no Brasil. A Melissa officinalis é originária da região mediterrânea e foi introduzida e cultivada no país. Já o Cymbopogon citratus é uma gramínea de origem asiática, conhecida principalmente como capim-santo ou capim-limão.\n\nAs três aparecem associadas a usos digestivos ou calmantes, mas possuem composições químicas diferentes.",
+					"limitations": "O principal problema é a ambiguidade do nome popular: diferentes espécies são chamadas de erva-cidreira e não devem compartilhar automaticamente os mesmos benefícios. Existem pesquisas interessantes de gastroproteção, mas são predominantemente realizadas em animais. Não foram identificados ensaios clínicos específicos que demonstrem tratamento de gastrite em seres humanos. Além disso, os efeitos calmantes e antiespasmódicos podem contribuir para o alívio de cólicas, gases e desconfortos funcionais, mas não demonstram redução da inflamação da mucosa gástrica. Óleos essenciais e extratos concentrados também não são equivalentes às infusões populares.",
+					"references": [
+						{
+							"text": "PASCUAL, M. E.; SLOWING, K.; CARRETERO, M. E.; VILLAR, A. Antiulcerogenic activity of Lippia alba (Mill.) N. E. Brown (Verbenaceae). Farmaco, v. 56, n. 5–7, p. 501–504, 2001. DOI: 10.1016/S0014-827X(01)01086-2.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0014827X01010862"
+						},
+						{
+							"text": "SABERI, A. et al. The Effects of Methanolic Extract of Melissa officinalis on Experimental Gastric Ulcers in Rats. Iranian Red Crescent Medical Journal, v. 18, n. 7, e24271, 2016. DOI: 10.5812/ircmj.24271.",
+							"url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5020425/"
+						},
+						{
+							"text": "FERNANDES, C. N. et al. Investigation of the mechanisms underlying the gastroprotective effect of Cymbopogon citratus essential oil. Journal of Young Pharmacists, v. 4, n. 1, p. 28–32, 2012. DOI: 10.4103/0975-1483.93578.",
+							"url": "https://www.jyoungpharm.org/article/4/1/28"
+						},
+						{
+							"text": "SAGRADAS, J. et al. Gastroprotective effect of Cymbopogon citratus infusion on acute ethanol-induced gastric lesions in rats. Journal of Ethnopharmacology, v. 173, p. 134–138, 2015. DOI: 10.1016/j.jep.2015.07.001.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874115300180"
+						},
+						{
+							"text": "VENZON, L. et al. Essential oil of Cymbopogon citratus (lemongrass) and geraniol, but not citral, promote gastric healing activity in mice. Biomedicine & Pharmacotherapy, v. 98, p. 118–124, 2018. DOI: 10.1016/j.biopha.2017.12.020.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0753332217348606"
+						},
+						{
+							"text": "HENNEBELLE, T. et al. Ethnopharmacology of Lippia alba. Journal of Ethnopharmacology, v. 116, n. 2, p. 211–222, 2008. DOI: 10.1016/j.jep.2007.11.044.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874107006447"
+						},
+						{
+							"text": "BRASIL. ANVISA. Formulário de Fitoterápicos da Farmacopeia Brasileira. 1. ed. Brasília: Anvisa. Verbete: Melissa officinalis L. Documento oficial.",
+							"url": "https://www.gov.br/anvisa/pt-br/assuntos/farmacopeia/formulario-fitoterapico/arquivos/8080json-file-1/@@display-file/file"
+						},
+						{
+							"text": "FITOTERAPIA BRASIL. Lippia alba (Mill.) N.E.Br. ex Britton & P.Wilson. Registro botânico e etnobotânico, com indicações populares em diferentes comunidades brasileiras. Base de dados.",
+							"url": "https://fitoterapiabrasil.com.br/node/936"
+						}
+					]
+				},
+				{
+					"id": "aroeira_praia",
+					"summary": "A aroeira-da-praia possui amplo histórico de utilização na medicina popular brasileira, especialmente no Nordeste.\n\nUma revisão etnobotânica publicada em 2022 por José Jailson Lima Bezerra analisou 43 artigos sobre os usos medicinais de Schinus terebinthifolia em diferentes regiões do Brasil.\n\nAs principais partes vegetais utilizadas foram a casca do caule, com 47% dos registros, e as folhas, com 39%.\n\nA espécie é tradicionalmente utilizada em preparações como decoctos, tinturas e aplicações externas. A casca também é empregada em banhos de assento populares, principalmente por suas propriedades anti-inflamatórias e cicatrizantes atribuídas pela medicina tradicional.",
+					"limitations": "A principal limitação é a escassez de estudos clínicos robustos. O estudo em pacientes incluiu somente 72 pessoas e durou quatro semanas. Embora tenha observado melhora percentual em alguns sintomas, a maioria das diferenças não foi estatisticamente significativa, e não houve comprovação de melhora histopatológica da gastrite. Também não foi demonstrada erradicação de H. pylori. Os experimentos em animais avaliaram preparações e doses específicas, que não necessariamente correspondem aos decoctos ou chás populares. A pesquisa antiúlcera de 2010 avaliou também Myracrodruon urundeuva, aroeira-do-sertão, de modo que os resultados precisam ser interpretados com atenção à espécie estudada.",
+					"references": [
+						{
+							"text": "CARLINI, E. A.; DUARTE-ALMEIDA, J. M.; RODRIGUES, E.; TABACH, R. Ação antiúlcera das aroeiras Schinus terebinthifolius Raddi (aroeira-da-praia) e Myracrodruon urundeuva Allemão, Anacardiaceae (aroeira-do-sertão). Revista Brasileira de Farmacognosia, v. 20, n. 2, p. 140–146, 2010. DOI: 10.1590/S0102-695X2010000200001.",
+							"url": "https://www.scielo.br/j/rbfar/a/BS9FRkvVpCp4Z85B4xpgWyg/"
+						},
+						{
+							"text": "SANTOS, S. B. dos; LIMA, A. C. A. de; MELO, A. R. da S.; FRAZÃO, C. da S.; CHERPAK, G. L. Comparação da eficácia da aroeira oral (Schinus terebinthifolius Raddi) com omeprazol em pacientes com gastrite e sintomas dispépticos: estudo randomizado e duplo-cego. GED Gastroenterologia Endoscopia Digestiva, v. 29, n. 4, p. 118–125, 2010. Não localizei DOI verificável. Artigo científico em PDF.",
+							"url": "https://docs.bvsalud.org/upload/S/0101-7772/2010/v29n4/a2135.pdf"
+						},
+						{
+							"text": "BEZERRA, J. J. L. Usos medicinais de Schinus terebinthifolia Raddi (Anacardiaceae) em diferentes regiões do Brasil: uma revisão. Ethnoscientia – Brazilian Journal of Ethnobiology and Ethnoecology, v. 7, n. 1, 2022. Artigo científico.",
+							"url": "https://www.periodicos.ufpa.br/index.php/ethnoscientia/article/view/10963"
+						},
+						{
+							"text": "FERNANDES, J. M.; GIORDANI, R. B.; LANGASSNER, S. M. Z. Informações Sistematizadas da Relação Nacional de Plantas Medicinais de Interesse ao SUS: Schinus terebinthifolia Raddi, Anacardiaceae – Aroeira-da-praia. Brasília: Ministério da Saúde, 2021. ISBN 978-85-334-2888-1. Monografia oficial.",
+							"url": "https://www.gov.br/saude/pt-br/composicao/sectics/daf/cbaf/arquivos/arquivos-plantas-medicinais-e-fitoterapicos/schinus_raddi.pdf"
+						}
+					]
+				}
+			]
+		},
+		"xeroftalmia": {
+			"name": "Xeroftalmia",
+			"ingredients": [
+				{
+					"id": "buriti",
+					"summary": "O buriti é um fruto de palmeira nativa da América do Sul, encontrado principalmente em regiões úmidas do Cerrado e da Amazônia.\n\nNo Brasil, sua polpa é consumida fresca e utilizada na produção de doces, geleias, sucos, sorvetes e outras preparações regionais.\n\nAlém de sua importância alimentar e cultural, o buriti é conhecido por sua coloração amarelo-alaranjada a avermelhada, característica associada à presença de carotenoides.\n\nO óleo extraído da polpa também é utilizado tradicionalmente em preparações alimentícias e cosméticas.",
+					"limitations": "• O estudo clínico é antigo, de 1989, e envolveu apenas 44 crianças.\n• A intervenção utilizou doce de buriti, não simplesmente o fruto fresco ou o óleo.\n• Os resultados não demonstram que qualquer quantidade ou preparação de buriti tenha o mesmo efeito.\n• O estudo não permite generalizar os resultados para todos os grupos populacionais.\n• O potencial preventivo não significa que o buriti substitua a suplementação terapêutica indicada em casos de deficiência grave ou xeroftalmia.",
+					"references": [
+						{
+							"text": "Mariath, J. G.; Lima, M. C.; Santos, L. M. Vitamin A activity of buriti (Mauritia vinifera Mart) and its effectiveness in the treatment and prevention of xerophthalmia. The American Journal of Clinical Nutrition, 49(5), 849–853, 1989. Departamento de Nutrição, Universidade Federal da Paraíba. DOI: 10.1093/ajcn/49.5.849.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0002916523434168"
+						},
+						{
+							"text": "Avaliação dos efeitos da radiação gama nos teores de carotenóides, ácido ascórbico e açúcares do fruto buriti do brejo (Mauritia flexuosa L.). Acta Amazonica, 2009. Artigo disponível na SciELO.",
+							"url": "https://www.scielo.br/j/aa/a/9GKdhs7GSBQCmJhGBJg75WB/"
+						},
+						{
+							"text": "Santos, L. M. P. Nutritional and ecological aspects of buriti or aguaje (Mauritia flexuosa Linnaeus filius): A carotene-rich palm fruit from Latin America. Ecology of Food and Nutrition, 44(5), 345–358, 2005. DOI: 10.1080/03670240500253369.",
+							"url": "https://www.tandfonline.com/doi/abs/10.1080/03670240500253369"
+						},
+						{
+							"text": "Silva, N. R. R. N.; Cavalcante, R. B. M.; Silva, F. A. Nutritional properties of Buriti (Mauritia flexuosa) and health benefits. Journal of Food Composition and Analysis, 117, 105092, 2023. DOI: 10.1016/j.jfca.2022.105092.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0889157522007104"
+						}
+					]
+				},
+				{
+					"id": "pequi",
+					"summary": "O pequi é um fruto característico do Cerrado brasileiro, com grande importância na alimentação e na cultura das comunidades tradicionais.\n\nSua polpa, de coloração amarelada, é consumida em preparações como arroz com pequi, galinhada, doces, conservas, licores e óleos.\n\nUm estudo etnoecológico realizado em uma comunidade quilombola de Minas Gerais identificou que 97% dos entrevistados mencionaram o pequi como alimento familiar. Também foram relatados usos na produção de óleo, sabão e preparações medicinais.\n\nÉ importante destacar que esse conhecimento tradicional diz respeito principalmente ao uso alimentar e a outras aplicações da planta, não constituindo comprovação de tratamento popular da xeroftalmia.",
+					"limitations": "• A concentração de carotenoides varia muito conforme a origem do fruto.\n• A maturação, o armazenamento e o processamento podem modificar a composição.\n• Os estudos encontrados são principalmente análises nutricionais, não ensaios clínicos de saúde ocular.\n• A conversão de carotenoides em vitamina A depende da absorção intestinal e de características individuais.\n• O valor nutricional calculado não garante que todo o carotenoide será convertido em vitamina A.",
+					"references": [
+						{
+							"text": "Geöcze, K. C.; Barbosa, L. C. A.; Lima, C. F.; Ferruzzi, M. G.; Fidêncio, P. H.; Sant'Ana, H. M. P.; Silvério, F. O. Caryocar brasiliense Camb. fruits from the Brazilian Cerrado as a rich source of carotenoids with pro-vitamin A activity. Journal of Food Composition and Analysis, 101, 103943, 2021. DOI: 10.1016/j.jfca.2021.103943.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S0889157521001435"
+						},
+						{
+							"text": "Delalibera, P.; Queiroz, B. B. T.; de Souza, R. L. F. M.; Araújo, R. L.; Assis, R. Q.; Abud, C. O. G.; Rios, A. O.; Pertuzatti, P. B. Unlocking the potential of pequi (Caryocar brasiliense Camb.): Stability of phenolic compounds, carotenoid profile and vitamin A after drying. Food Research International, 197(1), 115196, 2024. DOI: 10.1016/j.foodres.2024.115196.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0963996924012663"
+						},
+						{
+							"text": "Pinto, L. C. L.; Morais, L. M. O.; Guimarães, A. Q.; Almada, E. D.; Barbosa, P. M.; Drumond, M. A. Traditional knowledge and uses of the Caryocar brasiliense Cambess. (Pequi) by \"quilombolas\" of Minas Gerais, Brazil: subsidies for sustainable management. Brazilian Journal of Biology, 76(2), 511–519, 2016. DOI: 10.1590/1519-6984.22914.",
+							"url": "https://www.scielo.br/j/bjb/a/Y5VMnVX4vQZFgHb68ypQZ9m/"
+						}
+					]
+				},
+				{
+					"id": "figado_bovino",
+					"summary": "O fígado bovino é consumido tradicionalmente na alimentação brasileira, preparado grelhado, acebolado, cozido ou em outras receitas.\n\nPor ser um órgão envolvido no armazenamento e no metabolismo de nutrientes, apresenta concentração elevada de determinadas vitaminas e minerais.\n\nSua associação com a vitamina A é predominantemente nutricional, e não uma prática medicinal tradicional específica para xeroftalmia.",
+					"limitations": "• O fígado apresenta concentrações muito elevadas de vitamina A. O consumo frequente e excessivo pode provocar hipervitaminose A.\n• O limite superior tolerável de ingestão diária de vitamina A pré-formada para adultos é de 3.000 µg RAE. Os 14.574 µg encontrados em 100 g de fígado grelhado equivalem a aproximadamente 4,9 vezes esse limite. Isso não significa que uma refeição isolada cause necessariamente intoxicação, mas evidencia a importância de evitar o consumo excessivo habitual.\n• Quantidades elevadas de retinol também exigem atenção especial durante a gestação, devido ao risco de efeitos adversos ao desenvolvimento fetal.\n• O teor de vitamina A pode variar conforme a origem do fígado, a alimentação do animal e a forma de preparo.\n• Em casos de deficiência diagnosticada ou xeroftalmia, é necessário tratamento adequado, com avaliação profissional. Não se deve utilizar apenas o consumo de fígado como substituto de tratamento.",
+					"references": [
+						{
+							"text": "Universidade de São Paulo. Faculdade de Ciências Farmacêuticas; FoRC; BRASILFOODS. Tabela Brasileira de Composição de Alimentos (TBCA). Registro BRC0035F: Carne, bovina, víscera, fígado, grelhada, sem óleo e sem sal. Consultar composição nutricional.",
+							"url": "https://www.tbca.net.br/base-dados/int_composicao_alimentos.php?n0REd3kv7e86D%2BViXWYUnQ%3D%3D=l%2FOaDiUqfGbgo1W80XUJmw"
+						},
+						{
+							"text": "National Institutes of Health, Office of Dietary Supplements. Vitamin A and Carotenoids: Fact Sheet for Health Professionals. Referência oficial sobre fontes, funções, recomendações e limites de ingestão de vitamina A.",
+							"url": "https://ods.od.nih.gov/factsheets/VitaminA-HealthProfessional/"
+						},
+						{
+							"text": "National Academies of Sciences, Engineering, and Medicine. Dietary Reference Intakes for Vitamin A, Vitamin K, Arsenic, Boron, Chromium, Copper, Iodine, Iron, Manganese, Molybdenum, Nickel, Silicon, Vanadium, and Zinc. National Academies Press, 2001. DOI: 10.17226/10026.",
+							"url": "https://www.nationalacademies.org/publications/10026"
+						}
+					]
+				},
+				{
+					"id": "licuri",
+					"summary": "O licuri é uma palmeira nativa do semiárido nordestino, especialmente importante na alimentação e na economia de comunidades da Caatinga.\n\nSeus frutos e amêndoas são utilizados na produção de:\n• Doces e cocadas.\n• Óleo culinário.\n• Leite vegetal de licuri.\n• Preparações alimentícias tradicionais.\n• Produtos artesanais.\nUm estudo etnobotânico realizado em Buíque, Pernambuco, documentou diversos usos do ouricuri por comunidades locais.\n\nOs pesquisadores também registraram alguns usos medicinais populares. Entre eles, a utilização da água do coco (endosperma líquido) como colírio para inflamações oculares.\n\nAtenção: esse uso tradicional não está relacionado à prevenção da deficiência de vitamina A ou ao tratamento da xeroftalmia. Também não representa comprovação de segurança ou eficácia da aplicação ocular.",
+					"limitations": "• O estudo nutricional mais relevante encontrado analisou amostras coletadas em Viçosa, Minas Gerais, não abrangendo necessariamente todas as populações de licuri do Nordeste.\n• A quantidade de provitamina A foi calculada a partir dos carotenoides, não medida diretamente como retinol.\n• Não foram encontrados ensaios clínicos que avaliem o efeito do licuri em pessoas com deficiência de vitamina A.\n• Não há comprovação de que o consumo do fruto isoladamente seja suficiente para prevenir a xeroftalmia.\n• Os usos tradicionais do endosperma líquido como colírio não devem ser confundidos com a contribuição nutricional da polpa.",
+					"references": [
+						{
+							"text": "Paula Filho, G. X.; Barreira, T. F.; Rodrigues, V. C. C.; Cardoso, L. M.; Martino, H. S. D.; Pinheiro-Sant'Ana, H. M. Study of the physical and physicochemical characteristics of fruits of the licuri palm (Syagrus coronata (Mart.) Becc.) found in the Atlantic Forest of Minas Gerais, Brazil. Food Science and Technology, 35(3), 2015. DOI: 10.1590/1678-457X.6652.",
+							"url": "https://www.scielo.br/j/cta/a/fkXx33FLPF86b69nJMSWNTG/"
+						},
+						{
+							"text": "Rufino, M. U. L.; Costa, J. T. M.; Silva, V. A.; Andrade, L. H. C. Conhecimento e uso do ouricuri (Syagrus coronata) e do babaçu (Orbignya phalerata) em Buíque, PE, Brasil. Acta Botanica Brasilica, 22(4), 2008. DOI: 10.1590/S0102-33062008000400025.",
+							"url": "https://www.scielo.br/j/abb/a/FM8f4RN6V9kBmbjNXdmzRqh/"
+						},
+						{
+							"text": "Hughes, A. F. S.; Lima, F. G.; Lucchese, A. M.; Góes Neto, A.; Uetanabaro, A. P. T. Antimicrobial activity of Syagrus coronata (Martius) Beccari. Brazilian Archives of Biology and Technology, 56(2), 2013. DOI: 10.1590/S1516-89132013000200012. Esta referência é complementar e investiga outras atividades da espécie, não a prevenção da xeroftalmia.",
+							"url": "https://www.scielo.br/j/babt/a/M9WtMgcPgRDsLBBQjvhRxSj/"
+						}
+					]
+				}
+			]
+		},
+		"escorbuto": {
+			"name": "Escorbuto",
+			"ingredients": [
+				{
+					"id": "camu_camu",
+					"summary": "O camu-camu é um fruto nativo da Amazônia, encontrado principalmente em áreas alagáveis, margens de rios e lagos.\n\nÉ consumido tradicionalmente por populações amazônicas, principalmente na forma de sucos, polpas, refrescos e preparações alimentícias.\n\nSeu uso como fonte de vitamina C ganhou destaque devido à concentração muito elevada de ácido ascórbico encontrada na polpa.\n\nÉ importante diferenciar o consumo tradicional do desenvolvimento mais recente de produtos industrializados, como polpas congeladas, bebidas concentradas e suplementos.",
+					"limitations": "• A concentração de vitamina C varia significativamente conforme a origem geográfica, a genética da planta e a parte do fruto analisada.\n• O armazenamento pode reduzir o conteúdo de ácido ascórbico. No estudo de Justi e colaboradores, a polpa armazenada a -18 °C perdeu aproximadamente 26% da vitamina C durante 335 dias.\n• O processamento industrial e a exposição ao calor também podem reduzir a disponibilidade de vitamina C.\n• O estudo em seres humanos avaliou marcadores de estresse oxidativo, não a recuperação de pacientes com escorbuto.\n• O consumo do fruto não deve ser apresentado como substituto da suplementação terapêutica em casos de escorbuto diagnosticado.",
+					"references": [
+						{
+							"text": "Yuyama, K.; Aguiar, J. P. L.; Yuyama, L. K. O. Camu-camu: um fruto fantástico como fonte de vitamina C. Acta Amazonica, 32(1), 169–174, 2002. Instituto Nacional de Pesquisas da Amazônia (INPA). DOI: 10.1590/1809-43922002321174.",
+							"url": "https://www.scielo.br/j/aa/a/4SST3bRPjcbnQX3f9xTxnkb/"
+						},
+						{
+							"text": "Justi, K. C.; Visentainer, J. V.; de Souza, N. E.; Matsushita, M. Nutritional composition and vitamin C stability in stored camu-camu (Myrciaria dubia) pulp. Archivos Latinoamericanos de Nutrición, 50(4), 405–408, 2000. Universidade Estadual de Maringá. PubMed – PMID 11464674.",
+							"url": "https://pubmed.ncbi.nlm.nih.gov/11464674/"
+						},
+						{
+							"text": "Cunha-Santos, E. C. E.; Viganó, J.; Neves, D. A.; Martínez, J.; Godoy, H. T. Vitamin C in camu-camu [Myrciaria dubia (H.B.K.) McVaugh]: evaluation of extraction and analytical methods. Food Research International, 115, 160–166, 2019. Universidade Estadual de Campinas (UNICAMP). DOI: 10.1016/j.foodres.2018.08.031.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0963996918306379"
+						},
+						{
+							"text": "Inoue, T.; Komoda, H.; Uchida, T.; Node, K. Tropical fruit camu-camu (Myrciaria dubia) has anti-oxidative and anti-inflammatory properties. Journal of Cardiology, 52(2), 127–132, 2008. DOI: 10.1016/j.jjcc.2008.06.004.",
+							"url": "https://www.journal-of-cardiology.com/article/S0914-5087(08)00150-0/"
+						}
+					]
+				},
+				{
+					"id": "acerola",
+					"summary": "A acerola é um fruto tropical bastante difundido no Brasil, consumido fresco ou em preparações como:\n• Sucos e polpas.\n• Vitaminas e bebidas.\n• Geleias e doces.\n• Sorvetes.\n• Polpas congeladas.\nSeu uso alimentar como fonte de vitamina C é amplamente conhecido. A acerola também é utilizada na indústria alimentícia para enriquecimento de produtos e produção de ingredientes naturais ricos em ácido ascórbico.\n\nA associação popular com a vitamina C possui fundamento nutricional: a fruta apresenta concentrações elevadas desse nutriente.",
+					"limitations": "• A concentração de vitamina C varia conforme o genótipo, a maturação e as condições de cultivo.\n• O processamento, o aquecimento e o armazenamento podem provocar perdas de ácido ascórbico.\n• Os estudos de absorção foram realizados principalmente com pessoas saudáveis, e não com pacientes diagnosticados com deficiência.\n• Não há comprovação clínica específica de que o consumo de acerola isoladamente reverta casos estabelecidos de escorbuto.\n• O potencial nutricional da fruta não elimina a necessidade de tratamento médico quando a deficiência já está instalada.",
+					"references": [
+						{
+							"text": "Maciel, M. I. S.; Mélo, E.; Lima, V.; Souza, K. A.; Silva, W. Caracterização físico-química de frutos de genótipos de aceroleira (Malpighia emarginata D.C.). Ciência e Tecnologia de Alimentos, 30(4), 865–869, 2010. Universidade Federal Rural de Pernambuco (UFRPE). DOI: 10.1590/S0101-20612010000400005.",
+							"url": "https://www.scielo.br/j/cta/a/jpZDC8YJNTgtqQmcyXS88Fq/"
+						},
+						{
+							"text": "Guedes, T. J. F. L.; Rajan, M.; Barbosa, P. F.; Silva, E. S.; Machado, T. O. X.; Narain, N. Phytochemical composition and antioxidant potential of different varieties viz. Flor Branca, Costa Rica and Junco of green unripe acerola (Malphigia emarginata D.C.) fruits. Food Science and Technology, 42, e46320, 2022. DOI: 10.1590/fst.46320.",
+							"url": "https://www.scielo.br/j/cta/a/YHZS6tPztv3WgMMXWF6pRZk/"
+						},
+						{
+							"text": "Uchida, E.; Kondo, Y.; Amano, A.; Aizawa, S.; Hanamura, T.; Aoki, H.; Nagamine, K.; Koizumi, T.; Maruyama, N.; Ishigami, A. Absorption and Excretion of Ascorbic Acid Alone and in Acerola (Malpighia emarginata) Juice: Comparison in Healthy Japanese Subjects. Biological and Pharmaceutical Bulletin, 34(11), 1744–1747, 2011. DOI: 10.1248/bpb.34.1744.",
+							"url": "https://www.jstage.jst.go.jp/article/bpb/34/11/34_11_1744/_article"
+						},
+						{
+							"text": "Takino, Y.; Aoki, H.; Kondo, Y.; Ishigami, A. Acerola (Malpighia emarginata DC.) Promotes Ascorbic Acid Uptake into Human Intestinal Caco-2 Cells via Enhancing the Gene Expression of Sodium-Dependent Vitamin C Transporter 1. Journal of Nutritional Science and Vitaminology, 66(4), 296–299, 2020. DOI: 10.3177/jnsv.66.296.",
+							"url": "https://www.jstage.jst.go.jp/article/jnsv/66/4/66_296/_article"
+						}
+					]
+				},
+				{
+					"id": "aroeira_praia",
+					"summary": "A aroeira-da-praia possui histórico de utilização na medicina popular brasileira.\n\nA monografia do Ministério da Saúde registra principalmente a utilização da casca do caule na preparação de decocções, empregadas tradicionalmente em banhos de assento após o parto, com finalidade anti-inflamatória e cicatrizante.\n\nFolhas, frutos e raízes também aparecem em registros de utilização popular.",
+					"limitations": "• A pesquisa de composição química disponível avaliou um extrato metanólico dos frutos, e não todas as partes da planta.\n• A não detecção de ácido ascórbico nesse estudo não prova ausência absoluta em qualquer amostra, parte vegetal ou condição de cultivo.\n• Não encontrei análises nutricionais suficientemente robustas que estabeleçam a aroeira-da-praia como fonte alimentar relevante de vitamina C.\n• A atividade antioxidante encontrada em laboratório não significa que a planta possa prevenir doenças causadas por deficiências nutricionais.\n• Os estudos de atividade cicatrizante e anti-inflamatória não comprovam eficácia contra o escorbuto.",
+					"references": [
+						{
+							"text": "Brandão, S. C. Composição química e avaliação da atividade antioxidante dos frutos de Schinus terebinthifolius Raddi. 2018. Trabalho de Conclusão de Curso (Bacharelado em Biotecnologia) – Faculdade de Ciências Biológicas e Ambientais, Universidade Federal da Grande Dourados (UFGD), Dourados, MS, 2018. Orientadora: Kely de Picoli Souza. Repositório Institucional da UFGD.",
+							"url": "https://repositorio.ufgd.edu.br/jspui/handle/prefix/3016"
+						},
+						{
+							"text": "Brasil. Ministério da Saúde. Informações Sistematizadas da Relação Nacional de Plantas Medicinais de Interesse ao SUS: Schinus terebinthifolius Raddi, Anacardiaceae – Aroeira-da-praia. Brasília, DF: Ministério da Saúde, 2021. Documento oficial do Ministério da Saúde (PDF).",
+							"url": "https://www.gov.br/saude/pt-br/composicao/sectics/daf/cbaf/arquivos/arquivos-plantas-medicinais-e-fitoterapicos/schinus_raddi.pdf"
+						}
+					]
+				}
+			]
+		},
+		"queimaduras": {
+			"name": "Queimaduras",
+			"ingredients": [
+				{
+					"id": "pele_tilapia",
+					"summary": "A pele de tilápia é especialmente interessante devido à sua composição estrutural, rica em colágeno, principalmente dos tipos I e III. Essas proteínas fazem parte da estrutura da pele e participam dos processos de sustentação e reparação dos tecidos. A proposta é utilizar a pele processada como um curativo biológico oclusivo, que permanece em contato com a lesão, protege a região e ajuda a manter condições favoráveis à cicatrização. Os pesquisadores da Universidade Federal do Ceará (UFC), em parceria com o Instituto Dr. José Frota (IJF), desenvolveram pesquisas pré-clínicas e ensaios clínicos.",
+					"limitations": "Apesar dos resultados positivos, existem restrições importantes:\n• Os ensaios mencionados investigaram principalmente queimaduras superficiais de espessura parcial, e não qualquer tipo ou gravidade de queimadura.\n• A aplicação depende de processamento, preparação e controle microbiológico da pele.\n• O produto utilizado nos estudos não corresponde à pele retirada diretamente de um peixe e aplicada sem tratamento.\n• A preservação em glicerol ou a liofilização fazem parte da preparação do material.\n• Os resultados de um curativo biológico não significam que a pele de tilápia seja capaz de tratar infecções graves ou substituir procedimentos necessários em queimaduras profundas.",
+					"references": [
+						{
+							"text": "LIMA JÚNIOR, Edmar Maciel. Avaliação pré-clínica da pele da tilápia (Oreochromis niloticus), como curativo biológico oclusivo, no tratamento de queimaduras. 2017. Dissertação (Mestrado em Farmacologia Clínica) — Universidade Federal do Ceará, Fortaleza. Repositório UFC.",
+							"url": "https://repositorio.ufc.br/handle/riufc/27516"
+						},
+						{
+							"text": "LIMA JÚNIOR, Edmar Maciel et al. Innovative Burn Treatment Using Tilapia Skin as a Xenograft: A Phase II Randomized Controlled Trial. Journal of Burn Care & Research, v. 41, n. 3, p. 585–592, 2020. DOI: 10.1093/jbcr/irz205.",
+							"url": "https://academic.oup.com/jbcr/article-abstract/41/3/585/5695972"
+						},
+						{
+							"text": "LIMA JÚNIOR, Edmar Maciel et al. Nile Tilapia Fish Skin-Based Wound Dressing Improves Pain and Treatment-Related Costs of Superficial Partial-Thickness Burns: A Phase III Randomized Controlled Trial. Plastic and Reconstructive Surgery, v. 147, n. 5, p. 1189–1198, 2021. DOI: 10.1097/PRS.0000000000007895.",
+							"url": "https://journals.lww.com/plasreconsurg/abstract/10.1097/prs.0000000000007895"
+						},
+						{
+							"text": "LIMA JÚNIOR, Edmar Maciel et al. Pediatric Burn Treatment Using Tilapia Skin as a Xenograft for Superficial Partial-Thickness Wounds: A Pilot Study. Journal of Burn Care & Research. 2020. DOI: 10.1093/jbcr/irz149.",
+							"url": "https://academic.oup.com/jbcr/article-abstract/41/2/241/5554505"
+						},
+						{
+							"text": "LIMA JÚNIOR, Edmar Maciel et al. A Randomized Comparison Study of Lyophilized Nile Tilapia Skin and Silver-Impregnated Sodium Carboxymethylcellulose for the Treatment of Superficial Partial-Thickness Burns. Journal of Burn Care & Research, v. 42, n. 1, p. 41–48, 2021. DOI: 10.1093/jbcr/iraa099.",
+							"url": "https://academic.oup.com/jbcr/article-abstract/42/1/41/5865364"
+						}
+					]
+				},
+				{
+					"id": "resina_copaiba",
+					"summary": "A copaíba possui um histórico importante na medicina tradicional brasileira, especialmente em comunidades indígenas e populações que utilizam recursos vegetais da Amazônia.\n\nSua resina é extraída do tronco das árvores e tradicionalmente utilizada para:\n• Cicatrização de feridas e lesões na pele.\n• Tratamento de inflamações.\n• Alívio de dores.\n• Aplicações em lesões e irritações cutâneas.\nExiste uma publicação acadêmica bastante interessante da Universidade Federal de Minas Gerais (UFMG), que investigou justamente a história desse conhecimento tradicional.\n\nO trabalho analisou 101 livros publicados entre 1576 e 2011 e identificou registros históricos do uso da copaíba na cicatrização de lesões cutâneas e mucosas.\n\nIsso demonstra que a associação entre copaíba e cicatrização não surgiu apenas de pesquisas recentes: existe um histórico documentado de utilização tradicional no Brasil. Entretanto, esse histórico não comprova sua eficácia clínica em queimaduras.",
+					"limitations": "A copaíba apresenta potencial farmacológico, mas existem limitações importantes:\n• A composição química varia entre espécies e amostras.\n• Os resultados antimicrobianos são dependentes da bactéria testada.\n• O estudo diretamente relacionado a queimaduras utilizou radiação UVB, não calor.\n• Não existem resultados clínicos suficientes para determinar dose, concentração e segurança de utilização em queimaduras humanas.\n• Os efeitos observados em feridas cirúrgicas de animais não podem ser automaticamente generalizados para queimaduras.\nTambém é importante diferenciar a atividade anti-inflamatória da cicatrização efetiva. Diminuir a inflamação ou a dor não significa necessariamente acelerar a regeneração de todos os tecidos lesionados.",
+					"references": [
+						{
+							"text": "BECKER, Gabriela et al. Copaiba oleoresin has topical antinociceptive activity in a UVB radiation-induced skin-burn model in mice. Journal of Ethnopharmacology, v. 250, art. 112476, 2020. DOI: 10.1016/j.jep.2019.112476.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S0378874119313583"
+						},
+						{
+							"text": "MASSON, D. S.; SALVADOR, S. L.; POLIZELLO, A. C. M.; FRADE, M. A. C. Antimicrobial activity of copaíba (Copaifera langsdorffii) oleoresin on bacteria of clinical significance in cutaneous wounds. Revista Brasileira de Plantas Medicinais, v. 15, n. 4, supl. 1, 2013. DOI: 10.1590/S1516-05722013000500006.",
+							"url": "https://www.scielo.br/j/rbpm/a/7NGfBrRJ99dfq8rHtKcx3Kf/"
+						},
+						{
+							"text": "BIONDO-SIMÕES, Maria de Lourdes Pessole et al. Análise comparativa dos efeitos do mel, do óleo-resina de copaíba e de um produto comercial (fibrinolisina, desoxirribonuclease e cloranfenicol) na cicatrização por segunda intenção, em ratos. Revista do Colégio Brasileiro de Cirurgiões, v. 46, n. 5, 2019. DOI: 10.1590/0100-6991e-20192245.",
+							"url": "https://www.scielo.br/j/rcbc/a/jx6BdkGgDjnG4rfKGnYvbpF/"
+						},
+						{
+							"text": "RICARDO, Letícia M. et al. Evidence of traditionality of Brazilian medicinal plants: The case studies of Stryphnodendron adstringens (Mart.) Coville (barbatimão) barks and Copaifera spp. (copaíba) oleoresin in wound healing. Journal of Ethnopharmacology, v. 219, p. 319–336, 2018. DOI: 10.1016/j.jep.2018.02.042.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0378874117310954"
+						},
+						{
+							"text": "DA TRINDADE, Rafaela; DA SILVA, Joyce Kelly; SETZER, William N. Copaifera of the Neotropics: A Review of the Phytochemistry and Pharmacology. International Journal of Molecular Sciences, v. 19, n. 5, art. 1511, 2018. DOI: 10.3390/ijms19051511.",
+							"url": "https://www.mdpi.com/1422-0067/19/5/1511"
+						}
+					]
+				},
+				{
+					"id": "mel",
+					"summary": "O mel possui um histórico milenar de utilização medicinal, especialmente no tratamento de feridas, lesões cutâneas e infecções.\n\nSeu uso tradicional está associado principalmente à aplicação tópica sobre ferimentos, devido à percepção de que ajudaria a proteger a região e favorecer sua cicatrização.\n\nNo Brasil, também existe pesquisa sobre o mel de abelhas nativas, especialmente a abelha-jandaíra (Melipona subnitida), espécie encontrada no Nordeste.\n\nÉ importante separar duas coisas:\n• A utilização popular do mel em feridas, que possui registros históricos.\n• A utilização do mel como curativo medicinal, que depende de processamento e controle de qualidade.",
+					"limitations": "",
+					"references": [
+						{
+							"text": "AZIZ, Zoriah; HASSAN, Bassam Abdul Rasool. The effects of honey compared to silver sulfadiazine for the treatment of burns: A systematic review of randomized controlled trials. Burns, v. 43, n. 1, p. 50–57, 2017. DOI: 10.1016/j.burns.2016.07.004.",
+							"url": "https://www.sciencedirect.com/science/article/abs/pii/S0305417916302108"
+						},
+						{
+							"text": "NORMAN, Gill et al. Antiseptics for burns. Cochrane Database of Systematic Reviews, n. 7, CD011821, 2017. DOI: 10.1002/14651858.CD011821.pub2.",
+							"url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD011821.pub2/"
+						},
+						{
+							"text": "MALIK, Kamran Ishaque; MALIK, M. A. Nasir; ASLAM, Azhar. Honey compared with silver sulphadiazine in the treatment of superficial partial-thickness burns. International Wound Journal, v. 7, n. 5, p. 413–417, 2010. DOI: 10.1111/j.1742-481X.2010.00717.x.",
+							"url": "https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.1742-481X.2010.00717.x"
+						},
+						{
+							"text": "ALVES, Diego Felipe Sampaio et al. Efeitos da aplicação tópica do mel de Melipona subnitida em feridas infectadas de ratos. Revista do Colégio Brasileiro de Cirurgiões, v. 35, n. 3, 2008. DOI: 10.1590/S0100-69912008000300010.",
+							"url": "https://www.scielo.br/j/rcbc/a/KN4MvdshHskhpnRsscDySZQ/"
+						},
+						{
+							"text": "BIONDO-SIMÕES, Maria de Lourdes Pessole et al. Análise comparativa dos efeitos do mel, do óleo-resina de copaíba e de um produto comercial (fibrinolisina, desoxirribonuclease e cloranfenicol) na cicatrização por segunda intenção, em ratos. Revista do Colégio Brasileiro de Cirurgiões, v. 46, n. 5, 2019. DOI: 10.1590/0100-6991e-20192245.",
+							"url": "https://www.scielo.br/j/rcbc/a/jx6BdkGgDjnG4rfKGnYvbpF/"
+						},
+						{
+							"text": "VIEIRA, Alexsniellie Santana dos Santos; KRON-RODRIGUES, Meline Rossetto; CARVALHO, Viviane Fernandes de. Curativos a base de mel no tratamento de feridas de difícil cicatrização. Revista Brasileira de Queimaduras, v. 23, n. 3, p. 128–138, 2024. DOI: 10.5935/2595-170X.20240020.",
+							"url": "https://www.rbqueimaduras.com.br/details/583/pt-BR/curativos-a-base-de-mel-no-tratamento-de-feridas-de-dificil-cicatrizacao"
+						},
+						{
+							"text": "PETERS, Linsey J. F. et al. Medical-grade honey: its definition and refined standards. Journal of Wound Care, v. 34, n. 6, p. 412–423, 2025. DOI: 10.12968/jowc.2024.0206.",
+							"url": "https://www.magonlinelibrary.com/doi/abs/10.12968/jowc.2024.0206"
+						},
+						{
+							"text": "MIELES, Joel Yupanqui et al. Honey: An Advanced Antimicrobial and Wound Healing Biomaterial for Tissue Engineering Applications. Pharmaceutics, v. 14, n. 8, art. 1663, 2022. DOI: 10.3390/pharmaceutics14081663.",
+							"url": "https://www.mdpi.com/1999-4923/14/8/1663"
+						}
+					]
+				}
+			]
+		},
+		"diarreia": {
+			"name": "Diarreia",
+			"ingredients": [
+				{
+					"id": "agua_coco",
+					"summary": "Existe fundamento para associar a água de coco à hidratação, mas não para apresentá-la como tratamento da diarreia ou substituto universal da solução de reidratação oral.",
+					"limitations": "Bebida natural rica em água e potássio, que pode contribuir para a ingestão de líquidos durante episódios leves de diarreia, mas não substitui a solução de reidratação oral.",
+					"references": [
+						{
+							"text": "ADAMS, William; BRATT, David E. Young coconut water for home rehydration in children with mild gastroenteritis. Tropical and Geographical Medicine, v. 44, n. 1–2, p. 149–153, 1992. PMID: 1496708. PubMed. Texto integral arquivado. DOI: não identificado.",
+							"url": "https://pubmed.ncbi.nlm.nih.gov/1496708/"
+						},
+						{
+							"text": "YONG, Jean W. H.; GE, Liya; NG, Yan Fei; TAN, Swee Ngin. The Chemical Composition and Biological Properties of Coconut (Cocos nucifera L.) Water. Molecules, v. 14, n. 12, p. 5144–5164, 2009. DOI: 10.3390/molecules14125144.",
+							"url": "https://www.mdpi.com/1420-3049/14/12/5144"
+						},
+						{
+							"text": "WORLD HEALTH ORGANIZATION. The selection and use of essential medicines, 2025: WHO Model List of Essential Medicines. 24th list. Geneva: WHO, 2025. DOI: 10.2471/B09474.",
+							"url": "https://iris.who.int/items/7abbdb85-d893-4559-b82b-cec0b3c4d70b"
+						}
+					]
+				},
+				{
+					"id": "folha_goiabeira",
+					"summary": "A folha de goiabeira é um dos ingredientes mais interessantes desta pesquisa porque possui registros de utilização medicinal no Brasil.\n\nO chá ou decocto das folhas é tradicionalmente utilizado para combater episódios de diarreia.\n\nUma fonte particularmente relevante é a base de dados Fitoterapia Brasil, vinculada à Coleção Botânica de Plantas Medicinais da Fiocruz.\n\nA base documenta o uso de folhas de Psidium guajava para diarreia em comunidades tradicionais brasileiras, incluindo:\n• Comunidade de Siribinha, na Bahia: folhas preparadas como chá.\n• Comunidade da Barra do Jucu, no Espírito Santo: folhas utilizadas em decocto e suco.",
+					"limitations": "A evidência é promissora, mas é necessário considerar que:\n• Os extratos utilizados em pesquisas não são necessariamente equivalentes ao chá preparado em casa.\n• A concentração de substâncias varia conforme a planta e o modo de preparo.\n• A atividade antimicrobiana em laboratório não comprova eficácia contra infecções intestinais em pessoas.\n• Os estudos clínicos disponíveis ainda não são suficientes para comprovar o uso de qualquer preparação da planta como tratamento universal da diarreia.\nO relatório da Anvisa também apresenta restrições de segurança: não recomenda o uso do decocto por gestantes, lactantes ou crianças menores de 12 anos devido à insuficiência de dados de segurança, além de alertar para possível interferência na coagulação e interação com anticoagulantes.",
+					"references": [
+						{
+							"text": "ALMEIDA, Cybele E.; KARNIKOWSKI, Margô G. O.; FOLETO, Rejane; BALDISSEROTTO, Bernardo. Analysis of antidiarrhoeic effect of plants used in popular medicine. Revista de Saúde Pública, v. 29, n. 6, p. 428–433, 1995. DOI: 10.1590/S0034-89101995000600002.",
+							"url": "https://www.scielo.br/j/rsp/a/S6BcN7ywDNTydHd6fzBSZvp/"
+						},
+						{
+							"text": "BIRDI, Tannaz; KRISHNAN, Geetha; KATARIA, Sushila; GHOLKAR, Manasi; DASWANI, Poonam. A randomized open label efficacy clinical trial of oral guava leaf decoction in patients with acute infectious diarrhoea. Journal of Ayurveda and Integrative Medicine, v. 11, n. 2, p. 163–172, 2020. DOI: 10.1016/j.jaim.2020.04.001.",
+							"url": "https://www.sciencedirect.com/science/article/pii/S0975947620300188/"
+						},
+						{
+							"text": "LIU, Chengmei; JULLIAN, Valérie; CHASSAGNE, François. Ethnobotany, phytochemistry, and biological activities of Psidium guajava in the treatment of diarrhea: a review. Frontiers in Pharmacology, v. 15, art. 1459066, 2024. DOI: 10.3389/fphar.2024.1459066.",
+							"url": "https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2024.1459066/"
+						},
+						{
+							"text": "AGÊNCIA NACIONAL DE VIGILÂNCIA SANITÁRIA (ANVISA). Relatório de avaliação sobre Psidium guajava L., folium e Psidium guajava L., cortex. Relatório técnico. Documento oficial da Anvisa. Data de publicação não identificada no documento consultado.",
+							"url": "https://www.gov.br/anvisa/pt-br/setorregulado/regularizacao/medicamentos/fitoterapicos-dinamizados-e-especificos/registro-simplificado-de-fitoterapicos/relatorios-de-avaliacao/relatorio_psidium_guajava.pdf"
+						},
+						{
+							"text": "FIOCRUZ — COLEÇÃO DE PLANTAS MEDICINAIS. Fitoterapia Brasil: registros etnobotânicos de Psidium guajava L. Consultar registros de uso popular.",
+							"url": "https://fitoterapiabrasil.com.br/etnobotanica?combine=Psidium+guajava"
+						}
+					]
+				},
+				{
+					"id": "banana_da_terra",
+					"summary": "A banana verde é utilizada tradicionalmente em diferentes regiões do mundo como alimento associado ao cuidado de problemas intestinais.\n\nUma revisão científica publicada em 2024 reconhece o uso tradicional da banana verde (Musa paradisiaca) como alimento auxiliar no tratamento da diarreia.\n\nÉ importante, entretanto, diferenciar a banana verde da banana madura: a composição do fruto muda conforme o amadurecimento, especialmente em relação ao amido resistente.",
+					"limitations": "A principal limitação é que as evidências clínicas são predominantemente pediátricas e provenientes de variedades de banana estudadas fora do Brasil. A banana verde não deve ser apresentada como substituta da reidratação oral ou do tratamento da causa da infecção.",
+					"references": [
+						{
+							"text": "ALVAREZ-ACOSTA, Thais; LEÓN, Cira; ACOSTA-GONZÁLEZ, Salvador; PARRA-SOTO, Haydeé; CLUET-RODRIGUEZ, Isabel; ROSSELL, Maria Rosario; COLINA-CHOURIO, José A. Beneficial role of green plantain (Musa paradisiaca) in the management of persistent diarrhea: a prospective randomized trial. Journal of the American College of Nutrition, v. 28, n. 2, p. 169–176, 2009. DOI: 10.1080/07315724.2009.10719768.",
+							"url": "https://www.tandfonline.com/doi/abs/10.1080/07315724.2009.10719768"
+						},
+						{
+							"text": "RABBANI, Golam H. et al. Green banana reduces clinical severity of childhood shigellosis: a double-blind, randomized, controlled clinical trial. The Pediatric Infectious Disease Journal, v. 28, n. 5, p. 420–425, 2009. DOI: 10.1097/INF.0b013e31819510b5.",
+							"url": "https://www.ovid.com/jnls/pidj/abstract/10.1097/inf.0b013e31819510b5"
+						},
+						{
+							"text": "GUNASEKARAN, Dhandapany; CHANDRAMOHAN, Anandhi; KARTHIKEYAN, Kadirvel; BALASUBRAMANIAM, Banupriya; JAGADEESAN, Podhini; SOUNDARARAJAN, Palanisamy. Effect of Green Banana (Musa paradisiaca) on Recovery in Children With Acute Watery Diarrhea With No Dehydration: A Randomized Controlled Trial. Indian Pediatrics, v. 57, n. 12, p. 1114–1118, 2020. PMID: 32893836. PubMed. Texto integral. DOI: não identificado.",
+							"url": "https://www.indianpediatrics.net/dec2020/dec-1114-1118.htm"
+						},
+						{
+							"text": "GALLO RUELAS, Mariano; GOMEZ-HERRERA, Gian Pierre; NOA-PERALTA, Kevin Franco; REGALADO-PALACIOS, Geanfranco; SORIA-MAMANI, Marco; ROJAS-ARMAS, Juan Pedro. Role of green banana consumption in the treatment of acute and persistent diarrhea in children: a systematic review and meta-analysis of randomized controlled trials. European Journal of Pediatrics, v. 183, n. 9, p. 3705–3718, 2024. DOI: 10.1007/s00431-024-05679-0.",
+							"url": "https://link.springer.com/article/10.1007/s00431-024-05679-0"
+						},
+						{
+							"text": "BOMFIM, Natália da Silva; FERREIRA, Renata de Souza; OLIVEIRA, Julia Silva e; ALFENAS, Rita de Cássia Gonçalves. Green banana biomass anti-obesogenic, anti-hyperlipidemic, antidiabetic, and intestinal function potential effects: a systematic review. Nutrition Reviews, v. 83, n. 2, p. e290–e303, 2025. DOI: 10.1093/nutrit/nuae040.",
+							"url": "https://academic.oup.com/nutritionreviews/article-abstract/83/2/e290/7648700"
+						},
+						{
+							"text": "UNIVERSIDADE DE SÃO PAULO. Food Research Center (FoRC). Tabela Brasileira de Composição de Alimentos — Banana-da-terra, in natura, Brasil. Consultar composição nutricional na TBCA.",
+							"url": "https://www.tbca.net.br/"
+						}
+					]
+				}
+			]
+		}
+	}
+}

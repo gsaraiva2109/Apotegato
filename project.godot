@@ -32,7 +32,6 @@ GameCursor="*res://autoload/game_cursor.gd"
 window/size/viewport_width=960
 window/size/viewport_height=544
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
 window/stretch/scale_mode="integer"
 
 [editor_plugins]

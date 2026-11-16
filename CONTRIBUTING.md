@@ -57,7 +57,7 @@ scenes/
   player/          o Mingau
   region/          andares, labirinto, porta, ingrediente no chão
   creatures/
-  ui/              menu inicial (main_menu.tscn, a cena inicial do jogo), HUD, diário, mochila, estoque, tela Créditos
+  ui/              menu inicial (main_menu.tscn, a cena inicial do jogo), HUD, diário, mochila, estoque, telas Fontes e Créditos
 scripts/           lógica sem cena (BFS, gerador do labirinto, mochila, luz, save)
 tests/             testes do GUT
 tools/             scripts de linha de comando
@@ -157,6 +157,12 @@ A caixa de diálogo é `scenes/ui/dialogue_box.tscn`: nome de quem fala, texto a
 O jogo tem uma máquina de estados, `GameState.flow` (`scripts/game_flow.gd`): exploração, diálogo, entrega, menu e conclusão, com as transições permitidas em `GameFlow.TRANSITIONS`. Só a exploração deixa o gato andar, atacar e interagir; em qualquer outro estado o `GameState` pausa a árvore de cenas, e só a interface (`process_mode` Always) responde. **Nenhuma cena pausa o jogo direto**: um menu novo pede `GameState.flow.open_menu()` ao abrir e `close_menu()` ao fechar.
 
 As opções do jogador ficam em `user://settings.cfg`, uma seção por autoload: `[display]` no `DisplaySettings`, `[audio]` e `[accessibility]` no `AudioSettings` (volumes dos barramentos `Music` e `SFX`, mudo, `reduce_effects` e `large_text`) e `[input]` no `InputSettings` (teclas trocáveis, com duas por ação). O `TextSize` aplica o "Texto grande" ao tema e aos `theme_override_font_sizes` dos nós; **ação nova que o jogador possa trocar entra em `InputSettings.REMAPPABLE`** (e o `InputSettings` é o único script que pode ler eventos de tecla, exceção registrada em `tests/test_input_map.gd`). Sem janela (modo headless) as teclas salvas não mexem no Input Map. Cada autoload grava só as suas seções e preserva as outras. **Todo efeito que pisca ou treme respeita `AudioSettings.reduce_effects`** (ver a piscada em `player.gd` e o aviso em `creature.gd`); o tremor de câmera, quando existir, também. Efeitos sonoros novos tocam no barramento `SFX`. A tela de opções é `scenes/ui/options_menu.tscn` e o menu de pausa, `scenes/ui/pause_menu.tscn` (uma instância em cada cena de jogo, abre com a ação `pause`).
+
+## O arquivo de fontes
+
+`data/fontes.json` guarda as referências científicas que aparecem na tela **Fontes** do menu inicial, uma entrada por condição (na mesma ordem do `data/diario.json`). Cada ingrediente da condição tem `id` (igual ao do CSV), `summary`, `limitations` e `references`, uma lista de `{"text": ..., "url": ...}`. Listas dentro dos textos usam uma linha por item, começando com `• `. O arquivo é lido por `scripts/sources_data.gd`; o nome do ingrediente na tela vem do CSV.
+
+`tests/test_sources_data.gd` confere que todo par condição–ingrediente do `data/ingredientes.csv` tem resumo e pelo menos uma referência com link. Ingrediente novo no CSV precisa das suas fontes aqui.
 
 ## Versões e entregas
 

@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b353uifxtkyo" path="res://assets/art/ui/scroll_button.png" id="5_uhagc"]
 [ext_resource type="Texture2D" uid="uid://1biq4bdpdcyl" path="res://assets/art/ui/scroll_button_hover.png" id="6_uhagc"]
 [ext_resource type="PackedScene" path="res://scenes/ui/options_menu.tscn" id="99_options"]
+
+[ext_resource type="PackedScene" path="res://scenes/ui/sources_menu.tscn" id="98_sources"]
 [ext_resource type="Texture2D" uid="uid://yhk7rnr5addr" path="res://assets/art/ui/scroll_button_on_press.png" id="7_btxxm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x15ge"]
@@ -80,7 +82,7 @@ custom_minimum_size = Vector2(0, 8)
 layout_mode = 2
 
 [node name="NewGameButton" type="Button" parent="Center/Panel/Layout" unique_id=50290526]
-custom_minimum_size = Vector2(340, 60)
+custom_minimum_size = Vector2(340, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -98,7 +100,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Novo Jogo"
 
 [node name="LoadButton" type="Button" parent="Center/Panel/Layout" unique_id=237467144]
-custom_minimum_size = Vector2(340, 60)
+custom_minimum_size = Vector2(340, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -116,7 +118,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Carregar Jogo"
 
 [node name="OptionsButton" type="Button" parent="Center/Panel/Layout"]
-custom_minimum_size = Vector2(340, 60)
+custom_minimum_size = Vector2(340, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -133,8 +135,26 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_wb0q5")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Opções"
 
+[node name="SourcesButton" type="Button" parent="Center/Panel/Layout"]
+custom_minimum_size = Vector2(340, 56)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_colors/font_focus_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_colors/font_hover_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_colors/font_pressed_color = Color(0.23137255, 0.14117648, 0.09019608, 1)
+theme_override_fonts/font = ExtResource("4_x2yvf")
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxTexture_1g8jr")
+theme_override_styles/hover = SubResource("StyleBoxTexture_btxxm")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_wb0q5")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
+text = "Fontes"
+
 [node name="CreditsButton" type="Button" parent="Center/Panel/Layout" unique_id=1977420081]
-custom_minimum_size = Vector2(340, 60)
+custom_minimum_size = Vector2(340, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -152,7 +172,7 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_wb0q5")
 text = "Créditos"
 
 [node name="QuitButton" type="Button" parent="Center/Panel/Layout" unique_id=241193468]
-custom_minimum_size = Vector2(340, 60)
+custom_minimum_size = Vector2(340, 56)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -217,5 +237,8 @@ autowrap_mode = 3
 [node name="BackButton" type="Button" parent="CreditsPanel/Center/Panel/Layout" unique_id=496259246]
 layout_mode = 2
 text = "Voltar"
+
+[node name="SourcesMenu" parent="." instance=ExtResource("98_sources")]
+visible = false
 
 [node name="OptionsMenu" parent="." instance=ExtResource("99_options")]

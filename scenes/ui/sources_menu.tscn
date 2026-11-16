@@ -1,0 +1,97 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scenes/ui/sources_menu.gd" id="1_sources"]
+[ext_resource type="Theme" uid="uid://dkgx8367noml7" path="res://scenes/ui/game_theme.tres" id="2_theme"]
+
+[node name="SourcesMenu" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_sources")
+
+[node name="Dim" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.75)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Center"]
+custom_minimum_size = Vector2(860, 500)
+layout_mode = 2
+theme_type_variation = &"ParchmentPanel"
+
+[node name="Layout" type="VBoxContainer" parent="Center/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="Center/Panel/Layout"]
+layout_mode = 2
+theme_type_variation = &"ParchmentTitle"
+text = "Fontes"
+horizontal_alignment = 1
+
+[node name="Subtitle" type="Label" parent="Center/Panel/Layout"]
+layout_mode = 2
+theme_type_variation = &"ParchmentSubtitle"
+text = "Pesquisas e documentos que embasam cada ingrediente"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Center/Panel/Layout"]
+layout_mode = 2
+
+[node name="Body" type="HBoxContainer" parent="Center/Panel/Layout"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+
+[node name="ConditionScroll" type="ScrollContainer" parent="Center/Panel/Layout/Body"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ConditionList" type="VBoxContainer" parent="Center/Panel/Layout/Body/ConditionScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Content" type="RichTextLabel" parent="Center/Panel/Layout/Body"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+focus_mode = 2
+theme_type_variation = &"ParchmentRichText"
+bbcode_enabled = true
+meta_underlined = true
+
+[node name="Footer" type="HBoxContainer" parent="Center/Panel/Layout"]
+layout_mode = 2
+
+[node name="Hint" type="Label" parent="Center/Panel/Layout/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"ParchmentSubtitle"
+text = "Clique em \"Abrir link\" para ver a referência no navegador."
+
+[node name="BackButton" type="Button" parent="Center/Panel/Layout/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Voltar"
