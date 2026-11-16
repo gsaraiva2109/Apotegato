@@ -3,6 +3,7 @@ extends GutTest
 ## leva à cabana com a mochila e o estoque intactos.
 
 const FloorScene := preload("res://scenes/region/floor.tscn")
+const TEST_SAVE := "user://test_floor_hearts_save.json"
 
 var _floor: RegionFloor
 
@@ -13,12 +14,15 @@ func before_each() -> void:
 	GameState.attendance.intro_done = true
 	GameState.start_region(Regions.CAATINGA)
 	_floor = autofree(FloorScene.instantiate())
+	_floor.save_path = TEST_SAVE
 	_floor.faint_seconds = 0.05
 	add_child(_floor)
 	await wait_physics_frames(2)
 
 
 func after_each() -> void:
+	if FileAccess.file_exists(TEST_SAVE):
+		DirAccess.remove_absolute(TEST_SAVE)
 	get_tree().paused = false
 	GameState.new_game()
 
@@ -76,6 +80,7 @@ func test_fainting_returns_to_the_cabin_with_the_backpack_intact() -> void:
 	assert_eq(GameState.backpack.count("mel"), mel)
 	assert_eq(GameState.backpack.used_slots(), slots)
 	assert_eq(GameState.stock.count("sardinha"), 3)
+	assert_eq(int(SaveGame.read(TEST_SAVE).get("hearts", 0)), Hearts.MAX)
 	get_tree().current_scene.queue_free()
 
 

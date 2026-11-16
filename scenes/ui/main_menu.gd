@@ -7,8 +7,8 @@ extends Control
 ## Emitido quando o jogador pede para sair do jogo.
 signal quit_requested
 
-## Onde o jogo guarda o save (o save em si é a issue #42).
-const SAVE_PATH := "user://save.json"
+## Onde o jogo guarda o save.
+const SAVE_PATH := SaveGame.PATH
 
 ## Arquivo de save procurado. Só muda nos testes.
 var save_path := SAVE_PATH
@@ -50,9 +50,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
-## Se existe um save no caminho dado.
+## Se há um save válido no caminho dado.
 static func has_save(path: String = SAVE_PATH) -> bool:
-	return FileAccess.file_exists(path)
+	return not SaveGame.read(path).is_empty()
 
 
 ## Se a tela Fontes está aberta.
@@ -70,8 +70,11 @@ func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_file(ScenePaths.CABIN)
 
 
-## O carregamento do estado salvo vem com o save (#42); por ora abre a cabana.
 func _on_load_pressed() -> void:
+	if not SaveGame.restore(save_path):
+		_load_button.disabled = true
+		_new_game_button.grab_focus()
+		return
 	get_tree().change_scene_to_file(ScenePaths.CABIN)
 
 

@@ -4,6 +4,7 @@ extends GutTest
 ## mochila nem o estoque.
 
 const FloorScene := preload("res://scenes/region/floor.tscn")
+const TEST_SAVE := "user://test_floor_save.json"
 
 var _floor: RegionFloor
 
@@ -13,11 +14,14 @@ func before_each() -> void:
 	GameState.attendance.intro_done = true
 	GameState.start_region(Regions.CAATINGA)
 	_floor = autofree(FloorScene.instantiate())
+	_floor.save_path = TEST_SAVE
 	add_child(_floor)
 	await wait_physics_frames(2)
 
 
 func after_each() -> void:
+	if FileAccess.file_exists(TEST_SAVE):
+		DirAccess.remove_absolute(TEST_SAVE)
 	get_tree().paused = false
 	GameState.new_game()
 
@@ -124,8 +128,10 @@ func test_cancelling_the_door_menu_keeps_the_floor() -> void:
 
 
 func test_back_to_the_cabin_keeps_backpack_and_stock() -> void:
+	GameState.backpack.clear()
 	GameState.backpack.add("licuri")
 	GameState.stock.store("sardinha", 3)
+	_player().hearts.hurt(3)
 	_floor._on_door_choice_made(DoorMenu.CABIN)
 	# a troca de cena acontece no fim do quadro; limpa o que ela criou
 	await wait_process_frames(2)
@@ -133,4 +139,9 @@ func test_back_to_the_cabin_keeps_backpack_and_stock() -> void:
 	assert_eq(GameState.backpack.count("licuri"), 1)
 	assert_eq(GameState.stock.count("sardinha"), 3)
 	assert_true(get_tree().current_scene is Cabin)
+	var saved := SaveGame.read(TEST_SAVE)
+	assert_eq(int(saved.get("versao", 0)), SaveGame.VERSION)
+	assert_eq(int(saved.get("hearts", 0)), Hearts.MAX - 3)
+	assert_eq(int(saved.get("backpack", {}).get("licuri", 0)), 1)
+	assert_eq(int(saved.get("stock", {}).get("sardinha", 0)), 3)
 	get_tree().current_scene.queue_free()
