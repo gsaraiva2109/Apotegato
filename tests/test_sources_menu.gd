@@ -41,11 +41,77 @@ func test_starts_closed() -> void:
 	assert_false(_menu.is_open())
 
 
-func test_has_one_button_per_condition() -> void:
-	assert_eq(_list().get_child_count(), _order.size())
-	for button: Button in _list().get_children():
+func test_has_one_button_per_condition_and_the_credits() -> void:
+	var buttons := _buttons()
+	assert_eq(buttons.size(), _order.size() + 2)
+	for i in _order.size():
+		assert_eq(String(buttons[i].name), _order[i])
+	assert_eq(String(buttons[-2].name), SourcesMenu.CREDITS_ART)
+	assert_eq(String(buttons[-1].name), SourcesMenu.CREDITS_AUDIO)
+	for button in buttons:
 		assert_ne(button.focus_mode, Control.FOCUS_NONE)
 		assert_eq(button.mouse_filter, Control.MOUSE_FILTER_STOP)
+
+
+func test_list_opens_scrolled_to_the_top() -> void:
+	_menu.open()
+	await wait_process_frames(3)
+	var scroll: ScrollContainer = _menu.get_node("%ConditionScroll")
+	assert_eq(scroll.scroll_vertical, 0)
+
+
+func test_shows_the_fiction_disclaimer() -> void:
+	_menu.open()
+	var disclaimer: Label = _menu.get_node("%Disclaimer")
+	assert_true(disclaimer.is_visible_in_tree())
+	assert_string_contains(disclaimer.text, "ficção")
+	assert_string_contains(disclaimer.text, "não é orientação médica")
+
+
+func test_art_credits_list_author_and_license() -> void:
+	_menu.open()
+	(_list().get_node(SourcesMenu.CREDITS_ART) as Button).pressed.emit()
+	assert_eq(_menu.current_condition(), SourcesMenu.CREDITS_ART)
+	var text := _content().get_parsed_text()
+	for row in CreditsData.of_type(CreditsData.load_rows(), CreditsData.ART):
+		assert_string_contains(text, row["nome"])
+		assert_string_contains(text, row["autor"])
+		assert_string_contains(text, row["licenca"])
+
+
+func test_audio_credits_only_show_audio() -> void:
+	var rows := CreditsData.load_rows()
+	_menu.open()
+	_menu.show_condition(SourcesMenu.CREDITS_AUDIO)
+	var text := _content().get_parsed_text()
+	for row in CreditsData.of_type(rows, CreditsData.AUDIO):
+		assert_string_contains(text, row["nome"])
+	for row in CreditsData.of_type(rows, CreditsData.ART):
+		assert_false(text.contains(row["nome"]), "Arte na seção de áudio: %s" % row["nome"])
+
+
+func test_credit_links_are_clickable() -> void:
+	var rows: Array[Dictionary] = [
+		{
+			"nome": "Pack",
+			"autor": "Autor",
+			"finalidade": "x",
+			"licenca": "y",
+			"origem": "https://a.io"
+		},
+		{"nome": "Outro", "autor": "B", "finalidade": "x", "licenca": "y", "origem": "file:///C:/"},
+	]
+	var text := SourcesMenu.build_credits_text("Teste", rows)
+	assert_string_contains(text, "[url=https://a.io]")
+	assert_false(text.contains("[url=file:"))
+
+
+func _buttons() -> Array[Button]:
+	var buttons: Array[Button] = []
+	for child in _list().get_children():
+		if child is Button:
+			buttons.append(child)
+	return buttons
 
 
 func test_opens_on_the_first_condition_with_focus() -> void:
