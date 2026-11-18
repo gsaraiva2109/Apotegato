@@ -52,6 +52,14 @@ theme_type_variation = &"ParchmentSubtitle"
 text = "Pesquisas e documentos que embasam cada ingrediente"
 horizontal_alignment = 1
 
+[node name="Disclaimer" type="Label" parent="Center/Panel/Layout"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"ParchmentSubtitle"
+text = "Apotegato é uma obra de ficção."
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="Separator" type="HSeparator" parent="Center/Panel/Layout"]
 layout_mode = 2
 
@@ -61,6 +69,7 @@ size_flags_vertical = 3
 theme_override_constants/separation = 12
 
 [node name="ConditionScroll" type="ScrollContainer" parent="Center/Panel/Layout/Body"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(190, 0)
 layout_mode = 2
 follow_focus = true
