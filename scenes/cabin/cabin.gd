@@ -25,6 +25,8 @@ signal delivery_completed(condition: String)
 signal patient_arrived(condition: String)
 ## Emitido quando o paciente atendido termina de sair pela porta.
 signal patient_left(condition: String)
+## Emitido quando o Mingau volta para casa, logo antes de abrir a tela de fim.
+signal campaign_finished
 
 ## Tamanho da cabana em pixels (30 x 17 tiles de 32 px).
 const ROOM := Rect2i(0, 0, 960, 544)
@@ -38,8 +40,10 @@ const PATIENT_SPEED := 120.0
 ## Mostra o paciente entrando e saindo andando. Os testes desligam para não
 ## esperar a caminhada.
 @export var animate_patient := true
-## Segundos entre a despedida (voltar para a Unifor) e o menu inicial.
+## Segundos entre a despedida (voltar para a Unifor) e a tela de fim.
 @export var ending_seconds := 1.5
+## Cena aberta depois do encerramento. Vazio não troca de cena (testes).
+@export_file("*.tscn") var ending_scene := ScenePaths.ENDING
 
 ## Condição do paciente que pode receber a entrega agora (id do CSV): a do
 ## atendimento em andamento, só depois que a apotecária pediu os ingredientes.
@@ -209,15 +213,20 @@ func _on_ending_choice(choice: String) -> void:
 		_play([Attendance.ENDING_KEEP_HELPING], _on_keep_helping)
 
 
-## Fim da campanha: Mingau atravessa o portal. A tela de fim vem com a #40; por
-## enquanto o jogo volta ao menu inicial.
+## Fim da campanha: Mingau atravessa o portal e o jogo mostra a tela de fim.
 func _on_going_home(_choice: String) -> void:
 	GameState.flow.request(GameFlow.State.COMPLETION)
 	# O jogo está congelado na conclusão; a espera roda mesmo assim e some junto
 	# com a cabana.
 	var wait := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	wait.tween_interval(ending_seconds)
-	wait.tween_callback(get_tree().change_scene_to_file.bind(ScenePaths.MENU))
+	wait.tween_callback(_finish_campaign)
+
+
+func _finish_campaign() -> void:
+	campaign_finished.emit()
+	if not ending_scene.is_empty():
+		get_tree().change_scene_to_file(ending_scene)
 
 
 func _on_keep_helping(_choice: String) -> void:
