@@ -246,3 +246,23 @@ func test_going_home_completes_the_campaign() -> void:
 	assert_true(texts[-1].ends_with("Boa viagem!"))
 	assert_true(GameState.flow.is_in(GameFlow.State.COMPLETION))
 	assert_true(get_tree().paused)
+
+
+func test_going_home_opens_the_ending_screen() -> void:
+	for condition in IngredientData.get_conditions():
+		GameState.patients.mark_attended(condition)
+	GameState.attendance.intro_done = true
+	_open_cabin()
+	assert_eq(_cabin.ending_scene, ScenePaths.ENDING)
+	assert_true(ResourceLoader.exists(ScenePaths.ENDING))
+	# Sem trocar de cena de verdade: trocaria a cena do próprio GUT.
+	_cabin.ending_scene = ""
+	_cabin.ending_seconds = 0.05
+	watch_signals(_cabin)
+	_read_dialogue()
+	_box().choose(Attendance.CHOICE_GO_HOME)
+	_read_dialogue()
+	# A conclusão congela o jogo, e o GUT espera com o jogo rodando.
+	get_tree().paused = false
+	await wait_seconds(0.3)
+	assert_signal_emitted(_cabin, "campaign_finished")

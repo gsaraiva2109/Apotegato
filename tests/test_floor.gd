@@ -42,6 +42,12 @@ func _label() -> Label:
 	return _floor.get_node("Hud/Root/LocationPanel/LocationLabel")
 
 
+## Primeira linha do painel: região e andar (a segunda é o contador de
+## atendimentos).
+func _location() -> String:
+	return _label().text.get_slice("\n", 0)
+
+
 func _door_menu() -> DoorMenu:
 	return _floor.get_node("DoorMenu")
 
@@ -70,7 +76,11 @@ func test_camera_is_limited_to_the_floor() -> void:
 
 
 func test_shows_region_and_floor_on_screen() -> void:
-	assert_eq(_label().text, "Caatinga - Andar 1")
+	assert_eq(_location(), "Caatinga - Andar 1")
+
+
+func test_shows_the_attendance_counter_under_the_location() -> void:
+	assert_eq(_label().text.get_slice("\n", 1), "Atendimentos 0/10")
 
 
 func test_opens_directly_with_a_default_region() -> void:
@@ -98,7 +108,7 @@ func test_going_up_generates_a_new_floor_with_the_other_parity() -> void:
 	assert_eq(GameState.current_floor, 2)
 	assert_eq(GameState.floor_parity(), "par")
 	assert_ne(_room().layout, before, "Andar novo, mapa novo")
-	assert_eq(_label().text, "Caatinga - Andar 2")
+	assert_eq(_location(), "Caatinga - Andar 2")
 	assert_eq(_player().position, MazeGrid.cell_to_position(_room().layout.entry_cell))
 
 
@@ -112,7 +122,7 @@ func test_other_region_goes_to_floor_one_keeping_backpack_and_stock() -> void:
 	_region_menu().get_button(Regions.LITORAL).pressed.emit()
 	assert_eq(GameState.current_region, "litoral")
 	assert_eq(GameState.current_floor, 1)
-	assert_eq(_label().text, "Litoral - Andar 1")
+	assert_eq(_location(), "Litoral - Andar 1")
 	assert_eq(GameState.backpack.count("acerola"), 2)
 	assert_eq(GameState.stock.count("mel"), 1)
 	assert_false(get_tree().paused)
