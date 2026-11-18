@@ -1,11 +1,14 @@
 class_name SourcesMenu
 extends Control
 ## Tela Fontes, aberta pelo menu inicial: as referências científicas que
-## embasam cada ingrediente, separadas por condição. À esquerda fica a lista de
-## condições; à direita, para cada ingrediente da condição escolhida, o resumo,
-## as limitações e as referências, com links que abrem no navegador.
+## embasam cada ingrediente, separadas por condição, e os créditos de arte e de
+## áudio. À esquerda fica a lista de seções; à direita, o conteúdo da escolhida.
+## Para cada ingrediente aparecem o resumo, as limitações e as referências, com
+## links que abrem no navegador. No topo fica sempre o aviso de que o jogo é
+## ficção e não orientação médica (GDD, seção 3).
 ##
-## Os textos vêm do data/fontes.json (ver `SourcesData`).
+## As referências vêm do data/fontes.json (ver `SourcesData`) e os créditos do
+## data/creditos.csv (ver `CreditsData`).
 
 ## Emitido quando a tela fecha, para o menu devolver o foco ao botão.
 signal closed
@@ -18,22 +21,41 @@ const HEADING_SIZE := 20
 const INGREDIENT_SIZE := 18
 const SECTION_SIZE := 16
 
+## Ids das seções de créditos na lista, depois das condições.
+const CREDITS_ART := "creditos_arte"
+const CREDITS_AUDIO := "creditos_audio"
+const CREDITS_TITLES := {
+	CREDITS_ART: "Créditos: arte",
+	CREDITS_AUDIO: "Créditos: áudio",
+}
+
+const DISCLAIMER := (
+	"Apotegato é uma obra de ficção. O que o jogo diz sobre plantas e alimentos "
+	+ "não é orientação médica: em caso de doença, procure um profissional de saúde."
+)
+
 ## Arquivo lido. Só muda nos testes.
 var data_path := SourcesData.PATH
 
 var _data := {}
+var _credits: Array[Dictionary] = []
 var _current := ""
 var _condition_buttons := {}
 
 @onready var _condition_list: VBoxContainer = %ConditionList
+@onready var _condition_scroll: ScrollContainer = %ConditionScroll
 @onready var _content: RichTextLabel = %Content
 @onready var _back_button: Button = %BackButton
+@onready var _disclaimer: Label = %Disclaimer
 
 
 func _ready() -> void:
 	hide()
 	_data = SourcesData.load_data(data_path)
+	_credits = CreditsData.load_rows()
+	_disclaimer.text = DISCLAIMER
 	_build_condition_buttons()
+	_build_credits_buttons()
 	_content.meta_clicked.connect(_on_link_clicked)
 	_back_button.pressed.connect(close)
 	AudioSettings.changed.connect(_refresh)
@@ -54,6 +76,8 @@ func open() -> void:
 		return
 	show_condition(order[0])
 	(_condition_buttons[order[0]] as Button).grab_focus()
+	# O foco rola a lista antes de o layout assentar; volta ao topo depois.
+	_condition_scroll.set_deferred("scroll_vertical", 0)
 
 
 func close() -> void:
@@ -67,20 +91,27 @@ func is_open() -> bool:
 	return visible
 
 
-## Condição mostrada agora.
+## Seção mostrada agora: o id de uma condição ou de uma seção de créditos.
 func current_condition() -> String:
 	return _current
 
 
-## Mostra as referências da condição pedida.
-func show_condition(condition_id: String) -> void:
-	var condition := SourcesData.get_condition(_data, condition_id)
-	if condition.is_empty():
-		return
-	_current = condition_id
+## Mostra a seção pedida: as referências de uma condição ou uma das seções de
+## créditos (`CREDITS_ART`, `CREDITS_AUDIO`).
+func show_condition(section_id: String) -> void:
+	var text := ""
+	if CREDITS_TITLES.has(section_id):
+		var type := CreditsData.ART if section_id == CREDITS_ART else CreditsData.AUDIO
+		text = build_credits_text(CREDITS_TITLES[section_id], CreditsData.of_type(_credits, type))
+	else:
+		var condition := SourcesData.get_condition(_data, section_id)
+		if condition.is_empty():
+			return
+		text = build_text(condition)
+	_current = section_id
 	for id: String in _condition_buttons:
-		(_condition_buttons[id] as Button).set_pressed_no_signal(id == condition_id)
-	_content.text = build_text(condition)
+		(_condition_buttons[id] as Button).set_pressed_no_signal(id == section_id)
+	_content.text = text
 	_content.scroll_to_line(0)
 
 
@@ -119,6 +150,34 @@ static func _ingredient_text(ingredient: Dictionary) -> String:
 		for i in references.size():
 			lines.append(_reference_text(i + 1, references[i]))
 	return "\n\n".join(lines)
+
+
+## Texto (BBCode) de uma seção de créditos: cada asset com autor, para que é
+## usado no jogo, licença e link da origem.
+static func build_credits_text(title: String, rows: Array[Dictionary]) -> String:
+	var parts: PackedStringArray = []
+	parts.append(
+		(
+			"[font_size=%d][color=%s]%s[/color][/font_size]"
+			% [TextSize.scaled(HEADING_SIZE), HEADING_COLOR, _escape(title)]
+		)
+	)
+	for row in rows:
+		var lines: PackedStringArray = []
+		lines.append(
+			(
+				"[font_size=%d][u]%s[/u][/font_size]"
+				% [TextSize.scaled(INGREDIENT_SIZE), _escape(row.get("nome", ""))]
+			)
+		)
+		lines.append("Autor: %s" % _escape(row.get("autor", "")))
+		lines.append("No jogo: %s" % _escape(row.get("finalidade", "")))
+		lines.append("Licença: %s" % _escape(row.get("licenca", "")))
+		var url: String = row.get("origem", "")
+		if is_web_link(url):
+			lines.append("[url=%s][color=%s]Abrir link[/color][/url]" % [url, LINK_COLOR])
+		parts.append("\n".join(lines))
+	return "\n\n".join(parts)
 
 
 static func _reference_text(number: int, reference: Dictionary) -> String:
@@ -162,6 +221,24 @@ func _build_condition_buttons() -> void:
 		button.focus_entered.connect(show_condition.bind(condition_id))
 		_condition_list.add_child(button)
 		_condition_buttons[condition_id] = button
+
+
+func _build_credits_buttons() -> void:
+	var group: ButtonGroup = null
+	if _condition_list.get_child_count() > 0:
+		group = (_condition_list.get_child(0) as Button).button_group
+	_condition_list.add_child(HSeparator.new())
+	for section_id: String in [CREDITS_ART, CREDITS_AUDIO]:
+		var button := Button.new()
+		button.name = section_id
+		button.text = CREDITS_TITLES[section_id]
+		button.toggle_mode = true
+		button.button_group = group
+		button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		button.pressed.connect(show_condition.bind(section_id))
+		button.focus_entered.connect(show_condition.bind(section_id))
+		_condition_list.add_child(button)
+		_condition_buttons[section_id] = button
 
 
 ## Redesenha o texto quando o "Texto grande" muda.

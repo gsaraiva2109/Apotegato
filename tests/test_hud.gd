@@ -17,6 +17,22 @@ func test_show_location_updates_the_label() -> void:
 	assert_eq(label.text, "Mata Atlântica - Andar 3")
 
 
+func test_campaign_text_counts_the_attendances() -> void:
+	assert_eq(Hud.campaign_text(0, 10, false), "Atendimentos 0/10")
+	assert_eq(Hud.campaign_text(3, 10, false), "Atendimentos 3/10")
+	assert_eq(Hud.campaign_text(12, 10, false), "Atendimentos 10/10")
+	assert_eq(Hud.campaign_text(10, 10, true), "Modo contínuo")
+
+
+func test_show_campaign_goes_under_the_location() -> void:
+	var hud: Hud = autofree(HudScene.instantiate())
+	add_child(hud)
+	hud.show_location(Regions.CERRADO, 2)
+	hud.show_campaign(4, 10, false)
+	var label: Label = hud.get_node("Root/LocationPanel/LocationLabel")
+	assert_eq(label.text, "Cerrado - Andar 2\nAtendimentos 4/10")
+
+
 func test_backpack_text_lists_names_and_amounts() -> void:
 	var backpack := Backpack.new()
 	assert_eq(Hud.backpack_text(backpack), "Mochila 0/6")

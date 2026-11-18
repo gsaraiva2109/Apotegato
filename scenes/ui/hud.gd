@@ -1,8 +1,8 @@
 class_name Hud
 extends CanvasLayer
 ## Interface da exploração: os corações (canto superior esquerdo, como em
-## Zelda), região e andar, o contador da mochila e os avisos rápidos ("Pegou
-## Buriti", "Mochila cheia").
+## Zelda), região e andar, o contador de atendimentos da campanha, o contador da
+## mochila e os avisos rápidos ("Pegou Buriti", "Mochila cheia").
 
 const HEART_FULL := preload("res://assets/art/ui/heart_full.png")
 const HEART_HALF := preload("res://assets/art/ui/heart_half.png")
@@ -11,6 +11,9 @@ const HEART_SIZE := Vector2(36, 30)
 
 ## Quanto tempo um aviso fica na tela, em segundos.
 const MESSAGE_SECONDS := 2.5
+
+var _location := ""
+var _campaign := ""
 
 @onready var _hearts_box: HBoxContainer = $Root/HeartsBox
 @onready var _light_bar: ProgressBar = $Root/LightBox/LightBar
@@ -69,7 +72,15 @@ func show_light(defeated: int) -> void:
 
 ## Mostra a região e o andar, como "Amazônia - Andar 2".
 func show_location(region: String, floor_number: int) -> void:
-	_location_label.text = location_text(region, floor_number)
+	_location = location_text(region, floor_number)
+	_update_location_label()
+
+
+## Mostra o contador de atendimentos embaixo da região, como "Atendimentos
+## 3/10", ou "Modo contínuo" depois de o jogador escolher continuar ajudando.
+func show_campaign(attended: int, goal: int, continuous: bool) -> void:
+	_campaign = campaign_text(attended, goal, continuous)
+	_update_location_label()
 
 
 ## Mostra o contador da mochila: espaços usados e o que já foi coletado.
@@ -95,6 +106,13 @@ static func location_text(region: String, floor_number: int) -> String:
 	return "%s - Andar %d" % [Regions.display_name(region), floor_number]
 
 
+## Texto do contador de atendimentos. Fica separado para ser testado.
+static func campaign_text(attended: int, goal: int, continuous: bool) -> String:
+	if continuous:
+		return "Modo contínuo"
+	return "Atendimentos %d/%d" % [mini(attended, goal), goal]
+
+
 ## Texto do contador da mochila, uma linha por ingrediente, com os nomes do CSV.
 static func backpack_text(backpack: Backpack) -> String:
 	var lines: Array[String] = ["Mochila %d/%d" % [backpack.used_slots(), Backpack.MAX_SLOTS]]
@@ -103,6 +121,14 @@ static func backpack_text(backpack: Backpack) -> String:
 		var item_name := ingredient.display_name if ingredient != null else id
 		lines.append("%s x%d" % [item_name, backpack.count(id)])
 	return "\n".join(lines)
+
+
+func _update_location_label() -> void:
+	var lines: PackedStringArray = []
+	for text in [_location, _campaign]:
+		if not text.is_empty():
+			lines.append(text)
+	_location_label.text = "\n".join(lines)
 
 
 func _hearts_with(texture: Texture2D) -> int:

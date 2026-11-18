@@ -12,6 +12,17 @@ extends RefCounted
 ## Emitido quando uma condição é marcada como atendida.
 signal attended_changed
 
+## Quantos atendimentos a campanha tem, se o projeto não disser outro número.
+const DEFAULT_CAMPAIGN_SIZE := 10
+## Configuração do projeto que muda o número de atendimentos da campanha
+## (Projeto > Configurações do Projeto, com "Configurações avançadas" ligado).
+const CAMPAIGN_SIZE_SETTING := "apotegato/campanha/atendimentos"
+
+## Quantos atendimentos a campanha tem. Começa com a configuração do projeto
+## e só muda nos testes. Valores fora de 1..(condições possíveis) são
+## ajustados por `campaign_goal`.
+var campaign_size: int = ProjectSettings.get_setting(CAMPAIGN_SIZE_SETTING, DEFAULT_CAMPAIGN_SIZE)
+
 ## Condições já atendidas, na ordem do atendimento.
 var _attended: Array[String] = []
 
@@ -39,10 +50,21 @@ func pick_continuous(rng: RandomNumberGenerator, previous: String = "") -> Strin
 	return candidates[rng.randi_range(0, candidates.size() - 1)]
 
 
-## true quando todas as condições possíveis já foram atendidas e começa o
-## encerramento da campanha principal.
+## true quando a campanha chegou ao número de atendimentos (ou quando não
+## sobrou condição possível) e começa o encerramento.
 func is_campaign_complete() -> bool:
-	return remaining().is_empty() and not _attended.is_empty()
+	return not _attended.is_empty() and _attended.size() >= campaign_goal()
+
+
+## Quantos atendimentos fecham a campanha: `campaign_size`, limitado entre 1 e
+## o número de condições possíveis (não dá para atender mais que isso sem
+## repetir).
+func campaign_goal() -> int:
+	var feasible := 0
+	for condition in IngredientData.get_conditions():
+		if is_feasible(condition):
+			feasible += 1
+	return clampi(campaign_size, 1, maxi(feasible, 1))
 
 
 ## Condições que ainda podem ser sorteadas: não atendidas e possíveis, na

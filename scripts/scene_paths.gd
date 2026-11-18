@@ -6,3 +6,4 @@ extends RefCounted
 const MENU := "res://scenes/ui/main_menu.tscn"
 const CABIN := "res://scenes/cabin/cabin.tscn"
 const FLOOR := "res://scenes/region/floor.tscn"
+const ENDING := "res://scenes/ui/ending_screen.tscn"
