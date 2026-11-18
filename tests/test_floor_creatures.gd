@@ -101,16 +101,31 @@ func test_each_defeated_creature_grows_the_light() -> void:
 
 func test_scratching_a_creature_through_the_player_raises_the_light() -> void:
 	var creature := _floor.get_creatures()[0]
-	_player().facing = Vector2.RIGHT
+	# Congela as criaturas: uma que ataque o gato o empurra e cancela o golpe.
+	for other in _floor.get_creatures():
+		other.set_physics_process(false)
+	# O mapa é sorteado: escolhe um lado livre, sem parede entre o gato e a criatura.
+	var direction := _free_side_of_player()
+	_player().facing = direction
 	_player().attack_cooldown = 0.0
 	for i in 3:
-		creature.global_position = _player().global_position + Vector2(28, 0)
+		creature.global_position = _player().global_position + direction * 28.0
 		await wait_physics_frames(2)
 		_player().try_attack()
 	assert_true(creature.is_defeated())
 	assert_eq(_light().defeated, 1)
 	assert_almost_eq(_light().texture_scale, 0.72, 0.0001)
 	assert_eq(_floor.get_creatures().size(), _reserved() - 1)
+
+
+## Uma das quatro direções cuja célula vizinha ao gato está livre.
+func _free_side_of_player() -> Vector2:
+	var grid := _room().layout.grid
+	var cell := MazeGrid.position_to_cell(_player().global_position)
+	for direction in [Vector2.RIGHT, Vector2.LEFT, Vector2.DOWN, Vector2.UP]:
+		if grid.is_free(cell + Vector2i(direction)):
+			return direction
+	return Vector2.RIGHT
 
 
 func test_light_resets_on_the_next_floor_after_defeats() -> void:
