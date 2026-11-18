@@ -112,6 +112,39 @@ func test_campaign_complete_after_ten_attendances() -> void:
 	assert_true(_picker.is_campaign_complete())
 
 
+func test_campaign_has_ten_attendances_by_default() -> void:
+	assert_eq(PatientPicker.DEFAULT_CAMPAIGN_SIZE, 10)
+	assert_eq(_picker.campaign_size, 10)
+	assert_eq(_picker.campaign_goal(), 10)
+
+
+func test_campaign_size_comes_from_the_project_setting() -> void:
+	ProjectSettings.set_setting(PatientPicker.CAMPAIGN_SIZE_SETTING, 4)
+	var picker := PatientPicker.new()
+	ProjectSettings.set_setting(PatientPicker.CAMPAIGN_SIZE_SETTING, null)
+	assert_eq(picker.campaign_size, 4)
+	assert_eq(PatientPicker.new().campaign_size, PatientPicker.DEFAULT_CAMPAIGN_SIZE)
+
+
+func test_shorter_campaign_ends_after_its_size() -> void:
+	_picker.campaign_size = 3
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	for i in 2:
+		_picker.mark_attended(_picker.pick(rng))
+	assert_false(_picker.is_campaign_complete())
+	_picker.mark_attended(_picker.pick(rng))
+	assert_true(_picker.is_campaign_complete())
+	assert_eq(_picker.attended_count(), 3)
+
+
+func test_campaign_goal_is_kept_between_one_and_the_conditions() -> void:
+	_picker.campaign_size = 0
+	assert_eq(_picker.campaign_goal(), 1)
+	_picker.campaign_size = 99
+	assert_eq(_picker.campaign_goal(), IngredientData.get_conditions().size())
+
+
 func test_continuous_mode_draws_any_condition_without_immediate_repeat() -> void:
 	_serve_all()
 	var seen := {}

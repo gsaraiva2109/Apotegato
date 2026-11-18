@@ -82,6 +82,11 @@ func generate_floor() -> void:
 	_player.set_camera_limits(_room.bounds())
 	_exit_door.position = _room.cell_to_position(layout.exit_cell)
 	_hud.show_location(GameState.current_region, GameState.current_floor)
+	_hud.show_campaign(
+		GameState.patients.attended_count(),
+		GameState.patients.campaign_goal(),
+		GameState.attendance.continuous
+	)
 	_hud.show_backpack(GameState.backpack)
 	_hud.show_light(0)
 	if GameState.current_floor == GameState.FIRST_FLOOR:
