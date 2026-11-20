@@ -22,6 +22,7 @@ var save_path := SAVE_PATH
 @onready var _credits_button: Button = $Center/Panel/Layout/CreditsButton
 @onready var _quit_button: Button = $Center/Panel/Layout/QuitButton
 @onready var _credits_panel: Control = $CreditsPanel
+@onready var _credits_text: RichTextLabel = $CreditsPanel/Center/Panel/Layout/Text
 @onready var _credits_back_button: Button = $CreditsPanel/Center/Panel/Layout/BackButton
 
 
@@ -37,7 +38,9 @@ func _ready() -> void:
 	_options_menu.closed.connect(_options_button.grab_focus)
 	_sources_button.pressed.connect(_sources_menu.open)
 	_sources_menu.closed.connect(_sources_button.grab_focus)
-	_credits_button.pressed.connect(_credits_panel.show)
+	_credits_text.text = build_credits_text(CreditsData.load_rows())
+	_credits_text.meta_clicked.connect(_on_credits_link_clicked)
+	_credits_button.pressed.connect(_open_credits)
 	_credits_back_button.pressed.connect(_close_credits)
 	_quit_button.pressed.connect(_on_quit_pressed)
 	quit_requested.connect(_quit_game)
@@ -84,6 +87,28 @@ func _on_quit_pressed() -> void:
 
 func _quit_game() -> void:
 	get_tree().quit()
+
+
+## Texto (BBCode) da tela Créditos: arte e áudio do data/creditos.csv, cada
+## item com autor, uso no jogo, licença e link da origem.
+static func build_credits_text(rows: Array[Dictionary]) -> String:
+	var parts: PackedStringArray = []
+	var art := CreditsData.of_type(rows, CreditsData.ART)
+	var audio := CreditsData.of_type(rows, CreditsData.AUDIO)
+	parts.append(SourcesMenu.build_credits_text("Arte", art))
+	parts.append(SourcesMenu.build_credits_text("Áudio", audio))
+	return "\n\n".join(parts)
+
+
+func _open_credits() -> void:
+	_credits_panel.show()
+	_credits_back_button.grab_focus()
+
+
+func _on_credits_link_clicked(meta: Variant) -> void:
+	var url := str(meta)
+	if SourcesMenu.is_web_link(url):
+		OS.shell_open(url)
 
 
 func _close_credits() -> void:
