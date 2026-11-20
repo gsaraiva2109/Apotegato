@@ -66,6 +66,13 @@ XP, moedas, upgrades e mochila que cresce estão em discussão e **não** fazem 
 
 O alvo é PC com Windows, incluindo máquinas com vídeo integrado, por isso o projeto usa o renderizador Compatibility.
 
+### Requisitos mínimos para jogar
+
+- Windows 10 ou mais novo, 64 bits (o jogo é distribuído como `.exe` na página de [Releases](https://github.com/gsaraiva2109/Apotegato/releases); basta extrair o `.zip` e abrir, sem instalar nada).
+- Placa de vídeo com suporte a OpenGL 3.3 (vídeo integrado serve, o jogo usa o renderizador Compatibility).
+- Tela de 960 x 544 ou maior; em qualquer resolução o jogo se ajusta (ver "Tamanho da janela").
+- Teclado e mouse. Não precisa de internet; ela só é usada para abrir os links das telas Fontes e Créditos no navegador.
+
 A versão jogável de cada sprint fica em [Releases](https://github.com/gsaraiva2109/Apotegato/releases).
 
 ## Organização

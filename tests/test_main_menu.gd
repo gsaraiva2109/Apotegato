@@ -132,6 +132,15 @@ func test_credits_opens_and_closes() -> void:
 	assert_false(_menu.is_credits_open())
 
 
+func test_credits_lists_the_csv_rows() -> void:
+	var rows := CreditsData.load_rows()
+	assert_gt(rows.size(), 0, "o creditos.csv tem linhas")
+	var text: String = _menu.get_node("CreditsPanel/Center/Panel/Layout/Text").text
+	for row in rows:
+		assert_string_contains(text, row["nome"])
+	assert_false(text.contains("ainda está sendo montada"))
+
+
 func test_sources_opens_and_closes() -> void:
 	assert_false(_menu.is_sources_open())
 	_button("SourcesButton").pressed.emit()
