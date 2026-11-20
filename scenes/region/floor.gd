@@ -186,6 +186,7 @@ func _on_pickup_touched(pickup: IngredientPickup) -> void:
 		return
 	if GameState.backpack.add(pickup.ingredient_id):
 		pickup.queue_free()
+		Sfx.play(SfxCatalog.COLETA)
 		_hud.show_message("Pegou %s" % pickup.display_name())
 
 
@@ -196,6 +197,7 @@ func _on_backpack_changed() -> void:
 func _on_backpack_rejected(id: String) -> void:
 	var ingredient := IngredientData.get_ingredient(id)
 	var item_name := ingredient.display_name if ingredient != null else id
+	Sfx.play(SfxCatalog.MOCHILA_CHEIA)
 	_hud.show_message("Mochila cheia: %s ficou no chão" % item_name)
 
 
@@ -205,6 +207,7 @@ func _on_exit_door_interacted(_id: StringName) -> void:
 
 
 func _on_door_choice_made(choice: StringName) -> void:
+	Sfx.play(SfxCatalog.PORTA)
 	match choice:
 		DoorMenu.UP:
 			GameState.climb_floor()
