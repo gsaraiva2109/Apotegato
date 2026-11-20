@@ -136,6 +136,7 @@ func try_attack() -> bool:
 		creature.take_scratch(facing)
 	_scratch.play(facing)
 	_scratch_time = 0.0
+	Sfx.play(SfxCatalog.ARRANHAO)
 	attacked.emit(facing)
 	return true
 
@@ -179,8 +180,10 @@ func take_hit(halves: int = 1, from: Vector2 = Vector2.INF) -> bool:
 		_fainted = true
 		_knockback_left = 0.0
 		_set_blink(false)
+		Sfx.play(SfxCatalog.DESMAIO)
 		fainted.emit()
 	else:
+		Sfx.play(SfxCatalog.DANO)
 		_invulnerable_left = invulnerability_time
 		if halves > 0 and from.is_finite():
 			_start_knockback(from)

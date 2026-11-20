@@ -193,8 +193,10 @@ func take_scratch(direction: Vector2 = Vector2.ZERO) -> void:
 	brain.scratched()
 	_flash()
 	if _hits_left <= 0:
+		Sfx.play(SfxCatalog.CRIATURA_DERROTADA)
 		_defeat()
 	else:
+		Sfx.play(SfxCatalog.ARRANHAO_ACERTOU)
 		_knockback = direction.normalized() * knockback_speed
 		_knockback_left = knockback_seconds
 
