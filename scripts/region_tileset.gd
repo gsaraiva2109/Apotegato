@@ -7,8 +7,9 @@ extends RefCounted
 ## Água animada: se a região tiver `water.png` (128 x 32 * quadros, os quadros de
 ## cada tile empilhados na coluna dele), os tiles que têm algo desenhado nele
 ## viram água animada (a parede e a barreira em Campos e Rios, só a parede no
-## Litoral, só a barreira, o açude, na Caatinga), numa segunda fonte (`WATER_SOURCE_ID`) com as mesmas
-## coordenadas e a mesma colisão. `source_for()` diz qual fonte usar em cada tile.
+## Litoral, só a barreira, o açude, na Caatinga), numa segunda fonte
+## (`WATER_SOURCE_ID`) com as mesmas coordenadas e a mesma colisão. `source_for()`
+## diz qual fonte usar em cada tile.
 ##
 ## Os TileSets ficam em cache, então trocar de andar na mesma região não monta
 ## tudo de novo.
