@@ -127,6 +127,22 @@ func test_only_the_wall_is_water_on_the_coast() -> void:
 	)
 
 
+func test_only_the_barrier_is_water_in_the_caatinga() -> void:
+	var tile_set := RegionTileSet.for_region(Regions.CAATINGA)
+	var source := tile_set.get_source(RegionTileSet.WATER_SOURCE_ID) as TileSetAtlasSource
+	assert_not_null(source, "A Caatinga tem o açude")
+	assert_eq(
+		RegionTileSet.source_for(Regions.CAATINGA, RegionTileSet.BARRIER_TILE),
+		RegionTileSet.WATER_SOURCE_ID
+	)
+	assert_eq(source.get_tile_animation_frames_count(RegionTileSet.BARRIER_TILE), 8)
+	assert_eq(
+		RegionTileSet.source_for(Regions.CAATINGA, RegionTileSet.WALL_TILE),
+		RegionTileSet.SOURCE_ID,
+		"A parede da borda segue sendo árvore seca"
+	)
+
+
 func test_regions_without_water_use_only_the_plain_source() -> void:
 	var tile_set := RegionTileSet.for_region(Regions.CERRADO)
 	assert_false(tile_set.has_source(RegionTileSet.WATER_SOURCE_ID))
