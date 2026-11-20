@@ -137,7 +137,7 @@ func test_credits_lists_the_csv_rows() -> void:
 	assert_gt(rows.size(), 0, "o creditos.csv tem linhas")
 	var text: String = _menu.get_node("CreditsPanel/Center/Panel/Layout/Text").text
 	for row in rows:
-		assert_string_contains(text, row["nome"])
+		assert_string_contains(text, String(row["nome"]).replace("[", "[lb]"))
 	assert_false(text.contains("ainda está sendo montada"))
 
 
