@@ -130,6 +130,7 @@ func _on_interacted(id: StringName) -> void:
 	match id:
 		&"door":
 			if GameState.flow.open_menu():
+				Sfx.play(SfxCatalog.PORTA)
 				_region_menu.open()
 		&"stock":
 			if GameState.flow.open_menu():
@@ -174,11 +175,22 @@ func _on_delivered(result: DeliveryResult) -> void:
 		result.outcome, not result.stored.is_empty(), not result.surplus.is_empty()
 	)
 	var values := {"missing": result.missing_text()}
+	Sfx.play(_delivery_sound(result.outcome))
 	_surplus_left = not result.surplus.is_empty()
 	if result.outcome == Delivery.Outcome.COMPLETE:
 		_play(topics, _on_attendance_concluded, values)
 	else:
 		_play(topics, _back_to_delivery, values)
+
+
+## Som de cada resultado de entrega.
+func _delivery_sound(outcome: Delivery.Outcome) -> StringName:
+	match outcome:
+		Delivery.Outcome.COMPLETE:
+			return SfxCatalog.ENTREGA_COMPLETA
+		Delivery.Outcome.PARTIAL:
+			return SfxCatalog.ENTREGA_PARCIAL
+	return SfxCatalog.ENTREGA_VAZIA
 
 
 ## A entrega cobriu a condição. Quem marca o atendimento como concluído é o fim
