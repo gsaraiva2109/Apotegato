@@ -37,6 +37,9 @@ const PATIENT_PATH: Array[Vector2] = [
 ]
 ## Velocidade do paciente andando, em pixels por segundo.
 const PATIENT_SPEED := 120.0
+## Sprite de cada paciente, pela condição. Sem o arquivo (arte de terceiros não
+## baixada), vale o sprite genérico que já está na cena.
+const PATIENT_SPRITE_DIR := "res://assets/art/characters/patient_%s.png"
 ## Mostra o paciente entrando e saindo andando. Os testes desligam para não
 ## esperar a caminhada.
 @export var animate_patient := true
@@ -291,11 +294,21 @@ func _restore_patient() -> void:
 	if attendance.phase == Attendance.Phase.LEAVING:
 		attendance.patient_left()
 	_patient.visible = attendance.has_patient()
+	if attendance.has_patient():
+		_set_patient_sprite(attendance.condition)
 	_patient.position = PATIENT_PATH[-1]
 	_patient_point.enabled = attendance.has_patient()
 
 
+## Troca o sprite do paciente pelo da condição dele, se houver.
+func _set_patient_sprite(condition: String) -> void:
+	var path := PATIENT_SPRITE_DIR % condition
+	if ResourceLoader.exists(path):
+		($World/Patient/Sprite as Sprite2D).texture = load(path)
+
+
 func _walk_patient_in(condition: String) -> void:
+	_set_patient_sprite(condition)
 	_patient.position = PATIENT_PATH[0]
 	_patient.visible = true
 	_patient_point.enabled = false

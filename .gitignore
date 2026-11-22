@@ -76,3 +76,4 @@ desktop.ini
 # tools/fetch_assets.sh): derivada de arte de terceiros, nunca versionar aqui.
 /assets/art/creatures/*/
 /assets/art/characters/mingau_sheet.png
+/assets/art/characters/patient_*.png
