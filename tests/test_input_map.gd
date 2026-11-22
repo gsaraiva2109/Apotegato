@@ -53,11 +53,11 @@ func test_no_script_reads_keys_directly() -> void:
 
 func _list_scripts() -> Array[String]:
 	var found: Array[String] = []
-	var pending: Array = CODE_DIRS.duplicate()
-	while not pending.is_empty():
-		var dir_path: String = pending.pop_back()
+	var queue: Array = CODE_DIRS.duplicate()
+	while not queue.is_empty():
+		var dir_path: String = queue.pop_back()
 		for sub in DirAccess.get_directories_at(dir_path):
-			pending.append(dir_path.path_join(sub))
+			queue.append(dir_path.path_join(sub))
 		for file in DirAccess.get_files_at(dir_path):
 			if file.get_extension() == "gd":
 				found.append(dir_path.path_join(file))

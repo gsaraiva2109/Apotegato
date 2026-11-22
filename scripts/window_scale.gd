@@ -47,4 +47,5 @@ static func window_size(area: Vector2i, base: Vector2i, pixel_perfect: bool) -> 
 ## Posição que centraliza uma janela de tamanho `size` (com a barra de título)
 ## dentro de `area` (a parte livre do monitor).
 static func centered_position(area: Rect2i, size: Vector2i) -> Vector2i:
-	return area.position + ((area.size - size) / 2).max(Vector2i.ZERO)
+	var free := Vector2(area.size - size)
+	return area.position + Vector2i((free / 2.0).max(Vector2.ZERO))

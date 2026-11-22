@@ -129,7 +129,7 @@ static func _add_water(tile_set: TileSet, region: String) -> Array[Vector2i]:
 		return water
 	var texture := load(path) as Texture2D
 	var tile_size := tile_set.tile_size
-	var frames := texture.get_height() / tile_size.y
+	var frames := floori(float(texture.get_height()) / tile_size.y)
 	if frames < 2 or texture.get_width() != tile_size.x * 4:
 		push_warning("RegionTileSet: %s deveria ter 128 px de largura e 2 ou mais quadros" % path)
 		return water

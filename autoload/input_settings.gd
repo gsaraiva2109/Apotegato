@@ -146,9 +146,9 @@ func owner_of(keycode: int, action: StringName = &"", slot: int = -1) -> StringN
 func set_key(action: StringName, slot: int, keycode: int) -> Result:
 	if not action in REMAPPABLE or slot < 0 or slot >= SLOTS or keycode <= 0:
 		return Result.INVALID
-	var owner := owner_of(keycode, action, slot)
-	if owner != &"":
-		return Result.RESERVED_KEY if owner in RESERVED else Result.TAKEN
+	var holder := owner_of(keycode, action, slot)
+	if holder != &"":
+		return Result.RESERVED_KEY if holder in RESERVED else Result.TAKEN
 	bindings[action][slot] = keycode
 	_commit()
 	return Result.OK

@@ -13,6 +13,10 @@ signal closed
 
 enum Tab { SOUND, VIDEO, KEYS, ACCESSIBILITY }
 
+## Script do InputSettings, para chamar as funções estáticas pelo tipo (o autoload
+## `InputSettings` é uma instância, e o Godot avisa se uma função estática for
+## chamada por ela).
+const InputSettingsScript := preload("res://autoload/input_settings.gd")
 const ICON_SOUND := preload("res://assets/art/ui/icon_sound.png")
 const ICON_MUTE := preload("res://assets/art/ui/icon_mute.png")
 const TEXT_ON := "Ligado"
@@ -99,13 +103,13 @@ func _ready() -> void:
 ## Enquanto uma tecla espera a nova, o próximo apertar de tecla vira a escolha
 ## (antes de a interface tratar a tecla). Esc cancela e Delete limpa a alternativa.
 func _input(event: InputEvent) -> void:
-	if not is_capturing() or not InputSettings.is_key_press(event):
+	if not is_capturing() or not InputSettingsScript.is_key_press(event):
 		return
 	get_viewport().set_input_as_handled()
-	var code := InputSettings.keycode_of(event)
-	if InputSettings.is_cancel_key(code):
+	var code := InputSettingsScript.keycode_of(event)
+	if InputSettingsScript.is_cancel_key(code):
 		cancel_capture()
-	elif InputSettings.is_clear_key(code):
+	elif InputSettingsScript.is_clear_key(code):
 		_clear_captured()
 	else:
 		_assign_captured(code)
