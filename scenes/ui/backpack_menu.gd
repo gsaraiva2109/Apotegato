@@ -216,7 +216,7 @@ func _new_slot(index: int, id: String, amount: int) -> HBoxContainer:
 
 	if id.is_empty():
 		name_label.text = "Vazio"
-		name_label.modulate = Color(1, 1, 1, 0.5)
+		name_label.theme_type_variation = &"MutedLabel"
 	else:
 		icon.texture = load(icon_path(id))
 		name_label.text = _display_name(id)

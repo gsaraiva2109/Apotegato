@@ -94,6 +94,15 @@ Além disso:
 - Um nó fala com os filhos chamando funções e com o pai emitindo sinais. Evite `get_parent()` e caminhos longos como `get_node("../../X")`.
 - Números de balanceamento (luz, corações, espaços da mochila, golpes) ficam em constantes nomeadas ou `@export`, nunca soltos no código.
 
+## Acessibilidade
+
+- **Piso de fonte 16.** Nenhum texto que se lê fica abaixo de 16 px, no tema ou em `theme_override_font_sizes` das cenas. A opção "Texto grande" multiplica por 1,25 em cima disso.
+- **Nada só por cor.** Todo aviso importante tem um segundo sinal além da cor (símbolo, texto, forma). O aviso de ataque das criaturas, por exemplo, mostra um "!" além do pulso vermelho.
+- **Reduzir efeitos.** Qualquer efeito piscante, pulsante ou de tremor precisa respeitar `AudioSettings.reduce_effects` e ter uma versão estática (o marcador do aviso continua fixo).
+- **Cores só pelo tema.** Cores de texto e tamanhos de fonte ficam em variações do `game_theme.tres` (`MutedLabel`, `HeadingLabel`, `ScrollButton`...), não em overrides soltos na cena ou no código. Texto precisa de contraste de pelo menos 4,5:1 com o fundo.
+
+O `tests/test_accessibility.gd` confere o piso de fonte e o contraste das cores de texto do tema. Se trocar a arte de um fundo, atualize as cores médias no começo do teste.
+
 ## Testes
 
 Os testes ficam em `tests/` e usam o [GUT](https://github.com/bitwes/Gut) (já incluído em `addons/gut`). Arquivos começam com `test_` e estendem `GutTest`.

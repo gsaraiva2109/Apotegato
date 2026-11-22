@@ -7,8 +7,9 @@ extends CharacterBody2D
 ## uma parede não percebe o gato.
 ##
 ## Encostar nela não machuca. Com o gato ao alcance, ela para e avisa (pisca em
-## vermelho e dá um pulinho), trava a direção, dá o bote e descansa. Só o bote
-## tira vida do gato (`Player.take_hit`), e só se ele estiver na área do golpe.
+## vermelho, dá um pulinho e mostra um "!" acima da cabeça), trava a direção, dá o
+## bote e descansa. Só o bote tira vida do gato (`Player.take_hit`), e só se ele
+## estiver na área do golpe.
 ## Um arranhão durante o aviso cancela o bote. Gato desmaiado não é atacado.
 ##
 ## Todo tempo daqui (aviso, bote, descanso, empurrão) conta no `_physics_process`
@@ -91,6 +92,7 @@ var _base_color := Color.WHITE
 
 @onready var _sprite: Sprite2D = $Sprite
 @onready var _strike_area: Area2D = $StrikeArea
+@onready var _warning_mark: Label = $WarningMark
 
 
 func _ready() -> void:
@@ -333,9 +335,12 @@ func _set_telegraph(progress: float) -> void:
 	)
 	_sprite.modulate = _base_color.lerp(WARNING_COLOR, pulse)
 	_sprite.position.y = -sin(progress * PI) * WARNING_HOP_HEIGHT
+	# O "!" fica fixo (também com efeitos reduzidos): o aviso nunca depende só da cor.
+	_warning_mark.show()
 
 
 func _clear_telegraph() -> void:
+	_warning_mark.hide()
 	_sprite.modulate = _base_color
 	_sprite.position = Vector2.ZERO
 
