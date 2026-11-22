@@ -134,7 +134,7 @@ func test_water_regions_have_animated_wall_and_barrier() -> void:
 		assert_eq(
 			RegionTileSet.source_for(Regions.CAMPOS_RIOS, tile), RegionTileSet.WATER_SOURCE_ID
 		)
-		assert_gt(source.get_tile_animation_frames_count(tile), 1, "Quadros do tile %s" % tile)
+		assert_eq(source.get_tile_animation_frames_count(tile), 8, "Quadros do tile %s" % tile)
 		var data := source.get_tile_data(tile, 0)
 		assert_eq(data.get_collision_polygons_count(0), 1, "A água bloqueia o gato")
 	assert_eq(
@@ -144,6 +144,11 @@ func test_water_regions_have_animated_wall_and_barrier() -> void:
 
 
 func test_only_the_wall_is_water_on_the_coast() -> void:
+	var source := (
+		RegionTileSet.for_region(Regions.LITORAL).get_source(RegionTileSet.WATER_SOURCE_ID)
+		as TileSetAtlasSource
+	)
+	assert_eq(source.get_tile_animation_frames_count(RegionTileSet.WALL_TILE), 8)
 	assert_eq(
 		RegionTileSet.source_for(Regions.LITORAL, RegionTileSet.WALL_TILE),
 		RegionTileSet.WATER_SOURCE_ID
