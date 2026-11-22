@@ -103,9 +103,12 @@ Os testes ficam em `tests/` e usam o [GUT](https://github.com/bitwes/Gut) (já i
   ```bash
   godot --headless --import
   godot --headless -s res://tools/check_project.gd
+  python3 tools/check_warnings.py
   godot --headless -s addons/gut/gut_cmdln.gd
   ```
   O `check_project.gd` abre todos os scripts e cenas e falha se algum tiver erro. O GUT só avisa quando um script de teste não compila e segue em frente, então essa verificação existe para pegar esse caso.
+
+  Os **avisos do GDScript** (função estática chamada pela instância, divisão inteira, variável que sombreia uma da classe base, variável sem uso...) só aparecem no editor, na aba Depurador > Erros; o Godot headless não os mostra. O `tools/check_warnings.py` abre o editor sem janela, pergunta ao servidor de linguagem dele e falha se houver qualquer aviso. A CI roda esse passo, então o projeto deve ficar sempre com zero avisos. Precisa do `godot` no PATH e do projeto importado.
 
 O que vale testar: tudo que é regra e não depende de tela. BFS, geração do labirinto, sorteio de pacientes e ingredientes, mochila, estoque, fórmula da luz e save.
 
