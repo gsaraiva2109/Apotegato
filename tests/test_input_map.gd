@@ -15,6 +15,10 @@ const ACTIONS := {
 	"pause": [KEY_ESCAPE],
 	"toggle_fullscreen": [KEY_F11],
 	"toggle_scale_mode": [KEY_F10],
+	"ui_up": [KEY_UP, KEY_W],
+	"ui_down": [KEY_DOWN, KEY_S],
+	"ui_left": [KEY_LEFT, KEY_A],
+	"ui_right": [KEY_RIGHT, KEY_D],
 }
 ## Pastas com código do jogo. addons/ e tests/ ficam de fora.
 const CODE_DIRS := ["res://autoload", "res://scenes", "res://scripts"]

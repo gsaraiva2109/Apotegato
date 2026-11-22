@@ -20,7 +20,7 @@ Pelo caminho tem criaturas. O combate é sem armas e sem sangue, e é opcional: 
 
 | Ação | Tecla | Nome no Input Map |
 | --- | --- | --- |
-| Mover | Setas ou WASD | `move_up`, `move_down`, `move_left`, `move_right` |
+| Mover (e navegar nos menus) | Setas ou WASD | `move_up`, `move_down`, `move_left`, `move_right` |
 | Atacar | Espaço | `attack` |
 | Interagir | E | `interact` |
 | Abrir a mochila | I | `backpack` |
