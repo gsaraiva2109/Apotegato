@@ -1,29 +1,28 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dk3nso4etv7ei"]
 
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_player"]
-[ext_resource type="Texture2D" path="res://assets/art/characters/mingau_placeholder.png" id="2_sprite"]
-[ext_resource type="Script" path="res://scenes/player/scratch_effect.gd" id="3_scratch"]
+[ext_resource type="Script" uid="uid://bdcgd7546yu7t" path="res://scenes/player/player.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://ceqa7n2annnd2" path="res://assets/art/characters/mingau_placeholder.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://k2yd3vn8x4jn" path="res://scenes/player/scratch_effect.gd" id="3_scratch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
-size = Vector2(20, 14)
+size = Vector2(30, 32)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=454878706]
 motion_mode = 1
 script = ExtResource("1_player")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1396045167]
 texture_filter = 1
 texture = ExtResource("2_sprite")
 
-[node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=319585652]
 shape = SubResource("RectangleShape2D_body")
 
-[node name="Scratch" type="Node2D" parent="."]
+[node name="Scratch" type="Node2D" parent="." unique_id=877876830]
 z_index = 5
 script = ExtResource("3_scratch")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." unique_id=1767625507]
 zoom = Vector2(2, 2)
 limit_left = 0
 limit_top = 0

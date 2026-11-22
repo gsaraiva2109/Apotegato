@@ -2,29 +2,29 @@
 
 [ext_resource type="Script" uid="uid://2c3tx15s5njq" path="res://scenes/cabin/cabin.gd" id="1_2b8xw"]
 [ext_resource type="TileSet" uid="uid://bh4gxas1ta2ly" path="res://scenes/cabin/cabin_tileset.tres" id="2_vecdk"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/rug.png" id="3_tybgj"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/door.png" id="4_2m0yr"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/window.png" id="20_window"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/stove.png" id="21_stove"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/barrels.png" id="22_barrels"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/sacks.png" id="23_sacks"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/chest.png" id="24_chest"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/round_table.png" id="25_round_table"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/potion_rack.png" id="26_potion_rack"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/rug_small.png" id="27_rug_small"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/shelf.png" id="5_umu4b"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/table.png" id="6_hm3kb"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/bed.png" id="7_bjiai"]
-[ext_resource type="Texture2D" path="res://assets/art/cabin/plant.png" id="8_4exgh"]
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="9_pqqmu"]
+[ext_resource type="Texture2D" uid="uid://b7umn18vhx7q2" path="res://assets/art/cabin/rug.png" id="3_tybgj"]
+[ext_resource type="Texture2D" uid="uid://c5csmct4d0htd" path="res://assets/art/cabin/door.png" id="4_2m0yr"]
+[ext_resource type="Texture2D" uid="uid://hci0wf1qngpm" path="res://assets/art/cabin/shelf.png" id="5_umu4b"]
+[ext_resource type="Texture2D" uid="uid://c2g686fy1mnol" path="res://assets/art/cabin/table.png" id="6_hm3kb"]
+[ext_resource type="Texture2D" uid="uid://cpglastfn8m6m" path="res://assets/art/cabin/bed.png" id="7_bjiai"]
+[ext_resource type="Texture2D" uid="uid://brgq0fnirabsj" path="res://assets/art/cabin/plant.png" id="8_4exgh"]
+[ext_resource type="PackedScene" uid="uid://dk3nso4etv7ei" path="res://scenes/player/player.tscn" id="9_pqqmu"]
 [ext_resource type="PackedScene" path="res://scenes/cabin/interaction_area.tscn" id="11_uo51r"]
 [ext_resource type="PackedScene" uid="uid://ctt1dhfms7gc" path="res://scenes/ui/journal.tscn" id="12_2b8xw"]
 [ext_resource type="PackedScene" path="res://scenes/ui/region_menu.tscn" id="13_region_menu"]
 [ext_resource type="PackedScene" path="res://scenes/ui/stock_menu.tscn" id="14_stock_menu"]
 [ext_resource type="PackedScene" path="res://scenes/ui/backpack_menu.tscn" id="15_backpack_menu"]
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogue_box.tscn" id="16_dialogue_box"]
-[ext_resource type="Texture2D" path="res://assets/art/characters/apothecary_placeholder.png" id="17_apothecary"]
-[ext_resource type="Texture2D" path="res://assets/art/characters/patient_placeholder.png" id="18_patient"]
+[ext_resource type="Texture2D" uid="uid://c3k841o8if86r" path="res://assets/art/characters/apothecary_placeholder.png" id="17_apothecary"]
+[ext_resource type="Texture2D" uid="uid://cux76k8ggg2m7" path="res://assets/art/characters/patient_placeholder.png" id="18_patient"]
+[ext_resource type="Texture2D" uid="uid://ulgsgig3ncd8" path="res://assets/art/cabin/window.png" id="20_window"]
+[ext_resource type="Texture2D" uid="uid://wb6cxgaswgwy" path="res://assets/art/cabin/stove.png" id="21_stove"]
+[ext_resource type="Texture2D" uid="uid://b7b6g7cw7hr2s" path="res://assets/art/cabin/barrels.png" id="22_barrels"]
+[ext_resource type="Texture2D" uid="uid://b0nvqr4hxt0us" path="res://assets/art/cabin/sacks.png" id="23_sacks"]
+[ext_resource type="Texture2D" uid="uid://dekdogah231dc" path="res://assets/art/cabin/chest.png" id="24_chest"]
+[ext_resource type="Texture2D" uid="uid://clfh2rqfwk2ao" path="res://assets/art/cabin/round_table.png" id="25_round_table"]
+[ext_resource type="Texture2D" uid="uid://cnpykael4u2ou" path="res://assets/art/cabin/potion_rack.png" id="26_potion_rack"]
+[ext_resource type="Texture2D" uid="uid://b3ee8kwa7818s" path="res://assets/art/cabin/rug_small.png" id="27_rug_small"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="99_pause_menu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ShelfLeft"]
@@ -34,40 +34,40 @@ size = Vector2(80, 24)
 size = Vector2(80, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ShelfRight"]
-size = Vector2(80, 24)
+size = Vector2(83, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Table"]
-size = Vector2(58, 22)
+size = Vector2(58, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Bed"]
-size = Vector2(76, 34)
+size = Vector2(81, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Plant"]
-size = Vector2(18, 12)
+size = Vector2(17, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Stove"]
-size = Vector2(36, 18)
+size = Vector2(40, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_BarrelsRight"]
-size = Vector2(50, 26)
+size = Vector2(48, 45)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_BarrelsBottom"]
-size = Vector2(50, 26)
+size = Vector2(53, 53)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_PotionRack"]
-size = Vector2(58, 24)
+size = Vector2(62, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Chest"]
 size = Vector2(42, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Sacks"]
-size = Vector2(52, 12)
+size = Vector2(58, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_RoundTable"]
 size = Vector2(32, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_PlantCorner"]
-size = Vector2(18, 12)
+size = Vector2(17, 20)
 
 [node name="Cabin" type="Node2D" unique_id=91514009]
 script = ExtResource("1_2b8xw")
@@ -77,245 +77,246 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAAAAAAAAAACAAAAAAABAAAAAAAFAAAAAAACAAAAAAAFAAAAAAADAAAAAAAFAAAAAAAEAAAAAAAFAAAAAAAFAAAAAAAFAAAAAAAGAAAAAAAFAAAAAAAHAAAAAAAFAAAAAAAIAAAAAAAFAAAAAAAJAAAAAAAFAAAAAAAKAAAAAAAFAAAAAAALAAAAAAAFAAAAAAAMAAAAAAAFAAAAAAANAAAAAAAFAAAAAAAOAAAAAAAFAAAAAAAPAAAAAAAFAAAAAAAQAAAAAAAFAAAAAAARAAAAAAAFAAAAAAASAAAAAAAFAAAAAAATAAAAAAAFAAAAAAAUAAAAAAAFAAAAAAAVAAAAAAACAAAAAAAAAAEAAAACAAAAAAABAAEAAAADAAAAAAACAAEAAAADAAAAAAADAAEAAAADAAAAAAAEAAEAAAADAAAAAAAFAAEAAAADAAAAAAAGAAEAAAADAAAAAAAHAAEAAAADAAAAAAAIAAEAAAADAAAAAAAJAAEAAAADAAAAAAAKAAEAAAADAAAAAAALAAEAAAADAAAAAAAMAAEAAAADAAAAAAANAAEAAAADAAAAAAAOAAEAAAADAAAAAAAPAAEAAAADAAAAAAAQAAEAAAADAAAAAAARAAEAAAADAAAAAAASAAEAAAADAAAAAAATAAEAAAADAAAAAAAUAAEAAAADAAAAAAAVAAEAAAACAAAAAAAAAAIAAAACAAAAAAABAAIAAAAEAAAAAAACAAIAAAAEAAAAAAADAAIAAAAEAAAAAAAEAAIAAAAEAAAAAAAFAAIAAAAEAAAAAAAGAAIAAAAEAAAAAAAHAAIAAAAEAAAAAAAIAAIAAAAEAAAAAAAJAAIAAAAEAAAAAAAKAAIAAAAEAAAAAAALAAIAAAAEAAAAAAAMAAIAAAAEAAAAAAANAAIAAAAEAAAAAAAOAAIAAAAEAAAAAAAPAAIAAAAEAAAAAAAQAAIAAAAEAAAAAAARAAIAAAAEAAAAAAASAAIAAAAEAAAAAAATAAIAAAAEAAAAAAAUAAIAAAAEAAAAAAAVAAIAAAACAAAAAAAAAAMAAAACAAAAAAABAAMAAAABAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAABAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAKAAMAAAAAAAAAAAALAAMAAAABAAAAAAAMAAMAAAAAAAAAAAANAAMAAAAAAAAAAAAOAAMAAAAAAAAAAAAPAAMAAAAAAAAAAAAQAAMAAAABAAAAAAARAAMAAAAAAAAAAAASAAMAAAAAAAAAAAATAAMAAAAAAAAAAAAUAAMAAAAAAAAAAAAVAAMAAAACAAAAAAAAAAQAAAACAAAAAAABAAQAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAABAAAAAAAEAAQAAAAAAAAAAAAFAAQAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAABAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAMAAQAAAAAAAAAAAANAAQAAAABAAAAAAAOAAQAAAAAAAAAAAAPAAQAAAAAAAAAAAAQAAQAAAAAAAAAAAARAAQAAAAAAAAAAAASAAQAAAABAAAAAAATAAQAAAAAAAAAAAAUAAQAAAAAAAAAAAAVAAQAAAACAAAAAAAAAAUAAAACAAAAAAABAAUAAAAAAAAAAAACAAUAAAAAAAAAAAADAAUAAAAAAAAAAAAEAAUAAAAAAAAAAAAFAAUAAAABAAAAAAAGAAUAAAAAAAAAAAAHAAUAAAAAAAAAAAAIAAUAAAAAAAAAAAAJAAUAAAAAAAAAAAAKAAUAAAABAAAAAAALAAUAAAAAAAAAAAAMAAUAAAAAAAAAAAANAAUAAAAAAAAAAAAOAAUAAAAAAAAAAAAPAAUAAAABAAAAAAAQAAUAAAAAAAAAAAARAAUAAAAAAAAAAAASAAUAAAAAAAAAAAATAAUAAAAAAAAAAAAUAAUAAAABAAAAAAAVAAUAAAACAAAAAAAAAAYAAAACAAAAAAABAAYAAAAAAAAAAAACAAYAAAABAAAAAAADAAYAAAAAAAAAAAAEAAYAAAAAAAAAAAAFAAYAAAAAAAAAAAAGAAYAAAAAAAAAAAAHAAYAAAABAAAAAAAIAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAKAAYAAAAAAAAAAAALAAYAAAAAAAAAAAAMAAYAAAABAAAAAAANAAYAAAAAAAAAAAAOAAYAAAAAAAAAAAAPAAYAAAAAAAAAAAAQAAYAAAAAAAAAAAARAAYAAAABAAAAAAASAAYAAAAAAAAAAAATAAYAAAAAAAAAAAAUAAYAAAAAAAAAAAAVAAYAAAACAAAAAAAAAAcAAAACAAAAAAABAAcAAAAAAAAAAAACAAcAAAAAAAAAAAADAAcAAAAAAAAAAAAEAAcAAAABAAAAAAAFAAcAAAAAAAAAAAAGAAcAAAAAAAAAAAAHAAcAAAAAAAAAAAAIAAcAAAAAAAAAAAAJAAcAAAABAAAAAAAKAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAANAAcAAAAAAAAAAAAOAAcAAAABAAAAAAAPAAcAAAAAAAAAAAAQAAcAAAAAAAAAAAARAAcAAAAAAAAAAAASAAcAAAAAAAAAAAATAAcAAAABAAAAAAAUAAcAAAAAAAAAAAAVAAcAAAACAAAAAAAAAAgAAAACAAAAAAABAAgAAAABAAAAAAACAAgAAAAAAAAAAAADAAgAAAAAAAAAAAAEAAgAAAAAAAAAAAAFAAgAAAAAAAAAAAAGAAgAAAABAAAAAAAHAAgAAAAAAAAAAAAIAAgAAAAAAAAAAAAJAAgAAAAAAAAAAAAKAAgAAAAAAAAAAAALAAgAAAABAAAAAAAMAAgAAAAAAAAAAAANAAgAAAAAAAAAAAAOAAgAAAAAAAAAAAAPAAgAAAAAAAAAAAAQAAgAAAABAAAAAAARAAgAAAAAAAAAAAASAAgAAAAAAAAAAAATAAgAAAAAAAAAAAAUAAgAAAAAAAAAAAAVAAgAAAACAAAAAAAAAAkAAAACAAAAAAABAAkAAAAAAAAAAAACAAkAAAAAAAAAAAADAAkAAAABAAAAAAAEAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAAGAAkAAAAAAAAAAAAHAAkAAAAAAAAAAAAIAAkAAAABAAAAAAAJAAkAAAAAAAAAAAAKAAkAAAAAAAAAAAALAAkAAAAAAAAAAAAMAAkAAAAAAAAAAAANAAkAAAABAAAAAAAOAAkAAAAAAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAASAAkAAAABAAAAAAATAAkAAAAAAAAAAAAUAAkAAAAAAAAAAAAVAAkAAAACAAAAAAAAAAoAAAACAAAAAAABAAoAAAAAAAAAAAACAAoAAAAAAAAAAAADAAoAAAAAAAAAAAAEAAoAAAAAAAAAAAAFAAoAAAABAAAAAAAGAAoAAAAAAAAAAAAHAAoAAAAAAAAAAAAIAAoAAAAAAAAAAAAJAAoAAAAAAAAAAAAKAAoAAAABAAAAAAALAAoAAAAAAAAAAAAMAAoAAAAAAAAAAAANAAoAAAAAAAAAAAAOAAoAAAAAAAAAAAAPAAoAAAABAAAAAAAQAAoAAAAAAAAAAAARAAoAAAAAAAAAAAASAAoAAAAAAAAAAAATAAoAAAAAAAAAAAAUAAoAAAABAAAAAAAVAAoAAAACAAAAAAAAAAsAAAACAAAAAAABAAsAAAAAAAAAAAACAAsAAAABAAAAAAADAAsAAAAAAAAAAAAEAAsAAAAAAAAAAAAFAAsAAAAAAAAAAAAGAAsAAAAAAAAAAAAHAAsAAAABAAAAAAAIAAsAAAAAAAAAAAAJAAsAAAAAAAAAAAAKAAsAAAAAAAAAAAALAAsAAAAAAAAAAAAMAAsAAAABAAAAAAANAAsAAAAAAAAAAAAOAAsAAAAAAAAAAAAPAAsAAAAAAAAAAAAQAAsAAAAAAAAAAAARAAsAAAABAAAAAAASAAsAAAAAAAAAAAATAAsAAAAAAAAAAAAUAAsAAAAAAAAAAAAVAAsAAAACAAAAAAAAAAwAAAACAAAAAAABAAwAAAACAAAAAAACAAwAAAACAAAAAAADAAwAAAACAAAAAAAEAAwAAAACAAAAAAAFAAwAAAACAAAAAAAGAAwAAAACAAAAAAAHAAwAAAACAAAAAAAIAAwAAAACAAAAAAAJAAwAAAACAAAAAAAKAAwAAAACAAAAAAALAAwAAAACAAAAAAAMAAwAAAACAAAAAAANAAwAAAACAAAAAAAOAAwAAAACAAAAAAAPAAwAAAACAAAAAAAQAAwAAAACAAAAAAARAAwAAAACAAAAAAASAAwAAAACAAAAAAATAAwAAAACAAAAAAAUAAwAAAACAAAAAAAVAAwAAAACAAAAAAA=")
 tile_set = ExtResource("2_vecdk")
 
-[node name="Rug" type="Sprite2D" parent="."]
+[node name="Rug" type="Sprite2D" parent="." unique_id=129541219]
 texture_filter = 1
 position = Vector2(294, 197)
 texture = ExtResource("3_tybgj")
 centered = false
 
-[node name="RugSmall" type="Sprite2D" parent="."]
+[node name="RugSmall" type="Sprite2D" parent="." unique_id=737078010]
 texture_filter = 1
-position = Vector2(64, 288)
+position = Vector2(66, 232)
+scale = Vector2(1.2115386, 1.2115386)
 texture = ExtResource("27_rug_small")
 centered = false
 
-[node name="Door" type="Sprite2D" parent="."]
-position = Vector2(352, 96)
+[node name="Door" type="Sprite2D" parent="." unique_id=312895077]
 texture_filter = 1
+position = Vector2(352, 96)
 texture = ExtResource("4_2m0yr")
 centered = false
 offset = Vector2(-27, -67)
 
-[node name="WindowLeft" type="Sprite2D" parent="."]
+[node name="WindowLeft" type="Sprite2D" parent="." unique_id=1154470694]
+texture_filter = 1
 position = Vector2(270, 78)
-texture_filter = 1
 texture = ExtResource("20_window")
 centered = false
 offset = Vector2(-27, -43)
 
-[node name="WindowRight" type="Sprite2D" parent="."]
+[node name="WindowRight" type="Sprite2D" parent="." unique_id=1219309274]
+texture_filter = 1
 position = Vector2(436, 78)
-texture_filter = 1
 texture = ExtResource("20_window")
 centered = false
 offset = Vector2(-27, -43)
 
-[node name="World" type="Node2D" parent="."]
+[node name="World" type="Node2D" parent="." unique_id=1935267391]
 y_sort_enabled = true
 
-[node name="ShelfLeft" type="StaticBody2D" parent="World"]
+[node name="ShelfLeft" type="StaticBody2D" parent="World" unique_id=924409233]
 position = Vector2(100, 100)
 
-[node name="Sprite" type="Sprite2D" parent="World/ShelfLeft"]
+[node name="Sprite" type="Sprite2D" parent="World/ShelfLeft" unique_id=1700149351]
 texture_filter = 1
 texture = ExtResource("5_umu4b")
 centered = false
 offset = Vector2(-42, -72)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfLeft"]
+[node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfLeft" unique_id=1114130364]
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_ShelfLeft")
 
-[node name="ShelfCenter" type="StaticBody2D" parent="World"]
+[node name="ShelfCenter" type="StaticBody2D" parent="World" unique_id=1228879750]
 position = Vector2(196, 100)
 
-[node name="Sprite" type="Sprite2D" parent="World/ShelfCenter"]
+[node name="Sprite" type="Sprite2D" parent="World/ShelfCenter" unique_id=1631901081]
 texture_filter = 1
 texture = ExtResource("5_umu4b")
 centered = false
 offset = Vector2(-42, -72)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfCenter"]
+[node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfCenter" unique_id=411981153]
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_ShelfCenter")
 
-[node name="ShelfRight" type="StaticBody2D" parent="World"]
+[node name="ShelfRight" type="StaticBody2D" parent="World" unique_id=863414414]
 position = Vector2(564, 100)
 
-[node name="Sprite" type="Sprite2D" parent="World/ShelfRight"]
+[node name="Sprite" type="Sprite2D" parent="World/ShelfRight" unique_id=1584800022]
 texture_filter = 1
 texture = ExtResource("5_umu4b")
 centered = false
 offset = Vector2(-42, -72)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfRight"]
-position = Vector2(0, -12)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfRight" unique_id=2019556715]
+position = Vector2(1.5, -11)
 shape = SubResource("RectangleShape2D_ShelfRight")
 
-[node name="Table" type="StaticBody2D" parent="World"]
+[node name="Table" type="StaticBody2D" parent="World" unique_id=259521042]
 position = Vector2(480, 224)
 
-[node name="Sprite" type="Sprite2D" parent="World/Table"]
+[node name="Sprite" type="Sprite2D" parent="World/Table" unique_id=1832014531]
 texture_filter = 1
 texture = ExtResource("6_hm3kb")
 centered = false
 offset = Vector2(-31, -35)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/Table"]
-position = Vector2(0, -11)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/Table" unique_id=1699489762]
+position = Vector2(0, -14.5)
 shape = SubResource("RectangleShape2D_Table")
 
-[node name="Bed" type="StaticBody2D" parent="World"]
+[node name="Bed" type="StaticBody2D" parent="World" unique_id=1956698868]
 position = Vector2(105, 288)
 
-[node name="Sprite" type="Sprite2D" parent="World/Bed"]
+[node name="Sprite" type="Sprite2D" parent="World/Bed" unique_id=1566412470]
 texture_filter = 1
 texture = ExtResource("7_bjiai")
 centered = false
 offset = Vector2(-40, -52)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/Bed"]
-position = Vector2(0, -17)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/Bed" unique_id=1033933955]
+position = Vector2(0.5, -25)
 shape = SubResource("RectangleShape2D_Bed")
 
-[node name="Plant" type="StaticBody2D" parent="World"]
+[node name="Plant" type="StaticBody2D" parent="World" unique_id=1636831435]
 position = Vector2(56, 160)
 
-[node name="Sprite" type="Sprite2D" parent="World/Plant"]
+[node name="Sprite" type="Sprite2D" parent="World/Plant" unique_id=15169746]
 texture_filter = 1
 texture = ExtResource("8_4exgh")
 centered = false
 offset = Vector2(-14, -50)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/Plant"]
-position = Vector2(0, -6)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/Plant" unique_id=1059857328]
+position = Vector2(0.5, -10)
 shape = SubResource("RectangleShape2D_Plant")
 
-[node name="Stove" type="StaticBody2D" parent="World"]
+[node name="Stove" type="StaticBody2D" parent="World" unique_id=1243086995]
 position = Vector2(612, 168)
 
-[node name="Sprite" type="Sprite2D" parent="World/Stove"]
+[node name="Sprite" type="Sprite2D" parent="World/Stove" unique_id=2088795267]
 texture_filter = 1
 texture = ExtResource("21_stove")
 centered = false
 offset = Vector2(-20, -45)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/Stove"]
-position = Vector2(0, -9)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/Stove" unique_id=1276388862]
+position = Vector2(0, -22.5)
 shape = SubResource("RectangleShape2D_Stove")
 
-[node name="BarrelsRight" type="StaticBody2D" parent="World"]
+[node name="BarrelsRight" type="StaticBody2D" parent="World" unique_id=93470238]
 position = Vector2(620, 296)
 
-[node name="Sprite" type="Sprite2D" parent="World/BarrelsRight"]
+[node name="Sprite" type="Sprite2D" parent="World/BarrelsRight" unique_id=2041800839]
 texture_filter = 1
 texture = ExtResource("22_barrels")
 centered = false
 offset = Vector2(-27, -60)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/BarrelsRight"]
-position = Vector2(0, -13)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/BarrelsRight" unique_id=894443092]
+position = Vector2(1, -31.5)
 shape = SubResource("RectangleShape2D_BarrelsRight")
 
-[node name="BarrelsBottom" type="StaticBody2D" parent="World"]
+[node name="BarrelsBottom" type="StaticBody2D" parent="World" unique_id=596697856]
 position = Vector2(612, 382)
 
-[node name="Sprite" type="Sprite2D" parent="World/BarrelsBottom"]
+[node name="Sprite" type="Sprite2D" parent="World/BarrelsBottom" unique_id=2034773030]
 texture_filter = 1
 texture = ExtResource("22_barrels")
 centered = false
 offset = Vector2(-27, -60)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/BarrelsBottom"]
-position = Vector2(0, -13)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/BarrelsBottom" unique_id=1755358310]
+position = Vector2(1.5, -26.5)
 shape = SubResource("RectangleShape2D_BarrelsBottom")
 
-[node name="PotionRack" type="StaticBody2D" parent="World"]
+[node name="PotionRack" type="StaticBody2D" parent="World" unique_id=913280917]
 position = Vector2(545, 382)
 
-[node name="Sprite" type="Sprite2D" parent="World/PotionRack"]
+[node name="Sprite" type="Sprite2D" parent="World/PotionRack" unique_id=1778163712]
 texture_filter = 1
 texture = ExtResource("26_potion_rack")
 centered = false
 offset = Vector2(-31, -53)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/PotionRack"]
-position = Vector2(0, -12)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/PotionRack" unique_id=1270765796]
+position = Vector2(0, -19)
 shape = SubResource("RectangleShape2D_PotionRack")
 
-[node name="Chest" type="StaticBody2D" parent="World"]
+[node name="Chest" type="StaticBody2D" parent="World" unique_id=1940508502]
 position = Vector2(88, 382)
 
-[node name="Sprite" type="Sprite2D" parent="World/Chest"]
+[node name="Sprite" type="Sprite2D" parent="World/Chest" unique_id=151716264]
 texture_filter = 1
 texture = ExtResource("24_chest")
 centered = false
 offset = Vector2(-23, -32)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/Chest"]
+[node name="CollisionShape" type="CollisionShape2D" parent="World/Chest" unique_id=1890142702]
 position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_Chest")
 
-[node name="Sacks" type="StaticBody2D" parent="World"]
+[node name="Sacks" type="StaticBody2D" parent="World" unique_id=1749632843]
 position = Vector2(171, 382)
 
-[node name="Sprite" type="Sprite2D" parent="World/Sacks"]
+[node name="Sprite" type="Sprite2D" parent="World/Sacks" unique_id=634701109]
 texture_filter = 1
 texture = ExtResource("23_sacks")
 centered = false
 offset = Vector2(-29, -18)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/Sacks"]
-position = Vector2(0, -6)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/Sacks" unique_id=715692663]
+position = Vector2(0, -9)
 shape = SubResource("RectangleShape2D_Sacks")
 
-[node name="RoundTable" type="StaticBody2D" parent="World"]
-position = Vector2(277, 352)
+[node name="RoundTable" type="StaticBody2D" parent="World" unique_id=459636714]
+position = Vector2(84, 210)
 
-[node name="Sprite" type="Sprite2D" parent="World/RoundTable"]
+[node name="Sprite" type="Sprite2D" parent="World/RoundTable" unique_id=143483863]
 texture_filter = 1
 texture = ExtResource("25_round_table")
 centered = false
 offset = Vector2(-19, -38)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/RoundTable"]
+[node name="CollisionShape" type="CollisionShape2D" parent="World/RoundTable" unique_id=1166577454]
 position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_RoundTable")
 
-[node name="PlantCorner" type="StaticBody2D" parent="World"]
+[node name="PlantCorner" type="StaticBody2D" parent="World" unique_id=2072720798]
 position = Vector2(650, 382)
 
-[node name="Sprite" type="Sprite2D" parent="World/PlantCorner"]
+[node name="Sprite" type="Sprite2D" parent="World/PlantCorner" unique_id=1837544239]
 texture_filter = 1
 texture = ExtResource("8_4exgh")
 centered = false
 offset = Vector2(-14, -50)
 
-[node name="CollisionShape" type="CollisionShape2D" parent="World/PlantCorner"]
-position = Vector2(0, -6)
+[node name="CollisionShape" type="CollisionShape2D" parent="World/PlantCorner" unique_id=384681421]
+position = Vector2(0.5, -10)
 shape = SubResource("RectangleShape2D_PlantCorner")
 
-[node name="Apothecary" type="Node2D" parent="World"]
+[node name="Apothecary" type="Node2D" parent="World" unique_id=417675908]
 position = Vector2(480, 204)
 
-[node name="Sprite" type="Sprite2D" parent="World/Apothecary"]
+[node name="Sprite" type="Sprite2D" parent="World/Apothecary" unique_id=1915324241]
 texture_filter = 1
 texture = ExtResource("17_apothecary")
 centered = false
 offset = Vector2(-16, -46)
 
-[node name="Patient" type="Node2D" parent="World"]
+[node name="Patient" type="Node2D" parent="World" unique_id=658418241]
 visible = false
 position = Vector2(178, 262)
 
-[node name="Sprite" type="Sprite2D" parent="World/Patient"]
+[node name="Sprite" type="Sprite2D" parent="World/Patient" unique_id=1813011829]
 texture_filter = 1
 texture = ExtResource("18_patient")
 centered = false
 offset = Vector2(-16, -46)
 
 [node name="Player" parent="World" unique_id=73071853 instance=ExtResource("9_pqqmu")]
-position = Vector2(352, 300)
+position = Vector2(352, 305)
 
 [node name="Interactions" type="Node2D" parent="." unique_id=847593572]
 
@@ -334,7 +335,7 @@ position = Vector2(162, 262)
 id = &"patient"
 size = Vector2(96, 96)
 
-[node name="Stock" parent="Interactions" instance=ExtResource("11_uo51r")]
+[node name="Stock" parent="Interactions" unique_id=118823117 instance=ExtResource("11_uo51r")]
 position = Vector2(196, 140)
 id = &"stock"
 size = Vector2(112, 64)
@@ -342,11 +343,12 @@ size = Vector2(112, 64)
 [node name="RegionMenu" parent="." unique_id=2140659373 instance=ExtResource("13_region_menu")]
 
 [node name="JournalUI" parent="." unique_id=1694554464 instance=ExtResource("12_2b8xw")]
+visible = false
 
-[node name="StockMenu" parent="." instance=ExtResource("14_stock_menu")]
+[node name="StockMenu" parent="." unique_id=581820724 instance=ExtResource("14_stock_menu")]
 
-[node name="BackpackMenu" parent="." instance=ExtResource("15_backpack_menu")]
+[node name="BackpackMenu" parent="." unique_id=215028163 instance=ExtResource("15_backpack_menu")]
 
-[node name="DialogueBox" parent="." instance=ExtResource("16_dialogue_box")]
+[node name="DialogueBox" parent="." unique_id=2046244388 instance=ExtResource("16_dialogue_box")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("99_pause_menu")]
+[node name="PauseMenu" parent="." unique_id=161011898 instance=ExtResource("99_pause_menu")]
