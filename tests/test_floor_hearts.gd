@@ -125,14 +125,14 @@ func _first_creature() -> Creature:
 
 func test_creature_touching_the_cat_in_the_floor_does_not_hurt() -> void:
 	var creature := await _first_creature()
-	creature.global_position = _player().global_position + Vector2(20, 0)
+	creature.global_position = _player().global_position + Vector2(26, 0)
 	await wait_physics_frames(10)
 	assert_eq(_player().hearts.current, Hearts.MAX, "Ainda no aviso")
 
 
 func test_creature_lunge_in_the_floor_hurts_and_the_hud_follows() -> void:
 	var creature := await _first_creature()
-	creature.global_position = _player().global_position + Vector2(20, 0)
+	creature.global_position = _player().global_position + Vector2(26, 0)
 	await wait_seconds(1.0)
 	assert_lt(_player().hearts.current, Hearts.MAX)
 	assert_lt(_hud().full_hearts(), 7)

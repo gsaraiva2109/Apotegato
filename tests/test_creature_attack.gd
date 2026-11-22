@@ -47,7 +47,7 @@ func _wait_for_state(creature: Creature, state: CreatureBrain.State, frames: int
 func test_combat_numbers_default_to_the_design() -> void:
 	var creature := _creature(_grid(["###", "#.#", "###"]), Vector2i(1, 1))
 	assert_eq(creature.damage, 1)
-	assert_eq(creature.attack_range, 24.0)
+	assert_eq(creature.attack_range, 34.0)
 	assert_eq(creature.warning_seconds, 0.4)
 	assert_eq(creature.lunge_seconds, 0.12)
 	assert_eq(creature.lunge_speed, 160.0)
@@ -167,7 +167,7 @@ func test_scratch_during_the_warning_cancels_the_lunge_and_nobody_gets_hurt() ->
 	player.position = MazeGrid.cell_to_position(Vector2i(5, 1))
 	add_child(player)
 	var creature: Creature = autofree(CreatureScene.instantiate())
-	creature.position = player.position + Vector2(-20, 0)
+	creature.position = player.position + Vector2(-26, 0)
 	creature.setup(_corridor(), player)
 	add_child(creature)
 	assert_true(await _wait_for_state(creature, CreatureBrain.State.WARNING))

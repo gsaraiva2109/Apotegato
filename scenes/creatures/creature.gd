@@ -52,7 +52,7 @@ const STRONG_TINT := Color(0.55, 0.45, 0.55)
 ## Quantos meios corações o bote tira do gato.
 @export var damage := 1
 ## Distância em linha reta, em pixels, a que ela para e avisa.
-@export var attack_range := 24.0
+@export var attack_range := 34.0
 ## Duração do aviso antes do bote, em segundos.
 @export var warning_seconds := 0.4
 ## Duração do bote, em segundos.
