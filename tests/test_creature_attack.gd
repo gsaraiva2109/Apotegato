@@ -122,6 +122,33 @@ func test_warning_does_not_pulse_with_reduced_effects() -> void:
 	assert_lt(greens.keys()[0], 0.9, "Ainda avisa com a cor")
 
 
+func test_warning_shows_a_fixed_mark_even_with_reduced_effects() -> void:
+	for reduced in [false, true]:
+		AudioSettings.reduce_effects = reduced
+		var creature := _creature(_corridor(), Vector2i(1, 1))
+		var mark: Label = creature.get_node("WarningMark")
+		assert_false(mark.visible, "Sem aviso, o marcador fica escondido")
+		_target.position = creature.position + Vector2(20, 0)
+		assert_true(await _wait_for_state(creature, CreatureBrain.State.WARNING))
+		assert_true(mark.visible, "O aviso não depende só da cor (efeitos reduzidos: %s)" % reduced)
+		assert_eq(mark.text, "!")
+		assert_true(await _wait_for_state(creature, CreatureBrain.State.LUNGE))
+		assert_false(mark.visible, "O bote esconde o marcador")
+		creature.queue_free()
+		await wait_physics_frames(1)
+	AudioSettings.reduce_effects = false
+
+
+func test_scratch_during_the_warning_hides_the_mark() -> void:
+	var creature := _creature(_corridor(), Vector2i(1, 1))
+	_target.position = creature.position + Vector2(20, 0)
+	assert_true(await _wait_for_state(creature, CreatureBrain.State.WARNING))
+	var mark: Label = creature.get_node("WarningMark")
+	assert_true(mark.visible)
+	creature.take_scratch(Vector2.LEFT)
+	assert_false(mark.visible, "O arranhão cancela o aviso e o marcador")
+
+
 func test_warning_blinks_red_and_hops() -> void:
 	var creature := _creature(_corridor(), Vector2i(1, 1))
 	_target.position = creature.position + Vector2(20, 0)

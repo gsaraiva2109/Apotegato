@@ -275,7 +275,7 @@ func _build_key_buttons() -> void:
 	for header in ["", "Principal", "Alternativa", "", "Principal", "Alternativa"]:
 		var label := Label.new()
 		label.text = header
-		label.add_theme_color_override("font_color", Color(0.85, 0.8, 0.7))
+		label.theme_type_variation = &"MutedLabel"
 		_keys_grid.add_child(label)
 	var movement: Array[StringName] = [&"move_up", &"move_down", &"move_left", &"move_right"]
 	var actions: Array[StringName] = [&"attack", &"interact", &"backpack", &"journal"]
