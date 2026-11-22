@@ -81,27 +81,27 @@ func test_attack_reach_and_size_are_exports() -> void:
 
 
 func test_touching_a_creature_does_not_hurt() -> void:
-	var creature := _creature_at(Vector2(20, 0))
+	var creature := _creature_at(Vector2(26, 0))
 	creature.brain.state = CreatureBrain.State.REST
 	await wait_physics_frames(10)
 	assert_eq(_player.hearts.current, 14)
 
 
 func test_creature_lunge_takes_its_damage_and_pushes_the_cat() -> void:
-	_creature_at(Vector2(20, 0), 1)
+	_creature_at(Vector2(26, 0), 1)
 	await wait_seconds(1.2)
 	assert_eq(_player.hearts.current, 13, "Meio coração do bote")
 	assert_lt(_player.position.x, 190.0, "Foi empurrado para longe da criatura")
 
 
 func test_strong_creature_takes_a_whole_heart() -> void:
-	_creature_at(Vector2(20, 0), 2)
+	_creature_at(Vector2(26, 0), 2)
 	await wait_seconds(1.2)
 	assert_eq(_player.hearts.current, 12)
 
 
 func test_creature_does_not_hurt_during_the_warning() -> void:
-	_creature_at(Vector2(20, 0))
+	_creature_at(Vector2(26, 0))
 	await wait_seconds(0.25)
 	assert_eq(_player.hearts.current, 14, "Ainda no aviso")
 
@@ -114,7 +114,7 @@ func test_creature_far_away_does_not_hurt() -> void:
 
 func test_creature_does_not_attack_a_fainted_cat() -> void:
 	_player.take_hit(Hearts.MAX)
-	var creature := _creature_at(Vector2(20, 0))
+	var creature := _creature_at(Vector2(26, 0))
 	await wait_seconds(1.0)
 	assert_eq(_player.hearts.current, 0)
 	assert_false(creature.brain.is_attacking())
