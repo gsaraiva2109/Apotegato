@@ -65,7 +65,11 @@ func test_generates_the_floor_of_the_current_region() -> void:
 
 func test_player_starts_on_the_entry_and_door_is_on_the_exit() -> void:
 	var layout := _room().layout
-	assert_eq(_player().position, MazeGrid.cell_to_position(layout.entry_cell))
+	# A caixa do gato tem a altura da célula e o motor pode afastá-lo uma fração
+	# de pixel do chão, por isso a tolerância.
+	var start := MazeGrid.cell_to_position(layout.entry_cell)
+	assert_almost_eq(_player().position.x, start.x, 1.0)
+	assert_almost_eq(_player().position.y, start.y, 1.0)
 	assert_eq(_door().position, MazeGrid.cell_to_position(layout.exit_cell))
 
 
