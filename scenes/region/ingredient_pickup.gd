@@ -1,21 +1,37 @@
 class_name IngredientPickup
 extends Area2D
-## Um ingrediente caído no chão do andar. Quando o Mingau encosta, avisa o
-## andar com `touched`; quem decide se vai para a mochila (e se o item some do
-## chão) é o andar, porque a mochila pode estar cheia.
 
-## Emitido quando o Mingau encosta no ingrediente.
 signal touched(pickup: IngredientPickup)
 
-## Id do ingrediente (o mesmo do CSV). Defina antes de pôr a cena na árvore.
 var ingredient_id: String = ""
+
+@onready var _sprite: Sprite2D = $Sprite
 
 
 func _ready() -> void:
+	_update_sprite()
 	body_entered.connect(_on_body_entered)
 
 
-## Nome do ingrediente para mostrar na tela, vindo do CSV.
+func _update_sprite() -> void:
+	if ingredient_id.is_empty():
+		return
+
+	var texture_path := "res://assets/art/ingredients/%s.png" % ingredient_id
+
+	if not ResourceLoader.exists(texture_path):
+		push_warning("Imagem do ingrediente não encontrada: %s. Usando placeholder." % texture_path)
+		return
+
+	var texture := load(texture_path) as Texture2D
+
+	if texture == null:
+		push_warning("Não foi possível carregar a imagem do ingrediente: %s" % texture_path)
+		return
+
+	_sprite.texture = texture
+
+
 func display_name() -> String:
 	var ingredient := IngredientData.get_ingredient(ingredient_id)
 	return ingredient.display_name if ingredient != null else ingredient_id
