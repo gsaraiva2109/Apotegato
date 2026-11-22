@@ -51,7 +51,7 @@ def noisy(img, base, seed, amount=6):
 
 
 def tileset():
-    img = Image.new("RGBA", (32 * 5, 32), (0, 0, 0, 0))
+    img = Image.new("RGBA", (32 * 6, 32), (0, 0, 0, 0))
 
     def tile(i):
         t = Image.new("RGBA", (32, 32))
@@ -94,6 +94,8 @@ def tileset():
     d = ImageDraw.Draw(t)
     d.line([(0, 16), (31, 16)], fill=shade(FLOOR_DARK, -14))
     img.paste(t, (ox, 0))
+    # 5: topo da parede (mesma face de tábuas, uma linha acima)
+    img.paste(img.crop((96, 0, 128, 32)), (160, 0))
     img.save(OUT / "cabin_tileset.png")
 
 
@@ -207,8 +209,49 @@ def rug():
     img.save(OUT / "rug.png")
 
 
+# Tamanho final de cada peça (o mesmo da arte do pacote, que a substitui): a cena ancora o
+# sprite pelo centro da base, então a arte provisória precisa ter o mesmo tamanho.
+SIZES = {
+    "shelf.png": (85, 72),
+    "table.png": (62, 35),
+    "bed.png": (81, 52),
+    "plant.png": (29, 50),
+    "door.png": (55, 67),
+    "rug.png": (116, 106),
+}
+
+
+def resize_to_final():
+    for name, size in SIZES.items():
+        img = Image.open(OUT / name)
+        img.resize(size, Image.NEAREST).save(OUT / name)
+
+
+def simple_piece(name, size, color, detail=None):
+    """Peça provisória simples (caixa de madeira com contorno) para os enfeites da cabana."""
+    img = Image.new("RGBA", size, (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    d.rectangle([0, 0, size[0] - 1, size[1] - 1], fill=color, outline=OUTLINE)
+    if detail:
+        d.rectangle([3, 3, size[0] - 4, size[1] - 4], fill=detail)
+    img.save(OUT / name)
+
+
+def decorations():
+    simple_piece("window.png", (54, 43), WOOD_DARK, (0xE8, 0xD0, 0x7A, 255))
+    simple_piece("stove.png", (40, 45), (0x4A, 0x4A, 0x52, 255), (0x2E, 0x2E, 0x34, 255))
+    simple_piece("barrels.png", (55, 60), WOOD, WOOD_LIGHT)
+    simple_piece("sacks.png", (58, 18), CORK, FLOOR_LIGHT)
+    simple_piece("chest.png", (46, 32), WOOD_DARK, WOOD)
+    simple_piece("round_table.png", (39, 38), WOOD_LIGHT, WOOD)
+    simple_piece("potion_rack.png", (62, 53), WOOD_DARK, shade(WOOD_DARK, -20))
+    simple_piece("rug_small.png", (60, 52), (0x8E, 0x2F, 0x34, 255), (0xC9, 0x4F, 0x4F, 255))
+
+
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for make in (tileset, shelf, table, bed, plant, door, rug):
         make()
+    resize_to_final()
+    decorations()
     print("Arte provisória gerada em", OUT)

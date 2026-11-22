@@ -37,8 +37,8 @@ func test_cabin_limits_the_camera() -> void:
 	add_child(room)
 	await wait_physics_frames(1)
 	var camera: Camera2D = room.get_node("World/Player/Camera")
-	assert_eq(camera.limit_right, 960)
-	assert_eq(camera.limit_bottom, 544)
+	assert_eq(camera.limit_right, 704)
+	assert_eq(camera.limit_bottom, 416)
 
 
 func test_walls_stop_the_player() -> void:

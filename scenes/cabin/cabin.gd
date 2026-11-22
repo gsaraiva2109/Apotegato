@@ -28,12 +28,12 @@ signal patient_left(condition: String)
 ## Emitido quando o Mingau volta para casa, logo antes de abrir a tela de fim.
 signal campaign_finished
 
-## Tamanho da cabana em pixels (30 x 17 tiles de 32 px).
-const ROOM := Rect2i(0, 0, 960, 544)
+## Tamanho da cabana em pixels (22 x 13 tiles de 32 px).
+const ROOM := Rect2i(0, 0, 704, 416)
 ## Caminho do paciente da porta até o lugar dele, ao lado da cama. Na saída ele
 ## faz o caminho ao contrário.
 const PATIENT_PATH: Array[Vector2] = [
-	Vector2(464, 72), Vector2(464, 200), Vector2(192, 200), Vector2(192, 336)
+	Vector2(352, 76), Vector2(352, 172), Vector2(178, 172), Vector2(178, 262)
 ]
 ## Velocidade do paciente andando, em pixels por segundo.
 const PATIENT_SPEED := 120.0

@@ -20,11 +20,11 @@ func after_each() -> void:
 	get_tree().paused = false
 
 
-func test_tilemap_is_30_by_17_tiles() -> void:
+func test_tilemap_is_22_by_13_tiles() -> void:
 	var tiles: TileMapLayer = _cabin.get_node("Tiles")
-	assert_eq(tiles.get_used_rect(), Rect2i(0, 0, 30, 17))
+	assert_eq(tiles.get_used_rect(), Rect2i(0, 0, 22, 13))
 	assert_eq(tiles.tile_set.tile_size, Vector2i(32, 32))
-	assert_eq(Cabin.ROOM.size, Vector2i(960, 544))
+	assert_eq(Cabin.ROOM.size, Vector2i(704, 416))
 
 
 func test_mingau_is_inside_the_cabin() -> void:
@@ -34,7 +34,7 @@ func test_mingau_is_inside_the_cabin() -> void:
 
 func test_walls_stop_the_player() -> void:
 	var player: Player = _cabin.get_node("World/Player")
-	player.position = Vector2(100, 440)
+	player.position = Vector2(100, 330)
 	await wait_physics_frames(2)
 	for i in 120:
 		player.velocity = Vector2.LEFT * player.speed
@@ -45,12 +45,12 @@ func test_walls_stop_the_player() -> void:
 
 func test_furniture_blocks_the_player() -> void:
 	var player: Player = _cabin.get_node("World/Player")
-	player.position = Vector2(624, 380)  # abaixo da mesa
+	player.position = Vector2(480, 300)  # abaixo da mesa
 	await wait_physics_frames(2)
 	for i in 120:
 		player.velocity = Vector2.UP * player.speed
 		player.move_and_slide()
-	assert_gt(player.position.y, 280.0, "O gato não atravessa a mesa")
+	assert_gt(player.position.y, 210.0, "O gato não atravessa a mesa")
 
 
 func test_has_door_journal_and_patient_points() -> void:
@@ -68,7 +68,7 @@ func test_prompt_shows_only_when_mingau_is_near() -> void:
 	player.position = apothecary.position
 	await wait_physics_frames(3)
 	assert_true(apothecary.is_prompt_visible(), "Perto: mostra o E")
-	player.position = Vector2(480, 440)
+	player.position = Vector2(480, 380)
 	await wait_physics_frames(3)
 	assert_false(apothecary.is_prompt_visible(), "Saiu: some o aviso")
 
