@@ -8,16 +8,15 @@ extends CanvasLayer
 ## Funciona com mouse e teclado; todo interruptor mostra o estado em texto,
 ## além da imagem. Esc ou Voltar fecham só esta tela.
 
-## Script do InputSettings, para chamar as funções estáticas pelo tipo (o autoload
-## `InputSettings` é uma instância, e o Godot avisa se uma função estática for
-## chamada por ela).
-const InputSettingsScript := preload("res://autoload/input_settings.gd")
-
 ## Emitido sempre que a tela se fecha.
 signal closed
 
 enum Tab { SOUND, VIDEO, KEYS, ACCESSIBILITY }
 
+## Script do InputSettings, para chamar as funções estáticas pelo tipo (o autoload
+## `InputSettings` é uma instância, e o Godot avisa se uma função estática for
+## chamada por ela).
+const InputSettingsScript := preload("res://autoload/input_settings.gd")
 const ICON_SOUND := preload("res://assets/art/ui/icon_sound.png")
 const ICON_MUTE := preload("res://assets/art/ui/icon_mute.png")
 const TEXT_ON := "Ligado"
