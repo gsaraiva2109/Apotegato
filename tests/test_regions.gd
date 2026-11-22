@@ -56,6 +56,33 @@ func test_tileset_has_collision_only_on_wall_and_barrier() -> void:
 			assert_gt(data.get_collision_polygons_count(0), 0, "Colisão do tile %s" % tile)
 
 
+func test_barrier_collision_covers_only_the_lower_half_of_the_tile() -> void:
+	for region in Regions.IDS:
+		var tile_set := RegionTileSet.for_region(region)
+		var source: TileSetAtlasSource = tile_set.get_source(RegionTileSet.SOURCE_ID)
+		var data := source.get_tile_data(RegionTileSet.BARRIER_TILE, 0)
+		var top := -16.0 + RegionTileSet.BARRIER_COLLISION_TOP
+		for index in data.get_collision_polygons_count(0):
+			for point in data.get_collision_polygon_points(0, index):
+				assert_gte(point.y, top - 0.5, "Colisão da barreira em %s" % region)
+
+
+func test_inner_water_collision_is_inset_and_the_border_water_is_whole() -> void:
+	var tile_set := RegionTileSet.for_region(Regions.CAMPOS_RIOS)
+	var source: TileSetAtlasSource = tile_set.get_source(RegionTileSet.WATER_SOURCE_ID)
+	var inset := 16.0 - RegionTileSet.WATER_COLLISION_INSET
+	var wall := source.get_tile_data(RegionTileSet.WALL_TILE, 0).get_collision_polygon_points(0, 0)
+	var barrier := source.get_tile_data(RegionTileSet.BARRIER_TILE, 0).get_collision_polygon_points(
+		0, 0
+	)
+	for point in wall:
+		assert_almost_eq(absf(point.x), 16.0, 0.01)
+		assert_almost_eq(absf(point.y), 16.0, 0.01)
+	for point in barrier:
+		assert_almost_eq(absf(point.x), inset, 0.01)
+		assert_almost_eq(absf(point.y), inset, 0.01)
+
+
 func _polygons_area(polygons: Array[PackedVector2Array]) -> float:
 	var area := 0.0
 	for polygon in polygons:

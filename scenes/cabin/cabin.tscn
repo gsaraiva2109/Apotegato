@@ -28,13 +28,13 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="99_pause_menu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ShelfLeft"]
-size = Vector2(80, 24)
+size = Vector2(80, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ShelfCenter"]
-size = Vector2(80, 24)
+size = Vector2(80, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ShelfRight"]
-size = Vector2(83, 26)
+size = Vector2(83, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Table"]
 size = Vector2(58, 15)
@@ -46,7 +46,7 @@ size = Vector2(81, 50)
 size = Vector2(17, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_Stove"]
-size = Vector2(40, 45)
+size = Vector2(40, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_BarrelsRight"]
 size = Vector2(48, 45)
@@ -64,7 +64,7 @@ size = Vector2(42, 18)
 size = Vector2(58, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_RoundTable"]
-size = Vector2(32, 16)
+size = Vector2(32, 21)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_PlantCorner"]
 size = Vector2(17, 20)
@@ -124,7 +124,7 @@ centered = false
 offset = Vector2(-42, -72)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfLeft" unique_id=1114130364]
-position = Vector2(0, -12)
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_ShelfLeft")
 
 [node name="ShelfCenter" type="StaticBody2D" parent="World" unique_id=1228879750]
@@ -137,7 +137,7 @@ centered = false
 offset = Vector2(-42, -72)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfCenter" unique_id=411981153]
-position = Vector2(0, -12)
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_ShelfCenter")
 
 [node name="ShelfRight" type="StaticBody2D" parent="World" unique_id=863414414]
@@ -150,7 +150,7 @@ centered = false
 offset = Vector2(-42, -72)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="World/ShelfRight" unique_id=2019556715]
-position = Vector2(1.5, -11)
+position = Vector2(1.5, -16.5)
 shape = SubResource("RectangleShape2D_ShelfRight")
 
 [node name="Table" type="StaticBody2D" parent="World" unique_id=259521042]
@@ -202,7 +202,7 @@ centered = false
 offset = Vector2(-20, -45)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="World/Stove" unique_id=1276388862]
-position = Vector2(0, -22.5)
+position = Vector2(0, -26.5)
 shape = SubResource("RectangleShape2D_Stove")
 
 [node name="BarrelsRight" type="StaticBody2D" parent="World" unique_id=93470238]
@@ -280,7 +280,7 @@ centered = false
 offset = Vector2(-19, -38)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="World/RoundTable" unique_id=1166577454]
-position = Vector2(0, -8)
+position = Vector2(1, -21.5)
 shape = SubResource("RectangleShape2D_RoundTable")
 
 [node name="PlantCorner" type="StaticBody2D" parent="World" unique_id=2072720798]
@@ -343,7 +343,6 @@ size = Vector2(112, 64)
 [node name="RegionMenu" parent="." unique_id=2140659373 instance=ExtResource("13_region_menu")]
 
 [node name="JournalUI" parent="." unique_id=1694554464 instance=ExtResource("12_2b8xw")]
-visible = false
 
 [node name="StockMenu" parent="." unique_id=581820724 instance=ExtResource("14_stock_menu")]
 

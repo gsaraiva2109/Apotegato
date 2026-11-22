@@ -19,6 +19,18 @@ const WALL_TILE := Vector2i(1, 0)
 const BARRIER_TILE := Vector2i(2, 0)
 const EXIT_TILE := Vector2i(3, 0)
 
+## Linha (em pixels, de cima para baixo) em que começa a colisão da barreira:
+## só a parte de baixo do desenho (o tronco e a base da copa) bloqueia o gato.
+## A copa fica por cima dele, como em qualquer jogo visto de cima, e sobra
+## espaço para passar entre duas árvores. Quanto maior o número, mais folga.
+const BARRIER_COLLISION_TOP := 22
+
+## Quantos pixels a colisão da água de dentro do andar (a barreira) fica para
+## dentro de cada lado do tile. O gato tem 32 px de altura, a mesma de um corredor
+## de uma célula; sem essa folga qualquer desalinhamento de 1 px o travava entre
+## duas águas. A borda do andar (parede) continua um quadrado inteiro.
+const WATER_COLLISION_INSET := 4
+
 ## Id da fonte (atlas) dentro de cada TileSet montado aqui.
 const SOURCE_ID := 0
 
@@ -76,9 +88,10 @@ static func _build(texture: Texture2D) -> TileSet:
 	for tile in [FLOOR_TILE, WALL_TILE, BARRIER_TILE, EXIT_TILE]:
 		source.create_tile(tile)
 	# A parede é um quadrado inteiro (a borda do andar não pode ter frestas); a
-	# barreira segue o desenho, para o gato só esbarrar onde ela aparece.
+	# barreira segue o desenho da metade de baixo, para o gato só esbarrar no tronco.
 	var image := texture.get_image()
 	var barrier_image := image.get_region(Rect2i(BARRIER_TILE * tile_size, tile_size))
+	barrier_image.fill_rect(Rect2i(0, 0, tile_size.x, BARRIER_COLLISION_TOP), Color(0, 0, 0, 0))
 	var shapes := {WALL_TILE: [square], BARRIER_TILE: silhouette_polygons(barrier_image)}
 	for tile: Vector2i in shapes:
 		var data := source.get_tile_data(tile, 0)
@@ -152,7 +165,18 @@ static func _add_water(tile_set: TileSet, region: String) -> Array[Vector2i]:
 		for frame in frames:
 			source.set_tile_animation_frame_duration(tile, frame, WATER_FRAME_SECONDS)
 		var data := source.get_tile_data(tile, 0)
+		var shape := square
+		if tile == BARRIER_TILE:
+			var inset := half - Vector2.ONE * WATER_COLLISION_INSET
+			shape = PackedVector2Array(
+				[
+					Vector2(-inset.x, -inset.y),
+					Vector2(inset.x, -inset.y),
+					inset,
+					Vector2(-inset.x, inset.y)
+				]
+			)
 		data.add_collision_polygon(0)
-		data.set_collision_polygon_points(0, 0, square)
+		data.set_collision_polygon_points(0, 0, shape)
 		water.append(tile)
 	return water
