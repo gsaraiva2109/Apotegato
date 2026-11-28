@@ -1,7 +1,8 @@
 class_name InteractionArea
 extends Area2D
 ## Ponto de interação da cabana (porta, apotecária, paciente, estoque). Quando o
-## Mingau chega perto aparece o aviso "E"; apertar `interact` emite `interacted`.
+## Mingau chega perto aparece o aviso com a tecla (ou o botão do controle) da
+## ação `interact`, "E" por padrão; apertar `interact` emite `interacted`.
 ##
 ## Só funciona na exploração: em diálogo, entrega ou menu o aviso some e o E não
 ## dispara. Um ponto desligado (`enabled = false`, como o do paciente quando não
@@ -32,6 +33,9 @@ func _ready() -> void:
 	shape.size = size
 	$CollisionShape.shape = shape
 	_prompt.visible = false
+	_refresh_prompt_text()
+	InputSettings.bindings_changed.connect(_refresh_prompt_text)
+	InputSettings.device_changed.connect(_refresh_prompt_text)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	GameState.flow.state_changed.connect(_on_flow_state_changed)
@@ -51,9 +55,18 @@ func try_interact() -> bool:
 	return true
 
 
-## Se o aviso "E" está aparecendo.
+## Se o aviso da tecla está aparecendo.
 func is_prompt_visible() -> bool:
 	return _prompt.visible
+
+
+## Texto do aviso: a tecla ou o botão atual de `interact`. O aviso cresce para
+## caber no texto e continua centrado no ponto.
+func _refresh_prompt_text() -> void:
+	var text := InputSettings.prompt_text(&"interact")
+	_prompt.text = text if not text.is_empty() else "?"
+	_prompt.size = Vector2.ZERO
+	_prompt.position.x = -_prompt.size.x / 2.0
 
 
 func _can_interact() -> bool:

@@ -262,7 +262,7 @@ columns = 6
 [node name="KeysStatus" type="Label" parent="Root/Center/Panel/Layout/Pages/KeysPage"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Clique numa tecla e aperte a nova. Esc cancela; Delete limpa a alternativa."
+text = "Escolha uma tecla ou botão e aperte o novo. Esc (ou B no controle) cancela; Delete limpa a tecla alternativa."
 autowrap_mode = 3
 
 [node name="AccessPage" type="VBoxContainer" parent="Root/Center/Panel/Layout/Pages"]

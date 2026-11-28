@@ -18,23 +18,24 @@ Pelo caminho tem criaturas. O combate é sem armas e sem sangue, e é opcional: 
 
 ## Controles
 
-| Ação | Tecla | Nome no Input Map |
-| --- | --- | --- |
-| Mover (e navegar nos menus) | Setas ou WASD | `move_up`, `move_down`, `move_left`, `move_right` |
-| Atacar | Espaço | `attack` |
-| Interagir | E | `interact` |
-| Abrir a mochila | I | `backpack` |
-| Abrir o diário | J | `journal` |
-| Pausar (menu com Continuar, Opções e Voltar ao menu inicial) | Esc | `pause` |
-| Tela cheia | F11 | `toggle_fullscreen` |
-| Pixel perfeito ou preencher a tela | F10 | `toggle_scale_mode` |
-| Menus | Mouse | |
+| Ação | Teclado | Controle | Nome no Input Map |
+| --- | --- | --- | --- |
+| Mover (e navegar nos menus) | Setas ou WASD | Analógico esquerdo ou direcional | `move_up`, `move_down`, `move_left`, `move_right` |
+| Atacar | Espaço | X | `attack` |
+| Interagir (e confirmar nos menus) | E | A | `interact` |
+| Abrir a mochila | I | RB | `backpack` |
+| Abrir o diário | J | Y | `journal` |
+| Pausar (menu com Continuar, Opções e Voltar ao menu inicial) | Esc | Start | `pause` |
+| Voltar (fechar menus) | Esc | B | `ui_cancel` |
+| Tela cheia | F11 | | `toggle_fullscreen` |
+| Pixel perfeito ou preencher a tela | F10 | | `toggle_scale_mode` |
+| Menus | Mouse | | |
 
-As teclas são físicas: WASD fica no mesmo lugar em qualquer layout de teclado. O jogador pode trocar as teclas em Opções > Teclas. O código usa sempre o nome da ação (`Input.is_action_pressed("attack")`), nunca a tecla. Para mudar uma tecla, edite em Projeto > Configurações do Projeto > Mapa de Entrada e atualize `tests/test_input_map.gd`.
+As teclas são físicas: WASD fica no mesmo lugar em qualquer layout de teclado. O jogador pode trocar as teclas e os botões do controle (arranhar, interagir, mochila e diário) em Opções > Teclas; as dicas na tela mostram a tecla ou o botão do último aparelho usado, e os nomes seguem o desenho do Xbox ou do PlayStation. O código usa sempre o nome da ação (`Input.is_action_pressed("attack")`), nunca a tecla. Para mudar uma tecla, edite em Projeto > Configurações do Projeto > Mapa de Entrada e atualize `tests/test_input_map.gd`.
 
 ### Opções
 
-A tela de opções abre pelo menu inicial e pelo menu de pausa. Tem volume da música e dos efeitos (0 a 100%, de 5 em 5), um interruptor de mudo para cada um, tela cheia, pixel perfeito ou preencher, a troca das teclas (andar, arranhar, interagir, mochila e diário, cada uma com tecla principal e alternativa; Esc, F10 e F11 são fixas e uma tecla só serve a uma ação), "Reduzir efeitos visuais", que troca as piscadas (a do Mingau ao levar dano e o aviso das criaturas) por versões estáticas, e "Texto grande", que aumenta os textos em 25%. Funciona com mouse e teclado, e tudo fica salvo em `user://settings.cfg`. "Restaurar padrões" volta tudo ao original.
+A tela de opções abre pelo menu inicial e pelo menu de pausa. Tem volume da música e dos efeitos (0 a 100%, de 5 em 5), um interruptor de mudo para cada um, tela cheia, pixel perfeito ou preencher, a troca das teclas (andar, arranhar, interagir, mochila e diário, cada uma com tecla principal e alternativa; Esc, F10 e F11 são fixas e uma tecla só serve a uma ação) e dos botões do controle (B, Start e o direcional são fixos), "Reduzir efeitos visuais", que troca as piscadas (a do Mingau ao levar dano e o aviso das criaturas) por versões estáticas, e "Texto grande", que aumenta os textos em 25%. Funciona com mouse, teclado e controle, e tudo fica salvo em `user://settings.cfg`. "Restaurar padrões" volta tudo ao original.
 
 ### Tamanho da janela
 
