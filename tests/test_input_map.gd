@@ -20,6 +20,27 @@ const ACTIONS := {
 	"ui_left": [KEY_LEFT, KEY_A],
 	"ui_right": [KEY_RIGHT, KEY_D],
 }
+## Botões do controle esperados em cada ação (o analógico fica à parte).
+const PAD_BUTTONS := {
+	"move_up": [JOY_BUTTON_DPAD_UP],
+	"move_down": [JOY_BUTTON_DPAD_DOWN],
+	"move_left": [JOY_BUTTON_DPAD_LEFT],
+	"move_right": [JOY_BUTTON_DPAD_RIGHT],
+	"attack": [JOY_BUTTON_X],
+	"interact": [JOY_BUTTON_A],
+	"backpack": [JOY_BUTTON_RIGHT_SHOULDER],
+	"journal": [JOY_BUTTON_Y],
+	"pause": [JOY_BUTTON_START],
+	"ui_accept": [JOY_BUTTON_A],
+	"ui_cancel": [JOY_BUTTON_B],
+}
+## Eixo do analógico esquerdo e o sinal de cada direção de andar.
+const STICK := {
+	"move_up": [JOY_AXIS_LEFT_Y, -1.0],
+	"move_down": [JOY_AXIS_LEFT_Y, 1.0],
+	"move_left": [JOY_AXIS_LEFT_X, -1.0],
+	"move_right": [JOY_AXIS_LEFT_X, 1.0],
+}
 ## Pastas com código do jogo. addons/ e tests/ ficam de fora.
 const CODE_DIRS := ["res://autoload", "res://scenes", "res://scripts"]
 ## Único script que pode ler teclas, porque é ele que remapeia as ações.
@@ -41,6 +62,33 @@ func test_actions_exist_with_expected_keys() -> void:
 		var expected: Array = ACTIONS[action].duplicate()
 		expected.sort()
 		assert_eq(keys, expected, "Teclas da ação %s" % action)
+
+
+func test_actions_have_controller_buttons() -> void:
+	for action in PAD_BUTTONS:
+		var buttons := []
+		for event in InputMap.action_get_events(action):
+			if event is InputEventJoypadButton:
+				buttons.append(event.button_index)
+		assert_eq(buttons, PAD_BUTTONS[action], "Botões da ação %s" % action)
+
+
+func test_walking_has_the_left_stick() -> void:
+	for action in STICK:
+		var found := false
+		for event in InputMap.action_get_events(action):
+			if event is InputEventJoypadMotion:
+				found = event.axis == STICK[action][0] and event.axis_value == STICK[action][1]
+		assert_true(found, "Analógico da ação %s" % action)
+
+
+func test_menu_navigation_works_on_the_controller() -> void:
+	# A confirma e B volta (conferidos acima); o direcional e o analógico movem o foco.
+	for action in ["ui_up", "ui_down", "ui_left", "ui_right"]:
+		var has_pad := false
+		for event in InputMap.action_get_events(action):
+			has_pad = has_pad or event is InputEventJoypadButton or event is InputEventJoypadMotion
+		assert_true(has_pad, "A ação %s não tem botão de controle" % action)
 
 
 func test_no_script_reads_keys_directly() -> void:

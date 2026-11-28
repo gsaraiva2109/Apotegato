@@ -2,11 +2,12 @@ class_name OptionsMenu
 extends CanvasLayer
 ## Tela de opções, aberta pelo menu inicial e pelo menu de pausa. Quatro abas:
 ## Som (volume da música e dos efeitos e o mudo de cada um), Vídeo (tela cheia
-## e escala, os mesmos do F11 e do F10), Teclas (trocar as teclas do jogo) e
-## Acessibilidade (reduzir efeitos visuais e texto grande). Cada escolha vale
-## na hora e fica salva (`AudioSettings`, `DisplaySettings` e `InputSettings`).
-## Funciona com mouse e teclado; todo interruptor mostra o estado em texto,
-## além da imagem. Esc ou Voltar fecham só esta tela.
+## e escala, os mesmos do F11 e do F10), Teclas (trocar as teclas e os botões do
+## controle) e Acessibilidade (reduzir efeitos visuais e texto grande). Cada
+## escolha vale na hora e fica salva (`AudioSettings`, `DisplaySettings` e
+## `InputSettings`). Funciona com mouse, teclado e controle; todo interruptor
+## mostra o estado em texto, além da imagem. Esc, B (controle) ou Voltar fecham
+## só esta tela.
 
 ## Emitido sempre que a tela se fecha.
 signal closed
@@ -21,7 +22,10 @@ const ICON_SOUND := preload("res://assets/art/ui/icon_sound.png")
 const ICON_MUTE := preload("res://assets/art/ui/icon_mute.png")
 const TEXT_ON := "Ligado"
 const TEXT_OFF := "Desligado"
-const KEYS_HINT := "Clique numa tecla e aperte a nova. Esc cancela; Delete limpa a alternativa."
+const KEYS_HINT := (
+	"Escolha uma tecla ou botão e aperte o novo. Esc (ou B no controle) cancela; "
+	+ "Delete limpa a tecla alternativa."
+)
 const _LAYOUT := "Root/Center/Panel/Layout/"
 const _ACCESS := "Root/Center/Panel/Layout/Pages/AccessPage/"
 
@@ -30,8 +34,12 @@ var _sfx_dragging := false
 ## Posição de tecla esperando uma tecla nova: ação e posição (vazia fora disso).
 var _capture_action := &""
 var _capture_slot := -1
+## Ação de botão de controle esperando um botão novo (vazia fora disso).
+var _capture_pad_action := &""
 ## Botão de cada posição de tecla, por "ação/posição".
 var _key_buttons := {}
+## Botão de controle de cada ação de botão, por ação.
+var _pad_buttons := {}
 
 @onready var _tab_buttons: Array[Button] = [
 	get_node(_LAYOUT + "Tabs/SoundTab"),
@@ -92,7 +100,9 @@ func _ready() -> void:
 	_reduce_switch.toggled.connect(AudioSettings.set_reduce_effects)
 	_large_switch.toggled.connect(AudioSettings.set_large_text)
 	_build_key_buttons()
+	_build_pad_buttons()
 	InputSettings.bindings_changed.connect(_refresh_keys)
+	InputSettings.device_changed.connect(_refresh_keys)
 	AudioSettings.changed.connect(refresh)
 	_reset_button.pressed.connect(reset_all)
 	_back_button.pressed.connect(close)
@@ -103,6 +113,9 @@ func _ready() -> void:
 ## Enquanto uma tecla espera a nova, o próximo apertar de tecla vira a escolha
 ## (antes de a interface tratar a tecla). Esc cancela e Delete limpa a alternativa.
 func _input(event: InputEvent) -> void:
+	if is_pad_capturing():
+		_handle_pad_capture(event)
+		return
 	if not is_capturing() or not InputSettingsScript.is_key_press(event):
 		return
 	get_viewport().set_input_as_handled()
@@ -196,14 +209,20 @@ func reset_all() -> void:
 	AudioSettings.reset_to_defaults()
 
 
-## Se alguma posição de tecla espera uma tecla nova.
+## Se alguma posição de tecla ou botão de controle espera um novo.
 func is_capturing() -> bool:
-	return _capture_action != &""
+	return _capture_action != &"" or _capture_pad_action != &""
+
+
+## Se algum botão de controle espera um botão novo.
+func is_pad_capturing() -> bool:
+	return _capture_pad_action != &""
 
 
 ## Passa a esperar a tecla nova da posição (um segundo pedido na mesma posição
 ## cancela).
 func start_capture(action: StringName, slot: int) -> void:
+	_capture_pad_action = &""
 	if _capture_action == action and _capture_slot == slot:
 		cancel_capture()
 		return
@@ -220,13 +239,75 @@ func cancel_capture() -> void:
 		return
 	_capture_action = &""
 	_capture_slot = -1
+	_capture_pad_action = &""
 	_keys_status.text = KEYS_HINT
 	_refresh_keys()
+
+
+## Passa a esperar o botão novo do controle para a ação (um segundo pedido na
+## mesma ação cancela).
+func start_pad_capture(action: StringName) -> void:
+	if _capture_pad_action == action:
+		cancel_capture()
+		return
+	_capture_action = &""
+	_capture_slot = -1
+	_capture_pad_action = action
+	_keys_status.text = (
+		'Aperte o novo botão do controle para "%s". B ou Esc cancela.'
+		% InputSettings.ACTION_LABELS[action]
+	)
+	_refresh_keys()
+
+
+## Botão do controle da ação (para a tela e para os testes).
+func pad_button(action: StringName) -> Button:
+	return _pad_buttons[action]
 
 
 ## Botão da posição de tecla (para a tela e para os testes).
 func key_button(action: StringName, slot: int) -> Button:
 	return _key_buttons["%s/%d" % [action, slot]]
+
+
+## Enquanto um botão do controle espera o novo, o próximo botão apertado vira a
+## escolha. B ou Esc cancelam (B é fixo e serve para voltar).
+func _handle_pad_capture(event: InputEvent) -> void:
+	if InputSettingsScript.is_pad_press(event):
+		get_viewport().set_input_as_handled()
+		var button := InputSettingsScript.button_of(event)
+		if button == JOY_BUTTON_B:
+			cancel_capture()
+		else:
+			_assign_captured_pad(button)
+	elif InputSettingsScript.is_key_press(event):
+		get_viewport().set_input_as_handled()
+		if InputSettingsScript.is_cancel_key(InputSettingsScript.keycode_of(event)):
+			cancel_capture()
+
+
+func _assign_captured_pad(button: int) -> void:
+	var action := _capture_pad_action
+	var owner_name := InputSettings.pad_owner_of(button, action)
+	var result := InputSettings.set_pad_button(action, button)
+	var label := InputSettings.pad_label(button)
+	_capture_pad_action = &""
+	match result:
+		InputSettings.Result.OK:
+			_keys_status.text = '"%s" agora usa %s.' % [InputSettings.ACTION_LABELS[action], label]
+		InputSettings.Result.TAKEN:
+			_keys_status.text = (
+				'%s já é de "%s". Escolha outro botão.'
+				% [label, InputSettings.ACTION_LABELS[owner_name]]
+			)
+		InputSettings.Result.RESERVED_KEY:
+			_keys_status.text = (
+				'%s é fixo para "%s". Escolha outro botão.'
+				% [label, InputSettings.ACTION_LABELS[owner_name]]
+			)
+		_:
+			_keys_status.text = KEYS_HINT
+	_refresh_keys()
 
 
 func _assign_captured(code: int) -> void:
@@ -293,6 +374,34 @@ func _build_key_buttons() -> void:
 				_key_buttons["%s/%d" % [action, slot]] = button
 
 
+## Monta a linha do controle abaixo da grade de teclas: o botão de cada ação de
+## botão (andar usa o analógico e o direcional, que não mudam).
+func _build_pad_buttons() -> void:
+	var page: Control = get_node(_LAYOUT + "Pages/KeysPage")
+	var heading := Label.new()
+	heading.text = "Controle (andar: analógico esquerdo e direcional)"
+	heading.theme_type_variation = &"MutedLabel"
+	var grid := GridContainer.new()
+	grid.columns = 4
+	grid.add_theme_constant_override("h_separation", 8)
+	grid.add_theme_constant_override("v_separation", 6)
+	for action in InputSettings.PAD_REMAPPABLE:
+		var name_label := Label.new()
+		name_label.text = InputSettings.ACTION_LABELS[action]
+		name_label.custom_minimum_size = Vector2(130, 0)
+		grid.add_child(name_label)
+		var button := Button.new()
+		button.custom_minimum_size = Vector2(100, 0)
+		button.pressed.connect(start_pad_capture.bind(action))
+		grid.add_child(button)
+		_pad_buttons[action] = button
+	var status_index := _keys_status.get_index()
+	page.add_child(heading)
+	page.move_child(heading, status_index)
+	page.add_child(grid)
+	page.move_child(grid, status_index + 1)
+
+
 func _refresh_keys() -> void:
 	for action in InputSettings.REMAPPABLE:
 		for slot in InputSettings.SLOTS:
@@ -303,6 +412,14 @@ func _refresh_keys() -> void:
 				button.text = "Aperte..."
 			else:
 				button.text = InputSettings.key_label(InputSettings.key_in_slot(action, slot))
+	for action in InputSettings.PAD_REMAPPABLE:
+		var pad_btn: Button = _pad_buttons.get(action)
+		if pad_btn == null:
+			continue
+		if action == _capture_pad_action:
+			pad_btn.text = "Aperte..."
+		else:
+			pad_btn.text = InputSettings.pad_label(InputSettings.pad_button_of(action))
 
 
 func _sync_video_switches() -> void:

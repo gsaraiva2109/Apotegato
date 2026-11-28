@@ -1,8 +1,8 @@
 class_name PauseMenu
 extends CanvasLayer
-## Menu de pausa da cabana e dos andares. Esc (ação `pause`) na exploração
+## Menu de pausa da cabana e dos andares. Esc ou Start (ação `pause`) na exploração
 ## congela o jogo (estado Menu da máquina de estados) e mostra Continuar,
-## Opções e Voltar ao menu inicial. Esc ou Continuar retomam. Não abre no meio
+## Opções e Voltar ao menu inicial. Esc, Start, B ou Continuar retomam. Não abre no meio
 ## de um diálogo, de uma entrega ou de outro menu: a máquina de estados recusa
 ## a transição. Voltar ao menu inicial pede confirmação, porque ainda não há
 ## save e o progresso se perde.
@@ -26,6 +26,7 @@ var _options: OptionsMenu
 @onready var _yes_button: Button = $Root/Center/Panel/Layout/ConfirmBox/YesButton
 @onready var _no_button: Button = $Root/Center/Panel/Layout/ConfirmBox/NoButton
 @onready var _panel_center: Control = $Root/Center
+@onready var _hint: Label = $Root/Center/Panel/Layout/MainButtons/Hint
 
 
 func _ready() -> void:
@@ -34,10 +35,16 @@ func _ready() -> void:
 	_menu_button.pressed.connect(_ask_to_leave)
 	_yes_button.pressed.connect(_leave_to_main_menu)
 	_no_button.pressed.connect(_cancel_leave)
+	InputSettings.device_changed.connect(_refresh_hint)
+	_refresh_hint()
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not event.is_action_pressed("pause") or event.is_echo():
+	if event.is_echo():
+		return
+	# Com o menu aberto, "voltar" (B no controle) vale como a tecla de pausa.
+	var wants_toggle := event.is_action_pressed("pause")
+	if not wants_toggle and not (visible and event.is_action_pressed("ui_cancel")):
 		return
 	if not visible:
 		if pause():
@@ -75,6 +82,11 @@ func resume() -> void:
 
 func is_open() -> bool:
 	return visible
+
+
+## Dica de como retomar: a tecla de pausa ou o botão do controle (Start).
+func _refresh_hint() -> void:
+	_hint.text = "%s também continua o jogo" % InputSettings.prompt_text(&"pause")
 
 
 func _show_main() -> void:

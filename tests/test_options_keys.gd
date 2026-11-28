@@ -49,6 +49,75 @@ func _key_event(code: int) -> InputEventKey:
 	return event
 
 
+func _pad_event(button: int) -> InputEventJoypadButton:
+	var event := InputEventJoypadButton.new()
+	event.button_index = button as JoyButton
+	event.pressed = true
+	return event
+
+
+func test_keys_tab_shows_the_controller_buttons() -> void:
+	_menu.open()
+	assert_eq(_menu.pad_button(&"attack").text, "X")
+	assert_eq(_menu.pad_button(&"interact").text, "A")
+	assert_eq(_menu.pad_button(&"backpack").text, "RB")
+	assert_eq(_menu.pad_button(&"journal").text, "Y")
+
+
+func test_choosing_a_pad_button_remaps_the_action() -> void:
+	_menu.open()
+	_menu.pad_button(&"attack").pressed.emit()
+	assert_true(_menu.is_pad_capturing())
+	assert_eq(_menu.pad_button(&"attack").text, "Aperte...")
+	_menu._input(_pad_event(JOY_BUTTON_LEFT_SHOULDER))
+	assert_false(_menu.is_capturing())
+	assert_eq(InputSettings.pad_button_of(&"attack"), JOY_BUTTON_LEFT_SHOULDER)
+	assert_eq(_menu.pad_button(&"attack").text, "LB")
+
+
+func test_a_taken_pad_button_is_refused() -> void:
+	_menu.open()
+	_menu.pad_button(&"attack").pressed.emit()
+	_menu._input(_pad_event(JOY_BUTTON_A))
+	assert_eq(InputSettings.pad_button_of(&"attack"), JOY_BUTTON_X)
+	assert_string_contains(_menu._keys_status.text, "Interagir")
+
+
+func test_a_fixed_pad_button_is_refused() -> void:
+	_menu.open()
+	_menu.pad_button(&"attack").pressed.emit()
+	_menu._input(_pad_event(JOY_BUTTON_START))
+	assert_eq(InputSettings.pad_button_of(&"attack"), JOY_BUTTON_X)
+	assert_string_contains(_menu._keys_status.text, "Pausa")
+
+
+func test_b_and_esc_cancel_a_pad_capture() -> void:
+	_menu.open()
+	_menu.pad_button(&"attack").pressed.emit()
+	_menu._input(_pad_event(JOY_BUTTON_B))
+	assert_false(_menu.is_capturing())
+	_menu.pad_button(&"attack").pressed.emit()
+	_menu._input(_key_event(KEY_ESCAPE))
+	assert_false(_menu.is_capturing())
+	assert_eq(InputSettings.pad_button_of(&"attack"), JOY_BUTTON_X)
+
+
+func test_choosing_a_key_cancels_a_pad_capture() -> void:
+	_menu.open()
+	_menu.pad_button(&"attack").pressed.emit()
+	_menu.key_button(&"interact", 0).pressed.emit()
+	assert_false(_menu.is_pad_capturing())
+	assert_true(_menu.is_capturing())
+
+
+func test_reset_restores_the_pad_buttons() -> void:
+	_menu.open()
+	InputSettings.set_pad_button(&"attack", JOY_BUTTON_LEFT_SHOULDER)
+	_menu.reset_all()
+	assert_eq(InputSettings.pad_button_of(&"attack"), JOY_BUTTON_X)
+	assert_eq(_menu.pad_button(&"attack").text, "X")
+
+
 func test_keys_tab_shows_the_current_keys() -> void:
 	_menu.open()
 	_menu.show_tab(OptionsMenu.Tab.KEYS)

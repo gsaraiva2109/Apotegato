@@ -441,6 +441,7 @@ func open() -> void:
 		return
 
 	_root.show()
+	_focus_footer()
 
 
 func close() -> void:
@@ -464,12 +465,26 @@ func _go_to_next_page() -> void:
 	if _current_page < _pages.size() - 1:
 		_current_page += 1
 		_update_page()
+		_focus_footer()
 
 
 func _go_to_previous_page() -> void:
 	if _current_page > 0:
 		_current_page -= 1
 		_update_page()
+		_focus_footer()
+
+
+## Põe o foco num botão do rodapé que dê para apertar, para o teclado e o
+## controle navegarem sem mouse. Prefere o botão que está em foco, depois o
+## "Próxima", o "Anterior" e por fim o "Fechar".
+func _focus_footer() -> void:
+	var focused := _root.get_viewport().gui_get_focus_owner()
+	for button in [focused, _next_button, _previous_button, _close_button]:
+		if button is Button and button.is_visible_in_tree() and not button.disabled:
+			if button in [_previous_button, _next_button, _close_button]:
+				button.grab_focus()
+				return
 
 
 # =====================================================
